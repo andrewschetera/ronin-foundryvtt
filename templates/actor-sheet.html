@@ -1,7 +1,97 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
   <div class="ronin-sheet">
-    <!-- Header da Ficha -->
-    {{> "systems/ronin/templates/parts/sheet-header.html"}}
+    <!-- Header da Ficha (incorporado) -->
+    <header class="sheet-header">
+      <div class="header-grid">
+        <!-- Imagem do Personagem (1/3 da largura) -->
+        <div class="character-img">
+          <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+        </div>
+        
+        <!-- Informações Básicas (1/2 da largura) -->
+        <div class="basic-info">
+          <h1 class="character-name">
+            <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
+          </h1>
+          
+          <div class="character-class">
+            <input name="system.class" type="text" value="{{system.class}}" placeholder="Class"/>
+          </div>
+          
+          <div class="resources-grid">
+            <!-- HP -->
+            <div class="resource hp">
+              <label>HP</label>
+              <div class="resource-value">
+                <input name="system.resources.hp.value" type="number" value="{{system.resources.hp.value}}" min="0"/>
+                <span class="separator">/</span>
+                <input name="system.resources.hp.max" type="number" value="{{system.resources.hp.max}}" min="0"/>
+              </div>
+            </div>
+            
+            <!-- Texts -->
+            <div class="resource texts">
+              <label>Texts</label>
+              <input name="system.resources.texts.value" type="number" value="{{system.resources.texts.value}}" min="0"/>
+            </div>
+            
+            <!-- Virtues -->
+            <div class="resource virtues">
+              <label>Virtues</label>
+              <input name="system.resources.virtues.value" type="number" value="{{system.resources.virtues.value}}" min="0"/>
+            </div>
+            
+            <!-- Ryo -->
+            <div class="resource ryo">
+              <label>Ryo</label>
+              <input name="system.resources.ryo.value" type="number" value="{{system.resources.ryo.value}}" min="0"/>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Honor (metade inferior da coluna central) -->
+        <div class="honor-section">
+          <label>Honor</label>
+          <div class="honor-track">
+            {{#times 20}}
+              <input type="radio" name="system.resources.honor.value" id="honor-{{this}}" value="{{this}}" {{#if (eq ../system.resources.honor.value this)}}checked{{/if}}>
+              <label for="honor-{{this}}" class="honor-dot {{#if (lte this 9)}}dishonor{{/if}}">{{this}}</label>
+            {{/times}}
+          </div>
+        </div>
+        
+        <!-- Abilities (1/6 da largura) -->
+        <div class="abilities-column">
+          <div class="ability vigor">
+            <label>VIG</label>
+            <input name="system.abilities.vigor.value" type="number" value="{{system.abilities.vigor.value}}" min="-3" max="6"/>
+          </div>
+          
+          <div class="ability swiftness">
+            <label>SWI</label>
+            <input name="system.abilities.swiftness.value" type="number" value="{{system.abilities.swiftness.value}}" min="-3" max="6"/>
+          </div>
+          
+          <div class="ability spirit">
+            <label>SPI</label>
+            <input name="system.abilities.spirit.value" type="number" value="{{system.abilities.spirit.value}}" min="-3" max="6"/>
+          </div>
+          
+          <div class="ability resilience">
+            <label>RES</label>
+            <input name="system.abilities.resilience.value" type="number" value="{{system.abilities.resilience.value}}" min="-3" max="6"/>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Botões de Ação -->
+      <div class="action-buttons">
+        <button class="button-broken">BROKEN</button>
+        <button class="button-rest">REST</button>
+        <button class="button-seppuku">SEPPUKU</button>
+        <button class="button-get-better">GET BETTER</button>
+      </div>
+    </header>
     
     <!-- Navegação de Abas -->
     <nav class="sheet-tabs tabs" data-group="primary">
@@ -15,22 +105,269 @@
     <section class="sheet-body">
       <!-- Tab de Background -->
       <div class="tab" data-group="primary" data-tab="background">
-        {{> "systems/ronin/templates/parts/tab-background.html"}}
+        <div class="tab-background">
+          <div class="editor-wrapper">
+            <textarea class="background-editor" name="system.background">{{system.background}}</textarea>
+          </div>
+        </div>
       </div>
       
       <!-- Tab de Equipment -->
       <div class="tab" data-group="primary" data-tab="equipment">
-        {{> "systems/ronin/templates/parts/tab-equipment.html"}}
+        <div class="tab-equipment">
+          <div class="inventory-categories">
+            <!-- Weapons -->
+            <div class="inventory-category">
+              <h2 class="category-header">
+                <span>Weapons</span>
+                <a class="item-create" title="Create Weapon" data-type="weapon">
+                  <i class="fas fa-plus"></i> Add
+                </a>
+              </h2>
+              <ol class="item-list">
+                {{#each items as |item id|}}
+                  {{#if (eq item.type "weapon")}}
+                    <li class="item" data-item-id="{{item._id}}">
+                      <div class="item-header">
+                        <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+                        <div class="item-name">{{item.name}}</div>
+                        <div class="item-controls">
+                          <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                          <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                      </div>
+                      <div class="item-details">
+                        <div class="item-damage">{{item.system.damage}}</div>
+                        <div class="item-equipped">
+                          <input type="checkbox" {{#if item.system.equipped}}checked{{/if}} data-item-id="{{item._id}}" data-equipped>
+                          <label>Equipped</label>
+                        </div>
+                      </div>
+                    </li>
+                  {{/if}}
+                {{/each}}
+              </ol>
+            </div>
+
+            <!-- Armor -->
+            <div class="inventory-category">
+              <h2 class="category-header">
+                <span>Armor</span>
+                <a class="item-create" title="Create Armor" data-type="armor">
+                  <i class="fas fa-plus"></i> Add
+                </a>
+              </h2>
+              <ol class="item-list">
+                {{#each items as |item id|}}
+                  {{#if (eq item.type "armor")}}
+                    <li class="item" data-item-id="{{item._id}}">
+                      <div class="item-header">
+                        <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+                        <div class="item-name">{{item.name}}</div>
+                        <div class="item-controls">
+                          <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                          <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                      </div>
+                      <div class="item-details">
+                        <div class="item-protection">-{{item.system.protection}}</div>
+                        <div class="item-tier">Tier {{item.system.tier}}</div>
+                        <div class="item-equipped">
+                          <input type="checkbox" {{#if item.system.equipped}}checked{{/if}} data-item-id="{{item._id}}" data-equipped>
+                          <label>Equipped</label>
+                        </div>
+                      </div>
+                    </li>
+                  {{/if}}
+                {{/each}}
+              </ol>
+            </div>
+
+            <!-- Gear -->
+            <div class="inventory-category">
+              <h2 class="category-header">
+                <span>Gear</span>
+                <a class="item-create" title="Create Gear" data-type="gear">
+                  <i class="fas fa-plus"></i> Add
+                </a>
+              </h2>
+              <ol class="item-list">
+                {{#each items as |item id|}}
+                  {{#if (eq item.type "gear")}}
+                    <li class="item" data-item-id="{{item._id}}">
+                      <div class="item-header">
+                        <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+                        <div class="item-name">{{item.name}}</div>
+                        <div class="item-controls">
+                          <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                          <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                      </div>
+                      <div class="item-details">
+                        <div class="item-uses">
+                          <span>Uses: </span>
+                          <input type="number" value="{{item.system.uses.value}}" min="0" max="{{item.system.uses.max}}" data-item-id="{{item._id}}" data-field="system.uses.value">
+                          <span>/</span>
+                          <span>{{item.system.uses.max}}</span>
+                        </div>
+                      </div>
+                    </li>
+                  {{/if}}
+                {{/each}}
+              </ol>
+            </div>
+
+            <!-- Misc -->
+            <div class="inventory-category">
+              <h2 class="category-header">
+                <span>Misc</span>
+                <a class="item-create" title="Create Misc Item" data-type="misc">
+                  <i class="fas fa-plus"></i> Add
+                </a>
+              </h2>
+              <ol class="item-list">
+                {{#each items as |item id|}}
+                  {{#if (eq item.type "misc")}}
+                    <li class="item" data-item-id="{{item._id}}">
+                      <div class="item-header">
+                        <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+                        <div class="item-name">{{item.name}}</div>
+                        <div class="item-controls">
+                          <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                          <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                      </div>
+                      <div class="item-details">
+                        <div class="item-quantity">
+                          <span>Qty: </span>
+                          <input type="number" value="{{item.system.quantity}}" min="1" data-item-id="{{item._id}}" data-field="system.quantity">
+                        </div>
+                      </div>
+                    </li>
+                  {{/if}}
+                {{/each}}
+              </ol>
+            </div>
+          </div>
+        </div>
       </div>
       
       <!-- Tab de Tatakai (Combate) -->
       <div class="tab" data-group="primary" data-tab="tatakai">
-        {{> "systems/ronin/templates/parts/tab-tatakai.html"}}
+        <div class="tab-tatakai">
+          <div class="combat-section">
+            <!-- Botões de Iniciativa -->
+            <div class="initiative-buttons">
+              <button class="party-initiative">PARTY</button>
+              <button class="individual-initiative">INDIVIDUAL</button>
+            </div>
+            
+            <!-- Armas equipadas -->
+            <div class="equipped-weapons">
+              <h2>Equipped Weapons</h2>
+              <div class="equipped-list">
+                {{#each items as |item id|}}
+                  {{#if (and (eq item.type "weapon") item.system.equipped)}}
+                    <div class="equipped-item" data-item-id="{{item._id}}">
+                      <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+                      <div class="item-name">{{item.name}}</div>
+                      <div class="item-damage">{{item.system.damage}}</div>
+                    </div>
+                  {{/if}}
+                {{/each}}
+              </div>
+            </div>
+            
+            <!-- Armadura equipada -->
+            <div class="equipped-armor">
+              <h2>Equipped Armor</h2>
+              <div class="equipped-list">
+                {{#each items as |item id|}}
+                  {{#if (and (eq item.type "armor") item.system.equipped)}}
+                    <div class="equipped-item" data-item-id="{{item._id}}">
+                      <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+                      <div class="item-name">{{item.name}}</div>
+                      <div class="item-protection">-{{item.system.protection}}</div>
+                      <div class="item-tier">Tier {{item.system.tier}}</div>
+                    </div>
+                  {{/if}}
+                {{/each}}
+              </div>
+            </div>
+          </div>
+          
+          <!-- Botões de ações de combate -->
+          <div class="combat-actions">
+            <button class="defend-action">DEFEND</button>
+            <button class="parry-action">PARRY</button>
+          </div>
+        </div>
       </div>
       
       <!-- Tab de Features -->
       <div class="tab" data-group="primary" data-tab="features">
-        {{> "systems/ronin/templates/parts/tab-features.html"}}
+        <div class="tab-features">
+          <!-- Feats -->
+          <div class="features-section">
+            <h2 class="section-header">
+              <span>Feats</span>
+              <a class="item-create" title="Create Feat" data-type="feat">
+                <i class="fas fa-plus"></i> Add
+              </a>
+            </h2>
+            <ol class="feature-list">
+              {{#each items as |item id|}}
+                {{#if (eq item.type "feat")}}
+                  <li class="feature-item" data-item-id="{{item._id}}">
+                    <div class="item-header">
+                      <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+                      <div class="item-name">{{item.name}}</div>
+                      <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                      </div>
+                    </div>
+                    <div class="item-description">{{{item.system.description}}}</div>
+                  </li>
+                {{/if}}
+              {{/each}}
+            </ol>
+          </div>
+
+          <!-- Texts -->
+          <div class="texts-section">
+            <h2 class="section-header">
+              <span>Texts</span>
+              <a class="item-create" title="Create Text" data-type="text">
+                <i class="fas fa-plus"></i> Add
+              </a>
+            </h2>
+            <ol class="feature-list">
+              {{#each items as |item id|}}
+                {{#if (eq item.type "text")}}
+                  <li class="feature-item" data-item-id="{{item._id}}">
+                    <div class="item-header">
+                      <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+                      <div class="item-name">{{item.name}}</div>
+                      <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                      </div>
+                    </div>
+                    <div class="item-details">
+                      <div class="text-type">{{item.system.textType}}</div>
+                      <div class="text-prepared">
+                        <input type="checkbox" {{#if item.system.prepared}}checked{{/if}} data-item-id="{{item._id}}" data-prepared>
+                        <label>Prepared</label>
+                      </div>
+                    </div>
+                    <div class="item-description">{{{item.system.description}}}</div>
+                  </li>
+                {{/if}}
+              {{/each}}
+            </ol>
+          </div>
+        </div>
       </div>
     </section>
   </div>
