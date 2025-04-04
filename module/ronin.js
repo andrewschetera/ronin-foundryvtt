@@ -14,6 +14,24 @@ Hooks.once('init', async function() {
   // Registrar folhas de item
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("ronin", RoninItemSheet, { makeDefault: true });
+
+  // Registrar o helper Handlebars 'times' para criar loops
+  Handlebars.registerHelper('times', function(n, block) {
+    let accum = '';
+    for(let i = 1; i <= n; ++i)
+      accum += block.fn(i);
+    return accum;
+  });
+
+  // Registrar o helper Handlebars 'eq' para comparações
+  Handlebars.registerHelper('eq', function (a, b) {
+    return a === b;
+  });
+
+  // Registrar o helper Handlebars 'lte' para comparações
+  Handlebars.registerHelper('lte', function (a, b) {
+    return a <= b;
+  });
 });
 
 // Hooks adicionais podem ser adicionados aqui no futuro
@@ -25,8 +43,7 @@ class RoninActor extends Actor {
   prepareData() {
     super.prepareData();
 
-    const actorData = this.data;
-    const data = actorData.data;
+    const actorData = this;
     
     if (actorData.type === 'character') {
       this._prepareCharacterData(actorData);
@@ -52,7 +69,7 @@ class RoninItem extends Item {
  */
 class RoninActorSheet extends ActorSheet {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["ronin", "sheet", "actor"],
       template: "systems/ronin/templates/actor-sheet.html",
       width: 700,
@@ -64,10 +81,16 @@ class RoninActorSheet extends ActorSheet {
   }
   
   getData() {
-    const data = super.getData();
-    data.dtypes = ["String", "Number", "Boolean"];
+    const context = super.getData();
     
-    return data;
+    // Adiciona o sistema ao contexto para acessar os dados
+    const actorData = context.actor;
+    
+    // Adicionamos os dados ao objeto de contexto
+    context.system = actorData.system;
+    context.items = actorData.items;
+    
+    return context;
   }
   
   activateListeners(html) {
@@ -78,7 +101,36 @@ class RoninActorSheet extends ActorSheet {
     // Funcionalidade condicional para as ações do proprietário
     if (this.actor.isOwner) {
       // Futuros listeners específicos para o proprietário
+      html.find('.item-create').click(this._onItemCreate.bind(this));
+      html.find('.item-edit').click(this._onItemEdit.bind(this));
+      html.find('.item-delete').click(this._onItemDelete.bind(this));
     }
+  }
+
+  // Métodos para manipulação de itens
+  _onItemCreate(event) {
+    event.preventDefault();
+    const header = event.currentTarget;
+    const type = header.dataset.type;
+    const itemData = {
+      name: `Novo ${type}`,
+      type: type
+    };
+    return this.actor.createEmbeddedDocuments("Item", [itemData]);
+  }
+
+  _onItemEdit(event) {
+    event.preventDefault();
+    const li = event.currentTarget.closest(".item");
+    const item = this.actor.items.get(li.dataset.itemId);
+    item.sheet.render(true);
+  }
+
+  _onItemDelete(event) {
+    event.preventDefault();
+    const li = event.currentTarget.closest(".item");
+    const itemId = li.dataset.itemId;
+    this.actor.deleteEmbeddedDocuments("Item", [itemId]);
   }
 }
 
@@ -87,7 +139,7 @@ class RoninActorSheet extends ActorSheet {
  */
 class RoninItemSheet extends ItemSheet {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["ronin", "sheet", "item"],
       width: 520,
       height: 480,
@@ -96,13 +148,14 @@ class RoninItemSheet extends ItemSheet {
   }
   
   get template() {
-    const path = "systems/ronin/templates/item";
-    return `${path}/item-${this.item.data.type}-sheet.html`;
+    const path = "systems/ronin/templates/items";
+    return `${path}/item-${this.item.type}-sheet.html`;
   }
   
   getData() {
-    const data = super.getData();
-    return data;
+    const context = super.getData();
+    context.system = context.item.system;
+    return context;
   }
   
   activateListeners(html) {
