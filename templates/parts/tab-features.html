@@ -19,7 +19,7 @@
                 <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
               </div>
             </div>
-            <div class="item-description">{{{item.data.description}}}</div>
+            <div class="item-description">{{{item.system.description}}}</div>
           </li>
         {{/if}}
       {{/each}}
@@ -47,13 +47,13 @@
               </div>
             </div>
             <div class="item-details">
-              <div class="text-type">{{item.data.textType}}</div>
+              <div class="text-type">{{item.system.textType}}</div>
               <div class="text-prepared">
-                <input type="checkbox" {{#if item.data.prepared}}checked{{/if}} data-item-id="{{item._id}}" data-prepared>
+                <input type="checkbox" {{#if item.system.prepared}}checked{{/if}} data-item-id="{{item._id}}" data-prepared>
                 <label>Prepared</label>
               </div>
             </div>
-            <div class="item-description">{{{item.data.description}}}</div>
+            <div class="item-description">{{{item.system.description}}}</div>
           </li>
         {{/if}}
       {{/each}}
