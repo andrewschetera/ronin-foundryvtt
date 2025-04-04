@@ -5,29 +5,31 @@
   --color-white: #ffffff;
   --color-black: #000000;
   --color-red: #ff0000;
+  --color-red-dark: #c00000;
+  --color-gray: #333333;
   --font-primary: "Arial", sans-serif;
   --font-display: "Arial", sans-serif;
 }
 
 /* Estilos Globais */
 .ronin {
-  background-color: var(--color-white);
-  color: var(--color-black);
+  background-color: var(--color-black);
+  color: var(--color-white);
   font-family: var(--font-primary);
-  border: 1px solid var(--color-black);
+  border: 1px solid var(--color-red);
 }
 
 .ronin h1, .ronin h2, .ronin h3 {
   font-family: var(--font-display);
-  color: var(--color-black);
-  border-bottom: 1px solid var(--color-black);
+  color: var(--color-white);
+  border-bottom: 1px solid var(--color-red);
 }
 
 .ronin input[type="text"],
 .ronin input[type="number"],
 .ronin select {
   background-color: var(--color-white);
-  border: 1px solid var(--color-black);
+  border: 1px solid var(--color-red);
   border-radius: 0;
   padding: 4px;
   color: var(--color-black);
@@ -41,42 +43,40 @@
 
 /* Header da Ficha */
 .sheet-header {
-  background-color: var(--color-white);
+  background-color: var(--color-black);
   margin-bottom: 10px;
   padding: 10px;
-  border-bottom: 2px solid var(--color-black);
+  border-bottom: 2px solid var(--color-red);
   display: flex;
   flex-direction: column;
 }
 
 .header-grid {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 2fr 3fr 1fr;
   gap: 10px;
 }
 
 .character-img {
-  grid-area: img;
   text-align: center;
   height: 200px;
 }
 
 .profile-img {
-  border: 2px solid var(--color-black);
+  border: 2px solid var(--color-red);
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
 
 .basic-info {
-  grid-area: info;
   display: flex;
   flex-direction: column;
 }
 
 .character-name {
   font-size: 1.8em;
-  color: var(--color-black);
+  color: var(--color-white);
   font-weight: bold;
   margin: 0 0 5px 0;
   text-align: center;
@@ -86,7 +86,7 @@
   width: 100%;
   background: var(--color-white);
   color: var(--color-black);
-  border: 1px solid var(--color-black);
+  border: 1px solid var(--color-red);
   text-align: center;
   font-weight: bold;
 }
@@ -101,7 +101,7 @@
   margin-bottom: 5px;
   background: var(--color-white);
   color: var(--color-black);
-  border: 1px solid var(--color-black);
+  border: 1px solid var(--color-red);
   text-align: center;
 }
 
@@ -109,20 +109,20 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .resource {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--color-white);
-  border: 1px solid var(--color-black);
+  background: var(--color-black);
+  border: 1px solid var(--color-red);
   padding: 5px;
 }
 
 .resource label {
-  color: var(--color-black);
+  color: var(--color-white);
   font-size: 1.1em;
   font-weight: bold;
   margin-bottom: 3px;
@@ -141,7 +141,7 @@
 }
 
 .separator {
-  color: var(--color-black);
+  color: var(--color-white);
   margin: 0 5px;
 }
 
@@ -149,12 +149,13 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
+  margin-top: 10px;
 }
 
 .action-buttons button {
-  background-color: var(--color-black);
+  background-color: var(--color-red);
   color: var(--color-white);
-  border: 1px solid var(--color-black);
+  border: 1px solid var(--color-white);
   padding: 5px 10px;
   font-family: var(--font-display);
   cursor: pointer;
@@ -163,23 +164,27 @@
 }
 
 .action-buttons button:hover {
-  background-color: var(--color-red);
+  background-color: var(--color-red-dark);
 }
 
 .honor-section {
   grid-column: 1 / -1;
   margin-top: 10px;
   padding: 8px;
-  border: 1px solid var(--color-black);
+  border: 1px solid var(--color-red);
+  background-color: var(--color-black);
 }
 
 .honor-section label {
-  color: var(--color-black);
+  color: var(--color-white);
   display: block;
   text-align: center;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 1.4em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 2px var(--color-red);
 }
 
 .honor-track {
@@ -196,10 +201,10 @@
   width: 25px;
   height: 25px;
   margin: 0 2px;
-  background-color: var(--color-white);
-  border: 2px solid var(--color-black);
+  background-color: var(--color-black);
+  border: 2px solid var(--color-white);
   border-radius: 50%;
-  color: var(--color-black);
+  color: var(--color-white);
   font-size: 0.8em;
   font-weight: bold;
   text-align: center;
@@ -207,7 +212,6 @@
 }
 
 .honor-dot.dishonor {
-  background-color: var(--color-white);
   border-color: var(--color-red);
   color: var(--color-red);
 }
@@ -217,8 +221,8 @@ input[type="radio"][name="system.resources.honor.value"] {
 }
 
 input[type="radio"][name="system.resources.honor.value"]:checked + label {
-  background-color: var(--color-black);
-  color: var(--color-white);
+  background-color: var(--color-white);
+  color: var(--color-black);
 }
 
 input[type="radio"][name="system.resources.honor.value"]:checked + label.dishonor {
@@ -236,14 +240,14 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-white);
-  border: 2px solid var(--color-black);
+  background: var(--color-black);
+  border: 2px solid var(--color-red);
   padding: 5px;
   height: 40px;
 }
 
 .ability label {
-  color: var(--color-black);
+  color: var(--color-white);
   font-size: 1.2em;
   font-weight: bold;
   margin-right: 8px;
@@ -255,16 +259,14 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   text-align: center;
   font-weight: bold;
   font-size: 1.5em;
-  border: 1px solid var(--color-black);
+  border: 1px solid var(--color-red);
 }
 
 /* Navegação de Abas */
 .sheet-tabs {
   flex: 0;
-  margin: 0 0 5px 0;
-  background: var(--color-white);
-  border-top: 2px solid var(--color-black);
-  border-bottom: 2px solid var(--color-black);
+  margin: 0;
+  background: var(--color-red);
   display: flex;
   justify-content: space-between;
 }
@@ -273,7 +275,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   flex: 1;
   font-family: var(--font-display);
   padding: 8px 15px;
-  color: var(--color-black);
+  color: var(--color-white);
   text-align: center;
   font-weight: bold;
   transition: background-color 0.3s;
@@ -285,18 +287,21 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 }
 
 .sheet-tabs .item:hover {
-  background: var(--color-red);
-  color: var(--color-white);
+  background: var(--color-red-dark);
 }
 
 .sheet-tabs .item.active {
   background: var(--color-black);
   color: var(--color-white);
+  border-bottom: 2px solid var(--color-white);
 }
 
 /* Tab de Background */
 .tab-background {
   height: 100%;
+  background-color: var(--color-black);
+  border: 1px solid var(--color-red);
+  padding: 5px;
 }
 
 .editor-wrapper {
@@ -309,7 +314,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   height: 100%;
   min-height: 200px;
   background: var(--color-white);
-  border: 1px solid var(--color-black);
+  border: 1px solid var(--color-red);
   padding: 10px;
   color: var(--color-black);
 }
@@ -322,8 +327,8 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 }
 
 .inventory-category {
-  background: var(--color-white);
-  border: 1px solid var(--color-black);
+  background: var(--color-black);
+  border: 1px solid var(--color-red);
   padding: 5px;
   margin-bottom: 10px;
 }
@@ -332,13 +337,14 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--color-black);
+  border-bottom: 1px solid var(--color-red);
   padding-bottom: 5px;
   margin-bottom: 5px;
+  color: var(--color-white);
 }
 
 .item-create {
-  color: var(--color-red);
+  color: var(--color-white);
   margin-left: auto;
 }
 
@@ -349,8 +355,9 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 }
 
 .item {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--color-red);
   padding: 5px 0;
+  color: var(--color-white);
 }
 
 .item-header {
@@ -368,7 +375,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border: 1px solid var(--color-black);
+  border: 1px solid var(--color-red);
 }
 
 .item-name {
@@ -381,7 +388,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 }
 
 .item-edit, .item-delete {
-  color: var(--color-red);
+  color: var(--color-white);
 }
 
 .item-details {
@@ -406,9 +413,9 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 }
 
 .initiative-buttons button {
-  background-color: var(--color-black);
+  background-color: var(--color-red);
   color: var(--color-white);
-  border: 1px solid var(--color-black);
+  border: 1px solid var(--color-white);
   padding: 5px 15px;
   font-family: var(--font-display);
   cursor: pointer;
@@ -417,14 +424,15 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 }
 
 .initiative-buttons button:hover {
-  background-color: var(--color-red);
+  background-color: var(--color-red-dark);
 }
 
 .equipped-weapons, .equipped-armor {
-  background: var(--color-white);
-  border: 1px solid var(--color-black);
+  background: var(--color-black);
+  border: 1px solid var(--color-red);
   padding: 10px;
   margin-bottom: 10px;
+  color: var(--color-white);
 }
 
 .equipped-list {
@@ -437,8 +445,8 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--color-white);
-  border: 1px solid var(--color-black);
+  background: var(--color-gray);
+  border: 1px solid var(--color-red);
   padding: 10px;
   width: 100px;
   text-align: center;
@@ -457,9 +465,9 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 }
 
 .combat-actions button {
-  background-color: var(--color-black);
+  background-color: var(--color-red);
   color: var(--color-white);
-  border: 1px solid var(--color-black);
+  border: 1px solid var(--color-white);
   padding: 10px 20px;
   font-family: var(--font-display);
   font-size: 1.2em;
@@ -469,22 +477,23 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 }
 
 .combat-actions button:hover {
-  background-color: var(--color-red);
+  background-color: var(--color-red-dark);
 }
 
 /* Tab de Features */
 .features-section, .texts-section {
-  background: var(--color-white);
-  border: 1px solid var(--color-black);
+  background: var(--color-black);
+  border: 1px solid var(--color-red);
   padding: 10px;
   margin-bottom: 10px;
+  color: var(--color-white);
 }
 
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--color-black);
+  border-bottom: 1px solid var(--color-red);
   padding-bottom: 5px;
   margin-bottom: 10px;
 }
@@ -498,14 +507,39 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 .feature-item {
   margin-bottom: 10px;
   padding: 5px;
-  border: 1px solid var(--color-black);
-  background: var(--color-white);
+  border: 1px solid var(--color-red);
+  background: var(--color-gray);
 }
 
 .item-description {
   margin-top: 5px;
   padding: 5px;
   font-size: 0.9em;
-  background: var(--color-white);
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  background: var(--color-gray);
+  border-top: 1px solid var(--color-red);
+}
+
+/* Override padrões do Foundry */
+.window-content {
+  background: url("../../ui/parchment.jpg") repeat;
+}
+
+.dialog .window-content,
+.filepicker .window-content {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+button {
+  background: var(--color-red);
+  color: var(--color-white);
+  border: 1px solid var(--color-white);
+}
+
+button:hover {
+  background: var(--color-red-dark);
+}
+
+.tabs .item.active {
+  text-shadow: 0 0 5px var(--color-red);
 }
