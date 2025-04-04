@@ -8,7 +8,7 @@
           <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
         </div>
         
-        <!-- Informações Básicas (1/2 da largura) -->
+        <!-- Informações Básicas (metade central) -->
         <div class="basic-info">
           <h1 class="character-name">
             <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
@@ -47,16 +47,13 @@
               <input name="system.resources.ryo.value" type="number" value="{{system.resources.ryo.value}}" min="0"/>
             </div>
           </div>
-        </div>
-        
-        <!-- Honor (metade inferior da coluna central) -->
-        <div class="honor-section">
-          <label>Honor</label>
-          <div class="honor-track">
-            {{#times 20}}
-              <input type="radio" name="system.resources.honor.value" id="honor-{{this}}" value="{{this}}" {{#if (eq ../system.resources.honor.value this)}}checked{{/if}}>
-              <label for="honor-{{this}}" class="honor-dot {{#if (lte this 9)}}dishonor{{/if}}">{{this}}</label>
-            {{/times}}
+          
+          <!-- Botões de Ação -->
+          <div class="action-buttons">
+            <button class="button-broken">BROKEN</button>
+            <button class="button-rest">REST</button>
+            <button class="button-seppuku">SEPPUKU</button>
+            <button class="button-get-better">GET BETTER</button>
           </div>
         </div>
         
@@ -84,12 +81,15 @@
         </div>
       </div>
       
-      <!-- Botões de Ação -->
-      <div class="action-buttons">
-        <button class="button-broken">BROKEN</button>
-        <button class="button-rest">REST</button>
-        <button class="button-seppuku">SEPPUKU</button>
-        <button class="button-get-better">GET BETTER</button>
+      <!-- Honor (atravessa toda a largura) -->
+      <div class="honor-section">
+        <label>Honor</label>
+        <div class="honor-track">
+          {{#times 20}}
+            <input type="radio" name="system.resources.honor.value" id="honor-{{this}}" value="{{this}}" {{#if (eq ../system.resources.honor.value this)}}checked{{/if}}>
+            <label for="honor-{{this}}" class="honor-dot {{#if (lte this 9)}}dishonor{{/if}}">{{this}}</label>
+          {{/times}}
+        </div>
       </div>
     </header>
     
