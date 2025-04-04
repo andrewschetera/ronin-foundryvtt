@@ -2,39 +2,35 @@
 
 /* Variáveis de cores */
 :root {
-  --color-dark: #1a0000;
-  --color-light: #f9f9f9;
-  --color-red: #9e1c1c;
-  --color-red-light: #c41e1e;
-  --color-red-dark: #660000;
-  --color-brown: #4a2222;
-  --color-gold: #b8860b;
-  --font-primary: "Noto Sans JP", sans-serif;
-  --font-display: "Noto Serif JP", serif;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-red: #ff0000;
+  --font-primary: "Arial", sans-serif;
+  --font-display: "Arial", sans-serif;
 }
 
 /* Estilos Globais */
 .ronin {
-  background-image: url("systems/ronin/assets/textures/paper-bg.webp");
-  background-color: var(--color-light);
-  color: var(--color-dark);
+  background-color: var(--color-white);
+  color: var(--color-black);
   font-family: var(--font-primary);
+  border: 1px solid var(--color-black);
 }
 
 .ronin h1, .ronin h2, .ronin h3 {
   font-family: var(--font-display);
-  color: var(--color-red-dark);
-  border-bottom: 1px solid var(--color-gold);
+  color: var(--color-black);
+  border-bottom: 1px solid var(--color-black);
 }
 
 .ronin input[type="text"],
 .ronin input[type="number"],
 .ronin select {
-  background-color: rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--color-dark);
-  border-radius: 3px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-black);
+  border-radius: 0;
   padding: 4px;
-  color: var(--color-dark);
+  color: var(--color-black);
 }
 
 .ronin input[type="text"]:focus,
@@ -45,91 +41,98 @@
 
 /* Header da Ficha */
 .sheet-header {
-  background-image: url("systems/ronin/assets/textures/header-bg.webp");
-  background-color: var(--color-dark);
+  background-color: var(--color-white);
   margin-bottom: 10px;
   padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid var(--color-black);
+  display: flex;
+  flex-direction: column;
 }
 
 .header-grid {
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-template-areas: 
-    "img info abilities"
-    "img honor abilities";
+  grid-template-columns: 1fr 2fr 1fr;
   gap: 10px;
 }
 
 .character-img {
   grid-area: img;
   text-align: center;
+  height: 200px;
 }
 
 .profile-img {
-  border: 2px solid var(--color-gold);
-  border-radius: 5px;
-  max-height: 150px;
+  border: 2px solid var(--color-black);
+  height: 100%;
   width: 100%;
   object-fit: cover;
 }
 
 .basic-info {
   grid-area: info;
+  display: flex;
+  flex-direction: column;
 }
 
 .character-name {
-  font-size: 1.5em;
-  color: var(--color-light);
-  text-shadow: 2px 2px 2px black;
+  font-size: 1.8em;
+  color: var(--color-black);
+  font-weight: bold;
   margin: 0 0 5px 0;
+  text-align: center;
 }
 
 .character-name input {
   width: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  color: var(--color-light);
-  border: 1px solid var(--color-gold);
+  background: var(--color-white);
+  color: var(--color-black);
+  border: 1px solid var(--color-black);
+  text-align: center;
+  font-weight: bold;
+}
+
+.character-class {
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .character-class input {
   width: 100%;
   margin-bottom: 5px;
-  background: rgba(0, 0, 0, 0.3);
-  color: var(--color-light);
-  border: 1px solid var(--color-brown);
+  background: var(--color-white);
+  color: var(--color-black);
+  border: 1px solid var(--color-black);
+  text-align: center;
 }
 
 .resources-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5px;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
 .resource {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
+  background: var(--color-white);
+  border: 1px solid var(--color-black);
   padding: 5px;
 }
 
 .resource label {
-  color: var(--color-light);
-  font-size: 0.9em;
+  color: var(--color-black);
+  font-size: 1.1em;
+  font-weight: bold;
   margin-bottom: 3px;
 }
 
 .resource input {
-  width: 40px;
+  width: 50px;
   text-align: center;
   padding: 2px;
-}
-
-.resource.hp {
-  grid-column: span 2;
+  font-weight: bold;
 }
 
 .resource-value {
@@ -138,130 +141,157 @@
 }
 
 .separator {
-  color: var(--color-light);
+  color: var(--color-black);
   margin: 0 5px;
 }
 
-.honor-section {
-  grid-area: honor;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 5px;
-  border-radius: 3px;
-}
-
-.honor-section label {
-  color: var(--color-light);
-  display: block;
-  text-align: center;
-  margin-bottom: 5px;
-}
-
-.honor-track {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.honor-dot {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  margin: 2px;
-  background-color: black;
-  border-radius: 50%;
-  color: var(--color-light);
-  font-size: 0.8em;
-  text-align: center;
-  line-height: 24px;
-  cursor: pointer;
-}
-
-.honor-dot.dishonor {
-  background-color: var(--color-red-dark);
-}
-
-input[type="radio"][name="data.resources.honor.value"] {
-  display: none;
-}
-
-input[type="radio"][name="data.resources.honor.value"]:checked + label {
-  background-color: var(--color-gold);
-  color: var(--color-dark);
-}
-
-.abilities-column {
-  grid-area: abilities;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.ability {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
-  margin-bottom: 5px;
-  padding: 5px;
-}
-
-.ability label {
-  color: var(--color-light);
-  font-weight: bold;
-  margin-bottom: 3px;
-}
-
-.ability input {
-  width: 40px;
-  text-align: center;
-  font-weight: bold;
-}
-
 .action-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
 }
 
 .action-buttons button {
-  background-color: var(--color-red-dark);
-  color: var(--color-light);
-  border: 1px solid var(--color-gold);
-  border-radius: 3px;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border: 1px solid var(--color-black);
   padding: 5px 10px;
   font-family: var(--font-display);
   cursor: pointer;
   transition: background-color 0.3s;
+  font-weight: bold;
 }
 
 .action-buttons button:hover {
   background-color: var(--color-red);
 }
 
+.honor-section {
+  grid-column: 1 / -1;
+  margin-top: 10px;
+  padding: 8px;
+  border: 1px solid var(--color-black);
+}
+
+.honor-section label {
+  color: var(--color-black);
+  display: block;
+  text-align: center;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.honor-track {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.honor-dot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  margin: 0 2px;
+  background-color: var(--color-white);
+  border: 2px solid var(--color-black);
+  border-radius: 50%;
+  color: var(--color-black);
+  font-size: 0.8em;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.honor-dot.dishonor {
+  background-color: var(--color-white);
+  border-color: var(--color-red);
+  color: var(--color-red);
+}
+
+input[type="radio"][name="system.resources.honor.value"] {
+  display: none;
+}
+
+input[type="radio"][name="system.resources.honor.value"]:checked + label {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+input[type="radio"][name="system.resources.honor.value"]:checked + label.dishonor {
+  background-color: var(--color-red);
+  color: var(--color-white);
+}
+
+.abilities-column {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.ability {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  border: 2px solid var(--color-black);
+  padding: 5px;
+  height: 40px;
+}
+
+.ability label {
+  color: var(--color-black);
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.ability input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5em;
+  border: 1px solid var(--color-black);
+}
+
 /* Navegação de Abas */
 .sheet-tabs {
   flex: 0;
   margin: 0 0 5px 0;
-  background: var(--color-red-dark);
-  border-radius: 5px;
+  background: var(--color-white);
+  border-top: 2px solid var(--color-black);
+  border-bottom: 2px solid var(--color-black);
+  display: flex;
+  justify-content: space-between;
 }
 
 .sheet-tabs .item {
+  flex: 1;
   font-family: var(--font-display);
-  padding: 5px 15px;
-  color: var(--color-light);
-  border-radius: 5px 5px 0 0;
+  padding: 8px 15px;
+  color: var(--color-black);
+  text-align: center;
+  font-weight: bold;
   transition: background-color 0.3s;
+  border-right: 1px solid var(--color-black);
+}
+
+.sheet-tabs .item:last-child {
+  border-right: none;
 }
 
 .sheet-tabs .item:hover {
   background: var(--color-red);
+  color: var(--color-white);
 }
 
 .sheet-tabs .item.active {
-  background: var(--color-gold);
-  color: var(--color-dark);
+  background: var(--color-black);
+  color: var(--color-white);
 }
 
 /* Tab de Background */
@@ -278,11 +308,10 @@ input[type="radio"][name="data.resources.honor.value"]:checked + label {
   width: 100%;
   height: 100%;
   min-height: 200px;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--color-dark);
-  border-radius: 3px;
+  background: var(--color-white);
+  border: 1px solid var(--color-black);
   padding: 10px;
-  color: var(--color-dark);
+  color: var(--color-black);
 }
 
 /* Tab de Equipment */
@@ -293,9 +322,8 @@ input[type="radio"][name="data.resources.honor.value"]:checked + label {
 }
 
 .inventory-category {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--color-dark);
-  border-radius: 3px;
+  background: var(--color-white);
+  border: 1px solid var(--color-black);
   padding: 5px;
   margin-bottom: 10px;
 }
@@ -304,13 +332,13 @@ input[type="radio"][name="data.resources.honor.value"]:checked + label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--color-gold);
+  border-bottom: 1px solid var(--color-black);
   padding-bottom: 5px;
   margin-bottom: 5px;
 }
 
 .item-create {
-  color: var(--color-red-dark);
+  color: var(--color-red);
   margin-left: auto;
 }
 
@@ -321,7 +349,7 @@ input[type="radio"][name="data.resources.honor.value"]:checked + label {
 }
 
 .item {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 5px 0;
 }
 
@@ -340,8 +368,7 @@ input[type="radio"][name="data.resources.honor.value"]:checked + label {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border: 1px solid var(--color-dark);
-  border-radius: 3px;
+  border: 1px solid var(--color-black);
 }
 
 .item-name {
@@ -354,7 +381,7 @@ input[type="radio"][name="data.resources.honor.value"]:checked + label {
 }
 
 .item-edit, .item-delete {
-  color: var(--color-red-dark);
+  color: var(--color-red);
 }
 
 .item-details {
@@ -379,14 +406,14 @@ input[type="radio"][name="data.resources.honor.value"]:checked + label {
 }
 
 .initiative-buttons button {
-  background-color: var(--color-red-dark);
-  color: var(--color-light);
-  border: 1px solid var(--color-gold);
-  border-radius: 3px;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border: 1px solid var(--color-black);
   padding: 5px 15px;
   font-family: var(--font-display);
   cursor: pointer;
   transition: background-color 0.3s;
+  font-weight: bold;
 }
 
 .initiative-buttons button:hover {
@@ -394,9 +421,8 @@ input[type="radio"][name="data.resources.honor.value"]:checked + label {
 }
 
 .equipped-weapons, .equipped-armor {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--color-dark);
-  border-radius: 3px;
+  background: var(--color-white);
+  border: 1px solid var(--color-black);
   padding: 10px;
   margin-bottom: 10px;
 }
@@ -411,9 +437,8 @@ input[type="radio"][name="data.resources.honor.value"]:checked + label {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid var(--color-dark);
-  border-radius: 3px;
+  background: var(--color-white);
+  border: 1px solid var(--color-black);
   padding: 10px;
   width: 100px;
   text-align: center;
@@ -432,15 +457,15 @@ input[type="radio"][name="data.resources.honor.value"]:checked + label {
 }
 
 .combat-actions button {
-  background-color: var(--color-red-dark);
-  color: var(--color-light);
-  border: 1px solid var(--color-gold);
-  border-radius: 3px;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border: 1px solid var(--color-black);
   padding: 10px 20px;
   font-family: var(--font-display);
   font-size: 1.2em;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-weight: bold;
 }
 
 .combat-actions button:hover {
@@ -449,9 +474,8 @@ input[type="radio"][name="data.resources.honor.value"]:checked + label {
 
 /* Tab de Features */
 .features-section, .texts-section {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--color-dark);
-  border-radius: 3px;
+  background: var(--color-white);
+  border: 1px solid var(--color-black);
   padding: 10px;
   margin-bottom: 10px;
 }
@@ -460,7 +484,7 @@ input[type="radio"][name="data.resources.honor.value"]:checked + label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--color-gold);
+  border-bottom: 1px solid var(--color-black);
   padding-bottom: 5px;
   margin-bottom: 10px;
 }
@@ -474,31 +498,14 @@ input[type="radio"][name="data.resources.honor.value"]:checked + label {
 .feature-item {
   margin-bottom: 10px;
   padding: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--color-black);
+  background: var(--color-white);
 }
 
 .item-description {
   margin-top: 5px;
   padding: 5px;
   font-size: 0.9em;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 3px;
-}
-
-/* Responsividade */
-@media (max-width: 600px) {
-  .header-grid {
-    grid-template-columns: 1fr;
-    grid-template-areas: 
-      "img"
-      "info"
-      "honor"
-      "abilities";
-  }
-  
-  .inventory-categories {
-    grid-template-columns: 1fr;
-  }
+  background: var(--color-white);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
