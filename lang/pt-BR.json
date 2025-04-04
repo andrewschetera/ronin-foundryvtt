@@ -1,0 +1,59 @@
+{
+  "RONIN": {
+    "Abilities": {
+      "Vigor": "Vigor",
+      "Swiftness": "Destreza",
+      "Spirit": "Espírito",
+      "Resilience": "Resiliência"
+    },
+    "Resources": {
+      "HP": "PV",
+      "Texts": "Textos",
+      "Virtues": "Virtudes",
+      "Ryo": "Ryo",
+      "Honor": "Honra"
+    },
+    "Tabs": {
+      "Background": "Antecedentes",
+      "Equipment": "Equipamento",
+      "Tatakai": "Tatakai",
+      "Features": "Características"
+    },
+    "Actions": {
+      "Broken": "QUEBRADO",
+      "Rest": "DESCANSAR",
+      "Seppuku": "SEPPUKU",
+      "GetBetter": "MELHORAR",
+      "Party": "GRUPO",
+      "Individual": "INDIVIDUAL",
+      "Defend": "DEFENDER",
+      "Parry": "APARAR"
+    },
+    "Equipment": {
+      "Weapons": "Armas",
+      "Armor": "Armadura",
+      "Gear": "Equipamentos",
+      "Misc": "Diversos",
+      "Equipped": "Equipado",
+      "Damage": "Dano",
+      "Protection": "Proteção",
+      "Tier": "Nível",
+      "Uses": "Usos",
+      "Quantity": "Quantidade"
+    },
+    "Features": {
+      "Feats": "Talentos",
+      "Texts": "Textos",
+      "TextType": "Tipo de Texto",
+      "Prepared": "Preparado"
+    },
+    "ItemTypes": {
+      "Weapon": "Arma",
+      "Armor": "Armadura",
+      "Gear": "Equipamento",
+      "Misc": "Diversos",
+      "Feat": "Talento",
+      "Text": "Texto"
+    }
+  }
+}
