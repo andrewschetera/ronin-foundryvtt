@@ -11,11 +11,11 @@
       <h2>Equipped Weapons</h2>
       <div class="equipped-list">
         {{#each items as |item id|}}
-          {{#if (and (eq item.type "weapon") item.data.equipped)}}
+          {{#if (and (eq item.type "weapon") item.system.equipped)}}
             <div class="equipped-item" data-item-id="{{item._id}}">
               <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
               <div class="item-name">{{item.name}}</div>
-              <div class="item-damage">{{item.data.damage}}</div>
+              <div class="item-damage">{{item.system.damage}}</div>
             </div>
           {{/if}}
         {{/each}}
@@ -27,12 +27,12 @@
       <h2>Equipped Armor</h2>
       <div class="equipped-list">
         {{#each items as |item id|}}
-          {{#if (and (eq item.type "armor") item.data.equipped)}}
+          {{#if (and (eq item.type "armor") item.system.equipped)}}
             <div class="equipped-item" data-item-id="{{item._id}}">
               <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
               <div class="item-name">{{item.name}}</div>
-              <div class="item-protection">-{{item.data.protection}}</div>
-              <div class="item-tier">Tier {{item.data.tier}}</div>
+              <div class="item-protection">-{{item.system.protection}}</div>
+              <div class="item-tier">Tier {{item.system.tier}}</div>
             </div>
           {{/if}}
         {{/each}}
