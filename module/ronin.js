@@ -32,6 +32,11 @@ Hooks.once('init', async function() {
   Handlebars.registerHelper('lte', function (a, b) {
     return a <= b;
   });
+  
+  // Registrar o helper Handlebars 'and' para condições múltiplas
+  Handlebars.registerHelper('and', function () {
+    return Array.prototype.every.call(arguments, Boolean);
+  });
 });
 
 // Hooks adicionais podem ser adicionados aqui no futuro
@@ -96,14 +101,18 @@ class RoninActorSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
     
-    // Listeners irão aqui no futuro
-    
     // Funcionalidade condicional para as ações do proprietário
     if (this.actor.isOwner) {
-      // Futuros listeners específicos para o proprietário
+      // Item creation
       html.find('.item-create').click(this._onItemCreate.bind(this));
+
+      // Item editing
       html.find('.item-edit').click(this._onItemEdit.bind(this));
+
+      // Item deletion
       html.find('.item-delete').click(this._onItemDelete.bind(this));
+      
+      // Outras interações com botões podem ser adicionadas aqui
     }
   }
 
@@ -130,7 +139,7 @@ class RoninActorSheet extends ActorSheet {
     event.preventDefault();
     const li = event.currentTarget.closest(".item");
     const itemId = li.dataset.itemId;
-    this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+    return this.actor.deleteEmbeddedDocuments("Item", [itemId]);
   }
 }
 
@@ -149,6 +158,7 @@ class RoninItemSheet extends ItemSheet {
   
   get template() {
     const path = "systems/ronin/templates/items";
+    // Fallback para um template genérico se o específico não existir
     return `${path}/item-${this.item.type}-sheet.html`;
   }
   
