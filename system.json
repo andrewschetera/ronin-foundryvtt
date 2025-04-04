@@ -7,11 +7,11 @@
   "compatibleCoreVersion": "12",
   "author": "Your Name",
   "scripts": [
-    "ronin.js"
+    "module/ronin.js"
   ],
   "esmodules": [],
   "styles": [
-    "ronin.css"
+    "css/ronin.css"
   ],
   "packs": [],
   "languages": [
