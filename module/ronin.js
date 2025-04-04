@@ -101,6 +101,9 @@ class RoninActorSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
     
+    // Listener especial para os botões de honor
+    html.find('input[data-select-single="true"]').click(this._onClickHonorDot.bind(this));
+    
     // Funcionalidade condicional para as ações do proprietário
     if (this.actor.isOwner) {
       // Item creation
@@ -114,6 +117,20 @@ class RoninActorSheet extends ActorSheet {
       
       // Outras interações com botões podem ser adicionadas aqui
     }
+  }
+
+  /**
+   * Manipula o clique em um botão de honor
+   * @param {Event} event O evento de clique
+   * @private
+   */
+  _onClickHonorDot(event) {
+    event.preventDefault();
+    const dot = event.currentTarget;
+    const honorValue = dot.value;
+    
+    // Atualiza o valor de honor diretamente
+    this.actor.update({'system.resources.honor.value': parseInt(honorValue)});
   }
 
   // Métodos para manipulação de itens
