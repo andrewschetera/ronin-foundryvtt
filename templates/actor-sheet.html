@@ -3,12 +3,12 @@
     <!-- Header da Ficha (incorporado) -->
     <header class="sheet-header">
       <div class="header-grid">
-        <!-- Imagem do Personagem (1/3 da largura) -->
+        <!-- Imagem do Personagem (2/6 da largura) -->
         <div class="character-img">
           <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
         </div>
         
-        <!-- Informações Básicas (metade central) -->
+        <!-- Informações Básicas (3/6 da largura) -->
         <div class="basic-info">
           <h1 class="character-name">
             <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
@@ -50,10 +50,10 @@
           
           <!-- Botões de Ação -->
           <div class="action-buttons">
-            <button class="button-broken">BROKEN</button>
-            <button class="button-rest">REST</button>
-            <button class="button-seppuku">SEPPUKU</button>
-            <button class="button-get-better">GET BETTER</button>
+            <button class="button-broken" type="button">BROKEN</button>
+            <button class="button-rest" type="button">REST</button>
+            <button class="button-seppuku" type="button">SEPPUKU</button>
+            <button class="button-get-better" type="button">GET BETTER</button>
           </div>
         </div>
         
@@ -83,10 +83,10 @@
       
       <!-- Honor (atravessa toda a largura) -->
       <div class="honor-section">
-        <label>Honor</label>
+        <label>HONOR</label>
         <div class="honor-track">
           {{#times 20}}
-            <input type="radio" name="system.resources.honor.value" id="honor-{{this}}" value="{{this}}" {{#if (eq ../system.resources.honor.value this)}}checked{{/if}}>
+            <input type="radio" name="system.resources.honor.value" id="honor-{{this}}" value="{{this}}" {{#if (eq ../system.resources.honor.value this)}}checked{{/if}} data-select-single="true">
             <label for="honor-{{this}}" class="honor-dot {{#if (lte this 9)}}dishonor{{/if}}">{{this}}</label>
           {{/times}}
         </div>
@@ -258,8 +258,8 @@
           <div class="combat-section">
             <!-- Botões de Iniciativa -->
             <div class="initiative-buttons">
-              <button class="party-initiative">PARTY</button>
-              <button class="individual-initiative">INDIVIDUAL</button>
+              <button class="party-initiative" type="button">PARTY</button>
+              <button class="individual-initiative" type="button">INDIVIDUAL</button>
             </div>
             
             <!-- Armas equipadas -->
@@ -298,8 +298,8 @@
           
           <!-- Botões de ações de combate -->
           <div class="combat-actions">
-            <button class="defend-action">DEFEND</button>
-            <button class="parry-action">PARRY</button>
+            <button class="defend-action" type="button">DEFEND</button>
+            <button class="parry-action" type="button">PARRY</button>
           </div>
         </div>
       </div>
