@@ -49,7 +49,7 @@
     "character": {
       "templates": ["base"],
       "class": "",
-      "img": "systems/ronin/assets/default-character.webp"
+      "biography": ""
     }
   },
   "Item": {
