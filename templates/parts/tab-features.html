@@ -1,0 +1,62 @@
+<div class="tab-features">
+  <!-- Feats -->
+  <div class="features-section">
+    <h2 class="section-header">
+      <span>Feats</span>
+      <a class="item-create" title="Create Feat" data-type="feat">
+        <i class="fas fa-plus"></i> Add
+      </a>
+    </h2>
+    <ol class="feature-list">
+      {{#each items as |item id|}}
+        {{#if (eq item.type "feat")}}
+          <li class="feature-item" data-item-id="{{item._id}}">
+            <div class="item-header">
+              <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+              <div class="item-name">{{item.name}}</div>
+              <div class="item-controls">
+                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+              </div>
+            </div>
+            <div class="item-description">{{{item.data.description}}}</div>
+          </li>
+        {{/if}}
+      {{/each}}
+    </ol>
+  </div>
+
+  <!-- Texts -->
+  <div class="texts-section">
+    <h2 class="section-header">
+      <span>Texts</span>
+      <a class="item-create" title="Create Text" data-type="text">
+        <i class="fas fa-plus"></i> Add
+      </a>
+    </h2>
+    <ol class="feature-list">
+      {{#each items as |item id|}}
+        {{#if (eq item.type "text")}}
+          <li class="feature-item" data-item-id="{{item._id}}">
+            <div class="item-header">
+              <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+              <div class="item-name">{{item.name}}</div>
+              <div class="item-controls">
+                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+              </div>
+            </div>
+            <div class="item-details">
+              <div class="text-type">{{item.data.textType}}</div>
+              <div class="text-prepared">
+                <input type="checkbox" {{#if item.data.prepared}}checked{{/if}} data-item-id="{{item._id}}" data-prepared>
+                <label>Prepared</label>
+              </div>
+            </div>
+            <div class="item-description">{{{item.data.description}}}</div>
+          </li>
+        {{/if}}
+      {{/each}}
+    </ol>
+  </div>
+</div>
