@@ -21,9 +21,9 @@
                 </div>
               </div>
               <div class="item-details">
-                <div class="item-damage">{{item.data.damage}}</div>
+                <div class="item-damage">{{item.system.damage}}</div>
                 <div class="item-equipped">
-                  <input type="checkbox" {{#if item.data.equipped}}checked{{/if}} data-item-id="{{item._id}}" data-equipped>
+                  <input type="checkbox" {{#if item.system.equipped}}checked{{/if}} data-item-id="{{item._id}}" data-equipped>
                   <label>Equipped</label>
                 </div>
               </div>
@@ -54,10 +54,10 @@
                 </div>
               </div>
               <div class="item-details">
-                <div class="item-protection">-{{item.data.protection}}</div>
-                <div class="item-tier">Tier {{item.data.tier}}</div>
+                <div class="item-protection">-{{item.system.protection}}</div>
+                <div class="item-tier">Tier {{item.system.tier}}</div>
                 <div class="item-equipped">
-                  <input type="checkbox" {{#if item.data.equipped}}checked{{/if}} data-item-id="{{item._id}}" data-equipped>
+                  <input type="checkbox" {{#if item.system.equipped}}checked{{/if}} data-item-id="{{item._id}}" data-equipped>
                   <label>Equipped</label>
                 </div>
               </div>
@@ -90,9 +90,9 @@
               <div class="item-details">
                 <div class="item-uses">
                   <span>Uses: </span>
-                  <input type="number" value="{{item.data.uses.value}}" min="0" max="{{item.data.uses.max}}" data-item-id="{{item._id}}" data-field="data.uses.value">
+                  <input type="number" value="{{item.system.uses.value}}" min="0" max="{{item.system.uses.max}}" data-item-id="{{item._id}}" data-field="system.uses.value">
                   <span>/</span>
-                  <span>{{item.data.uses.max}}</span>
+                  <span>{{item.system.uses.max}}</span>
                 </div>
               </div>
             </li>
@@ -124,7 +124,7 @@
               <div class="item-details">
                 <div class="item-quantity">
                   <span>Qty: </span>
-                  <input type="number" value="{{item.data.quantity}}" min="1" data-item-id="{{item._id}}" data-field="data.quantity">
+                  <input type="number" value="{{item.system.quantity}}" min="1" data-item-id="{{item._id}}" data-field="system.quantity">
                 </div>
               </div>
             </li>
