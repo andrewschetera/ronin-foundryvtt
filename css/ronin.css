@@ -1,0 +1,504 @@
+/* ronin.css */
+
+/* Variáveis de cores */
+:root {
+  --color-dark: #1a0000;
+  --color-light: #f9f9f9;
+  --color-red: #9e1c1c;
+  --color-red-light: #c41e1e;
+  --color-red-dark: #660000;
+  --color-brown: #4a2222;
+  --color-gold: #b8860b;
+  --font-primary: "Noto Sans JP", sans-serif;
+  --font-display: "Noto Serif JP", serif;
+}
+
+/* Estilos Globais */
+.ronin {
+  background-image: url("systems/ronin/assets/textures/paper-bg.webp");
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  font-family: var(--font-primary);
+}
+
+.ronin h1, .ronin h2, .ronin h3 {
+  font-family: var(--font-display);
+  color: var(--color-red-dark);
+  border-bottom: 1px solid var(--color-gold);
+}
+
+.ronin input[type="text"],
+.ronin input[type="number"],
+.ronin select {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--color-dark);
+  border-radius: 3px;
+  padding: 4px;
+  color: var(--color-dark);
+}
+
+.ronin input[type="text"]:focus,
+.ronin input[type="number"]:focus,
+.ronin select:focus {
+  box-shadow: 0 0 5px var(--color-red);
+}
+
+/* Header da Ficha */
+.sheet-header {
+  background-image: url("systems/ronin/assets/textures/header-bg.webp");
+  background-color: var(--color-dark);
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header-grid {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-areas: 
+    "img info abilities"
+    "img honor abilities";
+  gap: 10px;
+}
+
+.character-img {
+  grid-area: img;
+  text-align: center;
+}
+
+.profile-img {
+  border: 2px solid var(--color-gold);
+  border-radius: 5px;
+  max-height: 150px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.basic-info {
+  grid-area: info;
+}
+
+.character-name {
+  font-size: 1.5em;
+  color: var(--color-light);
+  text-shadow: 2px 2px 2px black;
+  margin: 0 0 5px 0;
+}
+
+.character-name input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--color-light);
+  border: 1px solid var(--color-gold);
+}
+
+.character-class input {
+  width: 100%;
+  margin-bottom: 5px;
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--color-light);
+  border: 1px solid var(--color-brown);
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+.resource {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.resource label {
+  color: var(--color-light);
+  font-size: 0.9em;
+  margin-bottom: 3px;
+}
+
+.resource input {
+  width: 40px;
+  text-align: center;
+  padding: 2px;
+}
+
+.resource.hp {
+  grid-column: span 2;
+}
+
+.resource-value {
+  display: flex;
+  align-items: center;
+}
+
+.separator {
+  color: var(--color-light);
+  margin: 0 5px;
+}
+
+.honor-section {
+  grid-area: honor;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.honor-section label {
+  color: var(--color-light);
+  display: block;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.honor-track {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.honor-dot {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin: 2px;
+  background-color: black;
+  border-radius: 50%;
+  color: var(--color-light);
+  font-size: 0.8em;
+  text-align: center;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.honor-dot.dishonor {
+  background-color: var(--color-red-dark);
+}
+
+input[type="radio"][name="data.resources.honor.value"] {
+  display: none;
+}
+
+input[type="radio"][name="data.resources.honor.value"]:checked + label {
+  background-color: var(--color-gold);
+  color: var(--color-dark);
+}
+
+.abilities-column {
+  grid-area: abilities;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ability {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.ability label {
+  color: var(--color-light);
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+.ability input {
+  width: 40px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.action-buttons button {
+  background-color: var(--color-red-dark);
+  color: var(--color-light);
+  border: 1px solid var(--color-gold);
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.action-buttons button:hover {
+  background-color: var(--color-red);
+}
+
+/* Navegação de Abas */
+.sheet-tabs {
+  flex: 0;
+  margin: 0 0 5px 0;
+  background: var(--color-red-dark);
+  border-radius: 5px;
+}
+
+.sheet-tabs .item {
+  font-family: var(--font-display);
+  padding: 5px 15px;
+  color: var(--color-light);
+  border-radius: 5px 5px 0 0;
+  transition: background-color 0.3s;
+}
+
+.sheet-tabs .item:hover {
+  background: var(--color-red);
+}
+
+.sheet-tabs .item.active {
+  background: var(--color-gold);
+  color: var(--color-dark);
+}
+
+/* Tab de Background */
+.tab-background {
+  height: 100%;
+}
+
+.editor-wrapper {
+  height: 100%;
+  min-height: 200px;
+}
+
+.background-editor {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--color-dark);
+  border-radius: 3px;
+  padding: 10px;
+  color: var(--color-dark);
+}
+
+/* Tab de Equipment */
+.inventory-categories {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.inventory-category {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--color-dark);
+  border-radius: 3px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-gold);
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.item-create {
+  color: var(--color-red-dark);
+  margin-left: auto;
+}
+
+.item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 5px 0;
+}
+
+.item-header {
+  display: flex;
+  align-items: center;
+}
+
+.item-image {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid var(--color-dark);
+  border-radius: 3px;
+}
+
+.item-name {
+  flex: 1;
+}
+
+.item-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.item-edit, .item-delete {
+  color: var(--color-red-dark);
+}
+
+.item-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 3px;
+  padding-left: 29px;
+  font-size: 0.9em;
+}
+
+/* Tab de Tatakai */
+.combat-section {
+  margin-bottom: 20px;
+}
+
+.initiative-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.initiative-buttons button {
+  background-color: var(--color-red-dark);
+  color: var(--color-light);
+  border: 1px solid var(--color-gold);
+  border-radius: 3px;
+  padding: 5px 15px;
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.initiative-buttons button:hover {
+  background-color: var(--color-red);
+}
+
+.equipped-weapons, .equipped-armor {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--color-dark);
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.equipped-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.equipped-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--color-dark);
+  border-radius: 3px;
+  padding: 10px;
+  width: 100px;
+  text-align: center;
+}
+
+.equipped-item .item-image {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 5px;
+}
+
+.combat-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.combat-actions button {
+  background-color: var(--color-red-dark);
+  color: var(--color-light);
+  border: 1px solid var(--color-gold);
+  border-radius: 3px;
+  padding: 10px 20px;
+  font-family: var(--font-display);
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.combat-actions button:hover {
+  background-color: var(--color-red);
+}
+
+/* Tab de Features */
+.features-section, .texts-section {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--color-dark);
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-gold);
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feature-item {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.item-description {
+  margin-top: 5px;
+  padding: 5px;
+  font-size: 0.9em;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .header-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "img"
+      "info"
+      "honor"
+      "abilities";
+  }
+  
+  .inventory-categories {
+    grid-template-columns: 1fr;
+  }
+}
