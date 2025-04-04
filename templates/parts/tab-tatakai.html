@@ -1,0 +1,48 @@
+<div class="tab-tatakai">
+  <div class="combat-section">
+    <!-- Botões de Iniciativa -->
+    <div class="initiative-buttons">
+      <button class="party-initiative">PARTY</button>
+      <button class="individual-initiative">INDIVIDUAL</button>
+    </div>
+    
+    <!-- Armas equipadas -->
+    <div class="equipped-weapons">
+      <h2>Equipped Weapons</h2>
+      <div class="equipped-list">
+        {{#each items as |item id|}}
+          {{#if (and (eq item.type "weapon") item.data.equipped)}}
+            <div class="equipped-item" data-item-id="{{item._id}}">
+              <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+              <div class="item-name">{{item.name}}</div>
+              <div class="item-damage">{{item.data.damage}}</div>
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+    
+    <!-- Armadura equipada -->
+    <div class="equipped-armor">
+      <h2>Equipped Armor</h2>
+      <div class="equipped-list">
+        {{#each items as |item id|}}
+          {{#if (and (eq item.type "armor") item.data.equipped)}}
+            <div class="equipped-item" data-item-id="{{item._id}}">
+              <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+              <div class="item-name">{{item.name}}</div>
+              <div class="item-protection">-{{item.data.protection}}</div>
+              <div class="item-tier">Tier {{item.data.tier}}</div>
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  
+  <!-- Botões de ações de combate -->
+  <div class="combat-actions">
+    <button class="defend-action">DEFEND</button>
+    <button class="parry-action">PARRY</button>
+  </div>
+</div>
