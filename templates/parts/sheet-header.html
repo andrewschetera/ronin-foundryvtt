@@ -12,7 +12,7 @@
       </h1>
       
       <div class="character-class">
-        <input name="data.class" type="text" value="{{data.class}}" placeholder="Class"/>
+        <input name="system.class" type="text" value="{{system.class}}" placeholder="Class"/>
       </div>
       
       <div class="resources-grid">
@@ -20,28 +20,28 @@
         <div class="resource hp">
           <label>HP</label>
           <div class="resource-value">
-            <input name="data.resources.hp.value" type="number" value="{{data.resources.hp.value}}" min="0"/>
+            <input name="system.resources.hp.value" type="number" value="{{system.resources.hp.value}}" min="0"/>
             <span class="separator">/</span>
-            <input name="data.resources.hp.max" type="number" value="{{data.resources.hp.max}}" min="0"/>
+            <input name="system.resources.hp.max" type="number" value="{{system.resources.hp.max}}" min="0"/>
           </div>
         </div>
         
         <!-- Texts -->
         <div class="resource texts">
           <label>Texts</label>
-          <input name="data.resources.texts.value" type="number" value="{{data.resources.texts.value}}" min="0"/>
+          <input name="system.resources.texts.value" type="number" value="{{system.resources.texts.value}}" min="0"/>
         </div>
         
         <!-- Virtues -->
         <div class="resource virtues">
           <label>Virtues</label>
-          <input name="data.resources.virtues.value" type="number" value="{{data.resources.virtues.value}}" min="0"/>
+          <input name="system.resources.virtues.value" type="number" value="{{system.resources.virtues.value}}" min="0"/>
         </div>
         
         <!-- Ryo -->
         <div class="resource ryo">
           <label>Ryo</label>
-          <input name="data.resources.ryo.value" type="number" value="{{data.resources.ryo.value}}" min="0"/>
+          <input name="system.resources.ryo.value" type="number" value="{{system.resources.ryo.value}}" min="0"/>
         </div>
       </div>
     </div>
@@ -51,7 +51,7 @@
       <label>Honor</label>
       <div class="honor-track">
         {{#times 20}}
-          <input type="radio" name="data.resources.honor.value" id="honor-{{this}}" value="{{this}}" {{#if (eq ../data.resources.honor.value this)}}checked{{/if}}>
+          <input type="radio" name="system.resources.honor.value" id="honor-{{this}}" value="{{this}}" {{#if (eq ../system.resources.honor.value this)}}checked{{/if}}>
           <label for="honor-{{this}}" class="honor-dot {{#if (lte this 9)}}dishonor{{/if}}">{{this}}</label>
         {{/times}}
       </div>
@@ -61,22 +61,22 @@
     <div class="abilities-column">
       <div class="ability vigor">
         <label>VIG</label>
-        <input name="data.abilities.vigor.value" type="number" value="{{data.abilities.vigor.value}}" min="-3" max="6"/>
+        <input name="system.abilities.vigor.value" type="number" value="{{system.abilities.vigor.value}}" min="-3" max="6"/>
       </div>
       
       <div class="ability swiftness">
         <label>SWI</label>
-        <input name="data.abilities.swiftness.value" type="number" value="{{data.abilities.swiftness.value}}" min="-3" max="6"/>
+        <input name="system.abilities.swiftness.value" type="number" value="{{system.abilities.swiftness.value}}" min="-3" max="6"/>
       </div>
       
       <div class="ability spirit">
         <label>SPI</label>
-        <input name="data.abilities.spirit.value" type="number" value="{{data.abilities.spirit.value}}" min="-3" max="6"/>
+        <input name="system.abilities.spirit.value" type="number" value="{{system.abilities.spirit.value}}" min="-3" max="6"/>
       </div>
       
       <div class="ability resilience">
         <label>RES</label>
-        <input name="data.abilities.resilience.value" type="number" value="{{data.abilities.resilience.value}}" min="-3" max="6"/>
+        <input name="system.abilities.resilience.value" type="number" value="{{system.abilities.resilience.value}}" min="-3" max="6"/>
       </div>
     </div>
   </div>
