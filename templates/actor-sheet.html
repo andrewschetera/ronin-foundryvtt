@@ -1,0 +1,37 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+  <div class="ronin-sheet">
+    <!-- Header da Ficha -->
+    {{> "systems/ronin/templates/parts/sheet-header.html"}}
+    
+    <!-- Navegação de Abas -->
+    <nav class="sheet-tabs tabs" data-group="primary">
+      <a class="item" data-tab="background">Background</a>
+      <a class="item" data-tab="equipment">Equipment</a>
+      <a class="item" data-tab="tatakai">Tatakai</a>
+      <a class="item" data-tab="features">Features</a>
+    </nav>
+    
+    <!-- Corpo da Ficha -->
+    <section class="sheet-body">
+      <!-- Tab de Background -->
+      <div class="tab" data-group="primary" data-tab="background">
+        {{> "systems/ronin/templates/parts/tab-background.html"}}
+      </div>
+      
+      <!-- Tab de Equipment -->
+      <div class="tab" data-group="primary" data-tab="equipment">
+        {{> "systems/ronin/templates/parts/tab-equipment.html"}}
+      </div>
+      
+      <!-- Tab de Tatakai (Combate) -->
+      <div class="tab" data-group="primary" data-tab="tatakai">
+        {{> "systems/ronin/templates/parts/tab-tatakai.html"}}
+      </div>
+      
+      <!-- Tab de Features -->
+      <div class="tab" data-group="primary" data-tab="features">
+        {{> "systems/ronin/templates/parts/tab-features.html"}}
+      </div>
+    </section>
+  </div>
+</form>
