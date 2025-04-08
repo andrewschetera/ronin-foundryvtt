@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character"],
+    "types": ["character", "personagem"],
     "templates": {
       "base": {
         "abilities": {
@@ -50,10 +50,15 @@
       "templates": ["base"],
       "class": "",
       "biography": ""
+    },
+    "personagem": {
+      "templates": ["base"],
+      "class": "",
+      "biography": ""
     }
   },
   "Item": {
-    "types": ["weapon", "armor", "gear", "misc", "feat", "text"],
+    "types": ["weapon", "armor", "gear", "misc", "feat", "text", "item"],
     "templates": {
       "itemDescription": {
         "description": ""
@@ -93,6 +98,9 @@
       "templates": ["itemDescription"],
       "textType": "unseen",
       "prepared": false
+    },
+    "item": {
+      "templates": ["itemDescription", "physicalItem"]
     }
   }
 }
