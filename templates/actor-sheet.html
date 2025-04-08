@@ -3,9 +3,21 @@
     <!-- Header da Ficha (incorporado) -->
     <header class="sheet-header">
       <div class="header-grid">
-        <!-- Imagem do Personagem (1/4 da largura) -->
-        <div class="character-img">
-          <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+        <!-- Imagem do Personagem e Honor (1/4 da largura) -->
+        <div class="character-img-container">
+          <div class="character-img">
+            <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+          </div>
+          <!-- Honor dentro da mesma coluna -->
+          <div class="honor-section">
+            <label>HONOR</label>
+            <div class="honor-track">
+              {{#times 20}}
+                <input type="radio" name="system.resources.honor.value" id="honor-{{this}}" value="{{this}}" {{#if (eq ../system.resources.honor.value this)}}checked{{/if}} data-select-single="true">
+                <label for="honor-{{this}}" class="honor-dot {{#if (lte this 9)}}dishonor{{/if}}">{{this}}</label>
+              {{/times}}
+            </div>
+          </div>
         </div>
         
         <!-- Informações Básicas (2/4 da largura) -->
@@ -70,17 +82,6 @@
             <label>RES</label>
             <input name="system.abilities.resilience.value" type="number" value="{{system.abilities.resilience.value}}" min="-3" max="6"/>
           </div>
-        </div>
-      </div>
-      
-      <!-- Honor (atravessa toda a largura) -->
-      <div class="honor-section">
-        <label>HONOR</label>
-        <div class="honor-track">
-          {{#times 20}}
-            <input type="radio" name="system.resources.honor.value" id="honor-{{this}}" value="{{this}}" {{#if (eq ../system.resources.honor.value this)}}checked{{/if}} data-select-single="true">
-            <label for="honor-{{this}}" class="honor-dot {{#if (lte this 9)}}dishonor{{/if}}">{{this}}</label>
-          {{/times}}
         </div>
       </div>
       
