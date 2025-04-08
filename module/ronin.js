@@ -36,7 +36,7 @@ Hooks.once('init', async function() {
   
   // Registrar o helper Handlebars 'and' para condições múltiplas
   Handlebars.registerHelper('and', function () {
-    return Array.prototype.slice.call(arguments, 0, -1).every(Boolean);
+    return Array.prototype.every.call(arguments, Boolean);
   });
   
   // Helper para formatar números com sinal
@@ -55,6 +55,8 @@ Hooks.once('init', async function() {
     })
     .catch(error => console.error('Error loading format-attributes.js:', error));
 });
+
+// Hooks adicionais podem ser adicionados aqui no futuro
 
 /**
  * Estende a classe base de Actor para implementar funcionalidades específicas do sistema.
@@ -131,8 +133,7 @@ class RoninActorSheet extends ActorSheet {
       // Item deletion
       html.find('.item-delete').click(this._onItemDelete.bind(this));
       
-      // Toggle para itens equipados
-      html.find('input[data-equipped]').click(this._onToggleEquipped.bind(this));
+      // Outras interações com botões podem ser adicionadas aqui
     }
   }
 
@@ -174,19 +175,6 @@ class RoninActorSheet extends ActorSheet {
     const li = event.currentTarget.closest(".item");
     const itemId = li.dataset.itemId;
     return this.actor.deleteEmbeddedDocuments("Item", [itemId]);
-  }
-  
-  _onToggleEquipped(event) {
-    event.preventDefault();
-    const checkbox = event.currentTarget;
-    const itemId = checkbox.dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    
-    if (item) {
-      return item.update({
-        "system.equipped": checkbox.checked
-      });
-    }
   }
 }
 
