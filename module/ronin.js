@@ -36,7 +36,7 @@ Hooks.once('init', async function() {
   
   // Registrar o helper Handlebars 'and' para condições múltiplas
   Handlebars.registerHelper('and', function () {
-    return Array.prototype.every.call(arguments, Boolean);
+    return Array.prototype.slice.call(arguments, 0, -1).every(Boolean);
   });
   
   // Helper para formatar números com sinal
@@ -46,17 +46,21 @@ Hooks.once('init', async function() {
     return num >= 0 ? `+${num}` : `${num}`;
   });
   
-  // Carrega script de formatação após init
-  fetch('systems/ronin/module/format-attributes.js')
-    .then(response => response.text())
-    .then(script => {
-      // Executa o script que foi carregado
-      eval(script);
-    })
-    .catch(error => console.error('Error loading format-attributes.js:', error));
+  // Carrega script de formatação
+  loadFormatAttributesScript();
 });
 
-// Hooks adicionais podem ser adicionados aqui no futuro
+// Função para carregar o script de formatação
+async function loadFormatAttributesScript() {
+  try {
+    const response = await fetch('systems/ronin/module/format-attributes.js');
+    const script = await response.text();
+    // Avalia o script
+    eval(script);
+  } catch (error) {
+    console.error('Error loading format-attributes.js:', error);
+  }
+}
 
 /**
  * Estende a classe base de Actor para implementar funcionalidades específicas do sistema.
@@ -73,7 +77,20 @@ class RoninActor extends Actor {
   }
   
   _prepareCharacterData(actorData) {
-    // Implementação futura de cálculos do sistema
+    // Implementação de cálculos do sistema
+    // Calcular HP máximo com base na resiliência
+    const resilience = actorData.system.abilities.resilience.value || 0;
+    const baseHP = 2; // HP base
+    const bonusHP = resilience > 0 ? resilience : 0; // Só adiciona bônus para valores positivos
+    
+    // Atualiza o HP máximo se for maior que o atual
+    const currentMax = actorData.system.resources.hp.max || baseHP;
+    const newMax = baseHP + bonusHP;
+    
+    // Se o novo máximo for diferente do atual, atualiza
+    if (newMax !== currentMax) {
+      actorData.system.resources.hp.max = newMax;
+    }
   }
 }
 
@@ -83,6 +100,7 @@ class RoninActor extends Actor {
 class RoninItem extends Item {
   prepareData() {
     super.prepareData();
+    // Lógica específica de preparação de dados para itens pode ser adicionada aqui
   }
 }
 
@@ -111,7 +129,9 @@ class RoninActorSheet extends ActorSheet {
     
     // Adicionamos os dados ao objeto de contexto
     context.system = actorData.system;
-    context.items = actorData.items;
+    
+    // Organizamos os itens por tipo para facilitar o acesso nos templates
+    context.items = actorData.items.map(i => i);
     
     return context;
   }
@@ -133,7 +153,19 @@ class RoninActorSheet extends ActorSheet {
       // Item deletion
       html.find('.item-delete').click(this._onItemDelete.bind(this));
       
-      // Outras interações com botões podem ser adicionadas aqui
+      // Toggle de item equipado
+      html.find('input[data-equipped]').click(this._onToggleEquipped.bind(this));
+      
+      // Outras interações com botões
+      html.find('.button-rest').click(this._onRest.bind(this));
+      html.find('.button-broken').click(this._onBroken.bind(this));
+      html.find('.button-seppuku').click(this._onSeppuku.bind(this));
+      html.find('.button-get-better').click(this._onGetBetter.bind(this));
+    }
+    
+    // Reconfigura os displays de atributos após renderização
+    if (window.setupAttributeDisplays) {
+      window.setupAttributeDisplays();
     }
   }
 
@@ -157,7 +189,7 @@ class RoninActorSheet extends ActorSheet {
     const header = event.currentTarget;
     const type = header.dataset.type;
     const itemData = {
-      name: `Novo ${type}`,
+      name: game.i18n.localize(`RONIN.ItemTypes.${type.charAt(0).toUpperCase() + type.slice(1)}`),
       type: type
     };
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
@@ -175,6 +207,45 @@ class RoninActorSheet extends ActorSheet {
     const li = event.currentTarget.closest(".item");
     const itemId = li.dataset.itemId;
     return this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+  }
+  
+  _onToggleEquipped(event) {
+    event.preventDefault();
+    const checkbox = event.currentTarget;
+    const itemId = checkbox.dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    
+    return item.update({
+      "system.equipped": checkbox.checked
+    });
+  }
+  
+  // Métodos para botões de ação
+  _onRest(event) {
+    event.preventDefault();
+    // Implementar lógica para descansar
+    ui.notifications.info("Descansando...");
+  }
+  
+  _onBroken(event) {
+    event.preventDefault();
+    // Implementar lógica para estado de quebrado
+    ui.notifications.warn("Personagem QUEBRADO!");
+  }
+  
+  _onSeppuku(event) {
+    event.preventDefault();
+    // Implementar lógica para seppuku (medida drástica)
+    const confirmation = confirm("Você realmente deseja realizar seppuku? Esta ação não pode ser desfeita.");
+    if (confirmation) {
+      ui.notifications.error("Seppuku realizado. Honra restaurada na morte.");
+    }
+  }
+  
+  _onGetBetter(event) {
+    event.preventDefault();
+    // Implementar lógica para melhorar (recuperar)
+    ui.notifications.info("Melhorando condições...");
   }
 }
 
