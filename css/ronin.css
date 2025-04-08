@@ -1,7 +1,7 @@
-/* ronin.css - Alterações e correções */
+/* ronin.css */
 @import url('https://fonts.googleapis.com/css2?family=Reggae+One&display=swap');
 
-/* Variáveis de cores - Invertendo o esquema de cores conforme solicitado */
+/* Variáveis de cores */
 :root {
   --color-white: #ffffff;
   --color-black: #000000;
@@ -12,10 +12,65 @@
   --font-display: "Reggae One", sans-serif;
 }
 
-/* Estilos Globais - Fundo preto */
+/* Estilos Globais */
 .ronin {
-  background-color: var(--color-black);
+  background-color: var(--color-white);
+  color: var(--color-white) !important;
+}
+
+.tabs .item.active {
+  text-shadow: none;
+  background: var(--color-black) !important;
+  color: var(--color-white) !important;
+}
+
+.sidebar-tab .directory-list .directory-item,
+.sidebar-tab .directory-list .folder {
+  border-bottom: 1px solid var(--color-red);
+}
+
+.sidebar .sidebar-tab {
+  background: var(--color-black) !important;
+  color: var(--color-white) !important;
+}
+
+#chat-form textarea {
+  background: var(--color-white) !important;
+  color: var(--color-black) !important;
+  border: 1px solid var(--color-red) !important;
+}
+
+.window-app .window-content {
+  background: var(--color-black) !important;
+}
+
+/* Garantir que as fichas continuem com fundo branco */
+.sheet.actor .window-content,
+.sheet.item .window-content {
+  background: var(--color-white) !important;
+}
+
+/* Texto branco em fundos pretos */
+.window-content h1, 
+.window-content h2, 
+.window-content h3,
+.window-content p,
+.window-content label,
+.window-content span,
+.window-content div:not(.ronin *) {
   color: var(--color-white);
+}
+
+/* Inverter cores para fichas */
+.ronin h1, 
+.ronin h2, 
+.ronin h3,
+.ronin p,
+.ronin label:not(.ability *, .resource *),
+.ronin span:not(.separator),
+.ronin div:not(.ability, .resource) {
+  color: var(--color-black);
+}black);
   font-family: var(--font-primary);
   display: flex;
   flex-direction: column;
@@ -24,7 +79,7 @@
 
 .ronin h1, .ronin h2, .ronin h3 {
   font-family: var(--font-display);
-  color: var(--color-white);
+  color: var(--color-black);
   margin: 2px 0;
 }
 
@@ -50,10 +105,47 @@
   font-weight: bold;
   pointer-events: none;
   text-align: center;
+}
+
+/* Header da Ficha - Permanece fixo */
+.sheet-header {
+  background-color: var(--color-black);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-white);
+  position: sticky;
+  top: 0;
   z-index: 10;
 }
 
-/* Honor Section - Ajustes para o rótulo */
+.header-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto;
+  gap: 5px;
+  height: 200px; /* Altura fixa para todas as colunas */
+}
+
+.character-img-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.character-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
 .honor-section {
   padding: 2px;
   background-color: var(--color-black);
@@ -82,7 +174,6 @@
   width: 100%;
 }
 
-/* Reduzindo o tamanho dos números nas bolinhas de honor */
 .honor-dot {
   display: flex;
   justify-content: center;
@@ -93,8 +184,8 @@
   background-color: var(--color-black);
   border: 1px solid var(--color-white);
   border-radius: 50%;
-  color: var(--color-white); /* Cor padrão para números brancos */
-  font-size: 0.35em; /* Reduzindo ainda mais o tamanho da fonte */
+  color: var(--color-white);
+  font-size: 0.35em;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
@@ -104,7 +195,7 @@
 
 .honor-dot.dishonor {
   border-color: var(--color-red);
-  color: var(--color-red); /* Números vermelhos para bolinhas de dishonor */
+  color: var(--color-red);
 }
 
 input[type="radio"][name="system.resources.honor.value"] {
@@ -113,20 +204,223 @@ input[type="radio"][name="system.resources.honor.value"] {
 
 input[type="radio"][name="system.resources.honor.value"]:checked + label {
   background-color: var(--color-white);
-  color: var(--color-black) !important; /* Números pretos para bolinhas selecionadas */
+  color: var(--color-black) !important;
 }
 
 input[type="radio"][name="system.resources.honor.value"]:checked + label.dishonor {
   background-color: var(--color-red);
-  color: var(--color-black) !important; /* Números pretos para bolinhas selecionadas */
+  color: var(--color-black) !important;
 }
 
-/* Tab de Equipment - Fundo branco com texto preto */
-.inventory-category {
+.basic-info {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.character-name {
+  font-size: 1.6em;
+  color: var(--color-white);
+  font-weight: bold;
+  margin: 0 0 2px 0;
+  text-align: center;
+}
+
+.character-name input {
+  width: 100%;
   background: var(--color-white);
+  color: var(--color-black);
+  text-align: center;
+  font-weight: bold;
+}
+
+.character-class {
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.character-class input {
+  width: 100%;
+  margin-bottom: 2px;
+  background: var(--color-white);
+  color: var(--color-black);
+  text-align: center;
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 5px;
+  margin-top: 5px;
+  flex-grow: 1;
+}
+
+.resource {
+  display: flex;
+  align-items: center;
+  background: var(--color-black);
+  padding: 2px;
+}
+
+.resource label {
+  color: var(--color-white);
+  font-size: 1.1em;
+  font-weight: bold;
+  width: 70px;
+  text-align: right;
+  margin-right: 5px;
+}
+
+.resource input {
+  width: 40px;
+  text-align: center;
+  padding: 1px;
+  font-weight: bold;
+}
+
+.resource-value {
+  display: flex;
+  align-items: center;
+}
+
+.separator {
+  color: var(--color-white);
+  margin: 0 2px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.action-buttons button {
+  background-color: var(--color-red);
+  color: var(--color-black);
+  border: none;
+  padding: 3px 5px;
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+  flex: 1;
+}
+
+.action-buttons button:hover {
+  background-color: var(--color-red-dark);
+}
+
+.abilities-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  align-items: flex-end;
+}
+
+.ability {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  background: var(--color-black);
+  padding: 2px;
+  height: 40px;
+  width: 100%;
+  position: relative;
+}
+
+.ability label {
+  color: var(--color-white);
+  font-size: 1.7em; /* Tamanho aumentado */
+  font-weight: bold;
+  margin-right: 5px; /* Espaçamento reduzido */
+}
+
+.ability input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.7em;
+  opacity: 0.01; /* Quase invisível para permitir interação */
+}
+
+/* Navegação de Abas */
+.sheet-tabs {
+  flex: 0 0 auto;
+  margin: 0;
+  background: var(--color-red);
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 205px; /* Posição logo abaixo do header */
+  z-index: 10;
+}
+
+.sheet-tabs .item {
+  flex: 1;
+  font-family: var(--font-display);
+  padding: 5px 15px;
+  color: var(--color-black);
+  text-align: center;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.sheet-tabs .item:hover {
+  background: var(--color-red-dark);
+}
+
+.sheet-tabs .item.active {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+/* Conteúdo das Abas - Área rolável */
+.sheet-body {
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--color-white);
+  padding: 5px;
+}
+
+/* Tab de Background */
+.tab-background {
+  height: 100%;
+  background-color: var(--color-white);
+  padding: 5px;
+}
+
+.editor-wrapper {
+  height: 100%;
+  min-height: 200px;
+}
+
+.background-editor {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  background: var(--color-white);
+  padding: 10px;
+  color: var(--color-black);
+  border: 1px solid var(--color-black);
+  font-family: var(--font-primary);
+}
+
+/* Tab de Equipment */
+.inventory-categories {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+.inventory-category {
+  background: var(--color-black);
   padding: 5px;
   margin-bottom: 5px;
-  color: var(--color-black); /* Invertendo as cores */
 }
 
 .category-header {
@@ -135,30 +429,102 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   align-items: center;
   padding-bottom: 3px;
   margin-bottom: 3px;
-  color: var(--color-black); /* Invertendo as cores */
-  border-bottom: 1px solid var(--color-black);
+  color: var(--color-white);
 }
 
 .item-create {
-  color: var(--color-black); /* Invertendo as cores */
+  color: var(--color-white);
   margin-left: auto;
+}
+
+.item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .item {
   padding: 3px 0;
-  color: var(--color-black); /* Invertendo as cores */
+  color: var(--color-white);
+}
+
+.item-header {
+  display: flex;
+  align-items: center;
+}
+
+.item-image {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-name {
+  flex: 1;
+}
+
+.item-controls {
+  display: flex;
+  gap: 5px;
 }
 
 .item-edit, .item-delete {
-  color: var(--color-black); /* Invertendo as cores */
+  color: var(--color-white);
 }
 
-/* Tab de Tatakai - Fundo branco com texto preto */
+.item-details {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+  padding-left: 29px;
+  font-size: 0.9em;
+}
+
+/* Tab de Tatakai */
+.combat-section {
+  margin-bottom: 10px;
+}
+
+.initiative-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.initiative-buttons button {
+  background-color: var(--color-red);
+  color: var(--color-black);
+  border: none;
+  padding: 5px 15px;
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.initiative-buttons button:hover {
+  background-color: var(--color-red-dark);
+}
+
 .equipped-weapons, .equipped-armor {
-  background: var(--color-white);
+  background: var(--color-black);
   padding: 5px;
   margin-bottom: 5px;
-  color: var(--color-black); /* Invertendo as cores */
+  color: var(--color-white);
+}
+
+.equipped-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 .equipped-item {
@@ -169,114 +535,105 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   padding: 5px;
   width: 90px;
   text-align: center;
-  color: var(--color-white); /* Mantendo contraste */
 }
 
-/* Tab de Features - Fundo branco com texto preto */
+.equipped-item .item-image {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 3px;
+}
+
+.combat-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.combat-actions button {
+  background-color: var(--color-red);
+  color: var(--color-black);
+  border: none;
+  padding: 5px 15px;
+  font-family: var(--font-display);
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.combat-actions button:hover {
+  background-color: var(--color-red-dark);
+}
+
+/* Tab de Features */
 .features-section, .texts-section {
-  background: var(--color-white);
+  background: var(--color-black);
   padding: 5px;
   margin-bottom: 5px;
-  color: var(--color-black); /* Invertendo as cores */
+  color: var(--color-white);
 }
 
 .section-header {
-  color: var(--color-black);
-  border-bottom: 1px solid var(--color-black);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+}
+
+.feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .feature-item {
   margin-bottom: 5px;
   padding: 3px;
   background: var(--color-gray);
-  color: var(--color-white); /* Mantendo contraste */
 }
 
-/* Mantendo a área de conteúdo da ficha com fundo preto */
-.sheet-body {
-  flex: 1;
-  overflow-y: auto;
-  background-color: var(--color-black);
-  padding: 5px;
+.item-description {
+  margin-top: 3px;
+  padding: 3px;
+  font-size: 0.9em;
+  background: var(--color-gray);
 }
 
-/* Tab de Background - Mantendo com fundo preto */
-.tab-background {
-  height: 100%;
-  background-color: var(--color-black);
-  padding: 5px;
-}
-
-.background-editor {
-  width: 100%;
-  height: 100%;
-  min-height: 200px;
-  background: var(--color-white);
-  padding: 10px;
-  color: var(--color-black);
-  border: 1px solid var(--color-white);
-  font-family: var(--font-primary);
-}
-
-/* Ajustes para garantir que os textos nas tabs estejam corretos */
-.category-header h2,
-.section-header h2,
-.equipped-weapons h2,
-.equipped-armor h2 {
-  color: var(--color-black);
-}
-
-/* Ajustes essenciais para o CSS do RONIN */
-
-/* Ajustes para as bolinhas de honor */
-.honor-dot {
-  font-size: 0.35em !important; /* Reduzindo tamanho da fonte */
-}
-
-.honor-dot.dishonor {
-  color: var(--color-red) !important; /* Números vermelhos para dishonor */
-}
-
-.honor-dot {
-  color: var(--color-white) !important; /* Números brancos para honor normal */
-}
-
-input[type="radio"][name="system.resources.honor.value"]:checked + label {
-  color: var(--color-black) !important; /* Números pretos para bolinhas selecionadas */
-}
-
-/* Garantir que o rótulo HONOR esteja visível */
-.honor-section label {
+/* Override padrões do Foundry */
+.window-content {
+  background: var(--color-black) !important;
   color: var(--color-white) !important;
-  font-size: 1.2em !important;
-  margin-bottom: 3px !important;
-  display: block !important;
 }
 
-/* Estilo para os displays de atributos */
-.attribute-sign {
+.dialog .window-content,
+.filepicker .window-content {
+  background-color: var(--color-black) !important;
   color: var(--color-white) !important;
-  font-weight: bold !important;
-  pointer-events: none !important;
-  text-align: center !important;
-  z-index: 10 !important;
 }
 
-/* Evitar que os estilos de categoria quebrem a aparência */
-.inventory-category, 
-.features-section, 
-.texts-section,
-.equipped-weapons, 
-.equipped-armor {
-  color: inherit !important;
-  background: inherit !important;
+.window-app .window-header {
+  background: var(--color-red) !important;
+  color: var(--color-black) !important;
 }
 
-.item, 
-.item-edit, 
-.item-delete, 
-.item-create,
-.category-header,
-.section-header {
-  color: inherit !important;
+button {
+  background: var(--color-red) !important;
+  color: var(--color-black) !important;
+  border: none !important;
+  font-family: var(--font-primary) !important;
 }
+
+button:hover {
+  background: var(--color-red-dark) !important;
+}
+
+button.active {
+  background: var(--color-black) !important;
+  color: var(--color-white) !important;
+}
+
+.tabs .item.active {
+  text-shadow: none;
+  background: var(--color-black) !important;
+  color: var(--color-
