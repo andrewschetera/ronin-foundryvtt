@@ -39,7 +39,7 @@ function updateAllAttributeInputs() {
   });
 }
 
-// Evento a ser executado quando o documento estiver pronto
+// Evento a ser executado quando uma folha de ator é renderizada
 Hooks.on('renderActorSheet', (app, html, data) => {
   // Formata inicialmente todos os inputs de atributos
   updateAllAttributeInputs();
