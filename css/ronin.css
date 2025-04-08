@@ -44,6 +44,14 @@
   box-shadow: 0 0 5px var(--color-red);
 }
 
+/* Estilo para os displays de atributos */
+.attribute-sign {
+  color: var(--color-white);
+  font-weight: bold;
+  pointer-events: none;
+  text-align: center;
+}
+
 /* Header da Ficha - Permanece fixo */
 .sheet-header {
   background-color: var(--color-black);
@@ -86,6 +94,9 @@
 .honor-section {
   padding: 2px;
   background-color: var(--color-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .honor-section label {
@@ -103,8 +114,9 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  gap: 1px;
+  gap: 2px;
   justify-content: center;
+  width: 100%;
 }
 
 .honor-dot {
@@ -118,7 +130,7 @@
   border: 1px solid var(--color-white);
   border-radius: 50%;
   color: var(--color-white);
-  font-size: 0.4em;
+  font-size: 0.35em;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
@@ -137,12 +149,12 @@ input[type="radio"][name="system.resources.honor.value"] {
 
 input[type="radio"][name="system.resources.honor.value"]:checked + label {
   background-color: var(--color-white);
-  color: var(--color-black);
+  color: var(--color-black) !important;
 }
 
 input[type="radio"][name="system.resources.honor.value"]:checked + label.dishonor {
   background-color: var(--color-red);
-  color: var(--color-black);
+  color: var(--color-black) !important;
 }
 
 .basic-info {
@@ -262,6 +274,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   padding: 2px;
   height: 40px;
   width: 100%;
+  position: relative;
 }
 
 .ability label {
@@ -277,6 +290,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   text-align: center;
   font-weight: bold;
   font-size: 1.7em;
+  opacity: 0.01; /* Quase invisível para permitir interação */
 }
 
 /* Navegação de Abas */
