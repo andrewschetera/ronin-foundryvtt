@@ -225,3 +225,58 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 .equipped-armor h2 {
   color: var(--color-black);
 }
+
+/* Ajustes essenciais para o CSS do RONIN */
+
+/* Ajustes para as bolinhas de honor */
+.honor-dot {
+  font-size: 0.35em !important; /* Reduzindo tamanho da fonte */
+}
+
+.honor-dot.dishonor {
+  color: var(--color-red) !important; /* Números vermelhos para dishonor */
+}
+
+.honor-dot {
+  color: var(--color-white) !important; /* Números brancos para honor normal */
+}
+
+input[type="radio"][name="system.resources.honor.value"]:checked + label {
+  color: var(--color-black) !important; /* Números pretos para bolinhas selecionadas */
+}
+
+/* Garantir que o rótulo HONOR esteja visível */
+.honor-section label {
+  color: var(--color-white) !important;
+  font-size: 1.2em !important;
+  margin-bottom: 3px !important;
+  display: block !important;
+}
+
+/* Estilo para os displays de atributos */
+.attribute-sign {
+  color: var(--color-white) !important;
+  font-weight: bold !important;
+  pointer-events: none !important;
+  text-align: center !important;
+  z-index: 10 !important;
+}
+
+/* Evitar que os estilos de categoria quebrem a aparência */
+.inventory-category, 
+.features-section, 
+.texts-section,
+.equipped-weapons, 
+.equipped-armor {
+  color: inherit !important;
+  background: inherit !important;
+}
+
+.item, 
+.item-edit, 
+.item-delete, 
+.item-create,
+.category-header,
+.section-header {
+  color: inherit !important;
+}
