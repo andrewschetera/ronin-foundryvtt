@@ -15,7 +15,7 @@ function setupAttributeDisplays() {
     let signDisplay = input.nextElementSibling;
     if (!signDisplay || !signDisplay.classList.contains('attribute-sign')) {
       // Cria o elemento de display se não existir
-      signDisplay = document.createElement('span');
+      signDisplay = document.createElement('div');  // Usando div em vez de span
       signDisplay.classList.add('attribute-sign');
       input.parentNode.insertBefore(signDisplay, input.nextSibling);
     }
@@ -45,42 +45,26 @@ function updateSignDisplay(input, display) {
   // Atualiza o texto do display
   display.textContent = formattedValue;
   
-  // Ajusta a posição para sobrepor o input
-  positionSignDisplay(input, display);
-}
-
-// Posiciona o display sobre o input
-function positionSignDisplay(input, display) {
-  // Define estilos inline pois o posicionamento absoluto no CSS pode não funcionar corretamente
+  // Posiciona o display
   display.style.position = 'absolute';
-  display.style.width = `${input.offsetWidth}px`;
-  display.style.height = `${input.offsetHeight}px`;
+  display.style.zIndex = '10';
+  display.style.top = '0';
+  display.style.left = '0';
+  display.style.width = '100%';
+  display.style.height = '100%';
   display.style.display = 'flex';
   display.style.alignItems = 'center';
   display.style.justifyContent = 'center';
   display.style.pointerEvents = 'none';
-  display.style.fontSize = `${Math.floor(input.offsetHeight * 0.6)}px`;
+  display.style.color = '#FFFFFF';  // Texto branco
+  display.style.fontSize = '1.7em';  // Tamanho igual ao input
   display.style.fontWeight = 'bold';
-  display.style.top = '0';
-  display.style.left = '0';
-  
-  // Ajuste para manter o display posicionado corretamente quando houver rolagem
-  const inputRect = input.getBoundingClientRect();
-  const parentRect = input.offsetParent.getBoundingClientRect();
-  
-  display.style.top = `${input.offsetTop}px`;
-  display.style.left = `${input.offsetLeft}px`;
 }
 
 // Evento a ser executado quando uma folha de ator é renderizada
 Hooks.on('renderActorSheet', (app, html, data) => {
-  // Cria os displays para os inputs de atributos
+  // Adiciona um pequeno atraso para garantir que os elementos estejam renderizados
   setTimeout(() => {
     setupAttributeDisplays();
-  }, 100); // Pequeno delay para garantir que os elementos estejam carregados
-  
-  // Adiciona listener para reposicionar quando a janela for redimensionada
-  window.addEventListener('resize', () => {
-    setupAttributeDisplays();
-  });
+  }, 100);
 });
