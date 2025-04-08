@@ -46,21 +46,15 @@ Hooks.once('init', async function() {
     return num >= 0 ? `+${num}` : `${num}`;
   });
   
-  // Carrega script de formatação
-  loadFormatAttributesScript();
+  // Carrega script de formatação após init
+  fetch('systems/ronin/module/format-attributes.js')
+    .then(response => response.text())
+    .then(script => {
+      // Executa o script que foi carregado
+      eval(script);
+    })
+    .catch(error => console.error('Error loading format-attributes.js:', error));
 });
-
-// Função para carregar o script de formatação
-async function loadFormatAttributesScript() {
-  try {
-    const response = await fetch('systems/ronin/module/format-attributes.js');
-    const script = await response.text();
-    // Avalia o script
-    eval(script);
-  } catch (error) {
-    console.error('Error loading format-attributes.js:', error);
-  }
-}
 
 /**
  * Estende a classe base de Actor para implementar funcionalidades específicas do sistema.
@@ -77,20 +71,7 @@ class RoninActor extends Actor {
   }
   
   _prepareCharacterData(actorData) {
-    // Implementação de cálculos do sistema
-    // Calcular HP máximo com base na resiliência
-    const resilience = actorData.system.abilities.resilience.value || 0;
-    const baseHP = 2; // HP base
-    const bonusHP = resilience > 0 ? resilience : 0; // Só adiciona bônus para valores positivos
-    
-    // Atualiza o HP máximo se for maior que o atual
-    const currentMax = actorData.system.resources.hp.max || baseHP;
-    const newMax = baseHP + bonusHP;
-    
-    // Se o novo máximo for diferente do atual, atualiza
-    if (newMax !== currentMax) {
-      actorData.system.resources.hp.max = newMax;
-    }
+    // Implementação futura de cálculos do sistema
   }
 }
 
@@ -100,7 +81,6 @@ class RoninActor extends Actor {
 class RoninItem extends Item {
   prepareData() {
     super.prepareData();
-    // Lógica específica de preparação de dados para itens pode ser adicionada aqui
   }
 }
 
@@ -129,9 +109,7 @@ class RoninActorSheet extends ActorSheet {
     
     // Adicionamos os dados ao objeto de contexto
     context.system = actorData.system;
-    
-    // Organizamos os itens por tipo para facilitar o acesso nos templates
-    context.items = actorData.items.map(i => i);
+    context.items = actorData.items;
     
     return context;
   }
@@ -153,19 +131,8 @@ class RoninActorSheet extends ActorSheet {
       // Item deletion
       html.find('.item-delete').click(this._onItemDelete.bind(this));
       
-      // Toggle de item equipado
+      // Toggle para itens equipados
       html.find('input[data-equipped]').click(this._onToggleEquipped.bind(this));
-      
-      // Outras interações com botões
-      html.find('.button-rest').click(this._onRest.bind(this));
-      html.find('.button-broken').click(this._onBroken.bind(this));
-      html.find('.button-seppuku').click(this._onSeppuku.bind(this));
-      html.find('.button-get-better').click(this._onGetBetter.bind(this));
-    }
-    
-    // Reconfigura os displays de atributos após renderização
-    if (window.setupAttributeDisplays) {
-      window.setupAttributeDisplays();
     }
   }
 
@@ -189,7 +156,7 @@ class RoninActorSheet extends ActorSheet {
     const header = event.currentTarget;
     const type = header.dataset.type;
     const itemData = {
-      name: game.i18n.localize(`RONIN.ItemTypes.${type.charAt(0).toUpperCase() + type.slice(1)}`),
+      name: `Novo ${type}`,
       type: type
     };
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
@@ -215,37 +182,11 @@ class RoninActorSheet extends ActorSheet {
     const itemId = checkbox.dataset.itemId;
     const item = this.actor.items.get(itemId);
     
-    return item.update({
-      "system.equipped": checkbox.checked
-    });
-  }
-  
-  // Métodos para botões de ação
-  _onRest(event) {
-    event.preventDefault();
-    // Implementar lógica para descansar
-    ui.notifications.info("Descansando...");
-  }
-  
-  _onBroken(event) {
-    event.preventDefault();
-    // Implementar lógica para estado de quebrado
-    ui.notifications.warn("Personagem QUEBRADO!");
-  }
-  
-  _onSeppuku(event) {
-    event.preventDefault();
-    // Implementar lógica para seppuku (medida drástica)
-    const confirmation = confirm("Você realmente deseja realizar seppuku? Esta ação não pode ser desfeita.");
-    if (confirmation) {
-      ui.notifications.error("Seppuku realizado. Honra restaurada na morte.");
+    if (item) {
+      return item.update({
+        "system.equipped": checkbox.checked
+      });
     }
-  }
-  
-  _onGetBetter(event) {
-    event.preventDefault();
-    // Implementar lógica para melhorar (recuperar)
-    ui.notifications.info("Melhorando condições...");
   }
 }
 
