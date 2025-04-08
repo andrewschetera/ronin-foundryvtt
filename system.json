@@ -7,7 +7,8 @@
   "compatibleCoreVersion": "12",
   "author": "Your Name",
   "scripts": [
-    "module/ronin.js"
+    "module/ronin.js",
+    "module/format-attributes.js"
   ],
   "esmodules": [],
   "styles": [
