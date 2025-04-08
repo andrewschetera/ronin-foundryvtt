@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character", "personagem"],
+    "types": ["character"],
     "templates": {
       "base": {
         "abilities": {
@@ -47,11 +47,6 @@
       }
     },
     "character": {
-      "templates": ["base"],
-      "class": "",
-      "biography": ""
-    },
-    "personagem": {
       "templates": ["base"],
       "class": "",
       "biography": ""
