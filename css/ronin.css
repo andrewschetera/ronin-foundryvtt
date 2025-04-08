@@ -1,5 +1,5 @@
 /* ronin.css */
-@import url('https://fonts.googleapis.com/css2?family=Zen+Antique&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reggae+One&display=swap');
 
 /* Variáveis de cores */
 :root {
@@ -8,20 +8,23 @@
   --color-red: #ff0000;
   --color-red-dark: #c00000;
   --color-gray: #333333;
-  --font-primary: "Zen Antique", serif;
-  --font-display: "Zen Antique", serif;
+  --font-primary: "Reggae One", sans-serif;
+  --font-display: "Reggae One", sans-serif;
 }
 
 /* Estilos Globais */
 .ronin {
-  background-color: var(--color-black);
-  color: var(--color-white);
+  background-color: var(--color-white);
+  color: var(--color-black);
   font-family: var(--font-primary);
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
 }
 
 .ronin h1, .ronin h2, .ronin h3 {
   font-family: var(--font-display);
-  color: var(--color-white);
+  color: var(--color-black);
   margin: 2px 0;
 }
 
@@ -41,13 +44,16 @@
   box-shadow: 0 0 5px var(--color-red);
 }
 
-/* Header da Ficha */
+/* Header da Ficha - Permanece fixo */
 .sheet-header {
   background-color: var(--color-black);
-  margin-bottom: 5px;
   padding: 5px;
   display: flex;
   flex-direction: column;
+  color: var(--color-white);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .header-grid {
@@ -116,6 +122,8 @@
   font-weight: bold;
   text-align: center;
   cursor: pointer;
+  line-height: 1;
+  padding: 0;
 }
 
 .honor-dot.dishonor {
@@ -273,11 +281,14 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 
 /* Navegação de Abas */
 .sheet-tabs {
-  flex: 0;
+  flex: 0 0 auto;
   margin: 0;
   background: var(--color-red);
   display: flex;
   justify-content: space-between;
+  position: sticky;
+  top: 205px; /* Posição logo abaixo do header */
+  z-index: 10;
 }
 
 .sheet-tabs .item {
@@ -299,10 +310,18 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   color: var(--color-white);
 }
 
+/* Conteúdo das Abas - Área rolável */
+.sheet-body {
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--color-white);
+  padding: 5px;
+}
+
 /* Tab de Background */
 .tab-background {
   height: 100%;
-  background-color: var(--color-black);
+  background-color: var(--color-white);
   padding: 5px;
 }
 
@@ -318,7 +337,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   background: var(--color-white);
   padding: 10px;
   color: var(--color-black);
-  border: none;
+  border: 1px solid var(--color-black);
   font-family: var(--font-primary);
 }
 
@@ -514,39 +533,47 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 
 /* Override padrões do Foundry */
 .window-content {
-  background: var(--color-white) !important;
+  background: var(--color-black) !important;
+  color: var(--color-white) !important;
 }
 
 .dialog .window-content,
 .filepicker .window-content {
-  background-color: var(--color-white) !important;
-  color: var(--color-black);
+  background-color: var(--color-black) !important;
+  color: var(--color-white) !important;
 }
 
 .window-app .window-header {
-  background: var(--color-red);
-  color: var(--color-black);
+  background: var(--color-red) !important;
+  color: var(--color-black) !important;
 }
 
 button {
-  background: var(--color-red);
-  color: var(--color-black);
-  border: none;
-  font-family: var(--font-primary);
+  background: var(--color-red) !important;
+  color: var(--color-black) !important;
+  border: none !important;
+  font-family: var(--font-primary) !important;
 }
 
 button:hover {
-  background: var(--color-red-dark);
+  background: var(--color-red-dark) !important;
+}
+
+button.active {
+  background: var(--color-black) !important;
+  color: var(--color-white) !important;
 }
 
 .tabs .item.active {
   text-shadow: none;
+  background: var(--color-black) !important;
+  color: var(--color-white) !important;
 }
 
 /* Estilos específicos para elementos do Foundry */
 .app {
-  background: var(--color-white);
-  color: var(--color-black);
+  background: var(--color-black) !important;
+  color: var(--color-white) !important;
 }
 
 .sidebar-tab .directory-list .directory-item,
@@ -555,12 +582,44 @@ button:hover {
 }
 
 .sidebar .sidebar-tab {
-  background: var(--color-white);
-  color: var(--color-black);
+  background: var(--color-black) !important;
+  color: var(--color-white) !important;
 }
 
 #chat-form textarea {
-  background: var(--color-white);
+  background: var(--color-white) !important;
+  color: var(--color-black) !important;
+  border: 1px solid var(--color-red) !important;
+}
+
+.window-app .window-content {
+  background: var(--color-black) !important;
+}
+
+/* Garantir que as fichas continuem com fundo branco */
+.sheet.actor .window-content,
+.sheet.item .window-content {
+  background: var(--color-white) !important;
+}
+
+/* Texto branco em fundos pretos */
+.window-content h1, 
+.window-content h2, 
+.window-content h3,
+.window-content p,
+.window-content label,
+.window-content span,
+.window-content div:not(.ronin *) {
+  color: var(--color-white);
+}
+
+/* Inverter cores para fichas */
+.ronin h1, 
+.ronin h2, 
+.ronin h3,
+.ronin p,
+.ronin label:not(.ability *, .resource *),
+.ronin span:not(.separator),
+.ronin div:not(.ability, .resource) {
   color: var(--color-black);
-  border: 1px solid var(--color-red);
 }
