@@ -1,60 +1,85 @@
 /**
- * Script para formatar automaticamente os valores dos atributos com sinais + ou -
+ * Script para formatar visualmente os valores dos atributos com sinais + ou -
+ * sem alterar o valor real do input
  */
 
-// Função para formatar números com sinal
-function formatWithSign(value) {
-  // Se já for string e começar com - ou +, retorna como está
-  if (typeof value === 'string' && (value.startsWith('-') || value.startsWith('+'))) {
-    return value;
-  }
-  
-  // Converte para número
-  const numValue = Number(value);
-  
-  // Verifica se é um número válido
-  if (isNaN(numValue)) {
-    return value;
-  }
-  
-  // Adiciona o sinal apropriado
-  return numValue >= 0 ? `+${numValue}` : `${numValue}`;
-}
-
-// Função para atualizar todos os inputs de atributos
-function updateAllAttributeInputs() {
+// Adiciona displays formatados para todos os inputs de atributos
+function setupAttributeDisplays() {
   const abilityInputs = document.querySelectorAll('.ability input[type="number"]');
   
   abilityInputs.forEach(input => {
     // Obtém o valor atual
     const currentValue = input.value;
     
-    // Formata o valor
-    const formattedValue = formatWithSign(currentValue);
-    
-    // Atualiza o valor apenas se necessário
-    if (formattedValue !== currentValue) {
-      input.value = formattedValue;
+    // Verifica se já existe um display
+    let signDisplay = input.nextElementSibling;
+    if (!signDisplay || !signDisplay.classList.contains('attribute-sign')) {
+      // Cria o elemento de display se não existir
+      signDisplay = document.createElement('span');
+      signDisplay.classList.add('attribute-sign');
+      input.parentNode.insertBefore(signDisplay, input.nextSibling);
     }
+    
+    // Atualiza o texto do display
+    updateSignDisplay(input, signDisplay);
+    
+    // Adiciona evento para atualizar o display quando o valor mudar
+    input.addEventListener('change', () => {
+      updateSignDisplay(input, signDisplay);
+    });
+    
+    input.addEventListener('input', () => {
+      updateSignDisplay(input, signDisplay);
+    });
   });
+}
+
+// Atualiza o display de sinal para um input
+function updateSignDisplay(input, display) {
+  // Obtém o valor atual como número
+  const value = parseInt(input.value) || 0;
+  
+  // Formata com o sinal apropriado
+  const formattedValue = value >= 0 ? `+${value}` : `${value}`;
+  
+  // Atualiza o texto do display
+  display.textContent = formattedValue;
+  
+  // Ajusta a posição para sobrepor o input
+  positionSignDisplay(input, display);
+}
+
+// Posiciona o display sobre o input
+function positionSignDisplay(input, display) {
+  // Obtém a posição e dimensões do input
+  const rect = input.getBoundingClientRect();
+  
+  // Aplica estilos para posicionar o display sobre o input
+  display.style.position = 'absolute';
+  display.style.left = `${rect.left}px`;
+  display.style.top = `${rect.top}px`;
+  display.style.width = `${rect.width}px`;
+  display.style.height = `${rect.height}px`;
+  display.style.display = 'flex';
+  display.style.alignItems = 'center';
+  display.style.justifyContent = 'center';
+  display.style.pointerEvents = 'none'; // Permite clicar "através" do display
+  display.style.fontSize = `${Math.floor(rect.height * 0.6)}px`;
 }
 
 // Evento a ser executado quando uma folha de ator é renderizada
 Hooks.on('renderActorSheet', (app, html, data) => {
-  // Formata inicialmente todos os inputs de atributos
-  updateAllAttributeInputs();
+  // Cria os displays para os inputs de atributos
+  setupAttributeDisplays();
   
-  // Adiciona listeners para eventos de alteração nos inputs de atributos
-  const abilityInputs = html.find('.ability input[type="number"]');
-  
-  abilityInputs.on('change', (event) => {
-    const input = event.currentTarget;
-    input.value = formatWithSign(input.value);
-  });
-  
-  // Adiciona listeners para eventos de blur nos inputs de atributos
-  abilityInputs.on('blur', (event) => {
-    const input = event.currentTarget;
-    input.value = formatWithSign(input.value);
+  // Re-posiciona os displays quando a janela for redimensionada
+  window.addEventListener('resize', () => {
+    const abilityInputs = document.querySelectorAll('.ability input[type="number"]');
+    abilityInputs.forEach(input => {
+      const signDisplay = input.nextElementSibling;
+      if (signDisplay && signDisplay.classList.contains('attribute-sign')) {
+        positionSignDisplay(input, signDisplay);
+      }
+    });
   });
 });
