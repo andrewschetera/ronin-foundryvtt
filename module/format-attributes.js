@@ -51,35 +51,36 @@ function updateSignDisplay(input, display) {
 
 // Posiciona o display sobre o input
 function positionSignDisplay(input, display) {
-  // Obtém a posição e dimensões do input
-  const rect = input.getBoundingClientRect();
-  
-  // Aplica estilos para posicionar o display sobre o input
+  // Define estilos inline pois o posicionamento absoluto no CSS pode não funcionar corretamente
   display.style.position = 'absolute';
-  display.style.left = `${rect.left}px`;
-  display.style.top = `${rect.top}px`;
-  display.style.width = `${rect.width}px`;
-  display.style.height = `${rect.height}px`;
+  display.style.width = `${input.offsetWidth}px`;
+  display.style.height = `${input.offsetHeight}px`;
   display.style.display = 'flex';
   display.style.alignItems = 'center';
   display.style.justifyContent = 'center';
-  display.style.pointerEvents = 'none'; // Permite clicar "através" do display
-  display.style.fontSize = `${Math.floor(rect.height * 0.6)}px`;
+  display.style.pointerEvents = 'none';
+  display.style.fontSize = `${Math.floor(input.offsetHeight * 0.6)}px`;
+  display.style.fontWeight = 'bold';
+  display.style.top = '0';
+  display.style.left = '0';
+  
+  // Ajuste para manter o display posicionado corretamente quando houver rolagem
+  const inputRect = input.getBoundingClientRect();
+  const parentRect = input.offsetParent.getBoundingClientRect();
+  
+  display.style.top = `${input.offsetTop}px`;
+  display.style.left = `${input.offsetLeft}px`;
 }
 
 // Evento a ser executado quando uma folha de ator é renderizada
 Hooks.on('renderActorSheet', (app, html, data) => {
   // Cria os displays para os inputs de atributos
-  setupAttributeDisplays();
+  setTimeout(() => {
+    setupAttributeDisplays();
+  }, 100); // Pequeno delay para garantir que os elementos estejam carregados
   
-  // Re-posiciona os displays quando a janela for redimensionada
+  // Adiciona listener para reposicionar quando a janela for redimensionada
   window.addEventListener('resize', () => {
-    const abilityInputs = document.querySelectorAll('.ability input[type="number"]');
-    abilityInputs.forEach(input => {
-      const signDisplay = input.nextElementSibling;
-      if (signDisplay && signDisplay.classList.contains('attribute-sign')) {
-        positionSignDisplay(input, signDisplay);
-      }
-    });
+    setupAttributeDisplays();
   });
 });
