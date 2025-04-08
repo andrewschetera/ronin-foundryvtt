@@ -16,21 +16,18 @@
   background-color: var(--color-black);
   color: var(--color-white);
   font-family: var(--font-primary);
-  border: 1px solid var(--color-red);
 }
 
 .ronin h1, .ronin h2, .ronin h3 {
   font-family: var(--font-display);
   color: var(--color-white);
-  border-bottom: 1px solid var(--color-red);
 }
 
 .ronin input[type="text"],
 .ronin input[type="number"],
 .ronin select {
   background-color: var(--color-white);
-  border: 1px solid var(--color-red);
-  border-radius: 0;
+  border: none;
   padding: 4px;
   color: var(--color-black);
 }
@@ -46,30 +43,27 @@
   background-color: var(--color-black);
   margin-bottom: 10px;
   padding: 10px;
-  border-bottom: 2px solid var(--color-red);
   display: flex;
   flex-direction: column;
 }
 
 .header-grid {
   display: grid;
-  grid-template-columns: 2fr 3fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
   gap: 10px;
-  height: 300px; /* Altura fixa para alinhar todas as colunas */
+  height: 260px; /* Altura fixa para todas as colunas */
 }
 
 .character-img {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
-  width: 100%;
-  max-width: 300px;
-  max-height: 300px;
 }
 
 .profile-img {
-  border: 2px solid var(--color-red);
-  height: 100%;
   width: 100%;
+  height: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
 }
@@ -92,7 +86,6 @@
   width: 100%;
   background: var(--color-white);
   color: var(--color-black);
-  border: 1px solid var(--color-red);
   text-align: center;
   font-weight: bold;
 }
@@ -107,24 +100,22 @@
   margin-bottom: 5px;
   background: var(--color-white);
   color: var(--color-black);
-  border: 1px solid var(--color-red);
   text-align: center;
 }
 
 .resources-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 8px;
   margin-top: 10px;
   flex-grow: 1;
-  justify-content: space-between;
 }
 
 .resource {
   display: flex;
   align-items: center;
   background: var(--color-black);
-  border: 1px solid var(--color-red);
   padding: 5px;
 }
 
@@ -164,7 +155,7 @@
 .action-buttons button {
   background-color: var(--color-red);
   color: var(--color-black);
-  border: 1px solid var(--color-white);
+  border: none;
   padding: 5px 10px;
   font-family: var(--font-display);
   cursor: pointer;
@@ -181,7 +172,6 @@
   grid-column: 1 / -1;
   margin-top: 10px;
   padding: 8px;
-  border: 1px solid var(--color-red);
   background-color: var(--color-black);
 }
 
@@ -207,14 +197,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 25px;
-  height: 25px;
+  width: 24px;
+  height: 24px;
   margin: 0 2px;
   background-color: var(--color-black);
-  border: 2px solid var(--color-white);
+  border: 1px solid var(--color-white);
   border-radius: 50%;
   color: var(--color-white);
-  font-size: 0.7em;
+  font-size: 0.6em;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
@@ -248,29 +238,27 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 
 .ability {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background: var(--color-black);
-  border: 2px solid var(--color-red);
   padding: 5px;
-  height: 60px;
+  height: 50px;
 }
 
 .ability label {
   color: var(--color-white);
   font-size: 1.4em;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-right: 10px;
 }
 
 .ability input {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   text-align: center;
   font-weight: bold;
-  font-size: 2em;
-  border: 1px solid var(--color-red);
+  font-size: 1.8em;
 }
 
 /* Navegação de Abas */
@@ -290,11 +278,6 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   text-align: center;
   font-weight: bold;
   transition: background-color 0.3s;
-  border-right: 1px solid var(--color-black);
-}
-
-.sheet-tabs .item:last-child {
-  border-right: none;
 }
 
 .sheet-tabs .item:hover {
@@ -304,14 +287,12 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 .sheet-tabs .item.active {
   background: var(--color-black);
   color: var(--color-white);
-  border-bottom: 2px solid var(--color-white);
 }
 
 /* Tab de Background */
 .tab-background {
   height: 100%;
   background-color: var(--color-black);
-  border: 1px solid var(--color-red);
   padding: 5px;
 }
 
@@ -325,9 +306,9 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   height: 100%;
   min-height: 200px;
   background: var(--color-white);
-  border: 1px solid var(--color-red);
   padding: 10px;
   color: var(--color-black);
+  border: none;
 }
 
 /* Tab de Equipment */
@@ -339,7 +320,6 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 
 .inventory-category {
   background: var(--color-black);
-  border: 1px solid var(--color-red);
   padding: 5px;
   margin-bottom: 10px;
 }
@@ -348,7 +328,6 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--color-red);
   padding-bottom: 5px;
   margin-bottom: 5px;
   color: var(--color-white);
@@ -366,7 +345,6 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 }
 
 .item {
-  border-bottom: 1px solid var(--color-red);
   padding: 5px 0;
   color: var(--color-white);
 }
@@ -386,7 +364,6 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border: 1px solid var(--color-red);
 }
 
 .item-name {
@@ -426,7 +403,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 .initiative-buttons button {
   background-color: var(--color-red);
   color: var(--color-black);
-  border: 1px solid var(--color-white);
+  border: none;
   padding: 5px 15px;
   font-family: var(--font-display);
   cursor: pointer;
@@ -440,7 +417,6 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 
 .equipped-weapons, .equipped-armor {
   background: var(--color-black);
-  border: 1px solid var(--color-red);
   padding: 10px;
   margin-bottom: 10px;
   color: var(--color-white);
@@ -457,7 +433,6 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   flex-direction: column;
   align-items: center;
   background: var(--color-gray);
-  border: 1px solid var(--color-red);
   padding: 10px;
   width: 100px;
   text-align: center;
@@ -478,7 +453,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 .combat-actions button {
   background-color: var(--color-red);
   color: var(--color-black);
-  border: 1px solid var(--color-white);
+  border: none;
   padding: 10px 20px;
   font-family: var(--font-display);
   font-size: 1.2em;
@@ -494,7 +469,6 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 /* Tab de Features */
 .features-section, .texts-section {
   background: var(--color-black);
-  border: 1px solid var(--color-red);
   padding: 10px;
   margin-bottom: 10px;
   color: var(--color-white);
@@ -504,7 +478,6 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--color-red);
   padding-bottom: 5px;
   margin-bottom: 10px;
 }
@@ -518,7 +491,6 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 .feature-item {
   margin-bottom: 10px;
   padding: 5px;
-  border: 1px solid var(--color-red);
   background: var(--color-gray);
 }
 
@@ -527,7 +499,6 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   padding: 5px;
   font-size: 0.9em;
   background: var(--color-gray);
-  border-top: 1px solid var(--color-red);
 }
 
 /* Override padrões do Foundry */
@@ -544,7 +515,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 button {
   background: var(--color-red);
   color: var(--color-black);
-  border: 1px solid var(--color-white);
+  border: none;
 }
 
 button:hover {
