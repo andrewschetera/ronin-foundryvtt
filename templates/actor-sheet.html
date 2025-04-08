@@ -21,7 +21,7 @@
           <div class="resources-grid">
             <!-- HP -->
             <div class="resource hp">
-              <label>HP</label>
+              <label>HP:</label>
               <div class="resource-value">
                 <input name="system.resources.hp.value" type="number" value="{{system.resources.hp.value}}" min="0"/>
                 <span class="separator">/</span>
@@ -31,29 +31,21 @@
             
             <!-- Texts -->
             <div class="resource texts">
-              <label>Texts</label>
+              <label>Texts:</label>
               <input name="system.resources.texts.value" type="number" value="{{system.resources.texts.value}}" min="0"/>
             </div>
             
             <!-- Virtues -->
             <div class="resource virtues">
-              <label>Virtues</label>
+              <label>Virtues:</label>
               <input name="system.resources.virtues.value" type="number" value="{{system.resources.virtues.value}}" min="0"/>
             </div>
             
             <!-- Ryo -->
             <div class="resource ryo">
-              <label>Ryo</label>
+              <label>Ryo:</label>
               <input name="system.resources.ryo.value" type="number" value="{{system.resources.ryo.value}}" min="0"/>
             </div>
-          </div>
-          
-          <!-- Botões de Ação -->
-          <div class="action-buttons">
-            <button class="button-broken" type="button">BROKEN</button>
-            <button class="button-rest" type="button">REST</button>
-            <button class="button-seppuku" type="button">SEPPUKU</button>
-            <button class="button-get-better" type="button">GET BETTER</button>
           </div>
         </div>
         
@@ -90,6 +82,14 @@
             <label for="honor-{{this}}" class="honor-dot {{#if (lte this 9)}}dishonor{{/if}}">{{this}}</label>
           {{/times}}
         </div>
+      </div>
+      
+      <!-- Botões de Ação em uma única linha -->
+      <div class="action-buttons">
+        <button class="button-broken" type="button">BROKEN</button>
+        <button class="button-rest" type="button">REST</button>
+        <button class="button-seppuku" type="button">SEPPUKU</button>
+        <button class="button-get-better" type="button">GET BETTER</button>
       </div>
     </header>
     
