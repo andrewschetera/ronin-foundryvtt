@@ -1,5 +1,5 @@
 /* ronin.css */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Antique&display=swap');
 
 /* Variáveis de cores */
 :root {
@@ -8,8 +8,8 @@
   --color-red: #ff0000;
   --color-red-dark: #c00000;
   --color-gray: #333333;
-  --font-primary: "Noto Serif JP", serif;
-  --font-display: "Noto Serif JP", serif;
+  --font-primary: "Zen Antique", serif;
+  --font-display: "Zen Antique", serif;
 }
 
 /* Estilos Globais */
@@ -94,10 +94,11 @@
 }
 
 .honor-track {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 1px;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
 }
 
 .honor-dot {
@@ -106,12 +107,12 @@
   align-items: center;
   width: 18px;
   height: 18px;
-  margin: 1px;
+  margin: 1px auto;
   background-color: var(--color-black);
   border: 1px solid var(--color-white);
   border-radius: 50%;
   color: var(--color-white);
-  font-size: 0.5em;
+  font-size: 0.4em;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
@@ -241,16 +242,18 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  align-items: flex-end;
 }
 
 .ability {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
   background: var(--color-black);
   padding: 2px;
   height: 40px;
+  width: 100%;
 }
 
 .ability label {
@@ -511,13 +514,18 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 
 /* Override padrões do Foundry */
 .window-content {
-  background: url("../../ui/parchment.jpg") repeat;
+  background: var(--color-white) !important;
 }
 
 .dialog .window-content,
 .filepicker .window-content {
-  background-color: var(--color-black);
-  color: var(--color-white);
+  background-color: var(--color-white) !important;
+  color: var(--color-black);
+}
+
+.window-app .window-header {
+  background: var(--color-red);
+  color: var(--color-black);
 }
 
 button {
@@ -533,4 +541,26 @@ button:hover {
 
 .tabs .item.active {
   text-shadow: none;
+}
+
+/* Estilos específicos para elementos do Foundry */
+.app {
+  background: var(--color-white);
+  color: var(--color-black);
+}
+
+.sidebar-tab .directory-list .directory-item,
+.sidebar-tab .directory-list .folder {
+  border-bottom: 1px solid var(--color-red);
+}
+
+.sidebar .sidebar-tab {
+  background: var(--color-white);
+  color: var(--color-black);
+}
+
+#chat-form textarea {
+  background: var(--color-white);
+  color: var(--color-black);
+  border: 1px solid var(--color-red);
 }
