@@ -1,5 +1,8 @@
 // ronin.js - Sistema principal para o RPG RONIN baseado em MÖRK BORG
 
+// Importar script de formatação de atributos
+import './format-attributes.js';
+
 Hooks.once('init', async function() {
   console.log('ronin | Inicializando sistema RONIN');
   
@@ -36,6 +39,13 @@ Hooks.once('init', async function() {
   // Registrar o helper Handlebars 'and' para condições múltiplas
   Handlebars.registerHelper('and', function () {
     return Array.prototype.every.call(arguments, Boolean);
+  });
+  
+  // Helper para formatar números com sinal
+  Handlebars.registerHelper('formatSign', function (value) {
+    const num = Number(value);
+    if (isNaN(num)) return value;
+    return num >= 0 ? `+${num}` : `${num}`;
   });
 });
 
@@ -81,7 +91,8 @@ class RoninActorSheet extends ActorSheet {
       height: 600,
       tabs: [
         {navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "background"}
-      ]
+      ],
+      scrollY: [".sheet-body"]
     });
   }
   
