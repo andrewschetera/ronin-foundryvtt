@@ -55,23 +55,29 @@
   display: grid;
   grid-template-columns: 2fr 3fr 1fr;
   gap: 10px;
+  height: 300px; /* Altura fixa para alinhar todas as colunas */
 }
 
 .character-img {
   text-align: center;
-  height: 200px;
+  height: 100%;
+  width: 100%;
+  max-width: 300px;
+  max-height: 300px;
 }
 
 .profile-img {
   border: 2px solid var(--color-red);
   height: 100%;
   width: 100%;
+  aspect-ratio: 1/1;
   object-fit: cover;
 }
 
 .basic-info {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .character-name {
@@ -106,15 +112,16 @@
 }
 
 .resources-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
   margin-top: 10px;
+  flex-grow: 1;
+  justify-content: space-between;
 }
 
 .resource {
   display: flex;
-  flex-direction: column;
   align-items: center;
   background: var(--color-black);
   border: 1px solid var(--color-red);
@@ -125,7 +132,9 @@
   color: var(--color-white);
   font-size: 1.1em;
   font-weight: bold;
-  margin-bottom: 3px;
+  width: 70px;
+  text-align: right;
+  margin-right: 10px;
 }
 
 .resource input {
@@ -146,21 +155,22 @@
 }
 
 .action-buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  justify-content: space-between;
   gap: 8px;
   margin-top: 10px;
 }
 
 .action-buttons button {
   background-color: var(--color-red);
-  color: var(--color-white);
+  color: var(--color-black);
   border: 1px solid var(--color-white);
   padding: 5px 10px;
   font-family: var(--font-display);
   cursor: pointer;
   transition: background-color 0.3s;
   font-weight: bold;
+  flex: 1;
 }
 
 .action-buttons button:hover {
@@ -184,7 +194,6 @@
   font-size: 1.4em;
   text-transform: uppercase;
   letter-spacing: 2px;
-  text-shadow: 1px 1px 2px var(--color-red);
 }
 
 .honor-track {
@@ -205,7 +214,7 @@
   border: 2px solid var(--color-white);
   border-radius: 50%;
   color: var(--color-white);
-  font-size: 0.8em;
+  font-size: 0.7em;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
@@ -227,38 +236,40 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label {
 
 input[type="radio"][name="system.resources.honor.value"]:checked + label.dishonor {
   background-color: var(--color-red);
-  color: var(--color-white);
+  color: var(--color-black);
 }
 
 .abilities-column {
-  display: grid;
-  grid-template-rows: repeat(4, 1fr);
-  gap: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .ability {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background: var(--color-black);
   border: 2px solid var(--color-red);
   padding: 5px;
-  height: 40px;
+  height: 60px;
 }
 
 .ability label {
   color: var(--color-white);
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-weight: bold;
-  margin-right: 8px;
+  margin-bottom: 5px;
 }
 
 .ability input {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   text-align: center;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 2em;
   border: 1px solid var(--color-red);
 }
 
@@ -275,7 +286,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   flex: 1;
   font-family: var(--font-display);
   padding: 8px 15px;
-  color: var(--color-white);
+  color: var(--color-black);
   text-align: center;
   font-weight: bold;
   transition: background-color 0.3s;
@@ -414,7 +425,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 
 .initiative-buttons button {
   background-color: var(--color-red);
-  color: var(--color-white);
+  color: var(--color-black);
   border: 1px solid var(--color-white);
   padding: 5px 15px;
   font-family: var(--font-display);
@@ -466,7 +477,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 
 .combat-actions button {
   background-color: var(--color-red);
-  color: var(--color-white);
+  color: var(--color-black);
   border: 1px solid var(--color-white);
   padding: 10px 20px;
   font-family: var(--font-display);
@@ -532,7 +543,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 
 button {
   background: var(--color-red);
-  color: var(--color-white);
+  color: var(--color-black);
   border: 1px solid var(--color-white);
 }
 
@@ -541,5 +552,5 @@ button:hover {
 }
 
 .tabs .item.active {
-  text-shadow: 0 0 5px var(--color-red);
+  text-shadow: none;
 }
