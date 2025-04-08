@@ -1,4 +1,5 @@
 /* ronin.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
 
 /* Variáveis de cores */
 :root {
@@ -7,8 +8,8 @@
   --color-red: #ff0000;
   --color-red-dark: #c00000;
   --color-gray: #333333;
-  --font-primary: "Arial", sans-serif;
-  --font-display: "Arial", sans-serif;
+  --font-primary: "Noto Serif JP", serif;
+  --font-display: "Noto Serif JP", serif;
 }
 
 /* Estilos Globais */
@@ -31,6 +32,7 @@
   border: none;
   padding: 2px;
   color: var(--color-black);
+  font-family: var(--font-primary);
 }
 
 .ronin input[type="text"]:focus,
@@ -51,15 +53,21 @@
 .header-grid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto;
   gap: 5px;
-  height: 200px; /* Reduzida a altura */
+  height: 200px; /* Altura fixa para todas as colunas */
+}
+
+.character-img-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .character-img {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
 }
 
 .profile-img {
@@ -67,6 +75,65 @@
   height: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
+}
+
+.honor-section {
+  padding: 2px;
+  background-color: var(--color-black);
+}
+
+.honor-section label {
+  color: var(--color-white);
+  display: block;
+  text-align: center;
+  margin-bottom: 3px;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.honor-track {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.honor-dot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+  margin: 1px;
+  background-color: var(--color-black);
+  border: 1px solid var(--color-white);
+  border-radius: 50%;
+  color: var(--color-white);
+  font-size: 0.5em;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.honor-dot.dishonor {
+  border-color: var(--color-red);
+  color: var(--color-red);
+}
+
+input[type="radio"][name="system.resources.honor.value"] {
+  display: none;
+}
+
+input[type="radio"][name="system.resources.honor.value"]:checked + label {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+input[type="radio"][name="system.resources.honor.value"]:checked + label.dishonor {
+  background-color: var(--color-red);
+  color: var(--color-black);
 }
 
 .basic-info {
@@ -169,67 +236,6 @@
   background-color: var(--color-red-dark);
 }
 
-.honor-section {
-  grid-column: 1 / -1;
-  margin-top: 5px;
-  padding: 5px;
-  background-color: var(--color-black);
-}
-
-.honor-section label {
-  color: var(--color-white);
-  display: block;
-  text-align: center;
-  margin-bottom: 5px;
-  font-weight: bold;
-  font-size: 1.4em;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.honor-track {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: nowrap;
-}
-
-.honor-dot {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 22px;
-  height: 22px;
-  margin: 0 1px;
-  background-color: var(--color-black);
-  border: 1px solid var(--color-white);
-  border-radius: 50%;
-  color: var(--color-white);
-  font-size: 0.55em;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-}
-
-.honor-dot.dishonor {
-  border-color: var(--color-red);
-  color: var(--color-red);
-}
-
-input[type="radio"][name="system.resources.honor.value"] {
-  display: none;
-}
-
-input[type="radio"][name="system.resources.honor.value"]:checked + label {
-  background-color: var(--color-white);
-  color: var(--color-black);
-}
-
-input[type="radio"][name="system.resources.honor.value"]:checked + label.dishonor {
-  background-color: var(--color-red);
-  color: var(--color-black);
-}
-
 .abilities-column {
   display: flex;
   flex-direction: column;
@@ -241,7 +247,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   background: var(--color-black);
   padding: 2px;
   height: 40px;
@@ -251,7 +257,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   color: var(--color-white);
   font-size: 1.7em; /* Tamanho aumentado */
   font-weight: bold;
-  margin-right: 10px;
+  margin-right: 5px; /* Espaçamento reduzido */
 }
 
 .ability input {
@@ -310,6 +316,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   padding: 10px;
   color: var(--color-black);
   border: none;
+  font-family: var(--font-primary);
 }
 
 /* Tab de Equipment */
@@ -517,6 +524,7 @@ button {
   background: var(--color-red);
   color: var(--color-black);
   border: none;
+  font-family: var(--font-primary);
 }
 
 button:hover {
