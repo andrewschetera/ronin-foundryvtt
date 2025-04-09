@@ -119,6 +119,8 @@
   width: 100%;
 }
 
+/* Ajustes balanceados para as bolinhas de Honor */
+
 .honor-dot {
   display: flex;
   justify-content: center;
@@ -130,22 +132,33 @@
   border: 1px solid var(--color-white);
   border-radius: 50%;
   color: var(--color-white);
-  font-size: 0.25em; /* Reduzindo ainda mais o tamanho da fonte */
+  font-size: 0.3em; /* Tamanho intermediário para todos os números */
   font-weight: bold;
   text-align: center;
   cursor: pointer;
   line-height: 1;
   padding: 0;
-  overflow: hidden; /* Garantir que o número não saia da bolinha */
+}
+
+/* Ajuste fino para números de dois dígitos (10-20) */
+.honor-dot[for="honor-10"],
+.honor-dot[for="honor-11"],
+.honor-dot[for="honor-12"],
+.honor-dot[for="honor-13"],
+.honor-dot[for="honor-14"],
+.honor-dot[for="honor-15"],
+.honor-dot[for="honor-16"],
+.honor-dot[for="honor-17"],
+.honor-dot[for="honor-18"],
+.honor-dot[for="honor-19"],
+.honor-dot[for="honor-20"] {
+  font-size: 0.28em; /* Apenas um pouco menor para números de dois dígitos */
+  transform: scale(0.9); /* Aplicando uma leve redução de escala */
 }
 
 .honor-dot.dishonor {
   border-color: var(--color-red);
   color: var(--color-red);
-}
-
-input[type="radio"][name="system.resources.honor.value"] {
-  display: none;
 }
 
 input[type="radio"][name="system.resources.honor.value"]:checked + label {
@@ -156,12 +169,6 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label {
 input[type="radio"][name="system.resources.honor.value"]:checked + label.dishonor {
   background-color: var(--color-red);
   color: var(--color-black) !important;
-}
-
-/* Ajustes para números de dois dígitos */
-.honor-dot:nth-child(n+20) {
-  font-size: 0.2em; /* Reduzindo ainda mais para números de dois dígitos (10-20) */
-  letter-spacing: -0.5px; /* Comprimindo um pouco os dígitos */
 }
 
 .basic-info {
