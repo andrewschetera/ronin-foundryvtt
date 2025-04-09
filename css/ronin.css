@@ -1,4 +1,4 @@
-/* ronin.css */
+/* ronin.css - Versão simplificada */
 @import url('https://fonts.googleapis.com/css2?family=Reggae+One&display=swap');
 
 /* Variáveis de cores */
@@ -12,16 +12,31 @@
   --font-display: "Reggae One", sans-serif;
 }
 
-/* Estilos Globais - Apenas para elementos do sistema */
+/* Estrutura básica da janela e aplicativo */
+.window-content {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  height: 100%;
+}
+
 .ronin {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   background-color: var(--color-white);
   color: var(--color-black);
   font-family: var(--font-primary);
-  display: flex;
-  flex-direction: column;
-  max-height: 100%;
+  overflow: hidden;
 }
 
+.ronin-sheet {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Estilos comuns para textos e inputs */
 .ronin h1, .ronin h2, .ronin h3 {
   font-family: var(--font-display);
   color: var(--color-black);
@@ -44,122 +59,68 @@
   box-shadow: 0 0 5px var(--color-red);
 }
 
-/* Estilo para os displays de atributos */
-.attribute-sign {
-  color: var(--color-white);
-  font-weight: bold;
-  pointer-events: none;
-  text-align: center;
-}
-
-/* Header da Ficha - Permanece fixo */
+/* Header com altura fixa */
 .sheet-header {
+  flex: 0 0 auto;
   background-color: var(--color-black);
   padding: 5px;
-  display: flex;
-  flex-direction: column;
   color: var(--color-white);
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
 
 .header-grid {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: auto;
+  grid-template-columns: 1.5fr 2fr 0.8fr;
   gap: 5px;
-  height: 200px; /* Altura fixa para todas as colunas */
+  height: 200px;
 }
 
+/* Área da imagem e botões */
 .character-img-container {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .character-img {
-  flex: 1;
+  height: 140px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5px;
 }
 
 .profile-img {
   width: 100%;
   height: 100%;
-  aspect-ratio: 1/1;
   object-fit: cover;
 }
 
-.honor-section {
-  padding: 2px;
-  background-color: var(--color-black);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.honor-section label {
-  color: var(--color-white);
-  display: block;
-  text-align: center;
-  margin-bottom: 3px;
-  font-weight: bold;
-  font-size: 1.2em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.honor-track {
+/* Grid de botões 2x2 */
+.action-buttons-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  gap: 2px;
-  justify-content: center;
-  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3px;
+  padding: 2px;
 }
 
-/* Estilos para bolinhas de Honor - usando alta especificidade */
-.ronin .honor-section .honor-track label.honor-dot {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  width: 18px !important;
-  height: 18px !important;
-  margin: 1px auto !important;
-  background-color: var(--color-black) !important;
-  border: 1px solid var(--color-white) !important;
-  border-radius: 50% !important;
-  color: var(--color-white) !important;
-  font-size: 0.8em !important; /* Tamanho ajustado */
-  font-weight: bold !important;
-  text-align: center !important;
-  cursor: pointer !important;
-  line-height: 1 !important;
-  padding: 0 !important;
+.ronin .action-buttons-grid button {
+  background-color: var(--color-red);
+  color: var(--color-black);
+  border: none;
+  padding: 4px 2px;
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+  font-size: 0.85em;
 }
 
-.ronin .honor-section .honor-track label.honor-dot.dishonor {
-  border-color: var(--color-red) !important;
-  color: var(--color-red) !important;
+.ronin .action-buttons-grid button:hover {
+  background-color: var(--color-red-dark);
 }
 
-/* Esconder os inputs de rádio */
-input[type="radio"][name="system.resources.honor.value"] {
-  display: none;
-}
-
-/* Estilo para bolinhas selecionadas */
-.ronin .honor-section .honor-track input[type="radio"][name="system.resources.honor.value"]:checked + label.honor-dot {
-  background-color: var(--color-white) !important;
-  color: var(--color-black) !important;
-}
-
-.ronin .honor-section .honor-track input[type="radio"][name="system.resources.honor.value"]:checked + label.honor-dot.dishonor {
-  background-color: var(--color-red) !important;
-  color: var(--color-black) !important;
-}
-
+/* Área de informações principais */
 .basic-info {
   display: flex;
   flex-direction: column;
@@ -195,6 +156,7 @@ input[type="radio"][name="system.resources.honor.value"] {
   text-align: center;
 }
 
+/* Grid de recursos */
 .resources-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -237,29 +199,76 @@ input[type="radio"][name="system.resources.honor.value"] {
   margin: 0 2px;
 }
 
-.action-buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 5px;
+/* Honor */
+.honor-section {
+  padding: 2px;
+  background-color: var(--color-black);
   margin-top: 5px;
 }
 
-.ronin .action-buttons button {
-  background-color: var(--color-red);
-  color: var(--color-black);
-  border: none;
-  padding: 3px 5px;
-  font-family: var(--font-display);
-  cursor: pointer;
-  transition: background-color 0.3s;
+.honor-layout {
+  display: flex;
+  align-items: center;
+}
+
+.honor-label {
+  color: var(--color-white);
   font-weight: bold;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 10px;
+  width: 60px;
+  text-align: right;
+}
+
+.honor-track {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 2px;
   flex: 1;
 }
 
-.ronin .action-buttons button:hover {
-  background-color: var(--color-red-dark);
+.ronin .honor-section .honor-track label.honor-dot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  margin: 1px auto;
+  background-color: var(--color-black);
+  border: 1px solid var(--color-white);
+  border-radius: 50%;
+  color: var(--color-white);
+  font-size: 0.7em;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
 }
 
+.ronin .honor-section .honor-track label.honor-dot.dishonor {
+  border-color: var(--color-red);
+  color: var(--color-red);
+}
+
+input[type="radio"][name="system.resources.honor.value"] {
+  display: none;
+}
+
+.ronin .honor-section .honor-track input[type="radio"][name="system.resources.honor.value"]:checked + label.honor-dot {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.ronin .honor-section .honor-track input[type="radio"][name="system.resources.honor.value"]:checked + label.honor-dot.dishonor {
+  background-color: var(--color-red);
+  color: var(--color-black);
+}
+
+/* Atributos */
 .abilities-column {
   display: flex;
   flex-direction: column;
@@ -282,9 +291,9 @@ input[type="radio"][name="system.resources.honor.value"] {
 
 .ability label {
   color: var(--color-white);
-  font-size: 1.7em; /* Tamanho aumentado */
+  font-size: 1.7em;
   font-weight: bold;
-  margin-right: 5px; /* Espaçamento reduzido */
+  margin-right: 5px;
 }
 
 .ability input {
@@ -293,19 +302,13 @@ input[type="radio"][name="system.resources.honor.value"] {
   text-align: center;
   font-weight: bold;
   font-size: 1.7em;
-  opacity: 0.01; /* Quase invisível para permitir interação */
 }
 
-/* Navegação de Abas */
+/* Navegação de abas */
 .ronin .sheet-tabs {
   flex: 0 0 auto;
-  margin: 0;
   background: var(--color-red);
   display: flex;
-  justify-content: space-between;
-  position: sticky;
-  top: 205px; /* Posição logo abaixo do header */
-  z-index: 10;
 }
 
 .ronin .sheet-tabs .item {
@@ -327,29 +330,27 @@ input[type="radio"][name="system.resources.honor.value"] {
   color: var(--color-white);
 }
 
-/* Conteúdo das Abas - Área rolável */
+/* Conteúdo com barra de rolagem */
 .sheet-body {
-  flex: 1;
+  flex: 1 1 auto;
   overflow-y: auto;
+  overflow-x: hidden;
   background-color: var(--color-white);
   padding: 5px;
 }
 
 /* Tab de Background */
 .tab-background {
-  height: 100%;
   background-color: var(--color-white);
   padding: 5px;
 }
 
 .editor-wrapper {
-  height: 100%;
   min-height: 200px;
 }
 
 .background-editor {
   width: 100%;
-  height: 100%;
   min-height: 200px;
   background: var(--color-white);
   padding: 10px;
