@@ -130,12 +130,13 @@
   border: 1px solid var(--color-white);
   border-radius: 50%;
   color: var(--color-white);
-  font-size: 0.35em;
+  font-size: 0.25em; /* Reduzindo ainda mais o tamanho da fonte */
   font-weight: bold;
   text-align: center;
   cursor: pointer;
   line-height: 1;
   padding: 0;
+  overflow: hidden; /* Garantir que o número não saia da bolinha */
 }
 
 .honor-dot.dishonor {
@@ -155,6 +156,12 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label {
 input[type="radio"][name="system.resources.honor.value"]:checked + label.dishonor {
   background-color: var(--color-red);
   color: var(--color-black) !important;
+}
+
+/* Ajustes para números de dois dígitos */
+.honor-dot:nth-child(n+20) {
+  font-size: 0.2em; /* Reduzindo ainda mais para números de dois dígitos (10-20) */
+  letter-spacing: -0.5px; /* Comprimindo um pouco os dígitos */
 }
 
 .basic-info {
