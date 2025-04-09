@@ -12,65 +12,10 @@
   --font-display: "Reggae One", sans-serif;
 }
 
-/* Estilos Globais */
+/* Estilos Globais - Apenas para elementos do sistema */
 .ronin {
   background-color: var(--color-white);
-  color: var(--color-white) !important;
-}
-
-.tabs .item.active {
-  text-shadow: none;
-  background: var(--color-black) !important;
-  color: var(--color-white) !important;
-}
-
-.sidebar-tab .directory-list .directory-item,
-.sidebar-tab .directory-list .folder {
-  border-bottom: 1px solid var(--color-red);
-}
-
-.sidebar .sidebar-tab {
-  background: var(--color-black) !important;
-  color: var(--color-white) !important;
-}
-
-#chat-form textarea {
-  background: var(--color-white) !important;
-  color: var(--color-black) !important;
-  border: 1px solid var(--color-red) !important;
-}
-
-.window-app .window-content {
-  background: var(--color-black) !important;
-}
-
-/* Garantir que as fichas continuem com fundo branco */
-.sheet.actor .window-content,
-.sheet.item .window-content {
-  background: var(--color-white) !important;
-}
-
-/* Texto branco em fundos pretos */
-.window-content h1, 
-.window-content h2, 
-.window-content h3,
-.window-content p,
-.window-content label,
-.window-content span,
-.window-content div:not(.ronin *) {
-  color: var(--color-white);
-}
-
-/* Inverter cores para fichas */
-.ronin h1, 
-.ronin h2, 
-.ronin h3,
-.ronin p,
-.ronin label:not(.ability *, .resource *),
-.ronin span:not(.separator),
-.ronin div:not(.ability, .resource) {
   color: var(--color-black);
-}black);
   font-family: var(--font-primary);
   display: flex;
   flex-direction: column;
@@ -296,7 +241,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   margin-top: 5px;
 }
 
-.action-buttons button {
+.ronin .action-buttons button {
   background-color: var(--color-red);
   color: var(--color-black);
   border: none;
@@ -308,7 +253,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   flex: 1;
 }
 
-.action-buttons button:hover {
+.ronin .action-buttons button:hover {
   background-color: var(--color-red-dark);
 }
 
@@ -349,7 +294,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
 }
 
 /* Navegação de Abas */
-.sheet-tabs {
+.ronin .sheet-tabs {
   flex: 0 0 auto;
   margin: 0;
   background: var(--color-red);
@@ -360,7 +305,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   z-index: 10;
 }
 
-.sheet-tabs .item {
+.ronin .sheet-tabs .item {
   flex: 1;
   font-family: var(--font-display);
   padding: 5px 15px;
@@ -370,11 +315,11 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   transition: background-color 0.3s;
 }
 
-.sheet-tabs .item:hover {
+.ronin .sheet-tabs .item:hover {
   background: var(--color-red-dark);
 }
 
-.sheet-tabs .item.active {
+.ronin .sheet-tabs .item.active {
   background: var(--color-black);
   color: var(--color-white);
 }
@@ -499,7 +444,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   margin-bottom: 10px;
 }
 
-.initiative-buttons button {
+.ronin .initiative-buttons button {
   background-color: var(--color-red);
   color: var(--color-black);
   border: none;
@@ -510,7 +455,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   font-weight: bold;
 }
 
-.initiative-buttons button:hover {
+.ronin .initiative-buttons button:hover {
   background-color: var(--color-red-dark);
 }
 
@@ -549,7 +494,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   gap: 10px;
 }
 
-.combat-actions button {
+.ronin .combat-actions button {
   background-color: var(--color-red);
   color: var(--color-black);
   border: none;
@@ -561,7 +506,7 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   font-weight: bold;
 }
 
-.combat-actions button:hover {
+.ronin .combat-actions button:hover {
   background-color: var(--color-red-dark);
 }
 
@@ -600,40 +545,5 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   background: var(--color-gray);
 }
 
-/* Override padrões do Foundry */
-.window-content {
-  background: var(--color-black) !important;
-  color: var(--color-white) !important;
-}
-
-.dialog .window-content,
-.filepicker .window-content {
-  background-color: var(--color-black) !important;
-  color: var(--color-white) !important;
-}
-
-.window-app .window-header {
-  background: var(--color-red) !important;
-  color: var(--color-black) !important;
-}
-
-button {
-  background: var(--color-red) !important;
-  color: var(--color-black) !important;
-  border: none !important;
-  font-family: var(--font-primary) !important;
-}
-
-button:hover {
-  background: var(--color-red-dark) !important;
-}
-
-button.active {
-  background: var(--color-black) !important;
-  color: var(--color-white) !important;
-}
-
-.tabs .item.active {
-  text-shadow: none;
-  background: var(--color-black) !important;
-  color: var(--color-
+/* Remova todos os estilos que afetam componentes globais do Foundry */
+/* Foi removida a seção "Override padrões do Foundry" do arquivo original */
