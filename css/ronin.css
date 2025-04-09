@@ -119,55 +119,44 @@
   width: 100%;
 }
 
-/* Ajustes balanceados para as bolinhas de Honor */
-
-.honor-dot {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 18px;
-  height: 18px;
-  margin: 1px auto;
-  background-color: var(--color-black);
-  border: 1px solid var(--color-white);
-  border-radius: 50%;
-  color: var(--color-white);
-  font-size: 0.3em; /* Tamanho intermediário para todos os números */
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  line-height: 1;
-  padding: 0;
+/* Estilos para bolinhas de Honor - usando alta especificidade */
+.ronin .honor-section .honor-track label.honor-dot {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 1px auto !important;
+  background-color: var(--color-black) !important;
+  border: 1px solid var(--color-white) !important;
+  border-radius: 50% !important;
+  color: var(--color-white) !important;
+  font-size: 0.8em !important; /* Tamanho ajustado */
+  font-weight: bold !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+  padding: 0 !important;
 }
 
-/* Ajuste fino para números de dois dígitos (10-20) */
-.honor-dot[for="honor-10"],
-.honor-dot[for="honor-11"],
-.honor-dot[for="honor-12"],
-.honor-dot[for="honor-13"],
-.honor-dot[for="honor-14"],
-.honor-dot[for="honor-15"],
-.honor-dot[for="honor-16"],
-.honor-dot[for="honor-17"],
-.honor-dot[for="honor-18"],
-.honor-dot[for="honor-19"],
-.honor-dot[for="honor-20"] {
-  font-size: 0.28em; /* Apenas um pouco menor para números de dois dígitos */
-  transform: scale(0.9); /* Aplicando uma leve redução de escala */
+.ronin .honor-section .honor-track label.honor-dot.dishonor {
+  border-color: var(--color-red) !important;
+  color: var(--color-red) !important;
 }
 
-.honor-dot.dishonor {
-  border-color: var(--color-red);
-  color: var(--color-red);
+/* Esconder os inputs de rádio */
+input[type="radio"][name="system.resources.honor.value"] {
+  display: none;
 }
 
-input[type="radio"][name="system.resources.honor.value"]:checked + label {
-  background-color: var(--color-white);
+/* Estilo para bolinhas selecionadas */
+.ronin .honor-section .honor-track input[type="radio"][name="system.resources.honor.value"]:checked + label.honor-dot {
+  background-color: var(--color-white) !important;
   color: var(--color-black) !important;
 }
 
-input[type="radio"][name="system.resources.honor.value"]:checked + label.dishonor {
-  background-color: var(--color-red);
+.ronin .honor-section .honor-track input[type="radio"][name="system.resources.honor.value"]:checked + label.honor-dot.dishonor {
+  background-color: var(--color-red) !important;
   color: var(--color-black) !important;
 }
 
@@ -558,6 +547,3 @@ input[type="radio"][name="system.resources.honor.value"]:checked + label.dishono
   font-size: 0.9em;
   background: var(--color-gray);
 }
-
-/* Remova todos os estilos que afetam componentes globais do Foundry */
-/* Foi removida a seção "Override padrões do Foundry" do arquivo original */
