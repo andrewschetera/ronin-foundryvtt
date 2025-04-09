@@ -1,6 +1,6 @@
 // ronin.js - Sistema principal para o RPG RONIN baseado em MÖRK BORG
 
-// Carregamos o script de formatação de atributos após o init
+// Inicialização do sistema
 Hooks.once('init', async function() {
   console.log('ronin | Inicializando sistema RONIN');
   
@@ -45,15 +45,6 @@ Hooks.once('init', async function() {
     if (isNaN(num)) return value;
     return num >= 0 ? `+${num}` : `${num}`;
   });
-  
-  // Carrega script de formatação após init
-  fetch('systems/ronin/module/format-attributes.js')
-    .then(response => response.text())
-    .then(script => {
-      // Executa o script que foi carregado
-      eval(script);
-    })
-    .catch(error => console.error('Error loading format-attributes.js:', error));
 });
 
 // Hooks adicionais podem ser adicionados aqui no futuro
