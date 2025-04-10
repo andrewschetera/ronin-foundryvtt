@@ -26,8 +26,8 @@
       "path": "lang/en.json"
     }
   ],
-  "gridDistance": 5,
-  "gridUnits": "ft",
+  "grid.distance": 5,
+  "grid.units": "ft",
   "primaryTokenAttribute": "resources.hp",
   "secondaryTokenAttribute": null,
   "initiative": "1d6",
