@@ -1,78 +1,46 @@
-/* ronin.css - Versão final limpa */
+/* ronin.css - Versão minimalista que preserva a interface do Foundry */
 @import url('https://fonts.googleapis.com/css2?family=Reggae+One&display=swap');
 
-/* Variáveis de cores */
+/* Variáveis de cores - usadas apenas dentro dos elementos específicos do sistema */
 :root {
   --color-white: #ffffff;
   --color-black: #000000;
-  --color-red: #800000; /* Alterado para marrom escuro */
-  --color-red-dark: #680202; /* Alterado para marrom muito escuro */
+  --color-red: #800000;
+  --color-red-dark: #680202;
   --color-gray: #333333;
   --font-primary: "Reggae One", sans-serif;
   --font-display: "Reggae One", sans-serif;
 }
 
-/* Estilos Globais - Apenas para elementos do sistema */
-.ronin {
-  background-color: var(--color-black);
-  color: var(--color-white);
-  font-family: var(--font-primary);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-}
+/* ===== ESTRUTURA DA FICHA ===== */
 
-.ronin h1, .ronin h2, .ronin h3 {
-  font-family: var(--font-display);
-  margin: 2px 0;
-}
-
-.ronin input[type="text"],
-.ronin input[type="number"],
-.ronin select {
-  background-color: var(--color-white);
-  border: none;
-  padding: 2px;
-  color: var(--color-black);
-  font-family: var(--font-primary);
-}
-
-.ronin input[type="text"]:focus,
-.ronin input[type="number"]:focus,
-.ronin select:focus {
-  box-shadow: 0 0 5px var(--color-red);
-}
-
-/* ==== ESTRUTURA PRINCIPAL DA FICHA ==== */
+/* Estilos básicos para o conteúdo da ficha - sem interferir na UI do Foundry */
 .ronin-sheet {
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-height: 100%;
-  overflow: hidden;
-  background-color: var(--color-black);
+  gap: 2px; /* Adicionar gap entre elementos do flexbox (Altera a distância entre as áreas da ficha)*/
 }
 
-/* ==== CABEÇALHO ==== */
+/* Cabeçalho */
 .sheet-header {
-  background-color: var(--color-black);
-  padding: 5px;
-  color: var(--color-white);
   flex: 0 0 auto;
-  overflow: visible;
+  padding: 5px;
+  margin-bottom: 2px; /* Aumentado de 5px para 15px Margem inferior do cabeçalho */
+  padding-bottom: 10px; /* Adicionar padding na parte inferior */
+  border-bottom: 0px solid rgba(0, 0, 0, 0.1); /* Adicionar linha separadora sutil */
 }
 
-/* Grid do cabeçalho com altura fixa */
+/* Grid do cabeçalho */
 .header-grid {
   display: grid;
   grid-template-columns: 1.5fr 2fr 0.8fr;
-  grid-template-rows: auto;
-  gap: 5px;
+  gap: 2px; /* Modifica a distância horizontal entre os elementos do cabeçalho */
   height: 200px;
+  margin-bottom: 5px; /* Espaço extra após o grid */
 }
 
-/* Container da imagem com altura adequada */
+/* Container da imagem */
 .character-img-container {
   display: flex;
   flex-direction: column;
@@ -80,13 +48,12 @@
   height: 100%;
 }
 
-/* Área da imagem com altura fixa */
 .character-img {
   flex: 1 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 140px;
+  height: 50px; /* Tamanho da área do grid da imagem do personagem */
   margin-bottom: 5px;
 }
 
@@ -96,104 +63,16 @@
   object-fit: cover;
 }
 
-/* Reorganizar botões em grid 2x2 */
+/* Botões de ação */
 .action-buttons-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 3px;
+  gap: 2px; /* espaçamento entre os botões */
   padding: 2px;
 }
 
-.ronin .action-buttons-grid button {
-  background-color: var(--color-red);
-  color: var(--color-black);
-  border: none;
-  padding: 4px 2px;
-  font-family: var(--font-display);
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 0.85em;
-}
-
-/* Desabilitar explicitamente todos os hovers */
-.ronin .action-buttons-grid button:hover {
-  background-color: var(--color-red) !important;
-  color: var(--color-black) !important;
-}
-
-/* Nova organização da seção de Honor */
-.honor-section {
-  padding: 2px;
-  background-color: var(--color-black);
-  margin-top: 5px;
-}
-
-.honor-layout {
-  display: flex;
-  align-items: center;
-}
-
-.honor-label {
-  color: var(--color-white);
-  font-weight: bold;
-  font-size: 1.2em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-right: 10px;
-  width: 60px;
-  text-align: right;
-}
-
-.honor-track {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 2px;
-  flex: 1;
-}
-
-/* Estilos para bolinhas de Honor */
-.ronin .honor-section .honor-track label.honor-dot {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 16px;
-  height: 16px;
-  margin: 1px auto;
-  background-color: var(--color-black);
-  border: 1px solid var(--color-white);
-  border-radius: 50%;
-  color: var(--color-white);
-  font-size: 0.7em;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  line-height: 1;
-  padding: 0;
-}
-
-.ronin .honor-section .honor-track label.honor-dot.dishonor {
-  border-color: var(--color-red);
-  color: var(--color-red);
-}
-
-/* Esconder os inputs de rádio */
-input[type="radio"][name="system.resources.honor.value"] {
-  display: none;
-}
-
-/* Estilo para bolinhas selecionadas */
-.ronin .honor-section .honor-track input[type="radio"][name="system.resources.honor.value"]:checked + label.honor-dot {
-  background-color: var(--color-white);
-  color: var(--color-black);
-}
-
-.ronin .honor-section .honor-track input[type="radio"][name="system.resources.honor.value"]:checked + label.honor-dot.dishonor {
-  background-color: var(--color-red);
-  color: var(--color-black);
-}
-
+/* Seção de informações básicas */
 .basic-info {
   display: flex;
   flex-direction: column;
@@ -202,7 +81,6 @@ input[type="radio"][name="system.resources.honor.value"] {
 
 .character-name {
   font-size: 1.6em;
-  color: var(--color-white);
   font-weight: bold;
   margin: 0 0 2px 0;
   text-align: center;
@@ -210,8 +88,6 @@ input[type="radio"][name="system.resources.honor.value"] {
 
 .character-name input {
   width: 100%;
-  background: var(--color-white);
-  color: var(--color-black);
   text-align: center;
   font-weight: bold;
 }
@@ -224,29 +100,26 @@ input[type="radio"][name="system.resources.honor.value"] {
 .character-class input {
   width: 100%;
   margin-bottom: 2px;
-  background: var(--color-white);
-  color: var(--color-black);
   text-align: center;
 }
 
+/* Grid de recursos */
 .resources-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 5px;
-  margin-top: 5px;
+  gap: 0px; /* Altera a distância entre os elementos da grid de recursos */
+  margin-top: 1px;
   flex-grow: 1;
 }
 
 .resource {
   display: flex;
   align-items: center;
-  background: var(--color-black);
   padding: 2px;
 }
 
 .resource label {
-  color: var(--color-white);
   font-size: 1.1em;
   font-weight: bold;
   width: 70px;
@@ -267,40 +140,93 @@ input[type="radio"][name="system.resources.honor.value"] {
 }
 
 .separator {
-  color: var(--color-white);
   margin: 0 2px;
 }
 
-.action-buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 5px;
+/* Seção de Honor */
+.honor-section {
+  padding: 2px;
   margin-top: 5px;
 }
 
-.ronin .action-buttons button {
-  background-color: var(--color-red);
-  color: var(--color-black);
-  border: none;
-  padding: 3px 5px;
-  font-family: var(--font-display);
-  cursor: pointer;
+.honor-layout {
+  display: flex;
+  align-items: center;
+}
+
+.honor-label {
   font-weight: bold;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 10px;
+  width: 60px;
+  text-align: right;
+}
+
+.honor-track {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 2px;
   flex: 1;
 }
 
-/* Desabilitar explicitamente todos os hovers */
-.ronin .action-buttons button:hover {
-  background-color: var(--color-red) !important;
-  color: var(--color-black) !important;
+/* Pontos de Honor */
+.honor-dot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  margin: 1px auto;
+  border: 1px solid;
+  border-radius: 50%;
+  font-size: 0.7em;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  background-color: transparent; /* Fundo transparente por padrão */
+  color: var(--color-black); /* Texto preto para honor normal */ /* Alterar para --color-white quando adicionar as cores */
+  border-color: var(--color-black); /* Borda preta para honor normal */ /* Alterar para --color-white quando adicionar as cores */
 }
 
+.honor-dot.dishonor {
+  color: var(--color-red); /* Texto vermelho para dishonor */
+  border-color: var(--color-red); /* Borda vermelha para dishonor */
+}
+
+/* Esconder os inputs de rádio */
+input[type="radio"][name="system.resources.honor.value"] {
+  display: none;
+}
+
+/* Estilos para bolinhas selecionadas */
+input[type="radio"][name="system.resources.honor.value"]:checked + label.honor-dot {
+  background-color: var(--color-black); /* Fundo branco quando selecionado */
+  color: var(--color-white); /* Texto preto quando selecionado */
+}
+
+input[type="radio"][name="system.resources.honor.value"]:checked + label.honor-dot.dishonor {
+  background-color: var(--color-red); /* Fundo vermelho quando dishonor selecionado */
+  color: var(--color-white); /* Texto branco quando dishonor selecionado */
+}
+
+/* Esconder os inputs de rádio */
+input[type="radio"][name="system.resources.honor.value"] {
+  display: none;
+}
+
+/* Habilidades */
 .abilities-column {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
   align-items: flex-end;
+  gap: 0px; /* espaço entre os atributos */
 }
 
 .ability {
@@ -308,7 +234,6 @@ input[type="radio"][name="system.resources.honor.value"] {
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  background: var(--color-black);
   padding: 2px;
   height: 40px;
   width: 100%;
@@ -316,7 +241,6 @@ input[type="radio"][name="system.resources.honor.value"] {
 }
 
 .ability label {
-  color: var(--color-white);
   font-size: 1.7em;
   font-weight: bold;
   margin-right: 5px;
@@ -330,111 +254,10 @@ input[type="radio"][name="system.resources.honor.value"] {
   font-size: 1.7em;
 }
 
-/* ==== NAVEGAÇÃO DE ABAS ==== */
-/* Container para as abas */
-.tabs-container {
-  flex: 0 0 auto;
-  margin-top: 30px;
-  position: relative;
-  z-index: 20;
-  background-color: var(--color-black);
-}
-
-/* Navegação de abas - REMOVIDA QUALQUER BORDA */
-.ronin .sheet-tabs {
-  flex: 0 0 auto;
-  margin: 0;
-  background-color: var(--color-black);
-  display: flex;
-  justify-content: space-between;
-  border: none !important;
-  /* Remover linha branca acima e abaixo */
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* Itens das abas individuais */
-.ronin .sheet-tabs .item {
-  flex: 1;
-  font-family: var(--font-display);
-  padding: 5px 15px;
-  color: var(--color-white);
-  text-align: center;
-  font-weight: bold;
-  background-color: var(--color-black);
-  border: none !important;
-  /* Remover linha branca acima e abaixo */
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* Desabilitar explicitamente o hover nas abas */
-.ronin .sheet-tabs .item:hover {
-  background-color: var(--color-black) !important;
-  color: var(--color-white) !important;
-  /* Garantir que não há efeitos de hover */
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* Aba ativa */
-.ronin .sheet-tabs .item.active {
-  background-color: var(--color-red);
-  color: var(--color-black);
-  font-weight: bold;
-  /* Garantir que não há bordas ou outros efeitos */
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* ==== CORPO DA FICHA (CONTEÚDO DAS ABAS) ==== */
-/* Container principal do corpo */
-.sheet-body {
-  flex: 1 1 auto;
-  background-color: var(--color-black);
-  margin-top: 0;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  z-index: 10;
-  overflow: hidden;
-  min-height: 150px;
-  /* Remover linhas brancas ou bordas */
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* Estilos para as abas individuais */
-.sheet-body .tab {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 10px;
-  height: 100%;
-  background-color: var(--color-black);
-  color: var(--color-white);
-}
-
-/* Ajustes específicos para cada tipo de aba */
-.tab-background, 
-.tab-equipment, 
-.tab-tatakai, 
-.tab-features {
-  height: 100%;
-  min-height: 100%;
-  padding-bottom: 20px;
-  background-color: var(--color-black);
-  color: var(--color-white);
-}
-
-/* Tab de Background */
+/* Editor de texto */
 .editor-wrapper {
   height: auto;
   min-height: 200px;
-  background: var(--color-white);
   padding: 5px;
 }
 
@@ -442,24 +265,19 @@ input[type="radio"][name="system.resources.honor.value"] {
   width: 100%;
   height: 100%;
   min-height: 200px;
-  background-color: var(--color-white);
   padding: 10px;
-  color: var(--color-black);
   border: none;
-  font-family: var(--font-primary);
   overflow-y: auto;
 }
 
-/* Tab de Equipment */
+/* Inventário */
 .inventory-categories {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 5px;
 }
 
-/* CATEGORIAS DE INVENTÁRIO */
 .inventory-category {
-  background: var(--color-white);
   padding: 5px;
   margin-bottom: 5px;
   border-radius: 3px;
@@ -471,37 +289,21 @@ input[type="radio"][name="system.resources.honor.value"] {
   align-items: center;
   padding-bottom: 3px;
   margin-bottom: 3px;
-  color: var(--color-black);
-  border-bottom: 1px solid var(--color-gray);
-}
-
-.category-header h2 {
-  color: var(--color-black);
+  border-bottom: 1px solid;
 }
 
 .item-create {
-  color: var(--color-black);
   margin-left: auto;
-}
-
-/* Desabilitar expliciatamente o hover */
-.item-create:hover {
-  color: var(--color-black) !important;
-  text-shadow: none !important;
 }
 
 .item-list {
   list-style: none;
   margin: 0;
   padding: 0;
-  max-height: none;
 }
 
-/* ITENS DE INVENTÁRIO */
 .item {
   padding: 3px 0;
-  color: var(--color-black);
-  background: var(--color-white);
 }
 
 .item-header {
@@ -523,22 +325,11 @@ input[type="radio"][name="system.resources.honor.value"] {
 
 .item-name {
   flex: 1;
-  color: var(--color-black);
 }
 
 .item-controls {
   display: flex;
   gap: 5px;
-}
-
-.item-edit, .item-delete {
-  color: var(--color-black);
-}
-
-/* Desabilitar expliciatamente o hover */
-.item-edit:hover, .item-delete:hover {
-  color: var(--color-black) !important;
-  text-shadow: none !important;
 }
 
 .item-details {
@@ -548,10 +339,9 @@ input[type="radio"][name="system.resources.honor.value"] {
   margin-top: 2px;
   padding-left: 29px;
   font-size: 0.9em;
-  color: var(--color-black);
 }
 
-/* Tab de Tatakai */
+/* Combate */
 .combat-section {
   margin-bottom: 10px;
 }
@@ -563,33 +353,10 @@ input[type="radio"][name="system.resources.honor.value"] {
   margin-bottom: 10px;
 }
 
-.ronin .initiative-buttons button {
-  background-color: var(--color-red);
-  color: var(--color-black);
-  border: none;
-  padding: 5px 15px;
-  font-family: var(--font-display);
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* Desabilitar expliciatamente o hover */
-.ronin .initiative-buttons button:hover {
-  background-color: var(--color-red) !important;
-  color: var(--color-black) !important;
-}
-
-/* ÁREAS DE EQUIPAMENTO */
 .equipped-weapons, .equipped-armor {
-  background: var(--color-white);
   padding: 5px;
   margin-bottom: 5px;
-  color: var(--color-black);
   border-radius: 3px;
-}
-
-.equipped-weapons h2, .equipped-armor h2 {
-  color: var(--color-black);
 }
 
 .equipped-list {
@@ -602,12 +369,10 @@ input[type="radio"][name="system.resources.honor.value"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--color-white);
   padding: 5px;
   width: 90px;
   text-align: center;
-  border: 1px solid var(--color-gray);
-  color: var(--color-black);
+  border: 1px solid;
   border-radius: 3px;
 }
 
@@ -623,30 +388,10 @@ input[type="radio"][name="system.resources.honor.value"] {
   gap: 10px;
 }
 
-.ronin .combat-actions button {
-  background-color: var(--color-red);
-  color: var(--color-black);
-  border: none;
-  padding: 5px 15px;
-  font-family: var(--font-display);
-  font-size: 1.2em;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* Desabilitar expliciatamente o hover */
-.ronin .combat-actions button:hover {
-  background-color: var(--color-red) !important;
-  color: var(--color-black) !important;
-}
-
-/* Tab de Features */
-/* SEÇÕES DE FEATURES */
+/* Features */
 .features-section, .texts-section {
-  background: var(--color-white);
   padding: 5px;
   margin-bottom: 5px;
-  color: var(--color-black);
   border-radius: 3px;
 }
 
@@ -656,11 +401,7 @@ input[type="radio"][name="system.resources.honor.value"] {
   align-items: center;
   padding-bottom: 3px;
   margin-bottom: 5px;
-  border-bottom: 1px solid var(--color-gray);
-}
-
-.section-header span {
-  color: var(--color-black);
+  border-bottom: 1px solid;
 }
 
 .feature-list {
@@ -672,9 +413,7 @@ input[type="radio"][name="system.resources.honor.value"] {
 .feature-item {
   margin-bottom: 5px;
   padding: 3px;
-  background: var(--color-white);
-  color: var(--color-black);
-  border: 1px solid var(--color-gray);
+  border: 1px solid;
   border-radius: 3px;
 }
 
@@ -682,11 +421,9 @@ input[type="radio"][name="system.resources.honor.value"] {
   margin-top: 3px;
   padding: 3px;
   font-size: 0.9em;
-  background: var(--color-white);
-  color: var(--color-black);
 }
 
-/* Ajuste para telas menores */
+/* Responsividade */
 @media (max-height: 700px) {
   .header-grid {
     height: 180px;
@@ -697,77 +434,35 @@ input[type="radio"][name="system.resources.honor.value"] {
   }
 }
 
-/* Remover sobrescritas globais do Foundry */
-/* Apenas manter as essenciais para o nosso sistema */
-.window-app .window-content {
-  background-color: var(--color-black);
+/* Reset das configurações problemáticas de z-index e posição */
+.sheet-header, .tabs-container, .sheet-body, .sheet-tabs, .sheet-tabs .item {
+  z-index: auto;
+  position: static;
 }
 
-/* Desabilitar todos os efeitos de hover em qualquer lugar */
-a:hover, button:hover, .clickable:hover {
-  text-shadow: none !important;
-  box-shadow: none !important;
+/* Garantir que o container de abas esteja abaixo do cabeçalho */
+.tabs-container {
+  flex: 0 0 auto;
+  margin-top: 2px; /* Espaço adicional antes das abas (alterar isto mexe na distância entre as abas e o cabeçalho da ficha */
+  margin-bottom: 10px; /* Espaço adicional após as abas */
+  padding-top: 5px;
 }
 
-/* Regras específicas para remover todos os efeitos hover e manter as cores corretas */
-
-/* Regra para abas inativas (NÃO selecionadas) */
-.ronin .sheet-tabs .item {
-  background-color: var(--color-black) !important;
-  color: var(--color-white) !important;
+/* Corpo da ficha com scroll próprio */
+.sheet-body {
+  flex: 1 1 auto;
+  overflow: hidden;
 }
 
-/* Regra para abas inativas ao passar o mouse - MANTER TEXTO BRANCO */
-.ronin .sheet-tabs .item:hover {
-  background-color: var(--color-black) !important;
-  color: var(--color-white) !important;
-  text-shadow: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  outline: none !important;
+/* Garantir que as abas sejam clicáveis */
+.sheet-tabs .item {
+  cursor: pointer;
+  pointer-events: auto;
 }
 
-/* Regra para abas ativas (selecionadas) */
-.ronin .sheet-tabs .item.active {
-  background-color: var(--color-red) !important;
-  color: var(--color-black) !important;
-}
-
-/* Regra para abas ativas ao passar o mouse - MANTER TEXTO PRETO */
-.ronin .sheet-tabs .item.active:hover {
-  background-color: var(--color-red) !important;
-  color: var(--color-black) !important;
-  text-shadow: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  outline: none !important;
-}
-
-/* Desabilitar transições para evitar efeitos indesejados */
-.ronin .sheet-tabs .item,
-.ronin .sheet-tabs .item.active,
-.ronin button,
-.ronin a,
-.ronin .clickable {
-  transition: none !important;
-}
-
-/* Regras para botões e outros elementos clicáveis */
-.ronin button:hover,
-.ronin a:hover,
-.ronin .clickable:hover,
-.ronin .item-create:hover,
-.ronin .item-edit:hover, 
-.ronin .item-delete:hover {
-  text-shadow: none !important;
-  box-shadow: none !important;
-}
-
-/* Manter os botões vermelhos ao passar o mouse */
-.ronin .action-buttons-grid button:hover,
-.ronin .action-buttons button:hover,
-.ronin .initiative-buttons button:hover,
-.ronin .combat-actions button:hover {
-  background-color: var(--color-red) !important;
-  color: var(--color-black) !important;
+/* Configurar rolagem apenas dentro de cada aba */
+.sheet-body .tab {
+  overflow-y: auto;
+  height: 100%;
+  padding: 10px;
 }
