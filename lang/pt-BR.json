@@ -2,7 +2,7 @@
   "RONIN": {
     "Abilities": {
       "Vigor": "Vigor",
-      "Swiftness": "Destreza",
+      "Swiftness": "Rapidez",
       "Spirit": "Espírito",
       "Resilience": "Resiliência"
     },
@@ -15,7 +15,7 @@
     },
     "Tabs": {
       "Background": "Antecedentes",
-      "Equipment": "Equipamento",
+      "Equipment": "Equipamentos",
       "Tatakai": "Tatakai",
       "Features": "Características"
     },
@@ -42,7 +42,7 @@
       "Quantity": "Quantidade"
     },
     "Features": {
-      "Feats": "Talentos",
+      "Feats": "Características",
       "Texts": "Textos",
       "TextType": "Tipo de Texto",
       "Prepared": "Preparado"
@@ -52,7 +52,7 @@
       "Armor": "Armadura",
       "Gear": "Equipamento",
       "Misc": "Diversos",
-      "Feat": "Talento",
+      "Feat": "Característica",
       "Text": "Texto"
     }
   }
