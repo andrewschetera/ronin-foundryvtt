@@ -10,10 +10,10 @@
           </div>
           <!-- Botões de Ação em grid 2x2 -->
           <div class="action-buttons-grid">
-            <button class="button-broken" type="button">BROKEN</button>
-            <button class="button-rest" type="button">REST</button>
-            <button class="button-seppuku" type="button">SEPPUKU</button>
-            <button class="button-get-better" type="button">GET BETTER</button>
+            <button class="button-broken" type="button">{{localize "RONIN.Actions.Broken"}}</button>
+            <button class="button-rest" type="button">{{localize "RONIN.Actions.Rest"}}</button>
+            <button class="button-seppuku" type="button">{{localize "RONIN.Actions.Seppuku"}}</button>
+            <button class="button-get-better" type="button">{{localize "RONIN.Actions.GetBetter"}}</button>
           </div>
         </div>
         
@@ -30,7 +30,7 @@
           <div class="resources-grid">
             <!-- HP -->
             <div class="resource hp">
-              <label>HP:</label>
+              <label>{{localize "RONIN.Resources.HP"}}:</label>
               <div class="resource-value">
                 <input name="system.resources.hp.value" type="number" value="{{system.resources.hp.value}}" min="0"/>
                 <span class="separator">/</span>
@@ -40,19 +40,19 @@
             
             <!-- Texts -->
             <div class="resource texts">
-              <label>Texts:</label>
+              <label>{{localize "RONIN.Resources.Texts"}}:</label>
               <input name="system.resources.texts.value" type="number" value="{{system.resources.texts.value}}" min="0"/>
             </div>
             
             <!-- Virtues -->
             <div class="resource virtues">
-              <label>Virtues:</label>
+              <label>{{localize "RONIN.Resources.Virtues"}}:</label>
               <input name="system.resources.virtues.value" type="number" value="{{system.resources.virtues.value}}" min="0"/>
             </div>
             
             <!-- Ryo -->
             <div class="resource ryo">
-              <label>Ryo:</label>
+              <label>{{localize "RONIN.Resources.Ryo"}}:</label>
               <input name="system.resources.ryo.value" type="number" value="{{system.resources.ryo.value}}" min="0"/>
             </div>
           </div>
@@ -60,7 +60,7 @@
           <!-- Honor abaixo dos recursos -->
           <div class="honor-section">
             <div class="honor-layout">
-              <label class="honor-label">HONOR</label>
+              <label class="honor-label">{{localize "RONIN.Resources.Honor"}}</label>
               <div class="honor-track">
                 {{#times 20}}
                   <input type="radio" name="system.resources.honor.value" id="honor-{{this}}" value="{{this}}" {{#if (eq ../system.resources.honor.value this)}}checked{{/if}} data-select-single="true">
@@ -74,35 +74,37 @@
         <!-- Abilities (reduzida para 0.8fr) -->
         <div class="abilities-column">
           <div class="ability vigor">
-            <label>VIG</label>
+            <label>{{localize "RONIN.Abilities.Vigor"}}</label>
             <input name="system.abilities.vigor.value" type="text" value="{{formatSign system.abilities.vigor.value}}" data-dtype="Number"/>
           </div>
           
           <div class="ability swiftness">
-            <label>SWI</label>
+            <label>{{localize "RONIN.Abilities.Swiftness"}}</label>
             <input name="system.abilities.swiftness.value" type="text" value="{{formatSign system.abilities.swiftness.value}}" data-dtype="Number"/>
           </div>
           
           <div class="ability spirit">
-            <label>SPI</label>
+            <label>{{localize "RONIN.Abilities.Spirit"}}</label>
             <input name="system.abilities.spirit.value" type="text" value="{{formatSign system.abilities.spirit.value}}" data-dtype="Number"/>
           </div>
           
           <div class="ability resilience">
-            <label>RES</label>
+            <label>{{localize "RONIN.Abilities.Resilience"}}</label>
             <input name="system.abilities.resilience.value" type="text" value="{{formatSign system.abilities.resilience.value}}" data-dtype="Number"/>
           </div>
         </div>
       </div>
     </header>
     
-    <!-- Navegação de Abas -->
-    <nav class="sheet-tabs tabs" data-group="primary">
-      <a class="item" data-tab="background">Background</a>
-      <a class="item" data-tab="equipment">Equipment</a>
-      <a class="item" data-tab="tatakai">Tatakai</a>
-      <a class="item" data-tab="features">Features</a>
-    </nav>
+    <!-- Navegação de Abas - Nova estrutura com container -->
+    <div class="tabs-container">
+      <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="background">{{localize "RONIN.Tabs.Background"}}</a>
+        <a class="item" data-tab="equipment">{{localize "RONIN.Tabs.Equipment"}}</a>
+        <a class="item" data-tab="tatakai">{{localize "RONIN.Tabs.Tatakai"}}</a>
+        <a class="item" data-tab="features">{{localize "RONIN.Tabs.Features"}}</a>
+      </nav>
+    </div>
     
     <!-- Corpo da Ficha -->
     <section class="sheet-body">
@@ -122,7 +124,7 @@
             <!-- Weapons -->
             <div class="inventory-category">
               <h2 class="category-header">
-                <span>Weapons</span>
+                <span>{{localize "RONIN.Equipment.Weapons"}}</span>
                 <a class="item-create" title="Create Weapon" data-type="weapon">
                   <i class="fas fa-plus"></i> Add
                 </a>
@@ -143,7 +145,7 @@
                         <div class="item-damage">{{item.system.damage}}</div>
                         <div class="item-equipped">
                           <input type="checkbox" {{#if item.system.equipped}}checked{{/if}} data-item-id="{{item._id}}" data-equipped>
-                          <label>Equipped</label>
+                          <label>{{localize "RONIN.Equipment.Equipped"}}</label>
                         </div>
                       </div>
                     </li>
@@ -155,7 +157,7 @@
             <!-- Armor -->
             <div class="inventory-category">
               <h2 class="category-header">
-                <span>Armor</span>
+                <span>{{localize "RONIN.Equipment.Armor"}}</span>
                 <a class="item-create" title="Create Armor" data-type="armor">
                   <i class="fas fa-plus"></i> Add
                 </a>
@@ -174,10 +176,10 @@
                       </div>
                       <div class="item-details">
                         <div class="item-protection">-{{item.system.protection}}</div>
-                        <div class="item-tier">Tier {{item.system.tier}}</div>
+                        <div class="item-tier">{{localize "RONIN.Equipment.Tier"}} {{item.system.tier}}</div>
                         <div class="item-equipped">
                           <input type="checkbox" {{#if item.system.equipped}}checked{{/if}} data-item-id="{{item._id}}" data-equipped>
-                          <label>Equipped</label>
+                          <label>{{localize "RONIN.Equipment.Equipped"}}</label>
                         </div>
                       </div>
                     </li>
@@ -189,7 +191,7 @@
             <!-- Gear -->
             <div class="inventory-category">
               <h2 class="category-header">
-                <span>Gear</span>
+                <span>{{localize "RONIN.Equipment.Gear"}}</span>
                 <a class="item-create" title="Create Gear" data-type="gear">
                   <i class="fas fa-plus"></i> Add
                 </a>
@@ -208,7 +210,7 @@
                       </div>
                       <div class="item-details">
                         <div class="item-uses">
-                          <span>Uses: </span>
+                          <span>{{localize "RONIN.Equipment.Uses"}}: </span>
                           <input type="number" value="{{item.system.uses.value}}" min="0" max="{{item.system.uses.max}}" data-item-id="{{item._id}}" data-field="system.uses.value">
                           <span>/</span>
                           <span>{{item.system.uses.max}}</span>
@@ -223,7 +225,7 @@
             <!-- Misc -->
             <div class="inventory-category">
               <h2 class="category-header">
-                <span>Misc</span>
+                <span>{{localize "RONIN.Equipment.Misc"}}</span>
                 <a class="item-create" title="Create Misc Item" data-type="misc">
                   <i class="fas fa-plus"></i> Add
                 </a>
@@ -242,7 +244,7 @@
                       </div>
                       <div class="item-details">
                         <div class="item-quantity">
-                          <span>Qty: </span>
+                          <span>{{localize "RONIN.Equipment.Quantity"}}: </span>
                           <input type="number" value="{{item.system.quantity}}" min="1" data-item-id="{{item._id}}" data-field="system.quantity">
                         </div>
                       </div>
@@ -261,13 +263,13 @@
           <div class="combat-section">
             <!-- Botões de Iniciativa -->
             <div class="initiative-buttons">
-              <button class="party-initiative" type="button">PARTY</button>
-              <button class="individual-initiative" type="button">INDIVIDUAL</button>
+              <button class="party-initiative" type="button">{{localize "RONIN.Actions.Party"}}</button>
+              <button class="individual-initiative" type="button">{{localize "RONIN.Actions.Individual"}}</button>
             </div>
             
             <!-- Armas equipadas -->
             <div class="equipped-weapons">
-              <h2>Equipped Weapons</h2>
+              <h2>{{localize "RONIN.Equipment.Weapons"}} {{localize "RONIN.Equipment.Equipped"}}</h2>
               <div class="equipped-list">
                 {{#each items as |item id|}}
                   {{#if (and (eq item.type "weapon") item.system.equipped)}}
@@ -283,7 +285,7 @@
             
             <!-- Armadura equipada -->
             <div class="equipped-armor">
-              <h2>Equipped Armor</h2>
+              <h2>{{localize "RONIN.Equipment.Armor"}} {{localize "RONIN.Equipment.Equipped"}}</h2>
               <div class="equipped-list">
                 {{#each items as |item id|}}
                   {{#if (and (eq item.type "armor") item.system.equipped)}}
@@ -291,7 +293,7 @@
                       <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
                       <div class="item-name">{{item.name}}</div>
                       <div class="item-protection">-{{item.system.protection}}</div>
-                      <div class="item-tier">Tier {{item.system.tier}}</div>
+                      <div class="item-tier">{{localize "RONIN.Equipment.Tier"}} {{item.system.tier}}</div>
                     </div>
                   {{/if}}
                 {{/each}}
@@ -301,8 +303,8 @@
           
           <!-- Botões de ações de combate -->
           <div class="combat-actions">
-            <button class="defend-action" type="button">DEFEND</button>
-            <button class="parry-action" type="button">PARRY</button>
+            <button class="defend-action" type="button">{{localize "RONIN.Actions.Defend"}}</button>
+            <button class="parry-action" type="button">{{localize "RONIN.Actions.Parry"}}</button>
           </div>
         </div>
       </div>
@@ -313,7 +315,7 @@
           <!-- Feats -->
           <div class="features-section">
             <h2 class="section-header">
-              <span>Feats</span>
+              <span>{{localize "RONIN.Features.Feats"}}</span>
               <a class="item-create" title="Create Feat" data-type="feat">
                 <i class="fas fa-plus"></i> Add
               </a>
@@ -340,7 +342,7 @@
           <!-- Texts -->
           <div class="texts-section">
             <h2 class="section-header">
-              <span>Texts</span>
+              <span>{{localize "RONIN.Features.Texts"}}</span>
               <a class="item-create" title="Create Text" data-type="text">
                 <i class="fas fa-plus"></i> Add
               </a>
@@ -358,10 +360,10 @@
                       </div>
                     </div>
                     <div class="item-details">
-                      <div class="text-type">{{item.system.textType}}</div>
+                      <div class="text-type">{{localize "RONIN.Features.TextType"}}: {{item.system.textType}}</div>
                       <div class="text-prepared">
                         <input type="checkbox" {{#if item.system.prepared}}checked{{/if}} data-item-id="{{item._id}}" data-prepared>
-                        <label>Prepared</label>
+                        <label>{{localize "RONIN.Features.Prepared"}}</label>
                       </div>
                     </div>
                     <div class="item-description">{{{item.system.description}}}</div>
