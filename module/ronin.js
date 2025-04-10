@@ -47,7 +47,13 @@ Hooks.once('init', async function() {
   });
 });
 
-// Hooks adicionais podem ser adicionados aqui no futuro
+// Hook para ajustar rolagem depois que o Foundry terminar de carregar
+Hooks.once('ready', function() {
+  console.log('ronin | Aplicando ajustes de rolagem');
+  
+  // Adicionar classes específicas para melhorar o comportamento de rolagem
+  document.body.classList.add('ronin-system-loaded');
+});
 
 /**
  * Estende a classe base de Actor para implementar funcionalidades específicas do sistema.
@@ -90,7 +96,8 @@ class RoninActorSheet extends ActorSheet {
       tabs: [
         {navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "background"}
       ],
-      scrollY: [".sheet-body"]
+      scrollY: [".tab"], // Configurar rolagem apenas para as abas
+      resizable: true
     });
   }
   
@@ -105,6 +112,62 @@ class RoninActorSheet extends ActorSheet {
     context.items = actorData.items;
     
     return context;
+  }
+  
+  /**
+   * Sobrescreve o método _render para garantir que o layout esteja correto após a renderização
+   */
+  async _render(force = false, options = {}) {
+    await super._render(force, options);
+    
+    // Adicionar um pequeno atraso para garantir que o DOM esteja pronto
+    setTimeout(() => {
+      this._fixScrollingLayout();
+    }, 100);
+  }
+  
+  /**
+   * Método para corrigir problemas de layout e rolagem
+   * @private
+   */
+  _fixScrollingLayout() {
+    if (!this.element) return;
+    
+    // Certifique-se de que a rolagem esteja apenas nas abas
+    const tabs = this.element.find('.tab');
+    tabs.each(function() {
+      this.style.overflowY = 'auto';
+    });
+    
+    // Remover qualquer overflow desnecessário
+    this.element.find('.window-content').css('overflow', 'hidden');
+    this.element.find('.sheet-body').css('overflow', 'hidden');
+    this.element.find('.ronin-sheet').css('overflow', 'hidden');
+    
+    // Calcular e ajustar a altura disponível para o conteúdo das abas
+    const header = this.element.find('.sheet-header');
+    const tabsNav = this.element.find('.tabs-container');
+    const sheetBody = this.element.find('.sheet-body');
+    
+    if (header.length && tabsNav.length && sheetBody.length) {
+      const headerHeight = header.outerHeight(true);
+      const tabsNavHeight = tabsNav.outerHeight(true);
+      const windowHeight = this.element.find('.window-content').height();
+      
+      // Deixar um pouco de margem para evitar problemas
+      const availableHeight = windowHeight - headerHeight - tabsNavHeight - 10;
+      sheetBody.css('height', Math.max(150, availableHeight) + 'px');
+    }
+  }
+  
+  /**
+   * Aplicar correções de layout quando a janela é redimensionada
+   * @param {Event} event O evento de redimensionamento
+   * @private
+   */
+  _onResize(event) {
+    super._onResize(event);
+    this._fixScrollingLayout();
   }
   
   activateListeners(html) {
