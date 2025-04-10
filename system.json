@@ -4,7 +4,7 @@
   "description": "Sistema de jogo para o RPG RONIN baseado em MÖRK BORG.",
   "version": "0.1.0",
   "compatibility": {
-    "minimun": "12.0.0",
+    "minimum": "12.0.0",
     "verified": "12,331"
   },
   "authors": [
@@ -15,7 +15,6 @@
   "scripts": [
     "module/ronin.js"
   ],
-  "esmodules": [],
   "styles": [
     "css/ronin.css"
   ],
