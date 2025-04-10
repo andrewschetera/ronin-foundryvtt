@@ -27,8 +27,8 @@
         },
         "resources": {
           "hp": {
-            "value": 2,
-            "max": 2
+            "value": 0,
+            "max": 0
           },
           "texts": {
             "value": 0
