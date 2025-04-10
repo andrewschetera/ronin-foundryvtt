@@ -2,9 +2,13 @@
   "RONIN": {
     "Abilities": {
       "Vigor": "Vigor",
+      "AbbrevVigor": "VIG",
       "Swiftness": "Swiftness",
+      "AbbrevSwiftness": "SWI",
       "Spirit": "Spirit",
-      "Resilience": "Resilience"
+      "AbbrevSpirit": "SPI",
+      "Resilience": "Resilience",
+      "AbbrevResilience": "RES"
     },
     "Resources": {
       "HP": "HP",
