@@ -32,8 +32,10 @@
       "path": "lang/en.json"
     }
   ],
-  "grid.distance": 5,
-  "grid.units": "ft",
+  "grid": {
+    "distance": 5,
+    "units": "ft"
+  },
   "primaryTokenAttribute": "resources.hp",
   "secondaryTokenAttribute": null,
   "initiative": "1d6",
