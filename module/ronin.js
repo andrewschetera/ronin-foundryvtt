@@ -97,7 +97,7 @@ class RoninActorSheet extends ActorSheet {
         {navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "background"}
       ],
       scrollY: [".tab"], // Configurar rolagem apenas para as abas
-      resizable: true
+      resizable: false // Impedir que o tamanho da ficha seja alterado
     });
   }
   
@@ -127,36 +127,24 @@ class RoninActorSheet extends ActorSheet {
   }
   
   /**
-   * Método para corrigir problemas de layout e rolagem
+   * Método simplificado para corrigir problemas de layout
    * @private
    */
   _fixScrollingLayout() {
     if (!this.element) return;
     
-    // Certifique-se de que a rolagem esteja apenas nas abas
-    const tabs = this.element.find('.tab');
-    tabs.each(function() {
-      this.style.overflowY = 'auto';
-    });
+    // Configurar rolagem apenas para as abas
+    this.element.find('.tab').css('overflow-y', 'auto');
     
-    // Remover qualquer overflow desnecessário
-    this.element.find('.window-content').css('overflow', 'hidden');
-    this.element.find('.sheet-body').css('overflow', 'hidden');
-    this.element.find('.ronin-sheet').css('overflow', 'hidden');
+    // Calcular altura disponível de forma simples
+    const windowHeight = this.element.find('.window-content').height() || 0;
+    const headerHeight = this.element.find('.sheet-header').outerHeight(true) || 0;
+    const tabsHeight = this.element.find('.tabs-container').outerHeight(true) || 0;
     
-    // Calcular e ajustar a altura disponível para o conteúdo das abas
-    const header = this.element.find('.sheet-header');
-    const tabsNav = this.element.find('.tabs-container');
-    const sheetBody = this.element.find('.sheet-body');
-    
-    if (header.length && tabsNav.length && sheetBody.length) {
-      const headerHeight = header.outerHeight(true);
-      const tabsNavHeight = tabsNav.outerHeight(true);
-      const windowHeight = this.element.find('.window-content').height();
-      
-      // Deixar um pouco de margem para evitar problemas
-      const availableHeight = windowHeight - headerHeight - tabsNavHeight - 10;
-      sheetBody.css('height', Math.max(150, availableHeight) + 'px');
+    // Calcular altura para o corpo (deixando margem de segurança)
+    if (windowHeight > 0) {
+      const bodyHeight = Math.max(150, windowHeight - headerHeight - tabsHeight - 20);
+      this.element.find('.sheet-body').height(bodyHeight);
     }
   }
   
