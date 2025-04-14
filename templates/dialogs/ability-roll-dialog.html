@@ -1,0 +1,26 @@
+<form>
+  <div class="form-group">
+    <label>{{localize "RONIN.Abilities.Base"}}:</label>
+    <div class="form-fields">
+      <input type="text" name="abilityValue" value="{{abilityValue}}" disabled />
+    </div>
+  </div>
+  <div class="form-group">
+    <label>{{localize "RONIN.Rolls.Modifier"}}:</label>
+    <div class="form-fields">
+      <input type="number" name="modifier" value="0" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label>{{localize "RONIN.Rolls.DR"}}:</label>
+    <div class="form-fields">
+      <input type="number" name="difficultyRating" value="10" min="0" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label>{{localize "RONIN.Rolls.Description"}}:</label>
+    <div class="form-fields">
+      <input type="text" name="description" value="" placeholder="{{localize 'RONIN.Rolls.OptionalDescription'}}" />
+    </div>
+  </div>
+</form>
