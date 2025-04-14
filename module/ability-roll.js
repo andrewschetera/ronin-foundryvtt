@@ -27,11 +27,15 @@ window.RONIN.AbilityRoll = {
     // Obtém o nome localizado da habilidade
     let abilityName = game.i18n.localize(`RONIN.Abilities.${abilityKey.charAt(0).toUpperCase() + abilityKey.slice(1)}`);
     
+    // Obtém a abreviação localizada da habilidade
+    let abilityAbbrev = game.i18n.localize(`RONIN.Abilities.Abbrev${abilityKey.charAt(0).toUpperCase() + abilityKey.slice(1)}`);
+    
     // Cria o título do diálogo
     const dialogTitle = game.i18n.format("RONIN.Rolls.AbilityCheck", {ability: abilityName});
     
     // Configura os dados para o template
     const templateData = {
+      abilityName: abilityName,
       abilityValue: abilityData.value
     };
     
@@ -46,7 +50,7 @@ window.RONIN.AbilityRoll = {
         roll: {
           icon: '<i class="fas fa-dice-d20"></i>',
           label: game.i18n.localize("RONIN.Rolls.Roll"),
-          callback: html => this._onRollAbility(html, abilityKey, abilityName, actor)
+          callback: html => this._onRollAbility(html, abilityKey, abilityName, abilityAbbrev, actor)
         },
         cancel: {
           icon: '<i class="fas fa-times"></i>',
@@ -64,17 +68,17 @@ window.RONIN.AbilityRoll = {
    * @param {jQuery} html - Conteúdo HTML do diálogo
    * @param {string} abilityKey - Chave da habilidade
    * @param {string} abilityName - Nome localizado da habilidade
+   * @param {string} abilityAbbrev - Abreviação localizada da habilidade
    * @param {Object} actor - Ator que está fazendo a rolagem
    * @private
    */
-  _onRollAbility: async function(html, abilityKey, abilityName, actor) {
+  _onRollAbility: async function(html, abilityKey, abilityName, abilityAbbrev, actor) {
     try {
       // Obtém os valores do diálogo
       const form = html[0].querySelector("form");
       const abilityValue = parseInt(actor.system.abilities[abilityKey].value);
       const modifier = parseInt(form.modifier.value) || 0;
       const difficultyRating = parseInt(form.difficultyRating.value) || 10;
-      const description = form.description.value;
       
       // Construir a fórmula da rolagem
       const formula = "1d20";
@@ -113,12 +117,13 @@ window.RONIN.AbilityRoll = {
       const chatTemplateData = {
         actor: actor,
         abilityName: abilityName,
+        abilityAbbrev: abilityAbbrev,
         abilityValue: abilityValue,
         d20Result: d20Result,
+        modifier: modifier,
         modifierText: modifierText,
         totalResult: totalResult,
         difficultyRating: difficultyRating,
-        description: description,
         isSuccess: isSuccess,
         isCrit: isCrit,
         isFumble: isFumble,
