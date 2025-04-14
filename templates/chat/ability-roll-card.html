@@ -1,30 +1,27 @@
 <div class="ronin-chat-card ability-roll-card">
-  <div class="card-header {{rollResult}}">
-    <img class="profile-img" src="{{actor.img}}" title="{{actor.name}}" width="36" height="36"/>
-    <h3>{{actor.name}} - {{abilityName}} {{localize "RONIN.Rolls.Check"}}</h3>
-  </div>
-  
-  {{#if description}}
-  <div class="card-description">
-    <p>{{description}}</p>
-  </div>
-  {{/if}}
-  
-  <div class="card-roll-result">
-    <div class="roll-formula">
-      <span class="formula">1d20 ({{d20Result}}) + {{abilityValue}} {{#if modifierText}}{{modifierText}}{{/if}} = <strong>{{totalResult}}</strong> vs DR {{difficultyRating}}</span>
+    <div class="card-header {{rollResult}}">
+      <h3>{{abilityName}} {{localize "RONIN.Rolls.Check"}}</h3>
     </div>
     
-    <div class="roll-outcome {{rollResult}}">
-      {{#if isCrit}}
-        <h3 class="crit">{{localize "RONIN.Rolls.CriticalSuccess"}}!</h3>
-      {{else if isFumble}}
-        <h3 class="fumble">{{localize "RONIN.Rolls.CriticalFailure"}}!</h3>
-      {{else if isSuccess}}
-        <h3 class="success">{{localize "RONIN.Rolls.Success"}}</h3>
-      {{else}}
-        <h3 class="failure">{{localize "RONIN.Rolls.Failure"}}</h3>
-      {{/if}}
+    <div class="card-roll-result">
+      <div class="roll-formula">
+        <span>1d20 + {{abilityAbbrev}} {{#if modifierText}}{{modifierText}}{{/if}} VS DR {{difficultyRating}}</span>
+      </div>
+      
+      <div class="roll-calculation">
+        {{d20Result}} + {{abilityValue}}{{#if modifier}} + {{modifier}}{{/if}} = {{totalResult}}
+      </div>
+      
+      <div class="roll-outcome {{rollResult}}">
+        {{#if isCrit}}
+          <h3 class="crit">{{localize "RONIN.Rolls.CriticalSuccess"}}</h3>
+        {{else if isFumble}}
+          <h3 class="fumble">{{localize "RONIN.Rolls.CriticalFailure"}}</h3>
+        {{else if isSuccess}}
+          <h3 class="success">{{localize "RONIN.Rolls.Success"}}</h3>
+        {{else}}
+          <h3 class="failure">{{localize "RONIN.Rolls.Failure"}}</h3>
+        {{/if}}
+      </div>
     </div>
   </div>
-</div>
