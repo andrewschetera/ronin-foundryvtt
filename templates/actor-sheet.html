@@ -63,7 +63,10 @@
               <label class="honor-label">{{localize "RONIN.Resources.Honor"}}</label>
               <div class="honor-track">
                 {{#times 20}}
-                  <input type="radio" name="system.resources.honor.value" id="honor-{{this}}" value="{{this}}" {{#if (eq ../system.resources.honor.value this)}}checked{{/if}} data-select-single="true">
+                  <!-- Garantir que a comparação esteja usando valores numéricos -->
+                  <input type="radio" name="system.resources.honor.value" id="honor-{{this}}" value="{{this}}" 
+                        {{#if (eq (int ../system.resources.honor.value) this)}}checked="checked"{{/if}} 
+                        data-select-single="true">
                   <label for="honor-{{this}}" class="honor-dot {{#if (lte this 9)}}dishonor{{/if}}">{{this}}</label>
                 {{/times}}
               </div>
