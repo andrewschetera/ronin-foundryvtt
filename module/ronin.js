@@ -43,6 +43,11 @@ Hooks.once('init', async function() {
     return accum;
   });
 
+  // Helper para converter valores em inteiros para comparação
+  Handlebars.registerHelper('int', function (value) {
+    return parseInt(value) || 0;
+  });
+
   // Registrar o helper Handlebars 'eq' para comparações
   Handlebars.registerHelper('eq', function (a, b) {
     return a === b;
@@ -133,17 +138,35 @@ class RoninActorSheet extends ActorSheet {
     return context;
   }
   
-  /**
+/**
    * Sobrescreve o método _render para garantir que o layout esteja correto após a renderização
    */
-  async _render(force = false, options = {}) {
-    await super._render(force, options);
-    
-    // Adicionar um pequeno atraso para garantir que o DOM esteja pronto
-    setTimeout(() => {
-      this._fixScrollingLayout();
-    }, 100);
+async _render(force = false, options = {}) {
+  await super._render(force, options);
+  
+  // Adicionar um pequeno atraso para garantir que o DOM esteja pronto
+  setTimeout(() => {
+    this._fixScrollingLayout();
+    this._fixHonorSelection();
+  }, 100);
+}
+
+/**
+ * Garante que a bolinha de honor correta esteja selecionada
+ * @private
+ */
+_fixHonorSelection() {
+  if (!this.element) return;
+  
+  const honorValue = parseInt(this.actor.system.resources.honor.value);
+  console.log(`Inicializando seleção de honor: ${honorValue}`);
+  
+  // Encontrar o input radio com o valor correspondente e marcá-lo como selecionado
+  const honorInput = this.element.find(`input[name="system.resources.honor.value"][value="${honorValue}"]`);
+  if (honorInput.length) {
+    honorInput.prop('checked', true);
   }
+}
   
   /**
    * Método simplificado para corrigir problemas de layout
@@ -201,19 +224,21 @@ class RoninActorSheet extends ActorSheet {
     }
   }
 
-  /**
+/**
    * Manipula o clique em um botão de honor
    * @param {Event} event O evento de clique
    * @private
    */
-  _onClickHonorDot(event) {
-    event.preventDefault();
-    const dot = event.currentTarget;
-    const honorValue = dot.value;
-    
-    // Atualiza o valor de honor diretamente
-    this.actor.update({'system.resources.honor.value': parseInt(honorValue)});
-  }
+_onClickHonorDot(event) {
+  event.preventDefault();
+  const dot = event.currentTarget;
+  const honorValue = parseInt(dot.value);
+  
+  console.log(`Atualizando honor para: ${honorValue}`);
+  
+  // Atualiza o valor de honor diretamente
+  this.actor.update({'system.resources.honor.value': honorValue});
+}
   
   /**
    * Manipula o clique em um rótulo de habilidade
