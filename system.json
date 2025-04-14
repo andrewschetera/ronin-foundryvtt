@@ -12,7 +12,9 @@
       "name": "andrews"
     }
   ],
+  "esmodules": [],
   "scripts": [
+    "module/ability-roll.js",
     "module/ronin.js"
   ],
   "styles": [
