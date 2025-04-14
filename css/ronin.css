@@ -479,9 +479,7 @@ input[type="radio"][name="system.resources.honor.value"] {
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
-/* Adicione esta seção ao final do arquivo css/ronin.css */
-
-/* === Chat Card Styles === */
+/* Estilos para o chat-card (versão simplificada) */
 .ronin-chat-card {
   font-family: var(--font-primary);
   margin-bottom: 5px;
@@ -492,27 +490,19 @@ input[type="radio"][name="system.resources.honor.value"] {
 
 .ronin-chat-card .card-header {
   display: flex;
+  justify-content: center;
   align-items: center;
   padding: 5px;
   background: #333;
   color: white;
   border-radius: 2px 2px 0 0;
-}
-
-.ronin-chat-card .card-header img {
-  margin-right: 10px;
-  border: none;
+  text-align: center;
 }
 
 .ronin-chat-card .card-header h3 {
   margin: 0;
   border: none;
-}
-
-.ronin-chat-card .card-description {
-  padding: 5px 10px;
-  border-bottom: 1px solid #ccc;
-  font-style: italic;
+  font-size: 1.2em;
 }
 
 .ronin-chat-card .card-roll-result {
@@ -521,19 +511,34 @@ input[type="radio"][name="system.resources.honor.value"] {
 
 .ronin-chat-card .roll-formula {
   margin-bottom: 10px;
+  text-align: center;
   font-family: monospace;
   font-size: 1.1em;
+}
+
+.ronin-chat-card .roll-calculation {
+  margin: 10px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 .ronin-chat-card .roll-outcome {
   text-align: center;
   padding: 5px;
   border-radius: 3px;
+  margin-top: 10px;
 }
 
 .ronin-chat-card .roll-outcome h3 {
   margin: 0;
   border: none;
+  font-size: 1.3em;
 }
 
 /* Result styling */
