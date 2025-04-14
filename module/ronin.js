@@ -1,5 +1,24 @@
 // ronin.js - Sistema principal para o RPG RONIN baseado em MÖRK BORG
 
+// Garantir que o namespace RONIN existe
+window.RONIN = window.RONIN || {};
+
+// Se o módulo AbilityRoll ainda não existir, criar um temporário
+if (!window.RONIN.AbilityRoll) {
+  window.RONIN.AbilityRoll = {
+    roll: function(abilityKey, actor) {
+      console.log(`Rolagem de habilidade temporária: ${abilityKey} para ${actor.name}`);
+      console.warn("Módulo de rolagem completo não carregado. Usando função temporária.");
+    }
+  };
+  
+  // Tentar recarregar o módulo de rolagem
+  const script = document.createElement('script');
+  script.src = 'systems/ronin/module/ability-roll.js';
+  script.async = false;
+  document.head.appendChild(script);
+}
+
 // Inicialização do sistema
 Hooks.once('init', async function() {
   console.log('ronin | Inicializando sistema RONIN');
@@ -164,6 +183,9 @@ class RoninActorSheet extends ActorSheet {
     // Listener especial para os botões de honor
     html.find('input[data-select-single="true"]').click(this._onClickHonorDot.bind(this));
     
+    // Adicionar listener para os rótulos das habilidades
+    html.find('.ability label').click(this._onAbilityLabelClick.bind(this));
+    
     // Funcionalidade condicional para as ações do proprietário
     if (this.actor.isOwner) {
       // Item creation
@@ -191,6 +213,32 @@ class RoninActorSheet extends ActorSheet {
     
     // Atualiza o valor de honor diretamente
     this.actor.update({'system.resources.honor.value': parseInt(honorValue)});
+  }
+  
+  /**
+   * Manipula o clique em um rótulo de habilidade
+   * @param {Event} event O evento de clique
+   * @private
+   */
+  _onAbilityLabelClick(event) {
+    event.preventDefault();
+    
+    // Obter o elemento clicado e verificar a classe para determinar qual habilidade
+    const label = event.currentTarget;
+    const abilityEl = label.closest('.ability');
+    
+    // Identificar qual habilidade foi clicada
+    let abilityKey = '';
+    if (abilityEl.classList.contains('vigor')) abilityKey = 'vigor';
+    else if (abilityEl.classList.contains('swiftness')) abilityKey = 'swiftness';
+    else if (abilityEl.classList.contains('spirit')) abilityKey = 'spirit';
+    else if (abilityEl.classList.contains('resilience')) abilityKey = 'resilience';
+    
+    // Chamar a função de rolagem
+    if (abilityKey) {
+      // Usamos diretamente window.RONIN para garantir acesso global
+      window.RONIN.AbilityRoll.roll(abilityKey, this.actor);
+    }
   }
 
   // Métodos para manipulação de itens
