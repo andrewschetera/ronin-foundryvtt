@@ -8,7 +8,8 @@
       "Spirit": "Spirit",
       "AbbrevSpirit": "SPI",
       "Resilience": "Resilience",
-      "AbbrevResilience": "RES"
+      "AbbrevResilience": "RES",
+      "Base": "Base"
     },
     "Resources": {
       "HP": "HP",
@@ -58,6 +59,20 @@
       "Misc": "Misc",
       "Feat": "Feat",
       "Text": "Text"
+    },
+    "Rolls": {
+      "AbilityCheck": "{ability} Check",
+      "Roll": "Roll",
+      "Cancel": "Cancel",
+      "Modifier": "Modifier",
+      "DR": "DR",
+      "Description": "Description",
+      "OptionalDescription": "Optional description",
+      "Check": "Check",
+      "Success": "SUCCESS",
+      "Failure": "FAILURE",
+      "CriticalSuccess": "CRITICAL SUCCESS",
+      "CriticalFailure": "CRITICAL FAILURE"
     }
   }
 }
