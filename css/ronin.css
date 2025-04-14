@@ -466,3 +466,93 @@ input[type="radio"][name="system.resources.honor.value"] {
   height: 100%;
   padding: 10px;
 }
+
+/* Adicione esta seção ao final do arquivo css/ronin.css */
+
+/* Estilo para rótulos de habilidades clicáveis */
+.ability label {
+  cursor: pointer;
+  user-select: none;
+}
+
+.ability label:hover {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* Adicione esta seção ao final do arquivo css/ronin.css */
+
+/* === Chat Card Styles === */
+.ronin-chat-card {
+  font-family: var(--font-primary);
+  margin-bottom: 5px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background: #f0f0f0;
+}
+
+.ronin-chat-card .card-header {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  background: #333;
+  color: white;
+  border-radius: 2px 2px 0 0;
+}
+
+.ronin-chat-card .card-header img {
+  margin-right: 10px;
+  border: none;
+}
+
+.ronin-chat-card .card-header h3 {
+  margin: 0;
+  border: none;
+}
+
+.ronin-chat-card .card-description {
+  padding: 5px 10px;
+  border-bottom: 1px solid #ccc;
+  font-style: italic;
+}
+
+.ronin-chat-card .card-roll-result {
+  padding: 10px;
+}
+
+.ronin-chat-card .roll-formula {
+  margin-bottom: 10px;
+  font-family: monospace;
+  font-size: 1.1em;
+}
+
+.ronin-chat-card .roll-outcome {
+  text-align: center;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.ronin-chat-card .roll-outcome h3 {
+  margin: 0;
+  border: none;
+}
+
+/* Result styling */
+.ronin-chat-card .success {
+  background-color: rgba(0, 128, 0, 0.2);
+}
+
+.ronin-chat-card .failure {
+  background-color: rgba(128, 0, 0, 0.2);
+}
+
+.ronin-chat-card .crit {
+  color: #008000;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+.ronin-chat-card .fumble {
+  color: #800000;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
