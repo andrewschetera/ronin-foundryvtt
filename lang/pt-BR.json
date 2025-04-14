@@ -4,7 +4,8 @@
       "Vigor": "Vigor",
       "Swiftness": "Rapidez",
       "Spirit": "Espírito",
-      "Resilience": "Resiliência"
+      "Resilience": "Resiliência",
+      "Base": "Base"
     },
     "Resources": {
       "HP": "PV",
@@ -54,6 +55,20 @@
       "Misc": "Diversos",
       "Feat": "Característica",
       "Text": "Texto"
+    },
+    "Rolls": {
+      "AbilityCheck": "Teste de {ability}",
+      "Roll": "Rolar",
+      "Cancel": "Cancelar",
+      "Modifier": "Modificador",
+      "DR": "DR",
+      "Description": "Descrição",
+      "OptionalDescription": "Descrição opcional",
+      "Check": "Teste",
+      "Success": "SUCESSO",
+      "Failure": "FALHA",
+      "CriticalSuccess": "SUCESSO CRÍTICO",
+      "CriticalFailure": "FALHA CRÍTICA"
     }
   }
 }
