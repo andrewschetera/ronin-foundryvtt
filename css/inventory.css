@@ -1,16 +1,26 @@
 /* inventory.css - Estilos para o inventário para o sistema RONIN */
 
-/* Inventário */
+/* Inventário - Layout de duas colunas (mantido para compatibilidade) */
 .inventory-categories {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 5px;
 }
 
+/* Novo layout de uma coluna para a aba Equipment */
+.inventory-single-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
 .inventory-category {
   padding: 5px;
   margin-bottom: 5px;
   border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .category-header {
