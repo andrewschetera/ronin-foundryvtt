@@ -52,7 +52,10 @@
       "Hand": "Mãos",
       "OneHanded": "Uma Mão",
       "TwoHanded": "Duas Mãos",
-      "Price": "Preço"
+      "Price": "Preço",
+      "Weight": "Peso",
+      "Normal": "Normal",
+      "Heavy": "Pesado"
     },
     "Features": {
       "Feats": "Características",
