@@ -1,5 +1,48 @@
 /* inventory.css - Estilos para o inventário para o sistema RONIN */
 
+/* Estilos para a seção de Carrying Capacity */
+.carrying-capacity-section {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.carrying-capacity-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.carrying-capacity-info label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.carrying-capacity-current, 
+.carrying-capacity-max {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.carrying-capacity-rules {
+  margin-left: 10px;
+  font-style: italic;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Em telas pequenas, coloca as regras em outra linha */
+@media (max-width: 600px) {
+  .carrying-capacity-rules {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 5px;
+  }
+}
+
 /* Inventário - Layout de duas colunas (mantido para compatibilidade) */
 .inventory-categories {
   display: grid;
@@ -79,4 +122,10 @@
   margin-top: 2px;
   padding-left: 29px;
   font-size: 0.9em;
+}
+
+/* Exibir o peso dos itens na lista */
+.item-weight {
+  margin-left: 10px;
+  font-style: italic;
 }
