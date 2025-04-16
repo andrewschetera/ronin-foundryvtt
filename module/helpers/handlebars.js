@@ -68,6 +68,45 @@ RONIN.registerHandlebarsHelpers = function() {
     return num >= 0 ? `+${num}` : `${num}`;
   });
   
+  /**
+   * Helper para somar dois valores
+   * @param {any} a Primeiro valor
+   * @param {any} b Segundo valor
+   * @returns {number} Resultado da soma
+   */
+  Handlebars.registerHelper('sum', function (a, b) {
+    return (Number(a) || 0) + (Number(b) || 0);
+  });
+  
+  /**
+   * Helper para multiplicar dois valores
+   * @param {any} a Primeiro valor
+   * @param {any} b Segundo valor
+   * @returns {number} Resultado da multiplicação
+   */
+  Handlebars.registerHelper('multiply', function (a, b) {
+    return (Number(a) || 0) * (Number(b) || 0);
+  });
+  
+  /**
+   * Helper para capitalizar a primeira letra de uma string
+   * @param {string} str String a ser capitalizada
+   * @returns {string} String com a primeira letra maiúscula
+   */
+  Handlebars.registerHelper('capitalize', function (str) {
+    if (typeof str !== 'string') return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  });
+  
+  /**
+   * Helper para concatenar strings
+   * @returns {string} Strings concatenadas
+   */
+  Handlebars.registerHelper('concat', function () {
+    const args = Array.prototype.slice.call(arguments, 0, -1);
+    return args.join('');
+  });
+  
   // Adicionar outros helpers conforme necessário
 };
 
