@@ -59,16 +59,16 @@
         "description": ""
       },
       "physicalItem": {
-        "quantity": 1,
-        "weight": 0,
         "price": 0
       }
     },
     "weapon": {
-      "templates": ["itemDescription", "physicalItem"],
+      "templates": ["itemDescription"],
       "damage": "d6",
-      "equipped": false,
-      "weaponType": "melee"
+      "weaponType": "melee",
+      "useAmmo": false,
+      "hand": "one",
+      "price": 0
     },
     "armor": {
       "templates": ["itemDescription", "physicalItem"],
@@ -77,7 +77,8 @@
       "equipped": false
     },
     "misc": {
-      "templates": ["itemDescription", "physicalItem"]
+      "templates": ["itemDescription", "physicalItem"],
+      "quantity": 1
     },
     "feat": {
       "templates": ["itemDescription"]
@@ -87,8 +88,9 @@
       "textType": "unseen",
       "prepared": false
     },
-    "item": {
-      "templates": ["itemDescription", "physicalItem"]
+    "class": {
+      "templates": ["itemDescription", "physicalItem"],
+      "quantity": 1
     }
   }
 }
