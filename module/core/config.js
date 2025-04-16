@@ -38,7 +38,7 @@ RONIN.config = {
     misc: "RONIN.ItemTypes.Misc",
     feat: "RONIN.ItemTypes.Feat",
     text: "RONIN.ItemTypes.Text",
-    class: "RONIN.ItemTypes.Class
+    class: "RONIN.ItemTypes.Class"
   }
 };
 
