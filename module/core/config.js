@@ -27,6 +27,7 @@ RONIN.config = {
   // Configurações de equipamento
   equipment: {
     weaponTypes: ["melee", "ranged"],
+    weaponHands: ["one", "two"],
     armorTiers: [1, 2, 3]
   },
   
@@ -34,10 +35,10 @@ RONIN.config = {
   itemTypes: {
     weapon: "RONIN.ItemTypes.Weapon",
     armor: "RONIN.ItemTypes.Armor",
-    gear: "RONIN.ItemTypes.Gear",
     misc: "RONIN.ItemTypes.Misc",
     feat: "RONIN.ItemTypes.Feat",
-    text: "RONIN.ItemTypes.Text"
+    text: "RONIN.ItemTypes.Text",
+    class: "RONIN.ItemTypes.Class
   }
 };
 
