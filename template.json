@@ -53,7 +53,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "armor", "gear", "misc", "feat", "text", "item"],
+    "types": ["weapon", "armor", "misc", "feat", "text", "class"],
     "templates": {
       "itemDescription": {
         "description": ""
@@ -75,13 +75,6 @@
       "protection": "d2",
       "tier": 1,
       "equipped": false
-    },
-    "gear": {
-      "templates": ["itemDescription", "physicalItem"],
-      "uses": {
-        "value": 1,
-        "max": 1
-      }
     },
     "misc": {
       "templates": ["itemDescription", "physicalItem"]
