@@ -55,7 +55,10 @@
       "Price": "Price",
       "Weight": "Weight",
       "Normal": "Normal",
-      "Heavy": "Heavy"
+      "Heavy": "Heavy",
+      "CarryingCapacity": "Carrying Capacity",
+      "CarryingRulesPenalty": "DR -2 after that. Impossible to carry more than",
+      "CarryingRulesMax": "."
     },
     "Features": {
       "Feats": "Feats",
