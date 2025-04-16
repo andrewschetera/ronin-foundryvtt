@@ -46,6 +46,21 @@ class RoninItem extends Item {
     if (!itemData.damage) {
       itemData.damage = "d6"; // Dano padrão
     }
+    
+    // Verificar se o campo weaponType existe
+    if (!itemData.weaponType) {
+      itemData.weaponType = "melee"; // Tipo padrão
+    }
+    
+    // Verificar se o campo hand existe
+    if (!itemData.hand) {
+      itemData.hand = "one"; // Padrão uma mão
+    }
+    
+    // Verificar se o campo useAmmo existe (para armas ranged)
+    if (itemData.weaponType === "ranged" && itemData.useAmmo === undefined) {
+      itemData.useAmmo = false; // Padrão não usar munição
+    }
   }
   
   /**
