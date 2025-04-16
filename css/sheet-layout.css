@@ -1,0 +1,44 @@
+/* sheet-layout.css - Layout geral da ficha para o sistema RONIN */
+
+/* Garantir que o container de abas esteja abaixo do cabeçalho */
+.tabs-container {
+  flex: 0 0 auto;
+  margin-top: 2px; /* Espaço adicional antes das abas */
+  margin-bottom: 10px; /* Espaço adicional após as abas */
+  padding-top: 5px;
+}
+
+/* Corpo da ficha com scroll próprio */
+.sheet-body {
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+/* Garantir que as abas sejam clicáveis */
+.sheet-tabs .item {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* Configurar rolagem apenas dentro de cada aba */
+.sheet-body .tab {
+  overflow-y: auto;
+  height: 100%;
+  padding: 10px;
+}
+
+/* Editor de texto */
+.editor-wrapper {
+  height: auto;
+  min-height: 200px;
+  padding: 5px;
+}
+
+.background-editor {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  padding: 10px;
+  border: none;
+  overflow-y: auto;
+}

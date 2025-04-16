@@ -1,0 +1,72 @@
+/* inventory.css - Estilos para o inventário para o sistema RONIN */
+
+/* Inventário */
+.inventory-categories {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+.inventory-category {
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 3px;
+  margin-bottom: 3px;
+  border-bottom: 1px solid;
+}
+
+.item-create {
+  margin-left: auto;
+}
+
+.item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  padding: 3px 0;
+}
+
+.item-header {
+  display: flex;
+  align-items: center;
+}
+
+.item-image {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-name {
+  flex: 1;
+}
+
+.item-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.item-details {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+  padding-left: 29px;
+  font-size: 0.9em;
+}

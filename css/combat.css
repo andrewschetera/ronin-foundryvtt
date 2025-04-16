@@ -1,0 +1,48 @@
+/* combat.css - Estilos para a seção de combate para o sistema RONIN */
+
+/* Combate */
+.combat-section {
+  margin-bottom: 10px;
+}
+
+.initiative-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.equipped-weapons, .equipped-armor {
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+}
+
+.equipped-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.equipped-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  width: 90px;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 3px;
+}
+
+.equipped-item .item-image {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 3px;
+}
+
+.combat-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

@@ -1,0 +1,77 @@
+{
+  "RONIN": {
+    "Abilities": {
+      "Vigor": "Vigor",
+      "AbbrevVigor": "VIG",
+      "Swiftness": "Swiftness",
+      "AbbrevSwiftness": "SWI",
+      "Spirit": "Spirit",
+      "AbbrevSpirit": "SPI",
+      "Resilience": "Resilience",
+      "AbbrevResilience": "RES",
+      "Base": "Base"
+    },
+    "Resources": {
+      "HP": "HP",
+      "Texts": "Texts",
+      "Virtues": "Virtues",
+      "Ryo": "Ryo",
+      "Honor": "Honor"
+    },
+    "Tabs": {
+      "Background": "Background",
+      "Equipment": "Equipment",
+      "Tatakai": "Tatakai",
+      "Features": "Features"
+    },
+    "Actions": {
+      "Broken": "BROKEN",
+      "Rest": "REST",
+      "Seppuku": "SEPPUKU",
+      "GetBetter": "GET BETTER",
+      "Party": "PARTY",
+      "Individual": "INDIVIDUAL",
+      "Defend": "DEFEND",
+      "Parry": "PARRY"
+    },
+    "Equipment": {
+      "Weapons": "Weapons",
+      "Armor": "Armor",
+      "Gear": "Gear",
+      "Misc": "Misc",
+      "Equipped": "Equipped",
+      "Damage": "Damage",
+      "Protection": "Protection",
+      "Tier": "Tier",
+      "Uses": "Uses",
+      "Quantity": "Quantity"
+    },
+    "Features": {
+      "Feats": "Feats",
+      "Texts": "Texts",
+      "TextType": "Text Type",
+      "Prepared": "Prepared"
+    },
+    "ItemTypes": {
+      "Weapon": "Weapon",
+      "Armor": "Armor",
+      "Gear": "Gear",
+      "Misc": "Misc",
+      "Feat": "Feat",
+      "Text": "Text"
+    },
+    "Rolls": {
+      "AbilityCheck": "{ability} Check",
+      "Roll": "Roll",
+      "Cancel": "Cancel",
+      "Modifier": "Modifier",
+      "Bonus": "Bonus",
+      "DR": "DR",
+      "Check": "Check",
+      "Success": "SUCCESS",
+      "Failure": "FAILURE",
+      "CriticalSuccess": "CRITICAL SUCCESS",
+      "CriticalFailure": "CRITICAL FAILURE"
+    }
+  }
+}

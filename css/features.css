@@ -1,0 +1,36 @@
+/* features.css - Estilos para a seção de características para o sistema RONIN */
+
+/* Features */
+.features-section, .texts-section {
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid;
+}
+
+.feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feature-item {
+  margin-bottom: 5px;
+  padding: 3px;
+  border: 1px solid;
+  border-radius: 3px;
+}
+
+.item-description {
+  margin-top: 3px;
+  padding: 3px;
+  font-size: 0.9em;
+}
