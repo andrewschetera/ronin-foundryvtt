@@ -55,7 +55,10 @@
       "Price": "Preço",
       "Weight": "Peso",
       "Normal": "Normal",
-      "Heavy": "Pesado"
+      "Heavy": "Pesado",
+      "CarryingCapacity": "Capacidade de Carga",
+      "CarryingRulesPenalty": "DR -2 depois disso. Impossível carregar mais que",
+      "CarryingRulesMax": "."
     },
     "Features": {
       "Feats": "Características",
