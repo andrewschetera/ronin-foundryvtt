@@ -59,7 +59,8 @@
         "description": ""
       },
       "physicalItem": {
-        "price": 0
+        "price": 0,
+        "weight": "normal"
       }
     },
     "weapon": {
@@ -68,7 +69,8 @@
       "weaponType": "melee",
       "useAmmo": false,
       "hand": "one",
-      "price": 0
+      "price": 0,
+      "weight": "normal"
     },
     "armor": {
       "templates": ["itemDescription", "physicalItem"],
