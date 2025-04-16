@@ -2,9 +2,13 @@
   "RONIN": {
     "Abilities": {
       "Vigor": "Vigor",
+      "AbbrevVigor": "VIG",
       "Swiftness": "Rapidez",
+      "AbbrevSwiftness": "RAP",
       "Spirit": "Espírito",
+      "AbbrevSpirit": "ESP",
       "Resilience": "Resiliência",
+      "AbbrevResilience": "RES",
       "Base": "Base"
     },
     "Resources": {
@@ -40,7 +44,15 @@
       "Protection": "Proteção",
       "Tier": "Nível",
       "Uses": "Usos",
-      "Quantity": "Quantidade"
+      "Quantity": "Quantidade",
+      "Type": "Tipo",
+      "Melee": "Corpo a Corpo",
+      "Ranged": "Distância",
+      "UseAmmunition": "Usar Munição",
+      "Hand": "Mãos",
+      "OneHanded": "Uma Mão",
+      "TwoHanded": "Duas Mãos",
+      "Price": "Preço"
     },
     "Features": {
       "Feats": "Características",
@@ -68,6 +80,7 @@
       "Failure": "FALHA",
       "CriticalSuccess": "SUCESSO CRÍTICO",
       "CriticalFailure": "FALHA CRÍTICA"
-    }
+    },
+    "Description": "Descrição"
   }
 }
