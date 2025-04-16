@@ -512,7 +512,7 @@ input[type="radio"][name="system.resources.honor.value"] {
 .ronin-chat-card .roll-formula {
   margin-bottom: 10px;
   text-align: center;
-  font-family: monospace;
+  font-family: var(--font-primary);
   font-size: 1.1em;
 }
 
@@ -523,7 +523,7 @@ input[type="radio"][name="system.resources.honor.value"] {
   border-radius: 3px;
   background-color: rgba(255, 255, 255, 0.5);
   text-align: center;
-  font-family: monospace;
+  font-family: var(--font-primary);
   font-weight: bold;
   font-size: 1.2em;
 }
