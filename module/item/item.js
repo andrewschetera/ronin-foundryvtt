@@ -57,6 +57,11 @@ class RoninItem extends Item {
       itemData.hand = "one"; // Padrão uma mão
     }
     
+    // Verificar se o campo weight existe ou é válido
+    if (!itemData.weight || (itemData.weight !== "normal" && itemData.weight !== "heavy")) {
+      itemData.weight = "normal"; // Peso padrão
+    }
+    
     // Verificar se o campo useAmmo existe (para armas ranged)
     if (itemData.weaponType === "ranged" && itemData.useAmmo === undefined) {
       itemData.useAmmo = false; // Padrão não usar munição
@@ -78,6 +83,11 @@ class RoninItem extends Item {
     if (!itemData.tier) {
       itemData.tier = 1; // Tier padrão
     }
+    
+    // Verificar se o campo weight existe ou é válido
+    if (!itemData.weight || (itemData.weight !== "normal" && itemData.weight !== "heavy")) {
+      itemData.weight = "normal"; // Peso padrão
+    }
   }
   
   /**
@@ -92,6 +102,11 @@ class RoninItem extends Item {
         value: 1,
         max: 1
       };
+    }
+    
+    // Verificar se o campo weight existe ou é válido
+    if (!itemData.weight || (itemData.weight !== "normal" && itemData.weight !== "heavy")) {
+      itemData.weight = "normal"; // Peso padrão
     }
   }
   
