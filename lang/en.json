@@ -44,7 +44,15 @@
       "Protection": "Protection",
       "Tier": "Tier",
       "Uses": "Uses",
-      "Quantity": "Quantity"
+      "Quantity": "Quantity",
+      "Type": "Type",
+      "Melee": "Melee",
+      "Ranged": "Ranged",
+      "UseAmmunition": "Use Ammunition",
+      "Hand": "Hand",
+      "OneHanded": "One-Handed",
+      "TwoHanded": "Two-Handed",
+      "Price": "Price"
     },
     "Features": {
       "Feats": "Feats",
@@ -72,6 +80,7 @@
       "Failure": "FAILURE",
       "CriticalSuccess": "CRITICAL SUCCESS",
       "CriticalFailure": "CRITICAL FAILURE"
-    }
+    },
+    "Description": "Description"
   }
 }
