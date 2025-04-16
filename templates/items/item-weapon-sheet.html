@@ -42,6 +42,14 @@
         <label>{{localize "RONIN.Equipment.Price"}} ({{localize "RONIN.Resources.Ryo"}})</label>
         <input type="number" name="system.price" value="{{system.price}}" min="0"/>
       </div>
+      
+      <div class="form-group">
+        <label>{{localize "RONIN.Equipment.Weight"}}</label>
+        <select name="system.weight">
+          <option value="normal" {{#if (eq system.weight "normal")}}selected{{/if}}>{{localize "RONIN.Equipment.Normal"}}</option>
+          <option value="heavy" {{#if (eq system.weight "heavy")}}selected{{/if}}>{{localize "RONIN.Equipment.Heavy"}}</option>
+        </select>
+      </div>
 
       <div class="form-group weapon-description">
         <label>{{localize "RONIN.Description"}}</label>
