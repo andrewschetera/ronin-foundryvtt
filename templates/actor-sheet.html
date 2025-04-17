@@ -311,22 +311,56 @@
               <button class="individual-initiative" type="button">{{localize "RONIN.Actions.Individual"}}</button>
             </div>
             
-            <!-- Armas equipadas -->
-            <div class="equipped-weapons">
-              <h2>{{localize "RONIN.Equipment.Weapons"}} {{localize "RONIN.Equipment.Equipped"}}</h2>
-              <div class="equipped-list">
-                {{#each items as |item id|}}
-                  {{#if (and (eq item.type "weapon") item.system.equipped)}}
-                    <div class="equipped-item" data-item-id="{{item._id}}">
-                      <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
-                      <div class="item-name">{{item.name}}</div>
-                      <div class="item-damage">{{item.system.damage}}</div>
-                    </div>
-                  {{/if}}
-                {{/each}}
-              </div>
+<!-- Armas equipadas -->
+<!-- Versão básica da seção de armas equipadas para a aba Tatakai -->
+<div class="equipped-weapons">
+  <h2>{{localize "RONIN.Equipment.Weapons"}} {{localize "RONIN.Equipment.Equipped"}}</h2>
+  <div class="tatakai-weapons-list">
+    <!-- Percorre todos os itens -->
+    {{#each items as |item id|}}
+      {{#if (and (eq item.type "weapon") item.system.equipped)}}
+        <div class="tatakai-weapon-item" data-item-id="{{item._id}}">
+          <div class="weapon-main-info">
+            <div class="weapon-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+            <div class="weapon-name">{{item.name}}</div>
+            <div class="weapon-damage">{{item.system.damage}}</div>
+            
+            <!-- Tipo da arma - sempre exibido -->
+            <div class="weapon-type">
+              {{#if (eq item.system.weaponType "melee")}}
+                {{localize "RONIN.Equipment.Melee"}}
+              {{else}}
+                {{localize "RONIN.Equipment.Ranged"}}
+              {{/if}}
             </div>
             
+            <!-- Se for ranged com useAmmo, exibe o seletor de munição -->
+            {{#if (and (eq item.system.weaponType "ranged") item.system.useAmmo)}}
+              <div class="weapon-ammo">
+                <select class="ammo-select">
+                  <option value="">-- {{localize "RONIN.Equipment.SelectAmmo"}} --</option>
+                  <!-- Ammo será implementada futuramente -->
+                </select>
+              </div>
+            {{/if}}
+            
+            <div class="weapon-hand">
+              {{#if (eq item.system.hand "one")}}
+                {{localize "RONIN.Equipment.OneHanded"}}
+              {{else}}
+                {{localize "RONIN.Equipment.TwoHanded"}}
+              {{/if}}
+            </div>
+            
+            <button class="weapon-attack-button" type="button" data-weapon-id="{{item._id}}">
+              {{localize "RONIN.Actions.Attack"}}
+            </button>
+          </div>
+        </div>
+      {{/if}}
+    {{/each}}
+  </div>
+</div>           
             <!-- Armadura equipada -->
             <div class="equipped-armor">
               <h2>{{localize "RONIN.Equipment.Armor"}} {{localize "RONIN.Equipment.Equipped"}}</h2>
