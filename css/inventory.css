@@ -129,3 +129,16 @@
   margin-left: 10px;
   font-style: italic;
 }
+
+/* Estilo para quando a capacidade de carga está no máximo */
+.carrying-capacity-info.capacity-full label,
+.carrying-capacity-info.capacity-full .carrying-capacity-current,
+.carrying-capacity-info.capacity-full .carrying-capacity-max {
+  color: var(--color-red);
+  font-weight: bold;
+}
+
+.carrying-capacity-info.capacity-full {
+  background-color: rgba(128, 0, 0, 0.1);
+  border-color: var(--color-red);
+}
