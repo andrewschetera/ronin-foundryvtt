@@ -30,13 +30,19 @@ window.RONIN.AbilityRoll = {
     // Obtém a abreviação localizada da habilidade
     let abilityAbbrev = game.i18n.localize(`RONIN.Abilities.Abbrev${abilityKey.charAt(0).toUpperCase() + abilityKey.slice(1)}`);
     
+    // Verificar se há penalidade por sobrecarga
+    const maxCapacity = actor.system.abilities.vigor.value + 8;
+    const isOverencumbered = actor.system.carryingCapacity.value >= maxCapacity;
+    const showOverencumberedWarning = isOverencumbered && (abilityKey === 'vigor' || abilityKey === 'swiftness');
+    
     // Cria o título do diálogo
     const dialogTitle = game.i18n.format("RONIN.Rolls.AbilityCheck", {ability: abilityName});
     
     // Configura os dados para o template
     const templateData = {
       abilityName: abilityName,
-      abilityValue: abilityData.value
+      abilityValue: abilityData.value,
+      isOverencumbered: showOverencumberedWarning
     };
     
     // Renderiza o template do diálogo
@@ -78,7 +84,18 @@ window.RONIN.AbilityRoll = {
       const form = html[0].querySelector("form");
       const abilityValue = parseInt(actor.system.abilities[abilityKey].value);
       const modifier = parseInt(form.modifier.value) || 0;
-      const difficultyRating = parseInt(form.difficultyRating.value) || 10;
+      let difficultyRating = parseInt(form.difficultyRating.value) || 10;
+      
+      // Verificar se o personagem está com sobrecarga
+      const maxCapacity = actor.system.abilities.vigor.value + 8;
+      const isOverencumbered = actor.system.carryingCapacity.value >= maxCapacity;
+      
+      // Aplicar penalidade de DR +2 para Vigor e Swiftness quando sobrecarregado
+      let overencumberedPenalty = 0;
+      if (isOverencumbered && (abilityKey === 'vigor' || abilityKey === 'swiftness')) {
+        overencumberedPenalty = 2;
+        difficultyRating += overencumberedPenalty;
+      }
       
       // Construir a fórmula da rolagem
       const formula = "1d20";
@@ -127,7 +144,9 @@ window.RONIN.AbilityRoll = {
         isSuccess: isSuccess,
         isCrit: isCrit,
         isFumble: isFumble,
-        rollResult: rollResult
+        rollResult: rollResult,
+        isOverencumbered: isOverencumbered,
+        overencumberedPenalty: overencumberedPenalty
       };
       
       // Renderiza o template do chat-card
