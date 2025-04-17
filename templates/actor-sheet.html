@@ -120,58 +120,86 @@
         </div>
       </div>
       
+<!-- Correção da aba Equipment e estrutura geral -->
+
 <!-- Tab de Equipment -->
 <div class="tab" data-group="primary" data-tab="equipment">
   <div class="tab-equipment">
     <!-- Carrying Capacity no início da aba -->
     <div class="carrying-capacity-info {{#if (lte (sum system.abilities.vigor.value 8) system.carryingCapacity.value)}}capacity-full{{/if}}">
-  <label>{{localize "RONIN.Equipment.CarryingCapacity"}}:</label>
-  <span class="carrying-capacity-current">{{system.carryingCapacity.value}}</span>
-  <span>/</span>
-  {{#with system.abilities.vigor}}
-  <span class="carrying-capacity-max">{{sum value 8}}</span>
-  <span class="carrying-capacity-rules">
-    VIG +8. {{localize "RONIN.Equipment.CarryingRulesPenalty"}} {{multiply (sum value 8) 2}} {{localize "RONIN.Equipment.CarryingRulesMax"}}
-  </span>
-  {{/with}}
-</div>
+      <label>{{localize "RONIN.Equipment.CarryingCapacity"}}:</label>
+      <span class="carrying-capacity-current">{{system.carryingCapacity.value}}</span>
+      <span>/</span>
+      {{#with system.abilities.vigor}}
+      <span class="carrying-capacity-max">{{sum value 8}}</span>
+      <span class="carrying-capacity-rules">
+        VIG +8. {{localize "RONIN.Equipment.CarryingRulesPenalty"}} {{multiply (sum value 8) 2}} {{localize "RONIN.Equipment.CarryingRulesMax"}}
+      </span>
+      {{/with}}
     </div>
 
     <div class="inventory-single-column">
       <!-- Weapons -->
-      <div class="inventory-category">
-        <h2 class="category-header">
-          <span>{{localize "RONIN.Equipment.Weapons"}}</span>
-          <a class="item-create" title="Create Weapon" data-type="weapon">
-            <i class="fas fa-plus"></i> Add
-          </a>
-        </h2>
-        <ol class="item-list">
-          {{#each items as |item id|}}
-            {{#if (eq item.type "weapon")}}
-              <li class="item" data-item-id="{{item._id}}">
-                <div class="item-header">
-                  <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
-                  <div class="item-name">{{item.name}}</div>
-                  <div class="item-controls">
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                  </div>
-                </div>
-                <div class="item-details">
-                  <div class="item-damage">{{item.system.damage}}</div>
-                  <div class="item-weight">{{localize (concat "RONIN.Equipment." (capitalize item.system.weight))}}</div>
-                  <div class="item-equipped">
-                    <input type="checkbox" {{#if item.system.equipped}}checked{{/if}} data-item-id="{{item._id}}" data-equipped>
-                    <label>{{localize "RONIN.Equipment.Equipped"}}</label>
-                  </div>
-                </div>
-              </li>
-            {{/if}}
-          {{/each}}
-        </ol>
-      </div>
-
+<!-- Atualizar a seção de weapons para mostrar tipo, hand e weight -->
+<div class="inventory-category">
+  <h2 class="category-header">
+    <span>{{localize "RONIN.Equipment.Weapons"}}</span>
+    <a class="item-create" title="Create Weapon" data-type="weapon">
+      <i class="fas fa-plus"></i> Add
+    </a>
+  </h2>
+  
+  <!-- Aviso de limite de armas equipadas (inicialmente oculto) -->
+  <div class="weapons-limit-warning" id="weapons-limit-warning">
+    {{localize "RONIN.Equipment.WeaponsLimit"}}
+  </div>
+  
+  <ol class="item-list">
+    {{#each items as |item id|}}
+      {{#if (eq item.type "weapon")}}
+        <li class="item weapon-item-inline" data-item-id="{{item._id}}">
+          <div class="item-header">
+            <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+            <!-- Ícone de escudo para arma equipada -->
+            <i class="fas fa-shield-alt weapon-equip-icon {{#if item.system.equipped}}equipped{{/if}}" 
+               data-item-id="{{item._id}}" 
+               data-hand="{{item.system.hand}}" 
+               title="{{#if item.system.equipped}}{{localize 'RONIN.Equipment.UnequipWeapon'}}{{else}}{{localize 'RONIN.Equipment.EquipWeapon'}}{{/if}}"></i>
+            <div class="item-name">
+              {{item.name}}
+              <span class="item-properties">
+                <!-- Tipo da arma - Corrigido -->
+                <span class="item-type weapon-type-{{item.system.weaponType}}">
+                  {{#if (eq item.system.weaponType "melee")}}
+                    {{localize "RONIN.Equipment.Melee"}}
+                  {{else}}
+                    {{localize "RONIN.Equipment.Ranged"}}
+                  {{/if}}
+                </span>
+                <!-- Tipo de empunhadura -->
+                <span class="item-hand">
+                  {{#if (eq item.system.hand "one")}}
+                    {{localize "RONIN.Equipment.OneHanded"}}
+                  {{else}}
+                    {{localize "RONIN.Equipment.TwoHanded"}}
+                  {{/if}}
+                </span>
+                <!-- Peso -->
+                <span class="item-weight weight-{{item.system.weight}}">
+                  {{localize (concat "RONIN.Equipment." (capitalize item.system.weight))}}
+                </span>
+              </span>
+            </div>
+            <div class="item-controls">
+              <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+              <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+            </div>
+          </div>
+        </li>
+      {{/if}}
+    {{/each}}
+  </ol>
+</div>
       <!-- Armor -->
       <div class="inventory-category">
         <h2 class="category-header">
@@ -272,8 +300,7 @@
       </div>
     </div>
   </div>
-</div>
-      
+</div>     
       <!-- Tab de Tatakai (Combate) -->
       <div class="tab" data-group="primary" data-tab="tatakai">
         <div class="tab-tatakai">
