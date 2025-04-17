@@ -112,3 +112,53 @@ RONIN.registerHandlebarsHelpers = function() {
 
 // Exportar o módulo
 export default RONIN.registerHandlebarsHelpers;
+
+// Adicionar ao arquivo module/helpers/handlebars.js
+
+/**
+ * Helper 'some' para verificar se algum item de uma coleção atende a um critério
+ * @param {Array} collection A coleção a ser verificada
+ * @param {string} property O nome da propriedade a ser verificada
+ * @returns {boolean} Verdadeiro se algum item atender ao critério
+ */
+Handlebars.registerHelper('some', function (collection, property) {
+  if (!collection || collection.length === 0) return false;
+  
+  // Se collection for um array do Foundry, use a função some dele
+  if (collection instanceof Array) {
+    return collection.some(item => {
+      // Navegar pela propriedade usando notação de ponto
+      if (property.includes('.')) {
+        const parts = property.split('.');
+        let value = item;
+        for (const part of parts) {
+          if (!value) return false;
+          value = value[part];
+        }
+        return Boolean(value);
+      }
+      // Propriedade simples
+      return Boolean(item[property]);
+    });
+  }
+  
+  // Se for uma coleção do Foundry (como um items Collection)
+  if (collection.contents) {
+    return collection.contents.some(item => {
+      // Navegar pela propriedade usando notação de ponto
+      if (property.includes('.')) {
+        const parts = property.split('.');
+        let value = item;
+        for (const part of parts) {
+          if (!value) return false;
+          value = value[part];
+        }
+        return Boolean(value);
+      }
+      // Propriedade simples
+      return Boolean(item[property]);
+    });
+  }
+  
+  return false;
+});
