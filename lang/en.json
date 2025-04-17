@@ -59,7 +59,10 @@
       "Heavy": "Heavy",
       "CarryingCapacity": "Carrying Capacity",
       "CarryingRulesPenalty": "DR -2 after that. Impossible to carry more than",
-      "CarryingRulesMax": "."
+      "CarryingRulesMax": ".",
+      "WeaponsLimit": "Weapons limit reached! Unequip a weapon before equipping another one.",
+"EquipWeapon": "Equip weapon",
+"UnequipWeapon": "Unequip weapon"
     },
     "Encumbrance": {
   "MaxLoadExceeded": "Cannot add this item. The maximum load limit ({max}) would be exceeded!"
