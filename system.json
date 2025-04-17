@@ -21,6 +21,7 @@
     "module/item/item.js",
     "module/item/sheet.js",
     "module/rolls/ability-roll.js",
+    "module/hooks/encumbrance-hooks.js",
     "module/core/ronin.js"
   ],
   "scripts": [],
