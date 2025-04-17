@@ -59,7 +59,10 @@
       "Heavy": "Pesado",
       "CarryingCapacity": "Capacidade de Carga",
       "CarryingRulesPenalty": "DR -2 depois disso. Impossível carregar mais que",
-      "CarryingRulesMax": "."
+      "CarryingRulesMax": ".",
+      "WeaponsLimit": "Limite de armas atingido! Desequipe uma arma antes de equipar outra.",
+"EquipWeapon": "Equipar arma",
+"UnequipWeapon": "Desequipar arma"
     },
     "Encumbrance": {
   "MaxLoadExceeded": "Não é possível adicionar este item. O limite máximo de carga ({max}) seria ultrapassado!"
