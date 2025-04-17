@@ -32,7 +32,8 @@
       "Party": "GRUPO",
       "Individual": "INDIVIDUAL",
       "Defend": "DEFENDER",
-      "Parry": "APARAR"
+      "Parry": "APARAR",
+      "Attack": "ATACAR"
     },
     "Equipment": {
       "Weapons": "Armas",
@@ -61,8 +62,10 @@
       "CarryingRulesPenalty": "DR -2 depois disso. Impossível carregar mais que",
       "CarryingRulesMax": ".",
       "WeaponsLimit": "Limite de armas atingido! Desequipe uma arma antes de equipar outra.",
-"EquipWeapon": "Equipar arma",
-"UnequipWeapon": "Desequipar arma"
+      "EquipWeapon": "Equipar arma",
+      "UnequipWeapon": "Desequipar arma",
+      "NoEquippedWeapons": "Sem armas equipadas. Equipe armas na aba Equipamentos.",
+      "SelectAmmo": "Selecionar Munição"
     },
     "Encumbrance": {
   "MaxLoadExceeded": "Não é possível adicionar este item. O limite máximo de carga ({max}) seria ultrapassado!"
