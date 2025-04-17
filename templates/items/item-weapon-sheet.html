@@ -46,6 +46,7 @@
       <div class="form-group">
         <label>{{localize "RONIN.Equipment.Weight"}}</label>
         <select name="system.weight">
+          <option value="small" {{#if (eq system.weight "small")}}selected{{/if}}>{{localize "RONIN.Equipment.Small"}}</option>
           <option value="normal" {{#if (eq system.weight "normal")}}selected{{/if}}>{{localize "RONIN.Equipment.Normal"}}</option>
           <option value="heavy" {{#if (eq system.weight "heavy")}}selected{{/if}}>{{localize "RONIN.Equipment.Heavy"}}</option>
         </select>
