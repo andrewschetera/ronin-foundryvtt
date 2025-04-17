@@ -58,7 +58,7 @@ class RoninItem extends Item {
     }
     
     // Verificar se o campo weight existe ou é válido
-    if (!itemData.weight || (itemData.weight !== "normal" && itemData.weight !== "heavy")) {
+    if (!itemData.weight || (itemData.weight !== "small" && itemData.weight !== "normal" && itemData.weight !== "heavy")) {
       itemData.weight = "normal"; // Peso padrão
     }
     
