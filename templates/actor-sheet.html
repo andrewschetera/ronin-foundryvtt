@@ -124,18 +124,17 @@
 <div class="tab" data-group="primary" data-tab="equipment">
   <div class="tab-equipment">
     <!-- Carrying Capacity no início da aba -->
-    <div class="carrying-capacity-section">
-      <div class="carrying-capacity-info">
-        <label>{{localize "RONIN.Equipment.CarryingCapacity"}}:</label>
-        <span class="carrying-capacity-current">0</span>
-        <span>/</span>
-        {{#with system.abilities.vigor}}
-        <span class="carrying-capacity-max">{{sum value 8}}</span>
-        <span class="carrying-capacity-rules">
-          VIG +8. {{localize "RONIN.Equipment.CarryingRulesPenalty"}} {{multiply (sum value 8) 2}} {{localize "RONIN.Equipment.CarryingRulesMax"}}
-        </span>
-        {{/with}}
-      </div>
+    <div class="carrying-capacity-info {{#if (lte (sum system.abilities.vigor.value 8) system.carryingCapacity.value)}}capacity-full{{/if}}">
+  <label>{{localize "RONIN.Equipment.CarryingCapacity"}}:</label>
+  <span class="carrying-capacity-current">{{system.carryingCapacity.value}}</span>
+  <span>/</span>
+  {{#with system.abilities.vigor}}
+  <span class="carrying-capacity-max">{{sum value 8}}</span>
+  <span class="carrying-capacity-rules">
+    VIG +8. {{localize "RONIN.Equipment.CarryingRulesPenalty"}} {{multiply (sum value 8) 2}} {{localize "RONIN.Equipment.CarryingRulesMax"}}
+  </span>
+  {{/with}}
+</div>
     </div>
 
     <div class="inventory-single-column">
