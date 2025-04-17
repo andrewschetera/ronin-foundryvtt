@@ -31,20 +31,7 @@ class RoninActor extends Actor {
     // Referência ao sistema de dados do ator
     const systemData = actorData.system;
     
-    // Calcular HP máximo baseado em Vigor + Resiliência (apenas exemplo)
-    if (systemData.abilities) {
-      const vigor = systemData.abilities.vigor?.value || 0;
-      const resilience = systemData.abilities.resilience?.value || 0;
-      
-      // Base HP é 10 + modificadores
-      const baseHP = 10 + vigor + resilience;
-      systemData.resources.hp.max = baseHP;
-      
-      // Garantir que o HP atual não ultrapasse o máximo
-      if (systemData.resources.hp.value > systemData.resources.hp.max) {
-        systemData.resources.hp.value = systemData.resources.hp.max;
-      }
-    }
+    // Cálculo de HP removido - agora o HP máximo será definido manualmente pelo usuário
     
     // Calcular capacidade de carga
     let totalWeight = 0;
