@@ -29,6 +29,7 @@ Hooks.once('init', async function() {
 
   // Registrar helpers do Handlebars
   RONIN.registerHandlebarsHelpers();
+  
 });
 
 // Hook para ajustar rolagem depois que o Foundry terminar de carregar
