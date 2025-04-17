@@ -61,6 +61,9 @@
       "CarryingRulesPenalty": "DR -2 after that. Impossible to carry more than",
       "CarryingRulesMax": "."
     },
+    "Encumbrance": {
+  "MaxLoadExceeded": "Cannot add this item. The maximum load limit ({max}) would be exceeded!"
+},
     "Features": {
       "Feats": "Feats",
       "Texts": "Texts",
