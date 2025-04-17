@@ -46,7 +46,25 @@ class RoninActor extends Actor {
       }
     }
     
-    // Calcular ou processar outros atributos derivados aqui
+    // Calcular capacidade de carga
+    let totalWeight = 0;
+    
+    // Percorre todos os itens
+    if (actorData.items && actorData.items.size > 0) {
+      actorData.items.forEach(item => {
+        if (item.system && item.system.weight) {
+          if (item.system.weight === "normal") totalWeight += 1;
+          else if (item.system.weight === "heavy") totalWeight += 2;
+          // Itens "small" não adicionam peso (0)
+        }
+      });
+    }
+    
+    // Atribui o valor calculado à capacidade de carga
+    if (!systemData.carryingCapacity) {
+      systemData.carryingCapacity = { value: 0 };
+    }
+    systemData.carryingCapacity.value = totalWeight;
   }
   
   /**
