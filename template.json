@@ -45,13 +45,15 @@
         },
         "background": "",
         "carryingCapacity": {
-             "value": 0
+          "value": 0
+        }
       }
     },
     "character": {
       "templates": ["base"],
       "class": "",
       "biography": ""
+    }
   },
   "Item": {
     "types": ["weapon", "armor", "misc", "feat", "text", "class"],
