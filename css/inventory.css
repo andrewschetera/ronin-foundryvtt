@@ -142,3 +142,100 @@
   background-color: rgba(128, 0, 0, 0.1);
   border-color: var(--color-red);
 }
+
+/* Estilo para o ícone de escudo de arma equipada */
+.weapon-equip-icon {
+  margin-right: 5px;
+  cursor: pointer;
+  color: #999; /* Cor clara para desativado */
+  transition: color 0.2s;
+}
+
+.weapon-equip-icon.equipped {
+  color: #333; /* Cor escura para ativado */
+}
+
+/* Mensagem de alerta para limite de armas */
+.weapons-limit-warning {
+  color: var(--color-red);
+  font-style: italic;
+  font-size: 0.9em;
+  margin-top: 5px;
+  padding: 3px;
+  background-color: rgba(255, 0, 0, 0.1);
+  border-radius: 3px;
+  display: none;
+}
+
+.weapons-limit-warning.show {
+  display: block;
+}
+
+/* Remover a exibição de checkbox para equipar */
+.item-equipped input[type="checkbox"] {
+  display: none;
+}
+
+/* Item simplificado na lista de inventário */
+.weapon-item-simplified .item-header {
+  display: flex;
+  align-items: center;
+}
+
+.weapon-item-simplified .item-image {
+  margin-right: 5px;
+}
+
+.weapon-item-simplified .item-controls {
+  margin-left: auto;
+}
+
+/* Estilos para exibição simplificada de armas */
+.weapon-item-simplified .item-details {
+  display: flex;
+  margin-top: 3px;
+  padding-left: 29px;
+}
+
+.weapon-item-simplified .item-properties {
+  display: flex;
+  gap: 10px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Ajuste do espaçamento para informações de armas em linha */
+.weapon-item-inline .item-name {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.weapon-item-inline .item-properties {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribui os itens uniformemente */
+  gap: 20px; /* Aumenta o gap entre os itens */
+  font-size: 0.85em;
+  margin-left: 15px;
+  width: 65%; /* Define uma largura para as propriedades */
+}
+
+/* Cada propriedade individual agora terá largura fixa */
+.weapon-item-inline .item-type,
+.weapon-item-inline .item-hand,
+.weapon-item-inline .item-weight {
+  min-width: 80px; /* Largura mínima para cada item */
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  border-radius: 0px;
+  white-space: nowrap; /* Evita quebra de linha */
+  color: #000000 ; /* Forçar texto preto com !important */
+  font-weight: bold; /* Tornar texto em negrito para melhor legibilidade */
+  background-color: rgba(0, 0, 0, 0); /* Fundo sutil para todas as propriedades */
+  border: 0px solid rgba(0, 0, 0, 0); /* Borda sutil para todas as propriedades */
+}
+
