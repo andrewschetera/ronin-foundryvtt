@@ -5,7 +5,11 @@
     
     <div class="card-roll-result">
       <div class="roll-formula">
-        <span>1d20 + {{abilityAbbrev}} {{#if modifierText}}{{modifierText}}{{/if}} VS DR {{difficultyRating}}</span>
+        <span>1d20 + {{abilityAbbrev}} {{#if modifierText}}{{modifierText}}{{/if}} VS DR {{difficultyRating}}
+        {{#if isOverencumbered}}
+          {{#if overencumberedPenalty}} (Inclui penalidade de sobrecarga +{{overencumberedPenalty}}){{/if}}
+        {{/if}}
+        </span>
       </div>
       
       <div class="roll-calculation">
