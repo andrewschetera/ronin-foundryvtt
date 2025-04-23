@@ -106,34 +106,37 @@ class RoninActorSheet extends ActorSheet {
     this._fixScrollingLayout();
   }
   
-  /**
-   * Ativa os event listeners da ficha
-   * @param {jQuery} html O conteúdo HTML da ficha
-   * @override
-   */
-  activateListeners(html) {
-    super.activateListeners(html);
-    
-    // Listener especial para os botões de honor
-    html.find('input[data-select-single="true"]').click(this._onClickHonorDot.bind(this));
-    
-    // Adicionar listener para os rótulos das habilidades
-    html.find('.ability label').click(this._onAbilityLabelClick.bind(this));
-    
-    // Funcionalidade condicional para as ações do proprietário
-    if (this.actor.isOwner) {
-      // Item creation
-      html.find('.item-create').click(this._onItemCreate.bind(this));
+ /**
+ * Ativa os event listeners da ficha
+ * @param {jQuery} html O conteúdo HTML da ficha
+ * @override
+ */
+activateListeners(html) {
+  super.activateListeners(html);
+  
+  // Listener especial para os botões de honor
+  html.find('input[data-select-single="true"]').click(this._onClickHonorDot.bind(this));
+  
+  // Adicionar listener para os rótulos das habilidades
+  html.find('.ability label').click(this._onAbilityLabelClick.bind(this));
+  
+  // Novo listener para ícones de equipar armas
+  html.find('.weapon-equip-icon').click(this._onWeaponEquipToggle.bind(this));
+  
+  // Funcionalidade condicional para as ações do proprietário
+  if (this.actor.isOwner) {
+    // Item creation
+    html.find('.item-create').click(this._onItemCreate.bind(this));
 
-      // Item editing
-      html.find('.item-edit').click(this._onItemEdit.bind(this));
+    // Item editing
+    html.find('.item-edit').click(this._onItemEdit.bind(this));
 
-      // Item deletion
-      html.find('.item-delete').click(this._onItemDelete.bind(this));
-      
-      // Outras interações com botões podem ser adicionadas aqui
-    }
+    // Item deletion
+    html.find('.item-delete').click(this._onItemDelete.bind(this));
+    
+    // Outras interações com botões podem ser adicionadas aqui
   }
+}
 
   /**
    * Manipula o clique em um botão de honor
@@ -176,6 +179,74 @@ class RoninActorSheet extends ActorSheet {
       this.actor.rollAbility(abilityKey);
     }
   }
+
+/**
+ * Manipula o clique no ícone de equipar/desequipar arma
+ * @param {Event} event O evento de clique
+ * @private
+ */
+async _onWeaponEquipToggle(event) {
+  event.preventDefault();
+  const icon = event.currentTarget;
+  const itemId = icon.dataset.itemId;
+  const itemHand = icon.dataset.hand;
+  const item = this.actor.items.get(itemId);
+  
+  if (!item) return;
+  
+  // Verificar se a arma já está equipada
+  const isEquipped = item.system.equipped;
+  
+  // Se estiver tentando equipar (não desequipar)
+  if (!isEquipped) {
+    // Obter todas as armas atualmente equipadas
+    const equippedWeapons = this.actor.items.filter(i => 
+      i.type === "weapon" && i.system.equipped && i._id !== itemId
+    );
+    
+    // Contar armas de uma mão e duas mãos equipadas
+    const equippedOneHanded = equippedWeapons.filter(w => w.system.hand === "one").length;
+    const equippedTwoHanded = equippedWeapons.filter(w => w.system.hand === "two").length;
+    
+    // Verificar se atingiu o limite de armas equipadas
+    let limitReached = false;
+    
+    // Verificar limites com base no tipo de arma sendo equipada
+    if (itemHand === "two") {
+      // Para armas de duas mãos, não pode haver nenhuma outra arma equipada
+      limitReached = equippedOneHanded > 0 || equippedTwoHanded > 0;
+    } else {
+      // Para armas de uma mão, pode haver até 2 armas de uma mão, mas nenhuma de duas mãos
+      limitReached = equippedTwoHanded > 0 || equippedOneHanded >= 2;
+    }
+    
+    // Se atingiu o limite, mostrar aviso e retornar sem equipar
+    if (limitReached) {
+      // Mostrar mensagem de aviso
+      const warningElement = this.element.find('#weapons-limit-warning');
+      warningElement.addClass('show');
+      
+      // Esconder aviso após 3 segundos
+      setTimeout(() => {
+        warningElement.removeClass('show');
+      }, 3000);
+      
+      return;
+    }
+  }
+  
+  // Se chegou aqui, pode equipar ou desequipar a arma
+  await item.update({"system.equipped": !isEquipped});
+  
+  // Atualizar visualmente o ícone sem precisar recarregar toda a ficha
+  if (!isEquipped) {
+    icon.classList.add('equipped');
+    icon.title = game.i18n.localize("RONIN.Equipment.UnequipWeapon");
+  } else {
+    icon.classList.remove('equipped');
+    icon.title = game.i18n.localize("RONIN.Equipment.EquipWeapon");
+  }
+}
 
   // Métodos para manipulação de itens
   _onItemCreate(event) {
