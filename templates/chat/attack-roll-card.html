@@ -1,0 +1,69 @@
+<div class="ronin-chat-card attack-roll-card">
+    <div class="card-header {{rollResult}}">
+      <h3>{{weapon.name}}</h3>
+    </div>
+    
+    <div class="card-roll-result">
+      <div class="roll-formula">
+        <span>1d20 + {{abilityAbbrev}} {{#if modifierText}}{{modifierText}}{{/if}} VS DR {{difficultyRating}}</span>
+      </div>
+      
+      <div class="roll-calculation">
+        {{d20Result}} + {{abilityValue}}{{#if modifier}} + {{modifier}}{{/if}} = {{totalResult}}
+      </div>
+      
+      <div class="roll-outcome {{rollResult}}">
+        {{#if isCrit}}
+          <h3 class="crit">{{localize "RONIN.Rolls.CriticalSuccess"}}</h3>
+        {{else if isFumble}}
+          <h3 class="fumble">{{localize "RONIN.Rolls.CriticalFailure"}}</h3>
+        {{else if isSuccess}}
+          <h3 class="success">{{localize "RONIN.Rolls.Success"}}</h3>
+        {{else}}
+          <h3 class="failure">{{localize "RONIN.Rolls.Failure"}}</h3>
+        {{/if}}
+      </div>
+      
+      {{#if isSuccess}}
+      <div class="damage-section">
+        <!-- Dano da arma -->
+        <div class="damage-weapon">
+          <div class="section-label">{{weapon.name}}</div>
+          <div class="section-result">
+            {{damageRoll.formula}}:
+            {{#if isCrit}}
+              {{damageRoll.total}} + {{damageRoll2.total}} = {{totalDamage}}
+            {{else}}
+              {{damageRoll.total}}
+            {{/if}}
+          </div>
+        </div>
+        
+        <!-- Armadura do inimigo -->
+        <div class="armor-enemy">
+          <div class="section-label">{{localize "RONIN.Equipment.EnemyArmor"}}</div>
+          <div class="section-result">
+            {{armorRoll.formula}}: {{armorRoll.total}}
+          </div>
+        </div>
+        
+        <!-- Dano final -->
+        <div class="final-damage">
+          <h4>{{localize "RONIN.Rolls.DamageDealt"}}: {{finalDamage}}</h4>
+        </div>
+      </div>
+      {{/if}}
+      
+      {{#if isCrit}}
+      <div class="critical-effect">
+        <p class="crit">{{localize "RONIN.Rolls.CriticalDamageEffect"}}</p>
+      </div>
+      {{/if}}
+      
+      {{#if isFumble}}
+      <div class="fumble-effect">
+        <p class="fumble">{{localize "RONIN.Rolls.FumbleEffect"}}</p>
+      </div>
+      {{/if}}
+    </div>
+  </div>

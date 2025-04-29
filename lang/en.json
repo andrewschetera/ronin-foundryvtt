@@ -65,11 +65,13 @@
       "EquipWeapon": "Equip weapon",
       "UnequipWeapon": "Unequip weapon",
       "NoEquippedWeapons": "No weapons equipped. Equip weapons in the Equipment tab.",
-      "SelectAmmo": "Select Ammunition"
+      "SelectAmmo": "Select Ammunition",
+      "EnemyArmor": "Enemy Armor",
+      "Total": "Total"
     },
     "Encumbrance": {
-  "MaxLoadExceeded": "Cannot add this item. The maximum load limit ({max}) would be exceeded!"
-},
+      "MaxLoadExceeded": "Cannot add this item. The maximum load limit ({max}) would be exceeded!"
+    },
     "Features": {
       "Feats": "Feats",
       "Texts": "Texts",
@@ -86,6 +88,7 @@
     },
     "Rolls": {
       "AbilityCheck": "{ability} Check",
+      "AttackWith": "Attack with {weapon}",
       "Roll": "Roll",
       "Cancel": "Cancel",
       "Modifier": "Modifier",
@@ -95,7 +98,11 @@
       "Success": "SUCCESS",
       "Failure": "FAILURE",
       "CriticalSuccess": "CRITICAL SUCCESS",
-      "CriticalFailure": "CRITICAL FAILURE"
+      "CriticalFailure": "CRITICAL FAILURE",
+      "Critical": "Critical",
+      "DamageDealt": "Damage Dealt",
+      "CriticalDamageEffect": "Critical Hit, x2 damage and enemy armor is reduced by 1 category!",
+      "FumbleEffect": "Critical Failure, weapon lost or damaged!"
     },
     "Description": "Description"
   }

@@ -103,8 +103,8 @@ window.RONIN.AbilityRoll = {
       // Cria a rolagem
       let roll = new Roll(formula);
       
-      // Avalia a rolagem
-      await roll.evaluate();
+      // Avalia a rolagem - Correção para API v12 do Foundry
+      await roll.evaluate(); // Removida a opção {async: true} que está obsoleta
       
       // Obtém o resultado do d20
       const d20Result = roll.terms[0].results[0].result;
@@ -157,7 +157,6 @@ window.RONIN.AbilityRoll = {
         user: game.user.id,
         speaker: ChatMessage.getSpeaker({actor: actor}),
         content: chatContent,
-        style: CONST.CHAT_MESSAGE_STYLES.OTHER,
         sound: CONFIG.sounds.dice
       };
       

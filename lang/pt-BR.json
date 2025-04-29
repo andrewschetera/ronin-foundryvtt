@@ -65,11 +65,13 @@
       "EquipWeapon": "Equipar arma",
       "UnequipWeapon": "Desequipar arma",
       "NoEquippedWeapons": "Sem armas equipadas. Equipe armas na aba Equipamentos.",
-      "SelectAmmo": "Selecionar Munição"
+      "SelectAmmo": "Selecionar Munição",
+      "EnemyArmor": "Armadura do Inimigo",
+      "Total": "Total"
     },
     "Encumbrance": {
-  "MaxLoadExceeded": "Não é possível adicionar este item. O limite máximo de carga ({max}) seria ultrapassado!"
-},
+      "MaxLoadExceeded": "Não é possível adicionar este item. O limite máximo de carga ({max}) seria ultrapassado!"
+    },
     "Features": {
       "Feats": "Características",
       "Texts": "Textos",
@@ -86,6 +88,7 @@
     },
     "Rolls": {
       "AbilityCheck": "Teste de {ability}",
+      "AttackWith": "Ataque com {weapon}",
       "Roll": "Rolar",
       "Cancel": "Cancelar",
       "Modifier": "Modificador",
@@ -95,7 +98,11 @@
       "Success": "SUCESSO",
       "Failure": "FALHA",
       "CriticalSuccess": "SUCESSO CRÍTICO",
-      "CriticalFailure": "FALHA CRÍTICA"
+      "CriticalFailure": "FALHA CRÍTICA",
+      "Critical": "Crítico",
+      "DamageDealt": "Dano Infligido",
+      "CriticalDamageEffect": "Acerto Crítico, x2 de dano e a armadura do inimigo é reduzida em 1 categoria!",
+      "FumbleEffect": "Falha crítica, arma perdida ou danificada!"
     },
     "Description": "Descrição"
   }

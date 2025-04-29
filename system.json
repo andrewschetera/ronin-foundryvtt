@@ -13,14 +13,15 @@
     }
   ],
   "esmodules": [
-    "module/core/config.js",
+    "module/rolls/ability-roll.js",
+    "module/rolls/attack-roll.js",
     "module/helpers/handlebars.js",
     "module/helpers/listeners.js",
+    "module/core/config.js",
     "module/actor/actor.js",
     "module/actor/sheet.js",
     "module/item/item.js",
     "module/item/sheet.js",
-    "module/rolls/ability-roll.js",
     "module/hooks/encumbrance-hooks.js",
     "module/core/ronin.js"
   ],

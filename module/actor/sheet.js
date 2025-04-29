@@ -123,6 +123,9 @@ activateListeners(html) {
   // Novo listener para ícones de equipar armas
   html.find('.weapon-equip-icon').click(this._onWeaponEquipToggle.bind(this));
   
+  // Novo listener para botões de ataque nas armas da aba Tatakai
+  html.find('.weapon-attack-button').click(this._onWeaponAttack.bind(this));
+  
   // Funcionalidade condicional para as ações do proprietário
   if (this.actor.isOwner) {
     // Item creation
@@ -246,6 +249,59 @@ async _onWeaponEquipToggle(event) {
     icon.classList.remove('equipped');
     icon.title = game.i18n.localize("RONIN.Equipment.EquipWeapon");
   }
+}
+
+/**
+ * Manipula o clique no botão de ataque
+ * @param {Event} event O evento de clique
+ * @private
+ */
+_onWeaponAttack(event) {
+  event.preventDefault();
+  const button = event.currentTarget;
+  const weaponId = button.dataset.weaponId;
+  
+  // Obter a arma pelo ID
+  const weapon = this.actor.items.get(weaponId);
+  
+  if (!weapon) {
+    console.error("Arma não encontrada");
+    ui.notifications.error("Arma não encontrada");
+    return;
+  }
+  
+  // Verificar se o namespace RONIN existe
+  if (!window.RONIN) {
+    console.error("Namespace RONIN não encontrado");
+    ui.notifications.error("Erro no sistema: Namespace RONIN não encontrado");
+    return;
+  }
+  
+  // Verificar se o módulo AttackRoll existe
+  if (!window.RONIN.AttackRoll) {
+    console.error("Módulo de rolagem de ataque não encontrado no namespace RONIN");
+    ui.notifications.error("Módulo de rolagem de ataque não disponível");
+    
+    // Tentar importar dinamicamente (apenas como fallback)
+    try {
+      import('../rolls/attack-roll.js').then(module => {
+        if (module && module.default) {
+          console.log("Módulo de rolagem de ataque carregado dinamicamente");
+          module.default.roll(weapon, this.actor);
+        } else {
+          console.error("Falha ao importar módulo de rolagem de ataque");
+        }
+      }).catch(err => {
+        console.error("Erro ao importar módulo de rolagem de ataque:", err);
+      });
+    } catch (error) {
+      console.error("Erro ao tentar importação dinâmica:", error);
+    }
+    return;
+  }
+  
+  // Se chegou aqui, o módulo existe, então faz a rolagem
+  RONIN.AttackRoll.roll(weapon, this.actor);
 }
 
   // Métodos para manipulação de itens
