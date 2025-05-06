@@ -75,12 +75,14 @@
       "price": 0,
       "weight": "normal"
     },
-    "armor": {
-      "templates": ["itemDescription", "physicalItem"],
-      "protection": "d2",
-      "tier": 1,
-      "equipped": false
-    },
+"armor": {
+  "templates": ["itemDescription", "physicalItem"],
+  "maxCategory": 1,
+  "currentCategory": 1,
+  "protection": "",
+  "swiftnessPenalty": 0,
+  "defensePenalty": 0
+},
     "misc": {
       "templates": ["itemDescription", "physicalItem"],
       "quantity": 1

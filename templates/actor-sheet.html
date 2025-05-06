@@ -200,39 +200,61 @@
     {{/each}}
   </ol>
 </div>
-      <!-- Armor -->
-      <div class="inventory-category">
-        <h2 class="category-header">
-          <span>{{localize "RONIN.Equipment.Armor"}}</span>
-          <a class="item-create" title="Create Armor" data-type="armor">
-            <i class="fas fa-plus"></i> Add
-          </a>
-        </h2>
-        <ol class="item-list">
-          {{#each items as |item id|}}
-            {{#if (eq item.type "armor")}}
-              <li class="item" data-item-id="{{item._id}}">
-                <div class="item-header">
-                  <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
-                  <div class="item-name">{{item.name}}</div>
-                  <div class="item-controls">
-                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                  </div>
-                </div>
-                <div class="item-details">
-                  <div class="item-protection">-{{item.system.protection}}</div>
-                  <div class="item-tier">{{localize "RONIN.Equipment.Tier"}} {{item.system.tier}}</div>
-                  <div class="item-equipped">
-                    <input type="checkbox" {{#if item.system.equipped}}checked{{/if}} data-item-id="{{item._id}}" data-equipped>
-                    <label>{{localize "RONIN.Equipment.Equipped"}}</label>
-                  </div>
-                </div>
-              </li>
-            {{/if}}
-          {{/each}}
-        </ol>
-      </div>
+<!-- Armaduras - Formato atualizado similar às armas -->
+<div class="inventory-category">
+  <h2 class="category-header">
+    <span>{{localize "RONIN.Equipment.Armor"}}</span>
+    <a class="item-create" title="Create Armor" data-type="armor">
+      <i class="fas fa-plus"></i> Add
+    </a>
+  </h2>
+  
+  <!-- Aviso de limite de armaduras equipadas (inicialmente oculto) -->
+  <div class="armor-limit-warning" id="armor-limit-warning">
+    {{localize "RONIN.Equipment.ArmorLimit"}}
+  </div>
+  
+  <ol class="item-list">
+    {{#each items as |item id|}}
+      {{#if (eq item.type "armor")}}
+        <li class="item armor-item-inline" data-item-id="{{item._id}}">
+          <div class="item-header">
+            <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+            <!-- Ícone de escudo para armadura equipada -->
+            <i class="fas fa-shield-alt armor-equip-icon {{#if item.system.equipped}}equipped{{/if}}" 
+               data-item-id="{{item._id}}" 
+               title="{{#if item.system.equipped}}{{localize 'RONIN.Equipment.UnequipArmor'}}{{else}}{{localize 'RONIN.Equipment.EquipArmor'}}{{/if}}"></i>
+            <div class="item-name">
+              {{item.name}}
+              <span class="item-properties">
+                <!-- Categoria de armadura -->
+                <span class="item-category armor-cat-{{item.system.currentCategory}}">
+                  {{localize (concat "RONIN.Equipment.ArmorCat" item.system.currentCategory)}}
+                </span>
+                <!-- Peso -->
+                <span class="item-weight weight-{{item.system.weight}}">
+                  {{localize (concat "RONIN.Equipment." (capitalize item.system.weight))}}
+                </span>
+                <!-- Ícone de armadura danificada à direita, com posição fixa e não afetando o layout -->
+                <span class="armor-damaged-icon-container">
+                  {{#if (lt item.system.currentCategory item.system.maxCategory)}}
+                  <span class="armor-damaged-icon" title="{{localize 'RONIN.Equipment.ArmorDamaged'}}">
+                    <i class="fas fa-hammer"></i>
+                  </span>
+                  {{/if}}
+                </span>
+              </span>
+            </div>
+            <div class="item-controls">
+              <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+              <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+            </div>
+          </div>
+        </li>
+      {{/if}}
+    {{/each}}
+  </ol>
+</div>
 
       <!-- Misc -->
       <div class="inventory-category">
@@ -361,23 +383,56 @@
     {{/each}}
   </div>
 </div>           
-            <!-- Armadura equipada -->
-            <div class="equipped-armor">
-              <h2>{{localize "RONIN.Equipment.Armor"}} {{localize "RONIN.Equipment.Equipped"}}</h2>
-              <div class="equipped-list">
-                {{#each items as |item id|}}
-                  {{#if (and (eq item.type "armor") item.system.equipped)}}
-                    <div class="equipped-item" data-item-id="{{item._id}}">
-                      <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
-                      <div class="item-name">{{item.name}}</div>
-                      <div class="item-protection">-{{item.system.protection}}</div>
-                      <div class="item-tier">{{localize "RONIN.Equipment.Tier"}} {{item.system.tier}}</div>
-                    </div>
-                  {{/if}}
-                {{/each}}
-              </div>
+<!-- Armadura equipada na aba Tatakai -->
+<div class="equipped-armor">
+  <h2>{{localize "RONIN.Equipment.Armor"}} {{localize "RONIN.Equipment.Equipped"}}</h2>
+  
+  <!-- Mensagem para quando não houver armadura equipada -->
+  {{#unless (some items "system.equipped")}}
+    <div class="no-equipped-armor">
+      {{localize "RONIN.Equipment.NoEquippedArmor"}}
+    </div>
+  {{/unless}}
+  
+  <!-- Lista de armaduras equipadas (sempre será apenas uma) -->
+  <div class="tatakai-armor-list">
+    {{#each items as |item id|}}
+      {{#if (and (eq item.type "armor") item.system.equipped)}}
+        <div class="tatakai-armor-item" data-item-id="{{item._id}}">
+          <div class="armor-main-info">
+            <div class="armor-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+            <div class="armor-name">{{item.name}}</div>
+            
+            <!-- Categoria atual com seletor -->
+            <div class="armor-category">
+              <select class="armor-current-category" data-item-id="{{item._id}}">
+                <option value="0" {{#if (eq item.system.currentCategory 0)}}selected{{/if}}>{{localize "RONIN.Equipment.ArmorCat0"}}</option>
+                <option value="1" {{#if (eq item.system.currentCategory 1)}}selected{{/if}}>{{localize "RONIN.Equipment.ArmorCat1"}}</option>
+                <option value="2" {{#if (eq item.system.currentCategory 2)}}selected{{/if}}>{{localize "RONIN.Equipment.ArmorCat2"}}</option>
+                <option value="3" {{#if (eq item.system.currentCategory 3)}}selected{{/if}}>{{localize "RONIN.Equipment.ArmorCat3"}}</option>
+              </select>
+            </div>
+            
+            <!-- Proteção (sem quebra de linha) -->
+            <div class="armor-protection">
+              {{localize "RONIN.Equipment.Protection"}}: <span class="protection-value">{{item.system.protection}}</span>
             </div>
           </div>
+          
+          <!-- Segunda linha com penalidades -->
+          <div class="armor-penalties">
+            <span class="swiftness-penalty" data-value="{{item.system.swiftnessPenalty}}">
+              {{localize "RONIN.Equipment.SwiftnessPenalty"}}: CD + {{item.system.swiftnessPenalty}}
+            </span>
+            <span class="defense-penalty" data-value="{{item.system.defensePenalty}}">
+              {{localize "RONIN.Equipment.DefensePenalty"}}: CD + {{item.system.defensePenalty}}
+            </span>
+          </div>
+        </div>
+      {{/if}}
+    {{/each}}
+  </div>
+</div>
           
           <!-- Botões de ações de combate -->
           <div class="combat-actions">

@@ -68,27 +68,70 @@ class RoninItem extends Item {
     }
   }
   
-  /**
-   * Preparação específica para armaduras
-   * @param {Object} itemData Os dados do item
-   * @private
-   */
-  _prepareArmorData(itemData) {
-    // Verificar se o campo protection existe
-    if (!itemData.protection) {
-      itemData.protection = "d2"; // Proteção padrão
-    }
-    
-    // Verificar se o campo tier existe
-    if (!itemData.tier) {
-      itemData.tier = 1; // Tier padrão
-    }
-    
-    // Verificar se o campo weight existe ou é válido
-    if (!itemData.weight || (itemData.weight !== "normal" && itemData.weight !== "heavy")) {
-      itemData.weight = "normal"; // Peso padrão
-    }
+/**
+ * Preparação específica para armaduras
+ * @param {Object} itemData Os dados do item
+ * @private
+ */
+_prepareArmorData(itemData) {
+  // Verificar se os campos das categorias existem
+  // Convertendo explicitamente para números para evitar problemas com tipos
+  if (itemData.maxCategory === undefined) {
+    itemData.maxCategory = 1; // Categoria máxima padrão
+  } else {
+    // Garantir que maxCategory é um número
+    itemData.maxCategory = Number(itemData.maxCategory);
   }
+  
+  if (itemData.currentCategory === undefined) {
+    itemData.currentCategory = 1; // Categoria atual padrão 
+  } else {
+    // Garantir que currentCategory é um número
+    itemData.currentCategory = Number(itemData.currentCategory);
+  }
+  
+  // Garantir que a categoria atual não seja maior que a máxima
+  if (itemData.currentCategory > itemData.maxCategory) {
+    itemData.currentCategory = itemData.maxCategory;
+  }
+  
+  // Atualizar o valor de proteção com base na categoria atual
+  switch (itemData.currentCategory) {
+    case 0:
+      itemData.protection = "0";
+      break;
+    case 1:
+      itemData.protection = "1d2";
+      break;
+    case 2:
+      itemData.protection = "1d4";
+      break;
+    case 3:
+      itemData.protection = "1d6";
+      break;
+    default:
+      itemData.protection = "0";
+  }
+  
+  // Inicializar as penalidades se não existirem
+  if (itemData.swiftnessPenalty === undefined) {
+    itemData.swiftnessPenalty = 0;
+  }
+  
+  if (itemData.defensePenalty === undefined) {
+    itemData.defensePenalty = 0;
+  }
+  
+  // Verificar se o campo weight existe ou é válido
+  if (!itemData.weight || !["small", "normal", "heavy"].includes(itemData.weight)) {
+    itemData.weight = "normal"; // Peso padrão
+  }
+  
+  // Garantir que o campo de descrição exista
+  if (!itemData.description) {
+    itemData.description = "";
+  }
+}
   
   /**
    * Preparação específica para equipamentos

@@ -120,10 +120,14 @@ activateListeners(html) {
   // Adicionar listener para os rótulos das habilidades
   html.find('.ability label').click(this._onAbilityLabelClick.bind(this));
   
-  // Novo listener para ícones de equipar armas
+  // Listeners para equipar armas e armaduras
   html.find('.weapon-equip-icon').click(this._onWeaponEquipToggle.bind(this));
+  html.find('.armor-equip-icon').click(this._onArmorEquipToggle.bind(this));
   
-  // Novo listener para botões de ataque nas armas da aba Tatakai
+  // Novo listener para selecionar categoria atual de armadura na aba Tatakai
+  html.find('.armor-current-category').change(this._onArmorCategoryChange.bind(this));
+  
+  // Listener para botões de ataque nas armas da aba Tatakai
   html.find('.weapon-attack-button').click(this._onWeaponAttack.bind(this));
   
   // Funcionalidade condicional para as ações do proprietário
@@ -249,6 +253,137 @@ async _onWeaponEquipToggle(event) {
     icon.classList.remove('equipped');
     icon.title = game.i18n.localize("RONIN.Equipment.EquipWeapon");
   }
+}
+
+/**
+ * Manipula o clique no ícone de equipar/desequipar armadura
+ * @param {Event} event O evento de clique
+ * @private
+ */
+async _onArmorEquipToggle(event) {
+  event.preventDefault();
+  const icon = event.currentTarget;
+  const itemId = icon.dataset.itemId;
+  const item = this.actor.items.get(itemId);
+  
+  if (!item) return;
+  
+  // Verificar se a armadura já está equipada
+  const isEquipped = item.system.equipped;
+  
+  // Se estiver tentando equipar (não desequipar)
+  if (!isEquipped) {
+    // Obter todas as armaduras atualmente equipadas
+    const equippedArmors = this.actor.items.filter(i => 
+      i.type === "armor" && i.system.equipped && i._id !== itemId
+    );
+    
+    // Se já houver uma armadura equipada, mostrar aviso e retornar
+    if (equippedArmors.length > 0) {
+      // Mostrar mensagem de aviso
+      const warningElement = this.element.find('#armor-limit-warning');
+      warningElement.addClass('show');
+      
+      // Esconder aviso após 3 segundos
+      setTimeout(() => {
+        warningElement.removeClass('show');
+      }, 3000);
+      
+      return;
+    }
+    
+    // Se chegou aqui, não há outras armaduras equipadas, pode equipar esta
+    await item.update({"system.equipped": true});
+    
+    // Desequipar todas as outras armaduras (por precaução)
+    for (let armor of equippedArmors) {
+      await armor.update({"system.equipped": false});
+    }
+  } else {
+    // Estamos desequipando a armadura
+    await item.update({"system.equipped": false});
+  }
+  
+  // Atualizar visualmente o ícone sem precisar recarregar toda a ficha
+  if (!isEquipped) {
+    icon.classList.add('equipped');
+    icon.title = game.i18n.localize("RONIN.Equipment.UnequipArmor");
+  } else {
+    icon.classList.remove('equipped');
+    icon.title = game.i18n.localize("RONIN.Equipment.EquipArmor");
+  }
+  
+  // Recalcular a capacidade de carga após equipar/desequipar a armadura
+  this._recalculateCarryingCapacity();
+}
+
+/**
+ * Manipula a mudança da categoria atual da armadura na aba Tatakai
+ * @param {Event} event O evento de mudança
+ * @private
+ */
+async _onArmorCategoryChange(event) {
+  event.preventDefault();
+  const select = event.currentTarget;
+  const itemId = select.dataset.itemId;
+  const newCategory = parseInt(select.value);
+  
+  // Obter a armadura pelo ID
+  const armor = this.actor.items.get(itemId);
+  
+  if (!armor) return;
+  
+  // Verificar se a nova categoria é válida (não maior que a categoria máxima)
+  const maxCategory = armor.system.maxCategory;
+  if (newCategory > maxCategory) {
+    ui.notifications.error(game.i18n.localize("RONIN.Equipment.CategoryExceedsMax"));
+    // Reverter para o valor original
+    select.value = armor.system.currentCategory;
+    return;
+  }
+  
+  // Atualizar a categoria atual da armadura
+  await armor.update({"system.currentCategory": newCategory});
+  
+  // Atualizar a proteção exibida (sem recarregar a ficha completa)
+  const protectionElement = select.closest('.tatakai-armor-item').querySelector('.protection-value');
+  if (protectionElement) {
+    // Determinar o valor de proteção com base na categoria
+    let protectionValue = "0";
+    switch (newCategory) {
+      case 0: protectionValue = "0"; break;
+      case 1: protectionValue = "1d2"; break;
+      case 2: protectionValue = "1d4"; break;
+      case 3: protectionValue = "1d6"; break;
+    }
+    protectionElement.textContent = protectionValue;
+  }
+}
+
+/**
+ * Recalcula a capacidade de carga considerando itens equipados
+ * @private
+ */
+_recalculateCarryingCapacity() {
+  // Esta é uma função simplificada que deve ser adaptada ao seu sistema existente
+  let totalWeight = 0;
+  
+  // Percorre todos os itens, ignorando armaduras equipadas
+  this.actor.items.forEach(item => {
+    if (item.system && item.system.weight) {
+      // Ignorar armaduras equipadas
+      if (item.type === "armor" && item.system.equipped) {
+        return;
+      }
+      
+      if (item.system.weight === "normal") totalWeight += 1;
+      else if (item.system.weight === "heavy") totalWeight += 2;
+      // Itens "small" não adicionam peso (0)
+    }
+  });
+  
+  // Atualizar a capacidade de carga no ator
+  this.actor.update({'system.carryingCapacity.value': totalWeight});
 }
 
 /**

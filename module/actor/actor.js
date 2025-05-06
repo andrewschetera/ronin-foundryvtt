@@ -40,6 +40,11 @@ class RoninActor extends Actor {
     if (actorData.items && actorData.items.size > 0) {
       actorData.items.forEach(item => {
         if (item.system && item.system.weight) {
+          // Ignorar armaduras equipadas
+          if (item.type === "armor" && item.system.equipped) {
+            return;
+          }
+          
           if (item.system.weight === "normal") totalWeight += 1;
           else if (item.system.weight === "heavy") totalWeight += 2;
           // Itens "small" não adicionam peso (0)

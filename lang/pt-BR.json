@@ -67,7 +67,23 @@
       "NoEquippedWeapons": "Sem armas equipadas. Equipe armas na aba Equipamentos.",
       "SelectAmmo": "Selecionar Munição",
       "EnemyArmor": "Armadura do Inimigo",
-      "Total": "Total"
+      "Total": "Total",
+      "MaxCategory": "Categoria Máxima",
+"CurrentCategory": "Categoria Atual",
+"ArmorCat0": "Sem Armadura (0)",
+"ArmorCat1": "Armadura Leve (1)",
+"ArmorCat2": "Armadura Média (2)",
+"ArmorCat3": "Armadura Pesada (3)",
+"Protection": "Proteção",
+"ProtectionNotes": "Baseado na categoria atual (0: 0, 1: 1d2, 2: 1d4, 3: 1d6)",
+"SwiftnessPenalty": "Penalidade de Rapidez",
+"DefensePenalty": "Penalidade de Defesa",
+"EquipArmor": "Equipar armadura",
+"UnequipArmor": "Desequipar armadura",
+"NoEquippedArmor": "Sem armadura equipada. Equipe uma armadura na aba Equipamentos.",
+"ArmorLimit": "Limite de armadura atingido! Desequipe a armadura atual antes de equipar outra.",
+"ArmorDamaged": "Armadura danificada (categoria atual é menor que a máxima)",
+"CategoryExceedsMax": "A categoria selecionada excede a categoria máxima desta armadura!"
     },
     "Encumbrance": {
       "MaxLoadExceeded": "Não é possível adicionar este item. O limite máximo de carga ({max}) seria ultrapassado!"

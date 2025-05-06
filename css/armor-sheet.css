@@ -1,0 +1,67 @@
+/* Estilos específicos para a ficha de armadura - adicionar ao arquivo weapon-sheet.css ou criar um novo arquivo armor-sheet.css */
+
+.ronin.sheet.item .armor-properties {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ronin.sheet.item .armor-description {
+  align-items: flex-start;
+}
+
+.ronin.sheet.item .armor-description label {
+  margin-bottom: 5px;
+}
+
+.ronin.sheet.item .armor-description-editor {
+  width: 100%;
+  min-height: 200px;
+  border: 1px solid var(--color-gray);
+  border-radius: 3px;
+}
+
+/* Estilos para destacar as categorias de armadura */
+.ronin.sheet.item select[name="system.maxCategory"],
+.ronin.sheet.item select[name="system.currentCategory"] {
+  font-weight: bold;
+}
+
+/* Estilo para quando a categoria atual é menor que a máxima */
+.ronin.sheet.item .armor-category-warning {
+  margin-top: 5px;
+  color: var(--color-red);
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+/* Estilos adicionais para os novos campos da ficha de armadura */
+
+/* Estilo para o campo de proteção (desabilitado) */
+.ronin.sheet.item input[name="system.protection"] {
+  background-color: rgba(0, 0, 0, 0.05);
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Estilo para notas explicativas */
+.ronin.sheet.item .notes {
+  margin: 2px 0 0 0;
+  font-size: 0.85em;
+  font-style: italic;
+  color: #666;
+}
+
+/* Estilo para campos de penalidade */
+.ronin.sheet.item input[name="system.swiftnessPenalty"],
+.ronin.sheet.item input[name="system.defensePenalty"] {
+  width: 60px;
+  text-align: center;
+}
+
+/* Realce visual se as penalidades forem maiores que zero */
+.ronin.sheet.item input[name="system.swiftnessPenalty"][value]:not([value="0"]),
+.ronin.sheet.item input[name="system.defensePenalty"][value]:not([value="0"]) {
+  color: var(--color-red);
+  font-weight: bold;
+}
