@@ -130,6 +130,9 @@ activateListeners(html) {
   // Listener para botões de ataque nas armas da aba Tatakai
   html.find('.weapon-attack-button').click(this._onWeaponAttack.bind(this));
   
+  // Listener para o botão de defesa
+  html.find('.defend-action').click(this._onDefendButtonClick.bind(this));
+  
   // Funcionalidade condicional para as ações do proprietário
   if (this.actor.isOwner) {
     // Item creation
@@ -437,6 +440,48 @@ _onWeaponAttack(event) {
   
   // Se chegou aqui, o módulo existe, então faz a rolagem
   RONIN.AttackRoll.roll(weapon, this.actor);
+}
+
+/**
+ * Manipula o clique no botão de defesa
+ * @param {Event} event O evento de clique
+ * @private
+ */
+_onDefendButtonClick(event) {
+  event.preventDefault();
+  
+  // Verificar se o namespace RONIN existe
+  if (!window.RONIN) {
+    console.error("Namespace RONIN não encontrado");
+    ui.notifications.error("Erro no sistema: Namespace RONIN não encontrado");
+    return;
+  }
+  
+  // Verificar se o módulo DefenseRoll existe
+  if (!window.RONIN.DefenseRoll) {
+    console.error("Módulo de rolagem de defesa não encontrado no namespace RONIN");
+    ui.notifications.error("Módulo de rolagem de defesa não disponível");
+    
+    // Tentar importar dinamicamente (apenas como fallback)
+    try {
+      import('../rolls/defense-roll.js').then(module => {
+        if (module && module.default) {
+          console.log("Módulo de rolagem de defesa carregado dinamicamente");
+          module.default.roll(this.actor);
+        } else {
+          console.error("Falha ao importar módulo de rolagem de defesa");
+        }
+      }).catch(err => {
+        console.error("Erro ao importar módulo de rolagem de defesa:", err);
+      });
+    } catch (error) {
+      console.error("Erro ao tentar importação dinâmica:", error);
+    }
+    return;
+  }
+  
+  // Se chegou aqui, o módulo existe, então faz a rolagem
+  RONIN.DefenseRoll.roll(this.actor);
 }
 
   // Métodos para manipulação de itens

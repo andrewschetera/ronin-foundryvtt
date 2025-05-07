@@ -146,3 +146,44 @@
 .ronin-chat-card .fumble-effect {
   background-color: rgba(128, 0, 0, 0.2);
 }
+
+/* Regras de quebra de texto para chat cards */
+.ronin-chat-card .roll-formula,
+.ronin-chat-card .roll-calculation,
+.ronin-chat-card .defense-success p,
+.ronin-chat-card .critical-effect p,
+.ronin-chat-card .fumble-effect p,
+.ronin-chat-card .section-result,
+.ronin-chat-card .final-damage h4 {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+/* Estilos específicos para a penalidade de defesa */
+.ronin-chat-card .defense-penalty {
+  display: block;
+  font-style: italic;
+  font-size: 0.9em;
+  color: #800000;
+  margin-top: 5px;
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-align: center;
+}
+
+/* Estilos para a penalidade de rapidez da armadura */
+.ronin-chat-card .swiftness-penalty {
+  display: block;
+  font-style: italic;
+  font-size: 0.9em;
+  color: #800000;
+  margin-top: 5px;
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-align: center;
+}

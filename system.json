@@ -15,6 +15,7 @@
   "esmodules": [
     "module/rolls/ability-roll.js",
     "module/rolls/attack-roll.js",
+    "module/rolls/defense-roll.js",
     "module/helpers/handlebars.js",
     "module/helpers/listeners.js",
     "module/core/config.js",

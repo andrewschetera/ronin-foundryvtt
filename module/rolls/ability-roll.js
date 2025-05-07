@@ -35,6 +35,23 @@ window.RONIN.AbilityRoll = {
     const isOverencumbered = actor.system.carryingCapacity.value >= maxCapacity;
     const showOverencumberedWarning = isOverencumbered && (abilityKey === 'vigor' || abilityKey === 'swiftness');
     
+    // Verificar se estamos testando Rapidez e se há penalidade de armadura
+    let armorSwiftnessPenalty = 0;
+    let equippedArmor = null;
+    
+    if (abilityKey === 'swiftness') {
+      // Procurar por armadura equipada
+      const armors = actor.items.filter(i => i.type === "armor" && i.system.equipped);
+      if (armors.length > 0) {
+        equippedArmor = armors[0];
+        // Obter a penalidade de rapidez da armadura
+        armorSwiftnessPenalty = equippedArmor.system.swiftnessPenalty || 0;
+      }
+    }
+    
+    // Calcular a DR base para o teste
+    const baseDR = 10;
+    
     // Cria o título do diálogo
     const dialogTitle = game.i18n.format("RONIN.Rolls.AbilityCheck", {ability: abilityName});
     
@@ -42,7 +59,10 @@ window.RONIN.AbilityRoll = {
     const templateData = {
       abilityName: abilityName,
       abilityValue: abilityData.value,
-      isOverencumbered: showOverencumberedWarning
+      isOverencumbered: showOverencumberedWarning,
+      isSwiftness: abilityKey === 'swiftness',
+      armorSwiftnessPenalty: armorSwiftnessPenalty,
+      baseDR: baseDR
     };
     
     // Renderiza o template do diálogo
@@ -56,7 +76,7 @@ window.RONIN.AbilityRoll = {
         roll: {
           icon: '<i class="fas fa-dice-d20"></i>',
           label: game.i18n.localize("RONIN.Rolls.Roll"),
-          callback: html => this._onRollAbility(html, abilityKey, abilityName, abilityAbbrev, actor)
+          callback: html => this._onRollAbility(html, abilityKey, abilityName, abilityAbbrev, actor, armorSwiftnessPenalty)
         },
         cancel: {
           icon: '<i class="fas fa-times"></i>',
@@ -76,15 +96,16 @@ window.RONIN.AbilityRoll = {
    * @param {string} abilityName - Nome localizado da habilidade
    * @param {string} abilityAbbrev - Abreviação localizada da habilidade
    * @param {Object} actor - Ator que está fazendo a rolagem
+   * @param {number} armorSwiftnessPenalty - Penalidade de rapidez da armadura (para testes de rapidez)
    * @private
    */
-  _onRollAbility: async function(html, abilityKey, abilityName, abilityAbbrev, actor) {
+  _onRollAbility: async function(html, abilityKey, abilityName, abilityAbbrev, actor, armorSwiftnessPenalty) {
     try {
       // Obtém os valores do diálogo
       const form = html[0].querySelector("form");
       const abilityValue = parseInt(actor.system.abilities[abilityKey].value);
       const modifier = parseInt(form.modifier.value) || 0;
-      let difficultyRating = parseInt(form.difficultyRating.value) || 10;
+      let baseDR = parseInt(form.difficultyRating.value) || 10;
       
       // Verificar se o personagem está com sobrecarga
       const maxCapacity = actor.system.abilities.vigor.value + 8;
@@ -94,7 +115,13 @@ window.RONIN.AbilityRoll = {
       let overencumberedPenalty = 0;
       if (isOverencumbered && (abilityKey === 'vigor' || abilityKey === 'swiftness')) {
         overencumberedPenalty = 2;
-        difficultyRating += overencumberedPenalty;
+        baseDR += overencumberedPenalty;
+      }
+      
+      // Aplicar penalidade de Rapidez da armadura se for um teste de Rapidez
+      let finalDR = baseDR;
+      if (abilityKey === 'swiftness' && armorSwiftnessPenalty > 0) {
+        finalDR += armorSwiftnessPenalty;
       }
       
       // Construir a fórmula da rolagem
@@ -113,7 +140,7 @@ window.RONIN.AbilityRoll = {
       const totalResult = d20Result + abilityValue + modifier;
       
       // Determina o sucesso ou falha
-      const isSuccess = totalResult >= difficultyRating;
+      const isSuccess = totalResult >= finalDR;
       const isCrit = d20Result === 20;
       const isFumble = d20Result === 1;
       
@@ -140,13 +167,17 @@ window.RONIN.AbilityRoll = {
         modifier: modifier,
         modifierText: modifierText,
         totalResult: totalResult,
-        difficultyRating: difficultyRating,
+        baseDR: baseDR,
+        difficultyRating: finalDR,
         isSuccess: isSuccess,
         isCrit: isCrit,
         isFumble: isFumble,
         rollResult: rollResult,
         isOverencumbered: isOverencumbered,
-        overencumberedPenalty: overencumberedPenalty
+        overencumberedPenalty: overencumberedPenalty,
+        isSwiftness: abilityKey === 'swiftness',
+        armorSwiftnessPenalty: armorSwiftnessPenalty,
+        showSwiftnessPenalty: abilityKey === 'swiftness' && armorSwiftnessPenalty > 0
       };
       
       // Renderiza o template do chat-card

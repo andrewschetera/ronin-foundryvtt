@@ -1,0 +1,42 @@
+<form>
+  <div class="form-group">
+    <label>{{swiftnessName}}:</label>
+    <div class="form-fields">
+      <input type="text" name="swiftnessValue" value="{{swiftnessValue}}" disabled />
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>{{localize "RONIN.Rolls.Modifier"}}:</label>
+    <div class="form-fields">
+      <input type="number" name="modifier" value="0" />
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>{{localize "RONIN.Rolls.DR"}}:</label>
+    <div class="form-fields">
+      <input type="number" name="difficultyRating" value="{{baseDR}}" min="0" />
+    </div>
+  </div>
+  
+  {{#if armorDefensePenalty}}
+  <div class="form-group defense-penalty-info" style="color: var(--color-red); font-weight: bold; margin-bottom: 10px;">
+    <p>{{localize "RONIN.Rolls.DefensePenaltyApplied"}}: +{{armorDefensePenalty}} {{localize "RONIN.Rolls.DefensePenaltyWillBeAdded"}}</p>
+  </div>
+  {{/if}}
+  
+  <div class="form-group">
+    <label>{{localize "RONIN.Equipment.EnemyWeapon"}}:</label>
+    <div class="form-fields">
+      <input type="text" name="enemyWeaponDamage" value="d6" placeholder="Ex: d6, 2d6, etc." />
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>{{localize "RONIN.Equipment.Protection"}}:</label>
+    <div class="form-fields">
+      <input type="text" name="armorProtection" value="{{armorProtection}}" />
+    </div>
+  </div>
+</form>
