@@ -1,0 +1,116 @@
+<form>
+  <div class="form-group">
+    <label>{{resilienceName}}:</label>
+    <div class="form-fields">
+      <input type="text" name="resilienceValue" value="{{resilienceValue}}" disabled />
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>{{localize "RONIN.Rolls.Modifier"}}:</label>
+    <div class="form-fields">
+      <input type="number" name="modifier" value="0" />
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>{{localize "RONIN.Rolls.DR"}}:</label>
+    <div class="form-fields">
+      <input type="number" id="baseDRField" name="baseDR" value="{{baseDR}}" min="0" />
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>{{localize "RONIN.Rolls.ParryDR"}}:</label>
+    <div class="form-fields">
+      <input type="number" id="parryDRField" name="parryDR" value="{{parryDR}}" disabled />
+    </div>
+  </div>
+  
+  {{#if showDefensePenalty}}
+  <div class="form-group defense-penalty-info" style="color: var(--color-red); font-weight: bold; margin-bottom: 10px;">
+    <p>{{localize "RONIN.Rolls.ParryDRInfo"}}: <span id="drCalcDisplay">{{baseDR}}</span> + 2 {{#if armorDefensePenalty}}+ {{localize "RONIN.Equipment.DefensePenalty"}} {{armorDefensePenalty}}{{/if}}</p>
+  </div>
+  {{else}}
+  <div class="form-group">
+    <p>{{localize "RONIN.Rolls.ParryDRInfo"}}: <span id="drCalcDisplay">{{baseDR}}</span> + 2</p>
+  </div>
+  {{/if}}
+  
+  <div class="form-group">
+    <label>{{localize "RONIN.Equipment.Weapon"}}:</label>
+    <div class="form-fields">
+      {{#if equippedWeapons.length}}
+        {{#if (eq equippedWeapons.length 1)}}
+          <input type="text" value="{{equippedWeapons.[0].name}} ({{equippedWeapons.[0].system.damage}})" disabled />
+          <input type="hidden" name="selectedWeapon" value="{{equippedWeapons.[0].id}}" />
+        {{else}}
+          <select name="selectedWeapon">
+            {{#each equippedWeapons as |weapon|}}
+              <option value="{{weapon.id}}">{{weapon.name}} ({{weapon.system.damage}})</option>
+            {{/each}}
+          </select>
+        {{/if}}
+      {{else}}
+        <input type="text" value="{{localize 'RONIN.Equipment.NoEquippedWeapons'}}" disabled />
+      {{/if}}
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>{{localize "RONIN.Equipment.Protection"}}:</label>
+    <div class="form-fields">
+      <input type="text" name="armorProtection" value="{{armorProtection}}" />
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>{{localize "RONIN.Equipment.EnemyWeapon"}}:</label>
+    <div class="form-fields">
+      <input type="text" name="enemyWeaponDamage" value="d6" placeholder="Ex: d6, 2d6, etc." />
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>{{localize "RONIN.Equipment.EnemyArmor"}}:</label>
+    <div class="form-fields">
+      <input type="text" name="enemyArmorProtection" value="0" placeholder="Ex: 0, 1d2, 1d4, 1d6" />
+    </div>
+  </div>
+</form>
+
+<script type="text/javascript">
+  // Espera o DOM estar pronto
+  (function() {
+    // Define a penalidade de defesa da armadura (se houver)
+    const armorDefensePenalty = {{armorDefensePenalty}} || 0;
+    
+    // Função para atualizar o DR de Aparar quando o DR base mudar
+    function updateParryDR() {
+      const baseDRField = document.getElementById('baseDRField');
+      const parryDRField = document.getElementById('parryDRField');
+      const drCalcDisplay = document.getElementById('drCalcDisplay');
+      
+      if (baseDRField && parryDRField) {
+        const baseDR = parseInt(baseDRField.value) || 12;
+        const parryDR = baseDR + 2 + armorDefensePenalty;
+        
+        // Atualiza o campo de DR de Aparar
+        parryDRField.value = parryDR;
+        
+        // Atualiza o texto de cálculo
+        if (drCalcDisplay) {
+          drCalcDisplay.textContent = baseDR;
+        }
+      }
+    }
+    
+    // Adiciona o listener de evento para o campo de DR base
+    const baseDRField = document.getElementById('baseDRField');
+    if (baseDRField) {
+      baseDRField.addEventListener('input', updateParryDR);
+      // Executa uma vez para garantir que os valores estejam sincronizados
+      updateParryDR();
+    }
+  })();
+</script>

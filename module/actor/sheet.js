@@ -133,6 +133,9 @@ activateListeners(html) {
   // Listener para o botão de defesa
   html.find('.defend-action').click(this._onDefendButtonClick.bind(this));
   
+  // Listener para o botão de aparar
+  html.find('.parry-action').click(this._onParryButtonClick.bind(this));
+  
   // Funcionalidade condicional para as ações do proprietário
   if (this.actor.isOwner) {
     // Item creation
@@ -482,6 +485,48 @@ _onDefendButtonClick(event) {
   
   // Se chegou aqui, o módulo existe, então faz a rolagem
   RONIN.DefenseRoll.roll(this.actor);
+}
+
+/**
+ * Manipula o clique no botão de aparar
+ * @param {Event} event O evento de clique
+ * @private
+ */
+_onParryButtonClick(event) {
+  event.preventDefault();
+  
+  // Verificar se o namespace RONIN existe
+  if (!window.RONIN) {
+    console.error("Namespace RONIN não encontrado");
+    ui.notifications.error("Erro no sistema: Namespace RONIN não encontrado");
+    return;
+  }
+  
+  // Verificar se o módulo ParryRoll existe
+  if (!window.RONIN.ParryRoll) {
+    console.error("Módulo de rolagem de aparar não encontrado no namespace RONIN");
+    ui.notifications.error("Módulo de rolagem de aparar não disponível");
+    
+    // Tentar importar dinamicamente (apenas como fallback)
+    try {
+      import('../rolls/parry-roll.js').then(module => {
+        if (module && module.default) {
+          console.log("Módulo de rolagem de aparar carregado dinamicamente");
+          module.default.roll(this.actor);
+        } else {
+          console.error("Falha ao importar módulo de rolagem de aparar");
+        }
+      }).catch(err => {
+        console.error("Erro ao importar módulo de rolagem de aparar:", err);
+      });
+    } catch (error) {
+      console.error("Erro ao tentar importação dinâmica:", error);
+    }
+    return;
+  }
+  
+  // Se chegou aqui, o módulo existe, então faz a rolagem
+  RONIN.ParryRoll.roll(this.actor);
 }
 
   // Métodos para manipulação de itens

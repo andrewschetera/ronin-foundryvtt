@@ -84,7 +84,9 @@
       "ArmorLimit": "Armor limit reached! Unequip current armor before equipping another one.",
       "ArmorDamaged": "Damaged armor (current category is lower than maximum)",
       "CategoryExceedsMax": "The selected category exceeds the maximum category for this armor!",
-      "EnemyWeapon": "Enemy Weapon"
+      "EnemyWeapon": "Enemy Weapon",
+      "Weapon": "Weapon",
+      "EnemyArmor": "Enemy Armor"
     },
     "Encumbrance": {
       "MaxLoadExceeded": "Cannot add this item. The maximum load limit ({max}) would be exceeded!"
@@ -129,7 +131,12 @@
       "BaseDR": "Base DR",
       "SwiftnessPenaltyApplied": "Armor Swiftness Penalty",
       "SwiftnessPenaltyWillBeAdded": "will be added to final DR",
-      "OverencumberedPenalty": "Overencumbered Penalty"
+      "OverencumberedPenalty": "Overencumbered Penalty",
+      "ParryDR": "Parry DR",
+      "ParryDRInfo": "Parry DR calculation",
+      "ParrySuccess": "Parry successful! Counter-attack with your weapon!",
+      "ParryFailure": "Parry failed! You take damage from the enemy weapon!",
+      "ParryFumbleEffect": "Critical failure! Take double damage, your armor is reduced by one category, and your weapon is broken or lost!"
     },
     "Description": "Description"
   }

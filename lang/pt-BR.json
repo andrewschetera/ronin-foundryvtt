@@ -84,7 +84,9 @@
       "ArmorLimit": "Limite de armadura atingido! Desequipe a armadura atual antes de equipar outra.",
       "ArmorDamaged": "Armadura danificada (categoria atual é menor que a máxima)",
       "CategoryExceedsMax": "A categoria selecionada excede a categoria máxima desta armadura!",
-      "EnemyWeapon": "Arma do Inimigo"
+      "EnemyWeapon": "Arma do Inimigo",
+      "Weapon": "Arma",
+      "EnemyArmor": "Armadura do Inimigo"
     },
     "Encumbrance": {
       "MaxLoadExceeded": "Não é possível adicionar este item. O limite máximo de carga ({max}) seria ultrapassado!"
@@ -129,7 +131,12 @@
       "BaseDR": "DR Base",
       "SwiftnessPenaltyApplied": "Penalidade de Rapidez da Armadura",
       "SwiftnessPenaltyWillBeAdded": "será adicionada à DR final",
-      "OverencumberedPenalty": "Penalidade de Sobrecarga"
+      "OverencumberedPenalty": "Penalidade de Sobrecarga",
+      "ParryDR": "DR Aparar",
+      "ParryDRInfo": "Cálculo de DR de Aparar",
+      "ParrySuccess": "Aparar bem sucedido! Contra-ataque com sua arma!",
+      "ParryFailure": "Aparar falhou! Você sofre dano da arma inimiga!",
+      "ParryFumbleEffect": "Falha crítica! Sofra o dano dobrado, sua armadura é reduzida em uma categoria, e sua arma é quebrada ou perdida!"
     },
     "Description": "Descrição"
   }
