@@ -85,7 +85,8 @@
 },
     "misc": {
       "templates": ["itemDescription", "physicalItem"],
-      "quantity": 1
+      "quantity": 1,
+      "isAmmo": false
     },
     "feat": {
       "templates": ["itemDescription"]

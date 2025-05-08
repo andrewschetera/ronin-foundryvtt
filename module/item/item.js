@@ -27,7 +27,7 @@ class RoninItem extends Item {
       case 'armor':
         this._prepareArmorData(systemData);
         break;
-      case 'gear':
+      case 'misc':
         this._prepareGearData(systemData);
         break;
       case 'text':
@@ -134,22 +134,37 @@ _prepareArmorData(itemData) {
 }
   
   /**
-   * Preparação específica para equipamentos
+   * Preparação específica para itens diversos (misc)
    * @param {Object} itemData Os dados do item
    * @private
    */
   _prepareGearData(itemData) {
-    // Verificar se o campo uses existe
-    if (!itemData.uses) {
-      itemData.uses = {
-        value: 1,
-        max: 1
-      };
+    // Verificar se o campo quantity existe
+    if (itemData.quantity === undefined) {
+      itemData.quantity = 1;
+    }
+    
+    // Garantir que quantity seja um número
+    itemData.quantity = Number(itemData.quantity) || 1;
+    
+    // Verificar se o campo isAmmo existe
+    if (itemData.isAmmo === undefined) {
+      itemData.isAmmo = false;
     }
     
     // Verificar se o campo weight existe ou é válido
-    if (!itemData.weight || (itemData.weight !== "normal" && itemData.weight !== "heavy")) {
+    if (!itemData.weight || !["none", "small", "normal", "heavy"].includes(itemData.weight)) {
       itemData.weight = "normal"; // Peso padrão
+    }
+    
+    // Garantir que o preço esteja inicializado
+    if (itemData.price === undefined) {
+      itemData.price = 0;
+    }
+    
+    // Garantir que o campo de descrição exista
+    if (!itemData.description) {
+      itemData.description = "";
     }
   }
   
@@ -195,11 +210,11 @@ _prepareArmorData(itemData) {
       case 'armor':
         // Lógica para usar armaduras
         break;
-      case 'gear':
-        // Lógica para usar equipamentos
+      case 'misc':
+        // Lógica para usar equipamentos diversos
         // Por exemplo, decrementar os usos
-        if (this.system.uses && this.system.uses.value > 0) {
-          await this.update({'system.uses.value': this.system.uses.value - 1});
+        if (this.system.quantity > 0) {
+          await this.update({'system.quantity': Math.max(0, this.system.quantity - 1)});
         }
         break;
       case 'text':
