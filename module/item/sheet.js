@@ -76,7 +76,25 @@ class RoninItemSheet extends ItemSheet {
       // Botão de uso do item
       html.find('.item-use').click(this._onItemUse.bind(this));
       
-      // Outros listeners específicos podem ser adicionados aqui
+      // Adicionar listener para validação de quantidade
+      if (this.item.type === 'misc') {
+        html.find('input[name="system.quantity"]').change(this._onQuantityChange.bind(this));
+      }
+    }
+  }
+  
+  /**
+   * Manipula alterações na quantidade do item
+   * @param {Event} event O evento de mudança
+   * @private
+   */
+  _onQuantityChange(event) {
+    const input = event.currentTarget;
+    const newValue = parseInt(input.value);
+    
+    // Garantir que a quantidade nunca seja menor que 0
+    if (isNaN(newValue) || newValue < 0) {
+      input.value = 0;
     }
   }
   

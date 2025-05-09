@@ -133,40 +133,40 @@ _prepareArmorData(itemData) {
   }
 }
   
-  /**
-   * Preparação específica para itens diversos (misc)
-   * @param {Object} itemData Os dados do item
-   * @private
-   */
-  _prepareGearData(itemData) {
-    // Verificar se o campo quantity existe
-    if (itemData.quantity === undefined) {
-      itemData.quantity = 1;
-    }
-    
-    // Garantir que quantity seja um número
-    itemData.quantity = Number(itemData.quantity) || 1;
-    
-    // Verificar se o campo isAmmo existe
-    if (itemData.isAmmo === undefined) {
-      itemData.isAmmo = false;
-    }
-    
-    // Verificar se o campo weight existe ou é válido
-    if (!itemData.weight || !["none", "small", "normal", "heavy"].includes(itemData.weight)) {
-      itemData.weight = "normal"; // Peso padrão
-    }
-    
-    // Garantir que o preço esteja inicializado
-    if (itemData.price === undefined) {
-      itemData.price = 0;
-    }
-    
-    // Garantir que o campo de descrição exista
-    if (!itemData.description) {
-      itemData.description = "";
-    }
+/**
+ * Preparação específica para itens diversos (misc)
+ * @param {Object} itemData Os dados do item
+ * @private
+ */
+_prepareGearData(itemData) {
+  // Verificar se o campo quantity existe
+  if (itemData.quantity === undefined) {
+    itemData.quantity = 0; // Agora o padrão é 0 em vez de 1
   }
+  
+  // Garantir que quantity seja um número, mas permitindo zero
+  itemData.quantity = isNaN(Number(itemData.quantity)) ? 0 : Number(itemData.quantity);
+  
+  // Verificar se o campo isAmmo existe
+  if (itemData.isAmmo === undefined) {
+    itemData.isAmmo = false;
+  }
+  
+  // Verificar se o campo weight existe ou é válido
+  if (!itemData.weight || !["none", "small", "normal", "heavy"].includes(itemData.weight)) {
+    itemData.weight = "normal"; // Peso padrão
+  }
+  
+  // Garantir que o preço esteja inicializado
+  if (itemData.price === undefined) {
+    itemData.price = 0;
+  }
+  
+  // Garantir que o campo de descrição exista
+  if (!itemData.description) {
+    itemData.description = "";
+  }
+}
   
   /**
    * Preparação específica para textos

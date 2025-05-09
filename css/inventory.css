@@ -416,3 +416,67 @@
   background-color: rgba(0, 0, 0, 0.05);
   border-radius: 3px;
 }
+
+/* Estilos para a exibição de itens misc em linha na aba Equipamento */
+.misc-item-inline .item-name {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.misc-item-inline .item-properties {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 0.85em;
+  margin-left: 15px;
+  width: 65%;
+}
+
+/* Cada propriedade individual com largura fixa */
+.misc-item-inline .item-quantity,
+.misc-item-inline .item-weight {
+  min-width: 80px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  border-radius: 0px;
+  white-space: nowrap;
+  color: #000000;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px solid rgba(0, 0, 0, 0);
+}
+
+/* Ícone para munição */
+.misc-item-inline .ammo-icon {
+  margin-left: 5px;
+  color: #8b4513; /* Cor marrom para munição */
+}
+
+/* Container do ícone de munição */
+.ammo-icon-container {
+  width: 20px;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Estilo para o campo de quantidade editável */
+.misc-item-inline .quantity-input {
+  width: 40px;
+  text-align: center;
+  height: 22px;
+  margin-left: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.misc-item-inline .quantity-input:focus {
+  outline: none;
+  border-color: #6c8eef;
+  box-shadow: 0 0 3px rgba(108, 142, 239, 0.5);
+}

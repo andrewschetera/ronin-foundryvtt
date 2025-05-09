@@ -22,43 +22,53 @@ class RoninActor extends Actor {
     }
   }
   
-  /**
-   * Prepara os dados específicos do personagem.
-   * @param {Object} actorData Os dados do ator
-   * @private
-   */
-  _prepareCharacterData(actorData) {
-    // Referência ao sistema de dados do ator
-    const systemData = actorData.system;
-    
-    // Cálculo de HP removido - agora o HP máximo será definido manualmente pelo usuário
-    
-    // Calcular capacidade de carga
-    let totalWeight = 0;
-    
-    // Percorre todos os itens
-    if (actorData.items && actorData.items.size > 0) {
-      actorData.items.forEach(item => {
-        if (item.system && item.system.weight) {
-          // Ignorar armaduras equipadas
-          if (item.type === "armor" && item.system.equipped) {
-            return;
-          }
-          
-          if (item.system.weight === "normal") totalWeight += 1;
-          else if (item.system.weight === "heavy") totalWeight += 2;
-          // Itens "small" não adicionam peso (0)
+ /**
+ * Prepara os dados específicos do personagem.
+ * @param {Object} actorData Os dados do ator
+ * @private
+ */
+_prepareCharacterData(actorData) {
+  // Referência ao sistema de dados do ator
+  const systemData = actorData.system;
+  
+  // Cálculo de HP removido - agora o HP máximo será definido manualmente pelo usuário
+  
+  // Calcular capacidade de carga
+  let totalWeight = 0;
+  
+  // Percorre todos os itens
+  if (actorData.items && actorData.items.size > 0) {
+    actorData.items.forEach(item => {
+      if (item.system && item.system.weight) {
+        // Ignorar armaduras equipadas
+        if (item.type === "armor" && item.system.equipped) {
+          return;
         }
-      });
-    }
-    
-    // Atribui o valor calculado à capacidade de carga
-    if (!systemData.carryingCapacity) {
-      systemData.carryingCapacity = { value: 0 };
-    }
-    systemData.carryingCapacity.value = totalWeight;
+        
+        // Determinar o peso base com base no tipo de peso
+        let baseWeight = 0;
+        if (item.system.weight === "normal") baseWeight = 1;
+        else if (item.system.weight === "heavy") baseWeight = 2;
+        // Itens "small" ou "none" não adicionam peso (0)
+        
+        // Para itens do tipo misc, multiplicar pelo quantidade
+        if (item.type === "misc" && item.system.quantity !== undefined) {
+          totalWeight += baseWeight * item.system.quantity;
+        } else {
+          // Para outros tipos de item (armas, etc.), usar apenas o peso base
+          totalWeight += baseWeight;
+        }
+      }
+    });
   }
   
+  // Atribui o valor calculado à capacidade de carga
+  if (!systemData.carryingCapacity) {
+    systemData.carryingCapacity = { value: 0 };
+  }
+  systemData.carryingCapacity.value = totalWeight;
+}
+
   /**
    * Método para realizar uma rolagem de habilidade
    * @param {string} abilityKey A chave da habilidade a ser rolada

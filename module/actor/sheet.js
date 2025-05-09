@@ -136,6 +136,9 @@ activateListeners(html) {
   // Listener para o botão de aparar
   html.find('.parry-action').click(this._onParryButtonClick.bind(this));
   
+  // Listener para alteração de quantidade de itens
+  html.find('.quantity-input').change(this._onItemQuantityChange.bind(this));
+  
   // Funcionalidade condicional para as ações do proprietário
   if (this.actor.isOwner) {
     // Item creation
@@ -367,11 +370,38 @@ async _onArmorCategoryChange(event) {
 }
 
 /**
- * Recalcula a capacidade de carga considerando itens equipados
+ * Manipula a alteração da quantidade de um item
+ * @param {Event} event O evento de mudança
+ * @private
+ */
+async _onItemQuantityChange(event) {
+  event.preventDefault();
+  const input = event.currentTarget;
+  const itemId = input.dataset.itemId;
+  const field = input.dataset.field;
+  const newValue = Math.max(0, parseInt(input.value) || 0); // Garante valor mínimo de 0
+  
+  // Obter o item pelo ID
+  const item = this.actor.items.get(itemId);
+  
+  if (!item) return;
+  
+  // Criar objeto de atualização
+  const updateData = {};
+  updateData[field] = newValue;
+  
+  // Atualizar o item
+  await item.update(updateData);
+  
+  // Recalcular a capacidade de carga após a atualização da quantidade
+  this._recalculateCarryingCapacity();
+}
+
+/**
+ * Recalcula a capacidade de carga considerando itens equipados e quantidade
  * @private
  */
 _recalculateCarryingCapacity() {
-  // Esta é uma função simplificada que deve ser adaptada ao seu sistema existente
   let totalWeight = 0;
   
   // Percorre todos os itens, ignorando armaduras equipadas
@@ -382,9 +412,19 @@ _recalculateCarryingCapacity() {
         return;
       }
       
-      if (item.system.weight === "normal") totalWeight += 1;
-      else if (item.system.weight === "heavy") totalWeight += 2;
-      // Itens "small" não adicionam peso (0)
+      // Determinar o peso base com base no tipo de peso
+      let baseWeight = 0;
+      if (item.system.weight === "normal") baseWeight = 1;
+      else if (item.system.weight === "heavy") baseWeight = 2;
+      // Itens "small" ou "none" não adicionam peso (0)
+      
+      // Para itens do tipo misc, multiplicar pelo quantidade
+      if (item.type === "misc" && item.system.quantity !== undefined) {
+        totalWeight += baseWeight * item.system.quantity;
+      } else {
+        // Para outros tipos de item (armas, etc.), usar apenas o peso base
+        totalWeight += baseWeight;
+      }
     }
   });
   
