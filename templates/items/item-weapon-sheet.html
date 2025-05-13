@@ -28,6 +28,20 @@
         <label>{{localize "RONIN.Equipment.UseAmmunition"}}</label>
         <input type="checkbox" name="system.useAmmo" {{#if system.useAmmo}}checked{{/if}}/>
       </div>
+      
+      {{#if system.useAmmo}}
+      <div class="form-group">
+        <label>{{localize "RONIN.Equipment.SelectAmmo"}}</label>
+        <select name="system.ammoId">
+          <option value="">-- {{localize "RONIN.Equipment.SelectAmmo"}} --</option>
+          {{#each availableAmmo as |ammo id|}}
+            <option value="{{ammo.id}}" {{#if (eq ../system.ammoId ammo.id)}}selected{{/if}}>
+              {{ammo.name}} ({{ammo.system.quantity}})
+            </option>
+          {{/each}}
+        </select>
+      </div>
+      {{/if}}
       {{/if}}
       
       <div class="form-group">

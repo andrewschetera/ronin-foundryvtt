@@ -71,6 +71,7 @@
       "damage": "d6",
       "weaponType": "melee",
       "useAmmo": false,
+      "ammoId": null,
       "hand": "one",
       "price": 0,
       "weight": "normal"

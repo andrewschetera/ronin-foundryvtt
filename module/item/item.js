@@ -66,6 +66,16 @@ class RoninItem extends Item {
     if (itemData.weaponType === "ranged" && itemData.useAmmo === undefined) {
       itemData.useAmmo = false; // Padrão não usar munição
     }
+    
+    // Inicializar o campo ammoId se necessário
+    if (itemData.ammoId === undefined) {
+      itemData.ammoId = null;
+    }
+    
+    // Se a arma não for ranged ou não usar munição, garantir que ammoId seja null
+    if (itemData.weaponType !== "ranged" || !itemData.useAmmo) {
+      itemData.ammoId = null;
+    }
   }
   
 /**

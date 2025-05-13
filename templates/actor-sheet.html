@@ -381,11 +381,14 @@
 <!-- Se for ranged com useAmmo, exibe o seletor de munição -->
 {{#if (and (eq item.system.weaponType "ranged") item.system.useAmmo)}}
   <div class="weapon-ammo">
-    <select class="ammo-select">
+    <select class="ammo-select" data-weapon-id="{{item._id}}">
       <option value="">-- {{localize "RONIN.Equipment.SelectAmmo"}} --</option>
-      <!-- Ammo será implementada futuramente -->
+      {{#each ../ammoItems as |ammo ammoId|}}
+        <option value="{{ammo.id}}" {{#if (eq ../system.ammoId ammo.id)}}selected{{/if}}>
+          {{ammo.name}} ({{ammo.system.quantity}})
+        </option>
+      {{/each}}
     </select>
-    <span class="ammo-quantity">0</span>
   </div>
 {{/if}}
                    

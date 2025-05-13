@@ -53,6 +53,11 @@ class RoninItemSheet extends ItemSheet {
     // Se for uma arma, preparar opções específicas
     if (context.item.type === 'weapon') {
       context.weaponTypes = RONIN.config.equipment.weaponTypes;
+      
+      // Se for arma ranged com munição, buscar munições disponíveis
+      if (context.item.system.weaponType === 'ranged' && context.item.system.useAmmo) {
+        context.availableAmmo = this._getAvailableAmmo();
+      }
     }
     
     // Se for uma armadura, preparar opções específicas
@@ -61,6 +66,29 @@ class RoninItemSheet extends ItemSheet {
     }
     
     return context;
+  }
+  
+  /**
+   * Obtém a lista de munições disponíveis no inventário do ator
+   * @returns {Array} Lista de munições disponíveis
+   * @private
+   */
+  _getAvailableAmmo() {
+    const actor = this.item.actor;
+    
+    // Se o item não estiver associado a um ator, retornar lista vazia
+    if (!actor) return [];
+    
+    // Buscar todos os itens do tipo 'misc' que sejam munições
+    return actor.items.filter(i => 
+      i.type === 'misc' && 
+      i.system.isAmmo === true && 
+      i.system.quantity > 0
+    ).map(i => ({
+      id: i.id,
+      name: i.name,
+      system: i.system
+    }));
   }
   
   /**
@@ -80,7 +108,66 @@ class RoninItemSheet extends ItemSheet {
       if (this.item.type === 'misc') {
         html.find('input[name="system.quantity"]').change(this._onQuantityChange.bind(this));
       }
+      
+      // Adicionar listener para tipo de arma mudar (melee/ranged)
+      if (this.item.type === 'weapon') {
+        html.find('select[name="system.weaponType"]').change(this._onWeaponTypeChange.bind(this));
+        html.find('input[name="system.useAmmo"]').change(this._onUseAmmoChange.bind(this));
+        html.find('select[name="system.ammoId"]').change(this._onAmmoIdChange.bind(this));
+      }
     }
+  }
+  
+  /**
+   * Manipulador para quando o tipo de arma muda
+   * @param {Event} event O evento de mudança
+   * @private
+   */
+  _onWeaponTypeChange(event) {
+    const select = event.currentTarget;
+    const value = select.value;
+    
+    // Se mudou para 'melee', desativar o uso de munição
+    if (value === 'melee') {
+      this.item.update({
+        'system.useAmmo': false,
+        'system.ammoId': null
+      });
+    }
+    
+    // Recarregar a ficha para atualizar a UI
+    this.render(true);
+  }
+  
+  /**
+   * Manipulador para quando a opção de usar munição muda
+   * @param {Event} event O evento de mudança
+   * @private
+   */
+  _onUseAmmoChange(event) {
+    const checkbox = event.currentTarget;
+    const checked = checkbox.checked;
+    
+    // Se desmarcou, limpar a seleção de munição
+    if (!checked) {
+      this.item.update({'system.ammoId': null});
+    }
+    
+    // Recarregar a ficha para atualizar a UI
+    this.render(true);
+  }
+  
+  /**
+   * Manipulador para quando a seleção de munição muda
+   * @param {Event} event O evento de mudança
+   * @private
+   */
+  _onAmmoIdChange(event) {
+    const select = event.currentTarget;
+    const value = select.value;
+    
+    // Atualizar o ID da munição selecionada
+    this.item.update({'system.ammoId': value});
   }
   
   /**

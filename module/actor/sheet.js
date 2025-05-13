@@ -26,22 +26,32 @@ class RoninActorSheet extends ActorSheet {
     });
   }
   
-  /**
-   * Prepara os dados para renderização da ficha
-   * @override
-   */
-  getData() {
-    const context = super.getData();
-    
-    // Adiciona o sistema ao contexto para acessar os dados
-    const actorData = context.actor;
-    
-    // Adicionamos os dados ao objeto de contexto
-    context.system = actorData.system;
-    context.items = actorData.items;
-    
-    return context;
-  }
+/**
+ * Prepara os dados para renderização da ficha
+ * @override
+ */
+getData() {
+  const context = super.getData();
+  
+  // Adiciona o sistema ao contexto para acessar os dados
+  const actorData = context.actor;
+  
+  // Adicionamos os dados ao objeto de contexto
+  context.system = actorData.system;
+  context.items = actorData.items;
+  
+  // Preparar dados de munição
+  const ammoItems = context.items.filter(i => i.type === "misc" && i.system.isAmmo);
+  context.ammoItems = ammoItems;
+  
+  // Criar mapa para acesso rápido às munições
+  context.ammoItemsMap = {};
+  ammoItems.forEach(ammo => {
+    context.ammoItemsMap[ammo.id] = ammo;
+  });
+  
+  return context;
+}
   
   /**
    * Sobrescreve o método _render para garantir que o layout esteja correto após a renderização
@@ -138,6 +148,9 @@ activateListeners(html) {
   
   // Listener para alteração de quantidade de itens
   html.find('.quantity-input').change(this._onItemQuantityChange.bind(this));
+  
+  // Listener para seleção de munição na aba Tatakai
+  html.find('.ammo-select').change(this._onAmmoSelectChange.bind(this));
   
   // Funcionalidade condicional para as ações do proprietário
   if (this.actor.isOwner) {
@@ -395,6 +408,26 @@ async _onItemQuantityChange(event) {
   
   // Recalcular a capacidade de carga após a atualização da quantidade
   this._recalculateCarryingCapacity();
+}
+
+/**
+ * Manipula a alteração da seleção de munição na aba Tatakai
+ * @param {Event} event O evento de mudança
+ * @private
+ */
+async _onAmmoSelectChange(event) {
+  event.preventDefault();
+  const select = event.currentTarget;
+  const weaponId = select.dataset.weaponId;
+  const ammoId = select.value || null; // Se valor vazio, usar null
+  
+  // Obter a arma pelo ID
+  const weapon = this.actor.items.get(weaponId);
+  
+  if (!weapon) return;
+  
+  // Atualizar a arma com o novo ID de munição
+  await weapon.update({"system.ammoId": ammoId});
 }
 
 /**
