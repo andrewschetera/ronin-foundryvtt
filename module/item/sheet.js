@@ -118,44 +118,58 @@ class RoninItemSheet extends ItemSheet {
     }
   }
   
-  /**
-   * Manipulador para quando o tipo de arma muda
-   * @param {Event} event O evento de mudança
-   * @private
-   */
-  _onWeaponTypeChange(event) {
-    const select = event.currentTarget;
-    const value = select.value;
-    
-    // Se mudou para 'melee', desativar o uso de munição
-    if (value === 'melee') {
-      this.item.update({
-        'system.useAmmo': false,
-        'system.ammoId': null
-      });
-    }
-    
-    // Recarregar a ficha para atualizar a UI
-    this.render(true);
+/**
+ * Manipulador para quando o tipo de arma muda
+ * @param {Event} event O evento de mudança
+ * @private
+ */
+_onWeaponTypeChange(event) {
+  const select = event.currentTarget;
+  const value = select.value;
+  
+  // Criar objeto de atualização com o tipo da arma
+  const updateData = {
+    'system.weaponType': value
+  };
+  
+  // Se mudou para 'melee', desativar o uso de munição
+  if (value === 'melee') {
+    updateData['system.useAmmo'] = false;
+    updateData['system.ammoId'] = null;
   }
   
-  /**
-   * Manipulador para quando a opção de usar munição muda
-   * @param {Event} event O evento de mudança
-   * @private
-   */
-  _onUseAmmoChange(event) {
-    const checkbox = event.currentTarget;
-    const checked = checkbox.checked;
-    
-    // Se desmarcou, limpar a seleção de munição
-    if (!checked) {
-      this.item.update({'system.ammoId': null});
-    }
-    
-    // Recarregar a ficha para atualizar a UI
-    this.render(true);
+  // Aplicar as atualizações ao item
+  this.item.update(updateData);
+  
+  // Recarregar a ficha para atualizar a UI
+  this.render(true);
+}
+  
+/**
+ * Manipulador para quando a opção de usar munição muda
+ * @param {Event} event O evento de mudança
+ * @private
+ */
+_onUseAmmoChange(event) {
+  const checkbox = event.currentTarget;
+  const checked = checkbox.checked;
+  
+  // Criar objeto de atualização com o estado atual do checkbox
+  const updateData = {
+    'system.useAmmo': checked
+  };
+  
+  // Se desmarcou, limpar a seleção de munição
+  if (!checked) {
+    updateData['system.ammoId'] = null;
   }
+  
+  // Aplicar as atualizações ao item
+  this.item.update(updateData);
+  
+  // Recarregar a ficha para atualizar a UI
+  this.render(true);
+}
   
   /**
    * Manipulador para quando a seleção de munição muda
