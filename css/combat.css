@@ -47,9 +47,8 @@
   gap: 10px;
 }
 
-
 /* Estilo para a lista de armas equipadas na aba Tatakai */
-.tatakai-weapons-list {
+.ronin.sheet.actor .tatakai-weapons-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -57,7 +56,7 @@
   width: 100%;
 }
 
-.tatakai-weapon-item {
+.ronin.sheet.actor .tatakai-weapon-item {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -67,29 +66,32 @@
   border-radius: 3px;
 }
 
-/* Atualizar as definições de flexbox no arquivo css/combat.css */
-
-.weapon-main-info {
+/* Contenedor principal de informações da arma */
+.ronin.sheet.actor .weapon-main-info {
   display: flex;
   align-items: center;
   width: 100%;
   gap: 5px;
 }
 
-.weapon-image {
+/* Imagem da arma com tamanho fixo */
+.ronin.sheet.actor .weapon-image {
   width: 32px;
   height: 32px;
   flex: 0 0 32px;
 }
 
-/* Ajuste de largura para cada elemento */
-.weapon-name {
-  flex: 2;
+/* Nome da arma com largura fixa e ellipsis para nomes longos */
+.ronin.sheet.actor .weapon-name {
+  flex: 0 0 120px;
   font-weight: bold;
-  min-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.weapon-damage {
+/* Dano da arma */
+.ronin.sheet.actor .weapon-damage {
   flex: 0 0 60px;
   text-align: center;
   font-weight: bold;
@@ -97,80 +99,107 @@
   padding-left: 5px;
 }
 
-.weapon-type {
+/* Tipo da arma (melee/ranged) */
+.ronin.sheet.actor .weapon-type {
   flex: 0 0 80px;
   text-align: center;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   padding-left: 5px;
 }
 
-.weapon-ammo {
-  flex: 0 0 100px;
+/* Contenedor para o seletor de munição e quantidade */
+.ronin.sheet.actor .weapon-ammo {
+  flex: 0 0 110px;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   padding-left: 5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.weapon-hand {
+/* Seletor de munição com largura limitada e ellipsis */
+.ronin.sheet.actor .ammo-select {
+  width: 80px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 2px;
+  font-size: 0.85em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* Campo de quantidade de munição */
+.ronin.sheet.actor .ammo-quantity {
+  flex: 0 0 26px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.85em;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 1px 2px;
+  width: 26px;
+  display: inline-block;
+}
+
+/* Tipo de empunhadura (uma/duas mãos) */
+.ronin.sheet.actor .weapon-hand {
   flex: 0 0 100px;
   text-align: center;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   padding-left: 5px;
 }
 
-/* Ajustes para o botão de ataque */
-.weapon-attack-button {
+/* Botão de ataque */
+.ronin.sheet.actor .weapon-attack-button {
   flex: 0 0 auto;
   width: auto;
-  min-width: 80px;
-  max-width: 100px;
+  min-width: 60px;
+  max-width: 80px;
   background-color: var(--color-red);
   color: white;
   border: none;
   border-radius: 3px;
-  padding: 3px 10px;
+  padding: 3px 6px;
   cursor: pointer;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 0.8em;
-  margin-left: auto; /* Empurra o botão para a direita */
+  margin-left: auto;
 }
 
-.weapon-attack-button:hover {
+.ronin.sheet.actor .weapon-attack-button:hover {
   background-color: var(--color-red-dark);
-}
-
-/* Para o seletor de munição */
-.ammo-select {
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
-  padding: 2px;
-  font-size: 0.85em;
 }
 
 /* Ajustes para telas menores */
 @media (max-width: 768px) {
-  .weapon-type, .weapon-hand {
+  .ronin.sheet.actor .weapon-type, 
+  .ronin.sheet.actor .weapon-hand {
     flex: 0 0 70px;
   }
   
-  .weapon-name {
-    min-width: 100px;
+  .ronin.sheet.actor .weapon-name {
+    flex: 0 0 100px;
   }
   
-  .weapon-attack-button {
-    min-width: 60px;
+  .ronin.sheet.actor .weapon-ammo {
+    flex: 0 0 90px;
+  }
+  
+  .ronin.sheet.actor .ammo-select {
+    width: 60px;
+  }
+  
+  .ronin.sheet.actor .weapon-attack-button {
+    min-width: 50px;
     font-size: 0.75em;
-    padding: 3px 5px;
+    padding: 3px 4px;
   }
 }
 
-.weapon-attack-button:hover {
-  background-color: var(--color-red-dark);
-}
-
-.no-equipped-weapons {
+.ronin.sheet.actor .no-equipped-weapons {
   padding: 10px;
   text-align: center;
   font-style: italic;

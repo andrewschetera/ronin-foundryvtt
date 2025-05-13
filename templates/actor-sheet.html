@@ -369,17 +369,7 @@
                 {{localize "RONIN.Equipment.Ranged"}}
               {{/if}}
             </div>
-            
-            <!-- Se for ranged com useAmmo, exibe o seletor de munição -->
-            {{#if (and (eq item.system.weaponType "ranged") item.system.useAmmo)}}
-              <div class="weapon-ammo">
-                <select class="ammo-select">
-                  <option value="">-- {{localize "RONIN.Equipment.SelectAmmo"}} --</option>
-                  <!-- Ammo será implementada futuramente -->
-                </select>
-              </div>
-            {{/if}}
-            
+               
             <div class="weapon-hand">
               {{#if (eq item.system.hand "one")}}
                 {{localize "RONIN.Equipment.OneHanded"}}
@@ -388,6 +378,17 @@
               {{/if}}
             </div>
             
+<!-- Se for ranged com useAmmo, exibe o seletor de munição -->
+{{#if (and (eq item.system.weaponType "ranged") item.system.useAmmo)}}
+  <div class="weapon-ammo">
+    <select class="ammo-select">
+      <option value="">-- {{localize "RONIN.Equipment.SelectAmmo"}} --</option>
+      <!-- Ammo será implementada futuramente -->
+    </select>
+    <span class="ammo-quantity">0</span>
+  </div>
+{{/if}}
+                   
             <button class="weapon-attack-button" type="button" data-weapon-id="{{item._id}}">
               {{localize "RONIN.Actions.Attack"}}
             </button>
