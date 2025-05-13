@@ -88,7 +88,9 @@
       "CategoryExceedsMax": "The selected category exceeds the maximum category for this armor!",
       "EnemyWeapon": "Enemy Weapon",
       "Weapon": "Weapon",
-      "EnemyArmor": "Enemy Armor"
+      "EnemyArmor": "Enemy Armor",
+      "NoAmmoSelected": "No ammunition selected, please select one before attacking",
+      "NoAmmoRemaining": "No ammunition remaining"
     },
     "Encumbrance": {
       "MaxLoadExceeded": "Cannot add this item. The maximum load limit ({max}) would be exceeded!"

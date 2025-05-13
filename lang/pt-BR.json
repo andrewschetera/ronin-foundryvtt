@@ -88,7 +88,9 @@
       "CategoryExceedsMax": "A categoria selecionada excede a categoria máxima desta armadura!",
       "EnemyWeapon": "Arma do Inimigo",
       "Weapon": "Arma",
-      "EnemyArmor": "Armadura do Inimigo"
+      "EnemyArmor": "Armadura do Inimigo",
+      "NoAmmoSelected": "Sem munição selecionada, selecione uma antes de atacar",
+      "NoAmmoRemaining": "Sem munição"
     },
     "Encumbrance": {
       "MaxLoadExceeded": "Não é possível adicionar este item. O limite máximo de carga ({max}) seria ultrapassado!"

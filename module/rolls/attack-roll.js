@@ -25,6 +25,30 @@ window.RONIN.AttackRoll = {
       return;
     }
     
+    // Verificar se é uma arma à distância que usa munição
+    if (weapon.system.weaponType === "ranged" && weapon.system.useAmmo) {
+      // Verificar se uma munição foi selecionada
+      if (!weapon.system.ammoId) {
+        ui.notifications.warn(game.i18n.localize("RONIN.Equipment.NoAmmoSelected"));
+        return;
+      }
+      
+      // Obter o item de munição
+      const ammoItem = actor.items.get(weapon.system.ammoId);
+      
+      // Verificar se a munição existe
+      if (!ammoItem) {
+        ui.notifications.warn(game.i18n.localize("RONIN.Equipment.NoAmmoSelected"));
+        return;
+      }
+      
+      // Verificar se há munição suficiente
+      if (ammoItem.system.quantity <= 0) {
+        ui.notifications.warn(game.i18n.localize("RONIN.Equipment.NoAmmoRemaining"));
+        return;
+      }
+    }
+    
     // Determina qual atributo usar com base no tipo de arma
     const isRanged = weapon.system.weaponType === "ranged";
     const abilityKey = isRanged ? "spirit" : "vigor";
@@ -82,6 +106,21 @@ window.RONIN.AttackRoll = {
    */
   _onRollAttack: async function(html, weapon, abilityKey, abilityName, abilityAbbrev, actor) {
     try {
+      // Consumir munição se for uma arma à distância que usa munição
+      if (weapon.system.weaponType === "ranged" && weapon.system.useAmmo && weapon.system.ammoId) {
+        const ammoItem = actor.items.get(weapon.system.ammoId);
+        
+        // Verificar novamente se a munição existe e tem quantidade suficiente
+        if (!ammoItem || ammoItem.system.quantity <= 0) {
+          ui.notifications.warn(game.i18n.localize("RONIN.Equipment.NoAmmoRemaining"));
+          return;
+        }
+        
+        // Reduzir a quantidade de munição em 1
+        const newQuantity = Math.max(0, ammoItem.system.quantity - 1);
+        await ammoItem.update({"system.quantity": newQuantity});
+      }
+      
       // Obtém os valores do diálogo
       const form = html[0].querySelector("form");
       const abilityValue = parseInt(actor.system.abilities[abilityKey].value);
