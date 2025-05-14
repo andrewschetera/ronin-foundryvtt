@@ -35,6 +35,13 @@
       "Parry": "PARRY",
       "Attack": "ATTACK"
     },
+    "Broken": {
+      "Result1": "Falls unconscious for {rounds} rounds and awakens with {hp} HP",
+      "Result2a": "Broken or amputated limb.",
+      "Result2b": "Loss of an eye. Cannot act for {rounds} rounds and then can act with {hp} HP",
+      "Result3": "Hemorrhage. Death in {hours} hours, unless treated. All tests are DR 16 in the first hour, then DR 18 in the last hour",
+      "Result4": "Dead"
+    },
     "Equipment": {
       "Weapons": "Weapons",
       "Armor": "Armor",

@@ -35,6 +35,13 @@
       "Parry": "APARAR",
       "Attack": "ATACAR"
     },
+    "Broken": {
+      "Result1": "Cai inconsciente por {rounds} rodadas e desperta com {hp} PV",
+      "Result2a": "Membro quebrado ou amputado.",
+      "Result2b": "Perda de olho. Não pode agir por {rounds} rodadas e, em seguida pode agir com {hp} PV",
+      "Result3": "Hemorragia. Morte em {hours} horas, exceto se tratado. Todos os testes são CD 16 na primeira hora, depois CD 18 na última hora",
+      "Result4": "Morto"
+    },
     "Equipment": {
       "Weapons": "Armas",
       "Armor": "Armadura",
