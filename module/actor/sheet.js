@@ -155,6 +155,9 @@ activateListeners(html) {
   // Listener para o botão quebrado
   html.find('.button-broken').click(this._onBrokenButtonClick.bind(this));
   
+  // Listener para o botão de melhoria
+  html.find('.button-get-better').click(this._onGetBetterButtonClick.bind(this));
+  
   // Funcionalidade condicional para as ações do proprietário
   if (this.actor.isOwner) {
     // Item creation
@@ -645,6 +648,48 @@ _onBrokenButtonClick(event) {
   
   // Se chegou aqui, o módulo existe, então faz a rolagem
   RONIN.BrokenRoll.roll(this.actor);
+}
+
+/**
+ * Manipula o clique no botão de melhoria
+ * @param {Event} event O evento de clique
+ * @private
+ */
+_onGetBetterButtonClick(event) {
+  event.preventDefault();
+  
+  // Verificar se o namespace RONIN existe
+  if (!window.RONIN) {
+    console.error("Namespace RONIN não encontrado");
+    ui.notifications.error("Erro no sistema: Namespace RONIN não encontrado");
+    return;
+  }
+  
+  // Verificar se o módulo GetBetterRoll existe
+  if (!window.RONIN.GetBetterRoll) {
+    console.error("Módulo de rolagem de melhoria não encontrado no namespace RONIN");
+    ui.notifications.error("Módulo de rolagem de melhoria não disponível");
+    
+    // Tentar importar dinamicamente (apenas como fallback)
+    try {
+      import('../rolls/get-better-roll.js').then(module => {
+        if (module && module.default) {
+          console.log("Módulo de rolagem de melhoria carregado dinamicamente");
+          module.default.roll(this.actor);
+        } else {
+          console.error("Falha ao importar módulo de rolagem de melhoria");
+        }
+      }).catch(err => {
+        console.error("Erro ao importar módulo de rolagem de melhoria:", err);
+      });
+    } catch (error) {
+      console.error("Erro ao tentar importação dinâmica:", error);
+    }
+    return;
+  }
+  
+  // Se chegou aqui, o módulo existe, então faz a rolagem
+  RONIN.GetBetterRoll.roll(this.actor);
 }
 
   // Métodos para manipulação de itens

@@ -12,22 +12,23 @@
       "name": "andrews"
     }
   ],
-  "esmodules": [
-    "module/rolls/ability-roll.js",
-    "module/rolls/attack-roll.js",
-    "module/rolls/defense-roll.js",
-    "module/rolls/parry-roll.js",
-    "module/rolls/broken-roll.js",
-    "module/helpers/handlebars.js",
-    "module/helpers/listeners.js",
-    "module/core/config.js",
-    "module/actor/actor.js",
-    "module/actor/sheet.js",
-    "module/item/item.js",
-    "module/item/sheet.js",
-    "module/hooks/encumbrance-hooks.js",
-    "module/core/ronin.js"
-  ],
+"esmodules": [
+  "module/rolls/ability-roll.js",
+  "module/rolls/attack-roll.js",
+  "module/rolls/defense-roll.js",
+  "module/rolls/parry-roll.js",
+  "module/rolls/broken-roll.js",
+  "module/rolls/get-better-roll.js",
+  "module/helpers/handlebars.js",
+  "module/helpers/listeners.js",
+  "module/core/config.js",
+  "module/actor/actor.js",
+  "module/actor/sheet.js",
+  "module/item/item.js",
+  "module/item/sheet.js",
+  "module/hooks/encumbrance-hooks.js",
+  "module/core/ronin.js"
+],
   "scripts": [],
   "styles": [
     "css/ronin.css"

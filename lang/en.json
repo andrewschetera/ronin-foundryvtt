@@ -149,6 +149,17 @@
       "ParryFailure": "Parry failed! You take damage from the enemy weapon!",
       "ParryFumbleEffect": "Critical failure! Take double damage, your armor is reduced by one category, and your weapon is broken or lost!"
     },
-    "Description": "Description"
+    "Description": "Description",
+    "GetBetter": {
+      "Confirmation": "Are you sure you want to get better?",
+      "HPIncrease": "Max HP increased by +{value}",
+      "AttributeIncrease": "{attribute} increased by +1",
+      "AttributeDecrease": "{attribute} decreased by -1",
+      "NoHPChange": "Max HP unchanged",
+      "Result": "Get Better Results",
+      "RollResult": "Roll Result: {result}",
+      "HPThreshold": "HP Threshold: {threshold}",
+      "AttributeRoll": "{attribute} Roll: {roll}"
+    }
   }
 }

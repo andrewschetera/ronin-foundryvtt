@@ -229,3 +229,44 @@
   padding: 5px;
   text-align: center;
 }
+/* Estilos para o chat card de Get Better */
+.ronin-chat-card .get-better-section {
+  margin: 10px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.ronin-chat-card .hp-increase,
+.ronin-chat-card .attribute-change {
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.ronin-chat-card .hp-increase.success,
+.ronin-chat-card .attribute-change.success {
+  color: #008000;
+}
+
+.ronin-chat-card .attribute-change.failure {
+  color: #800000;
+}
+
+.ronin-chat-card .attribute-roll {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.ronin-chat-card .attribute-roll:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.ronin-chat-card .roll-summary {
+  font-style: italic;
+  color: #666;
+  font-size: 0.9em;
+}
