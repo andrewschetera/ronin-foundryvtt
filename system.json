@@ -23,6 +23,7 @@
   "module/helpers/handlebars.js",
   "module/helpers/listeners.js",
   "module/core/config.js",
+  "module/core/settings.js",
   "module/actor/actor.js",
   "module/actor/sheet.js",
   "module/item/item.js",

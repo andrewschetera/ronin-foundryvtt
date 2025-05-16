@@ -190,6 +190,17 @@
       "HonorIncrease": "Aumento de Honra",
       "HonorIncreaseHalf": "Aumento de Honra",
       "DamageTaken": "Dano Sofrido"
+    },
+    "Settings": {
+      "ConfigName": "Configurações do Sistema RONIN",
+      "ConfigLabel": "Abrir Configurações",
+      "ConfigTitle": "Configurações do Sistema RONIN",
+      "UseSoloRules": "Usar Regras Solo para testes de Atributos",
+      "UseSoloRulesHint": "Quando ativado, os testes de atributos usarão a variante de regras solo.",
+      "DeductConsumables": "Descontar Água e Comida ao Descansar",
+      "DeductConsumablesHint": "Quando ativado, os personagens consumirão automaticamente itens de água e comida ao descansar.",
+      "SaveButton": "Salvar Configurações",
+      "Saved": "Configurações salvas com sucesso!"
     }
   }
 }

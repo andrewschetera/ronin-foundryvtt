@@ -190,6 +190,17 @@
       "HonorIncrease": "Honor Increase",
       "HonorIncreaseHalf": "Honor Increase",
       "DamageTaken": "Damage Taken"
+    },
+    "Settings": {
+      "ConfigName": "RONIN System Settings",
+      "ConfigLabel": "Open Settings",
+      "ConfigTitle": "RONIN System Settings",
+      "UseSoloRules": "Use Solo Rules for Attribute Tests",
+      "UseSoloRulesHint": "When enabled, attribute tests will use the solo rules variant.",
+      "DeductConsumables": "Deduct Water and Food when Resting",
+      "DeductConsumablesHint": "When enabled, characters will automatically consume water and food items when resting.",
+      "SaveButton": "Save Settings",
+      "Saved": "Settings saved successfully!"
     }
   }
 }

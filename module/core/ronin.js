@@ -9,6 +9,9 @@ window.RONIN = window.RONIN || {};
 Hooks.once('init', async function() {
   console.log('ronin | Inicializando sistema RONIN');
   
+  // Registrar configurações do sistema
+  RONIN.Settings.registerSettings();
+  
   // Registrar configurações do sistema (cores, fonte, etc)
   CONFIG.RONIN = CONFIG.RONIN || {};
   
