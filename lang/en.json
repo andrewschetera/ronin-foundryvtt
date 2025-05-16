@@ -33,7 +33,8 @@
       "Individual": "INDIVIDUAL",
       "Defend": "DEFEND",
       "Parry": "PARRY",
-      "Attack": "ATTACK"
+      "Attack": "ATTACK",
+      "Use": "USE"
     },
     "Broken": {
       "Result1": "Falls unconscious for {rounds} rounds and awakens with {hp} HP",
@@ -99,8 +100,8 @@
       "NoAmmoSelected": "No ammunition selected, please select one before attacking",
       "NoAmmoRemaining": "No ammunition remaining",
       "ConsumableTypes": {
-        "Potion": "Potion",
-        "Scroll": "Scroll",
+        "Vial": "Vial",
+        "Water": "Water",
         "Food": "Food",
         "Other": "Other"
       },

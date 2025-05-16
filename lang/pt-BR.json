@@ -33,7 +33,8 @@
       "Individual": "INDIVIDUAL",
       "Defend": "DEFENDER",
       "Parry": "APARAR",
-      "Attack": "ATACAR"
+      "Attack": "ATACAR",
+      "Use": "USAR"
     },
     "Broken": {
       "Result1": "Cai inconsciente por {rounds} rodadas e desperta com {hp} PV",
@@ -98,9 +99,9 @@
       "EnemyArmor": "Armadura do Inimigo",
       "NoAmmoSelected": "Sem munição selecionada, selecione uma antes de atacar",
       "NoAmmoRemaining": "Sem munição",
-            "ConsumableTypes": {
-        "Potion": "Poção",
-        "Scroll": "Pergaminho",
+      "ConsumableTypes": {
+        "Vial": "Frasco",
+        "Water": "Água",
         "Food": "Comida",
         "Other": "Outro"
       },

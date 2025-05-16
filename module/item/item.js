@@ -220,13 +220,8 @@ class RoninItem extends Item {
    * @private
    */
   _prepareConsumableData(itemData) {
-    // Verificar se o campo quantity existe
-    if (itemData.quantity === undefined) {
-      itemData.quantity = 1;
-    }
-    
-    // Garantir que quantity seja um número
-    itemData.quantity = isNaN(Number(itemData.quantity)) ? 1 : Number(itemData.quantity);
+    // Quantidade sempre fixada em 1 para consumíveis
+    itemData.quantity = 1;
     
     // Inicializar os usos se não existirem
     if (!itemData.uses) {
@@ -253,7 +248,7 @@ class RoninItem extends Item {
     
     // Verificar se o tipo de consumível existe e é válido
     if (!itemData.consumableType || !RONIN.config.equipment.consumableTypes.includes(itemData.consumableType)) {
-      itemData.consumableType = "potion"; // Tipo padrão
+      itemData.consumableType = "vial"; // Tipo padrão alterado para "vial"
     }
     
     // Verificar se o campo weight existe ou é válido
@@ -326,15 +321,12 @@ class RoninItem extends Item {
         break;
       case 'consumable':
         // Lógica para usar consumíveis
-        // Por exemplo, decrementar os usos e/ou a quantidade
+        // Novo comportamento: decrementar apenas os usos do item
         if (this.system.uses.value > 0) {
           await this.update({'system.uses.value': Math.max(0, this.system.uses.value - 1)});
-        } else if (this.system.quantity > 0) {
-          // Se não houver mais usos disponíveis, consumir um item
-          await this.update({
-            'system.quantity': Math.max(0, this.system.quantity - 1),
-            'system.uses.value': this.system.uses.max // Restaurar os usos para o novo item
-          });
+          ui.notifications.info(`${this.name} usado: ${Math.max(0, this.system.uses.value)}/${this.system.uses.max} usos restantes.`);
+        } else {
+          ui.notifications.warn(`${this.name} não tem mais usos disponíveis.`);
         }
         break;
       case 'text':

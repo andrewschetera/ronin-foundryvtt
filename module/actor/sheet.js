@@ -161,6 +161,9 @@ activateListeners(html) {
   // Listener para o botão de Seppuku
   html.find('.button-seppuku').click(this._onSeppukuButtonClick.bind(this));
   
+  // Listener para botão de uso de consumível
+  html.find('.consumable-use').click(this._onConsumableUse.bind(this));
+  
   // Funcionalidade condicional para as ações do proprietário
   if (this.actor.isOwner) {
     // Item creation
