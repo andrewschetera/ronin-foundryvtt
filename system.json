@@ -19,6 +19,7 @@
   "module/rolls/parry-roll.js",
   "module/rolls/broken-roll.js",
   "module/rolls/get-better-roll.js",
+  "module/rolls/seppuku-roll.js",
   "module/helpers/handlebars.js",
   "module/helpers/listeners.js",
   "module/core/config.js",

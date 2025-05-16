@@ -160,6 +160,27 @@
       "RollResult": "Roll Result: {result}",
       "HPThreshold": "HP Threshold: {threshold}",
       "AttributeRoll": "{attribute} Roll: {roll}"
+    },
+    "Seppuku": {
+      "ConfirmationTitle": "Confirm Seppuku",
+      "ConfirmationText": "Do you really want to commit seppuku?",
+      "ConfirmButton": "Yes",
+      "CancelButton": "No",
+      "AssistantTitle": "Seppuku Assistant",
+      "AssistantText": "Do you have an assistant to help you with the ritual?",
+      "YesButton": "Yes",
+      "NoButton": "No",
+      "SpiritTestTitle": "Seppuku Spirit Test",
+      "RitualPreparation": "You ritually prepare yourself and your surroundings, meditating on the reasons for your act and writing a death haiku.",
+      "SpiritFailureText": "You failed to prepare your spirit and could not begin the ritual of Seppuku.",
+      "ContinueButton": "Seppuku",
+      "ResilienceTestTitle": "Seppuku Resilience Test",
+      "ResilienceSuccessText": "You endure the pain and complete the ritual, and your Honor increases by:",
+      "ResilienceFailureAssistantText": "You cannot endure the pain and your 'assistant' helps you, decapitating you to complete the ritual. Your Honor increases by:",
+      "ResilienceFailureNoAssistantText": "You cannot endure the pain and do not complete the ritual. You suffer damage and must roll on the Debilitating Injuries table.",
+      "HonorIncrease": "Honor Increase",
+      "HonorIncreaseHalf": "Honor Increase",
+      "DamageTaken": "Damage Taken"
     }
   }
 }

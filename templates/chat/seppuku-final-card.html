@@ -1,0 +1,46 @@
+<div class="ronin-chat-card seppuku-final-card">
+  <div class="card-header {{#if isSuccess}}success{{else}}failure{{/if}}">
+    <h3>{{localize "RONIN.Seppuku.ResilienceTestTitle"}}</h3>
+  </div>
+  
+  <div class="card-roll-result">
+    <div class="roll-formula">
+      <span>1d20 + {{localize "RONIN.Abilities.AbbrevResilience"}} VS DR {{difficultyRating}}</span>
+    </div>
+    
+    <div class="roll-calculation">
+      {{d20Result}} + {{resilienceValue}} = {{totalResult}}
+    </div>
+    
+    <div class="roll-outcome {{#if isSuccess}}success{{else}}failure{{/if}}">
+      <h3>{{#if isSuccess}}{{localize "RONIN.Rolls.Success"}}{{else}}{{localize "RONIN.Rolls.Failure"}}{{/if}}</h3>
+    </div>
+    
+    <div class="seppuku-result-description">
+      {{#if isSuccess}}
+        <p>{{localize "RONIN.Seppuku.ResilienceSuccessText"}}</p>
+        {{#if honorRoll}}
+          <div class="honor-increase">
+            <p>{{localize "RONIN.Seppuku.HonorIncrease"}}: {{honorRoll.total}}</p>
+          </div>
+        {{/if}}
+      {{else}}
+        {{#if hasAssistant}}
+          <p>{{localize "RONIN.Seppuku.ResilienceFailureAssistantText"}}</p>
+          {{#if honorRoll}}
+            <div class="honor-increase">
+              <p>{{localize "RONIN.Seppuku.HonorIncreaseHalf"}}: {{honorRoll.total}}</p>
+            </div>
+          {{/if}}
+        {{else}}
+          <p>{{localize "RONIN.Seppuku.ResilienceFailureNoAssistantText"}}</p>
+          {{#if damageRoll}}
+            <div class="damage-result">
+              <p>{{localize "RONIN.Seppuku.DamageTaken"}}: {{damageRoll.total}}</p>
+            </div>
+          {{/if}}
+        {{/if}}
+      {{/if}}
+    </div>
+  </div>
+</div>

@@ -160,6 +160,27 @@
       "RollResult": "Resultado da Rolagem: {result}",
       "HPThreshold": "Limite de PV: {threshold}",
       "AttributeRoll": "Rolagem de {attribute}: {roll}"
+    },
+    "Seppuku": {
+      "ConfirmationTitle": "Confirmar Seppuku",
+      "ConfirmationText": "Realmente deseja cometer seppuku?",
+      "ConfirmButton": "Sim",
+      "CancelButton": "Não",
+      "AssistantTitle": "Assistente de Seppuku",
+      "AssistantText": "Você tem um assistente para auxiliá-lo no ritual?",
+      "YesButton": "Sim",
+      "NoButton": "Não",
+      "SpiritTestTitle": "Teste de Espírito para Seppuku",
+      "RitualPreparation": "Você ritualmente prepara a si mesmo e seus arredores, meditando sobre os motivos para seu ato e escrevendo um haiku de morte.",
+      "SpiritFailureText": "Você falhou em preparar seu espírito e não pôde começar o ritual de Seppuku.",
+      "ContinueButton": "Seppuku",
+      "ResilienceTestTitle": "Teste de Resiliência para Seppuku",
+      "ResilienceSuccessText": "Você suporta a dor e completa o ritual, e sua Honra aumenta em:",
+      "ResilienceFailureAssistantText": "Você não suporta a dor e seu 'assistente' o ajuda, decapitando-o para completar o ritual. Sua Honra aumenta em:",
+      "ResilienceFailureNoAssistantText": "Você não consegue suportar a dor e não completa o ritual. Sofra dano e role na tabela Lesões Debilitantes.",
+      "HonorIncrease": "Aumento de Honra",
+      "HonorIncreaseHalf": "Aumento de Honra",
+      "DamageTaken": "Dano Sofrido"
     }
   }
 }

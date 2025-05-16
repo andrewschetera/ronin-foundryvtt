@@ -40,40 +40,33 @@ RONIN.listeners = {
    * @param {Object} actor O ator que está usando a ação
    */
   onSeppukuButtonClick: function(actor) {
-    console.log(`${actor.name} está realizando seppuku`);
-    // Implementar efeito do seppuku
-    // Por exemplo, causar dano massivo mas recuperar honor
+    console.log(`${actor.name} está tentando realizar seppuku`);
     
-    // Confirmar a ação com um diálogo
-    const d = new Dialog({
-      title: "Confirmar Seppuku",
-      content: "<p>Tem certeza que deseja realizar seppuku? Esta ação causará dano severo ao seu personagem.</p>",
-      buttons: {
-        confirm: {
-          icon: '<i class="fas fa-skull"></i>',
-          label: "Confirmar",
-          callback: () => {
-            // Reduzir HP para 0
-            actor.update({'system.resources.hp.value': 0});
-            
-            // Aumentar honor (exemplo)
-            const currentHonor = actor.system.resources.honor.value;
-            if (currentHonor < 20) {
-              actor.update({'system.resources.honor.value': currentHonor + 1});
-            }
-            
-            // Notificar o efeito
-            ui.notifications.warn(`${actor.name} realizou seppuku, caindo a 0 HP mas recuperando honor.`);
+    // Verificar se o módulo de rolagem de Seppuku existe
+    if (!window.RONIN.SeppukuRoll) {
+      console.error("Módulo de rolagem de Seppuku não encontrado no namespace RONIN");
+      ui.notifications.error("Módulo de rolagem de Seppuku não disponível");
+      
+      // Tentar importar dinamicamente (apenas como fallback)
+      try {
+        import('../rolls/seppuku-roll.js').then(module => {
+          if (module && module.default) {
+            console.log("Módulo de rolagem de Seppuku carregado dinamicamente");
+            module.default.roll(actor);
+          } else {
+            console.error("Falha ao importar módulo de rolagem de Seppuku");
           }
-        },
-        cancel: {
-          icon: '<i class="fas fa-times"></i>',
-          label: "Cancelar"
-        }
-      },
-      default: "cancel"
-    });
-    d.render(true);
+        }).catch(err => {
+          console.error("Erro ao importar módulo de rolagem de Seppuku:", err);
+        });
+      } catch (error) {
+        console.error("Erro ao tentar importação dinâmica:", error);
+      }
+      return;
+    }
+    
+    // Se chegou aqui, o módulo existe, então realiza o Seppuku
+    RONIN.SeppukuRoll.roll(actor);
   },
   
   /**
