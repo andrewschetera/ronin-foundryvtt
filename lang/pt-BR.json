@@ -97,7 +97,14 @@
       "Weapon": "Arma",
       "EnemyArmor": "Armadura do Inimigo",
       "NoAmmoSelected": "Sem munição selecionada, selecione uma antes de atacar",
-      "NoAmmoRemaining": "Sem munição"
+      "NoAmmoRemaining": "Sem munição",
+            "ConsumableTypes": {
+        "Potion": "Poção",
+        "Scroll": "Pergaminho",
+        "Food": "Comida",
+        "Other": "Outro"
+      },
+      "ConsumableType": "Tipo"
     },
     "Encumbrance": {
       "MaxLoadExceeded": "Não é possível adicionar este item. O limite máximo de carga ({max}) seria ultrapassado!"
@@ -112,7 +119,8 @@
       "Weapon": "Arma",
       "Armor": "Armadura",
       "Gear": "Equipamento",
-      "Misc": "Diversos",
+      "Ammo": "Munição",
+      "Consumable": "Consumível",
       "Feat": "Característica",
       "Text": "Texto"
     },

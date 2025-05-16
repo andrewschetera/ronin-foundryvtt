@@ -1,0 +1,58 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="item-name">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}"/>
+      </h1>
+    </div>
+  </header>
+
+  <section class="sheet-body">
+    <div class="consumable-properties">
+      <div class="form-group">
+        <label>{{localize "RONIN.Equipment.ConsumableType"}}</label>
+        <select name="system.consumableType">
+          <option value="potion" {{#if (eq system.consumableType "potion")}}selected{{/if}}>{{localize "RONIN.Equipment.ConsumableTypes.Potion"}}</option>
+          <option value="scroll" {{#if (eq system.consumableType "scroll")}}selected{{/if}}>{{localize "RONIN.Equipment.ConsumableTypes.Scroll"}}</option>
+          <option value="food" {{#if (eq system.consumableType "food")}}selected{{/if}}>{{localize "RONIN.Equipment.ConsumableTypes.Food"}}</option>
+          <option value="other" {{#if (eq system.consumableType "other")}}selected{{/if}}>{{localize "RONIN.Equipment.ConsumableTypes.Other"}}</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>{{localize "RONIN.Equipment.Quantity"}}</label>
+        <input type="number" name="system.quantity" value="{{system.quantity}}" min="0" data-dtype="Number"/>
+      </div>
+      
+      <div class="form-group">
+        <label>{{localize "RONIN.Equipment.Uses"}}</label>
+        <div class="form-fields">
+          <input type="number" name="system.uses.value" value="{{system.uses.value}}" min="0" data-dtype="Number"/>
+          <span class="separator">/</span>
+          <input type="number" name="system.uses.max" value="{{system.uses.max}}" min="0" data-dtype="Number"/>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>{{localize "RONIN.Equipment.Weight"}}</label>
+        <select name="system.weight">
+          <option value="none" {{#if (eq system.weight "none")}}selected{{/if}}>{{localize "RONIN.Equipment.None"}}</option>
+          <option value="small" {{#if (eq system.weight "small")}}selected{{/if}}>{{localize "RONIN.Equipment.Small"}}</option>
+          <option value="normal" {{#if (eq system.weight "normal")}}selected{{/if}}>{{localize "RONIN.Equipment.Normal"}}</option>
+          <option value="heavy" {{#if (eq system.weight "heavy")}}selected{{/if}}>{{localize "RONIN.Equipment.Heavy"}}</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>{{localize "RONIN.Equipment.Price"}} ({{localize "RONIN.Resources.Ryo"}})</label>
+        <input type="number" name="system.price" value="{{system.price}}" min="0"/>
+      </div>
+      
+      <div class="form-group consumable-description">
+        <label>{{localize "RONIN.Description"}}</label>
+        <textarea name="system.description" rows="8" style="width: 100%;">{{system.description}}</textarea>
+      </div>
+    </div>
+  </section>
+</form>

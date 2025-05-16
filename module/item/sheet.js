@@ -68,28 +68,27 @@ class RoninItemSheet extends ItemSheet {
     return context;
   }
   
-  /**
-   * Obtém a lista de munições disponíveis no inventário do ator
-   * @returns {Array} Lista de munições disponíveis
-   * @private
-   */
-  _getAvailableAmmo() {
-    const actor = this.item.actor;
-    
-    // Se o item não estiver associado a um ator, retornar lista vazia
-    if (!actor) return [];
-    
-    // Buscar todos os itens do tipo 'misc' que sejam munições
-    return actor.items.filter(i => 
-      i.type === 'misc' && 
-      i.system.isAmmo === true && 
-      i.system.quantity > 0
-    ).map(i => ({
-      id: i.id,
-      name: i.name,
-      system: i.system
-    }));
-  }
+/**
+ * Obtém a lista de munições disponíveis no inventário do ator
+ * @returns {Array} Lista de munições disponíveis
+ * @private
+ */
+_getAvailableAmmo() {
+  const actor = this.item.actor;
+  
+  // Se o item não estiver associado a um ator, retornar lista vazia
+  if (!actor) return [];
+  
+  // Buscar todos os itens do tipo 'ammo' que tenham quantidade maior que 0
+  return actor.items.filter(i => 
+    i.type === 'ammo' && 
+    i.system.quantity > 0
+  ).map(i => ({
+    id: i.id,
+    name: i.name,
+    system: i.system
+  }));
+}
   
   /**
    * Ativa os event listeners da ficha
@@ -105,9 +104,9 @@ class RoninItemSheet extends ItemSheet {
       html.find('.item-use').click(this._onItemUse.bind(this));
       
       // Adicionar listener para validação de quantidade
-      if (this.item.type === 'misc') {
-        html.find('input[name="system.quantity"]').change(this._onQuantityChange.bind(this));
-      }
+if (['gear', 'ammo', 'consumable'].includes(this.item.type)) {
+  html.find('input[name="system.quantity"]').change(this._onQuantityChange.bind(this));
+}
       
       // Adicionar listener para tipo de arma mudar (melee/ranged)
       if (this.item.type === 'weapon') {

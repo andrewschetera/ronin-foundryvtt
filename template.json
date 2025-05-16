@@ -56,7 +56,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "armor", "misc", "feat", "text", "class"],
+    "types": ["weapon", "armor", "gear", "ammo", "consumable", "feat", "text", "class"],
     "templates": {
       "itemDescription": {
         "description": ""
@@ -64,6 +64,9 @@
       "physicalItem": {
         "price": 0,
         "weight": "normal"
+      },
+      "itemQuantity": {
+        "quantity": 1
       }
     },
     "weapon": {
@@ -76,18 +79,28 @@
       "price": 0,
       "weight": "normal"
     },
-"armor": {
-  "templates": ["itemDescription", "physicalItem"],
-  "maxCategory": 1,
-  "currentCategory": 1,
-  "protection": "",
-  "swiftnessPenalty": 0,
-  "defensePenalty": 0
-},
-    "misc": {
+    "armor": {
       "templates": ["itemDescription", "physicalItem"],
-      "quantity": 1,
-      "isAmmo": false
+      "maxCategory": 1,
+      "currentCategory": 1,
+      "protection": "",
+      "swiftnessPenalty": 0,
+      "defensePenalty": 0
+    },
+    "gear": {
+      "templates": ["itemDescription", "physicalItem", "itemQuantity"]
+    },
+    "ammo": {
+      "templates": ["itemDescription", "physicalItem", "itemQuantity"],
+      "compatible": []
+    },
+    "consumable": {
+      "templates": ["itemDescription", "physicalItem", "itemQuantity"],
+      "uses": {
+        "value": 1,
+        "max": 1
+      },
+      "consumableType": "potion"
     },
     "feat": {
       "templates": ["itemDescription"]

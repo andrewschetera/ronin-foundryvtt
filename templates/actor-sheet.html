@@ -260,13 +260,22 @@
 <div class="inventory-category">
   <h2 class="category-header">
     <span>{{localize "RONIN.Equipment.Misc"}}</span>
-    <a class="item-create" title="Create Misc Item" data-type="misc">
-      <i class="fas fa-plus"></i> Add
-    </a>
+    <div class="item-create-buttons">
+      <a class="item-create" title="Create Gear Item" data-type="gear">
+        <i class="fas fa-toolbox"></i>
+      </a>
+      <a class="item-create" title="Create Ammo" data-type="ammo">
+        <i class="fas fa-bullseye"></i>
+      </a>
+      <a class="item-create" title="Create Consumable" data-type="consumable">
+        <i class="fas fa-flask"></i>
+      </a>
+    </div>
   </h2>
   <ol class="item-list">
+    <!-- Gear items -->
     {{#each items as |item id|}}
-      {{#if (eq item.type "misc")}}
+      {{#if (eq item.type "gear")}}
         <li class="item misc-item-inline" data-item-id="{{item._id}}">
           <div class="item-header">
             <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
@@ -283,12 +292,82 @@
                 <span class="item-weight weight-{{item.system.weight}}">
                   {{localize (concat "RONIN.Equipment." (capitalize item.system.weight))}}
                 </span>
-                <!-- Ícone de munição se aplicável -->
-                {{#if item.system.isAmmo}}
-                <span class="ammo-icon" title="{{localize 'RONIN.Equipment.IsAmmunition'}}">
-                  <i class="fas fa-bullseye"></i>
+              </span>
+            </div>
+            <div class="item-controls">
+              <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+              <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+            </div>
+          </div>
+        </li>
+      {{/if}}
+    {{/each}}
+    
+    <!-- Ammo items -->
+    {{#each items as |item id|}}
+      {{#if (eq item.type "ammo")}}
+        <li class="item misc-item-inline" data-item-id="{{item._id}}">
+          <div class="item-header">
+            <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+            <div class="item-name">
+              {{item.name}}
+              <span class="item-properties">
+                <!-- Quantidade editável -->
+                <span class="item-quantity">
+                  {{localize "RONIN.Equipment.Quantity"}}: 
+                  <input type="number" class="quantity-input" value="{{item.system.quantity}}" 
+                         min="0" data-item-id="{{item._id}}" data-field="system.quantity">
                 </span>
-                {{/if}}
+                <!-- Peso -->
+                <span class="item-weight weight-{{item.system.weight}}">
+                  {{localize (concat "RONIN.Equipment." (capitalize item.system.weight))}}
+                </span>
+                <!-- Ícone de munição -->
+                <span class="ammo-icon-container">
+                  <span class="ammo-icon" title="{{localize 'RONIN.ItemTypes.Ammo'}}">
+                    <i class="fas fa-bullseye"></i>
+                  </span>
+                </span>
+              </span>
+            </div>
+            <div class="item-controls">
+              <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+              <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+            </div>
+          </div>
+        </li>
+      {{/if}}
+    {{/each}}
+    
+    <!-- Consumable items -->
+    {{#each items as |item id|}}
+      {{#if (eq item.type "consumable")}}
+        <li class="item misc-item-inline" data-item-id="{{item._id}}">
+          <div class="item-header">
+            <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+            <div class="item-name">
+              {{item.name}}
+              <span class="item-properties">
+                <!-- Quantidade editável -->
+                <span class="item-quantity">
+                  {{localize "RONIN.Equipment.Quantity"}}: 
+                  <input type="number" class="quantity-input" value="{{item.system.quantity}}" 
+                         min="0" data-item-id="{{item._id}}" data-field="system.quantity">
+                </span>
+                <!-- Usos -->
+                <span class="item-uses">
+                  {{localize "RONIN.Equipment.Uses"}}: {{item.system.uses.value}}/{{item.system.uses.max}}
+                </span>
+                <!-- Peso -->
+                <span class="item-weight weight-{{item.system.weight}}">
+                  {{localize (concat "RONIN.Equipment." (capitalize item.system.weight))}}
+                </span>
+                <!-- Ícone de consumível -->
+                <span class="consumable-icon-container">
+                  <span class="consumable-icon" title="{{localize 'RONIN.ItemTypes.Consumable'}}">
+                    <i class="fas fa-flask"></i>
+                  </span>
+                </span>
               </span>
             </div>
             <div class="item-controls">

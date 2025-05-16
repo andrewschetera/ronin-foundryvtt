@@ -28,14 +28,17 @@ RONIN.config = {
   equipment: {
     weaponTypes: ["melee", "ranged"],
     weaponHands: ["one", "two"],
-    armorTiers: [1, 2, 3]
+    armorTiers: [1, 2, 3],
+    consumableTypes: ["potion", "scroll", "food", "other"]
   },
   
   // Mapeamento de tipos de item para localização
   itemTypes: {
     weapon: "RONIN.ItemTypes.Weapon",
     armor: "RONIN.ItemTypes.Armor",
-    misc: "RONIN.ItemTypes.Misc",
+    gear: "RONIN.ItemTypes.Gear",
+    ammo: "RONIN.ItemTypes.Ammo",
+    consumable: "RONIN.ItemTypes.Consumable",
     feat: "RONIN.ItemTypes.Feat",
     text: "RONIN.ItemTypes.Text",
     class: "RONIN.ItemTypes.Class"

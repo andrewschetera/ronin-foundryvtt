@@ -417,7 +417,7 @@
   border-radius: 3px;
 }
 
-/* Estilos para a exibição de itens misc em linha na aba Equipamento */
+/* Estilos para a exibição de itens em linha na aba Equipamento */
 .misc-item-inline .item-name {
   flex: 1;
   display: flex;
@@ -479,4 +479,88 @@
   outline: none;
   border-color: #6c8eef;
   box-shadow: 0 0 3px rgba(108, 142, 239, 0.5);
+}
+
+/* Estilos para os novos tipos de itens */
+
+/* Botões de criação de item agrupados */
+.item-create-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.item-create-buttons a {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  color: #444;
+  transition: all 0.2s ease;
+}
+
+.item-create-buttons a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #000;
+}
+
+/* Ícones específicos para cada tipo */
+.item-create-buttons a[data-type="gear"] i {
+  color: #555;
+}
+
+.item-create-buttons a[data-type="ammo"] i {
+  color: #8b4513;
+}
+
+.item-create-buttons a[data-type="consumable"] i {
+  color: #4b0082;
+}
+
+/* Container do ícone de consumível */
+.consumable-icon-container {
+  width: 20px;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Ícone de consumível */
+.consumable-icon {
+  color: #4b0082;
+}
+
+/* Estilo para o campo de usos */
+.item-uses {
+  min-width: 80px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  white-space: nowrap;
+  color: #000000;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px solid rgba(0, 0, 0, 0);
+}
+
+/* Estilos na ficha de item para os novos tipos */
+.ronin.sheet.item .gear-properties,
+.ronin.sheet.item .ammo-properties,
+.ronin.sheet.item .consumable-properties {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ronin.sheet.item .form-fields {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ronin.sheet.item .separator {
+  margin: 0 2px;
 }

@@ -22,7 +22,7 @@ class RoninActor extends Actor {
     }
   }
   
- /**
+/**
  * Prepara os dados específicos do personagem.
  * @param {Object} actorData Os dados do ator
  * @private
@@ -51,8 +51,8 @@ _prepareCharacterData(actorData) {
         else if (item.system.weight === "heavy") baseWeight = 2;
         // Itens "small" ou "none" não adicionam peso (0)
         
-        // Para itens do tipo misc, multiplicar pelo quantidade
-        if (item.type === "misc" && item.system.quantity !== undefined) {
+        // Para itens com quantidade, multiplicar pelo quantidade
+        if (["gear", "ammo", "consumable"].includes(item.type) && item.system.quantity !== undefined) {
           totalWeight += baseWeight * item.system.quantity;
         } else {
           // Para outros tipos de item (armas, etc.), usar apenas o peso base

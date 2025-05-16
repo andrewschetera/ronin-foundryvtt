@@ -41,7 +41,7 @@ getData() {
   context.items = actorData.items;
   
   // Preparar dados de munição
-  const ammoItems = context.items.filter(i => i.type === "misc" && i.system.isAmmo);
+  const ammoItems = context.items.filter(i => i.type === "ammo");
   context.ammoItems = ammoItems;
   
   // Criar mapa para acesso rápido às munições
@@ -349,6 +349,23 @@ async _onArmorEquipToggle(event) {
 }
 
 /**
+ * Manipula o clique no botão de uso de consumível
+ * @param {Event} event O evento de clique
+ * @private
+ */
+_onConsumableUse(event) {
+  event.preventDefault();
+  const button = event.currentTarget;
+  const itemId = button.dataset.itemId;
+  const item = this.actor.items.get(itemId);
+  
+  if (!item) return;
+  
+  // Chamar o método de uso do item
+  item.use();
+}
+
+/**
  * Manipula a mudança da categoria atual da armadura na aba Tatakai
  * @param {Event} event O evento de mudança
  * @private
@@ -460,8 +477,8 @@ _recalculateCarryingCapacity() {
       else if (item.system.weight === "heavy") baseWeight = 2;
       // Itens "small" ou "none" não adicionam peso (0)
       
-      // Para itens do tipo misc, multiplicar pelo quantidade
-      if (item.type === "misc" && item.system.quantity !== undefined) {
+      // Para itens com quantidade, multiplicar pelo quantidade
+      if (["gear", "ammo", "consumable"].includes(item.type) && item.system.quantity !== undefined) {
         totalWeight += baseWeight * item.system.quantity;
       } else {
         // Para outros tipos de item (armas, etc.), usar apenas o peso base

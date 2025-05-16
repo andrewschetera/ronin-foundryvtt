@@ -97,7 +97,14 @@
       "Weapon": "Weapon",
       "EnemyArmor": "Enemy Armor",
       "NoAmmoSelected": "No ammunition selected, please select one before attacking",
-      "NoAmmoRemaining": "No ammunition remaining"
+      "NoAmmoRemaining": "No ammunition remaining",
+      "ConsumableTypes": {
+        "Potion": "Potion",
+        "Scroll": "Scroll",
+        "Food": "Food",
+        "Other": "Other"
+      },
+      "ConsumableType": "Type"
     },
     "Encumbrance": {
       "MaxLoadExceeded": "Cannot add this item. The maximum load limit ({max}) would be exceeded!"
@@ -112,7 +119,8 @@
       "Weapon": "Weapon",
       "Armor": "Armor",
       "Gear": "Gear",
-      "Misc": "Misc",
+      "Ammo": "Ammunition",
+      "Consumable": "Consumable",
       "Feat": "Feat",
       "Text": "Text"
     },
