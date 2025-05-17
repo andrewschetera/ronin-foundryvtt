@@ -219,6 +219,10 @@
   "NoFoodAndWater": "No Food and Water",
   "OK": "Rest",
   "Cancel": "Cancel"
+},
+"Tables": {
+  "DebilitatingInjuries": "Debilitating Injuries",
+  "RollDebilitatingInjuries": "Roll Debilitating Injuries"
 }
   }
 }

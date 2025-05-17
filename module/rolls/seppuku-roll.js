@@ -92,7 +92,14 @@ class SeppukuRoll {
       
       // Criar a rolagem para o teste de Espírito
       const spiritRoll = new Roll("1d20");
+      
+      // Avaliar a rolagem
       await spiritRoll.evaluate();
+      
+      // Exibir a animação do Dice So Nice se o módulo estiver ativo
+      if (game.modules.get("dice-so-nice")?.active) {
+        await game.dice3d.showForRoll(spiritRoll);
+      }
       
       // Obter o resultado do d20
       const d20Result = spiritRoll.terms[0].results[0].result;
@@ -114,11 +121,6 @@ class SeppukuRoll {
       } else {
         // Se for falha, exibir o chat card de falha
         await this._showSpiritFailureCard(actor, spiritRoll, spiritValue, totalResult, difficultyRating);
-      }
-      
-      // Exibir a animação do Dice So Nice se o módulo estiver ativo
-      if (game.modules.get("dice-so-nice")?.active) {
-        await game.dice3d.showForRoll(spiritRoll);
       }
       
     } catch (error) {
@@ -210,7 +212,17 @@ class SeppukuRoll {
       
       // Criar a rolagem para o teste de Resiliência
       const resilienceRoll = new Roll("1d20");
+      
+      // Verificar se o módulo Dice So Nice está ativo
+      const dsn = game.modules.get("dice-so-nice")?.active;
+      
+      // Avaliar a rolagem de resiliência
       await resilienceRoll.evaluate();
+      
+      // Mostrar animação de dados se o DSN estiver ativo
+      if (dsn) {
+        await game.dice3d.showForRoll(resilienceRoll);
+      }
       
       // Obter o resultado do d20
       const d20Result = resilienceRoll.terms[0].results[0].result;
@@ -234,27 +246,67 @@ class SeppukuRoll {
         // Rolar 2d6+2 para o aumento de Honra
         honorRoll = new Roll("2d6+2");
         await honorRoll.evaluate();
+        
+        if (dsn) {
+          await game.dice3d.showForRoll(honorRoll);
+        }
       } else {
         if (hasAssistant) {
           // Rolar (1d6+1) para o aumento de Honra com assistente
           honorRoll = new Roll("(1d6+1)");
           await honorRoll.evaluate();
+          
+          if (dsn) {
+            await game.dice3d.showForRoll(honorRoll);
+          }
         } else {
           // Rolar 1d8 para o dano sem assistente
           damageRoll = new Roll("1d8");
           await damageRoll.evaluate();
+          
+          if (dsn) {
+            await game.dice3d.showForRoll(damageRoll);
+          }
         }
       }
       
-      // Exibir o chat card final
-      await this._showFinalCard(actor, hasAssistant, resilienceRoll, resilienceValue, totalResult, difficultyRating, isSuccess, honorRoll, damageRoll);
+      // Verificar se existe a tabela de Lesões Debilitantes
+      let hasDebilitatingInjuriesTable = false;
+      let tableId = null;
       
-      // Exibir a animação do Dice So Nice se o módulo estiver ativo
-      if (game.modules.get("dice-so-nice")?.active) {
-        await game.dice3d.showForRoll(resilienceRoll);
-        if (honorRoll) await game.dice3d.showForRoll(honorRoll);
-        if (damageRoll) await game.dice3d.showForRoll(damageRoll);
+      // Tentar localizar o nome da tabela com base na string de tradução
+      let localizedTableName = "";
+      
+      // Verificar se existe uma string de tradução específica para a tabela
+      if (game.i18n.has("RONIN.Tables.DebilitatingInjuries")) {
+        localizedTableName = game.i18n.localize("RONIN.Tables.DebilitatingInjuries");
       }
+      
+      // Buscar a tabela com o nome localizado
+      let injuriesTable = null;
+      
+      if (localizedTableName) {
+        injuriesTable = game.tables.find(t => t.name === localizedTableName);
+      }
+      
+      // Se não encontrou com a localização ou não tinha localização, procurar com nomes fixos
+      if (!injuriesTable) {
+        // Verificar nome em inglês
+        injuriesTable = game.tables.find(t => t.name === "Debilitating Injuries");
+        
+        // Verificar nome em português
+        if (!injuriesTable) {
+          injuriesTable = game.tables.find(t => t.name === "Lesões Debilitantes");
+        }
+      }
+      
+      if (injuriesTable) {
+        hasDebilitatingInjuriesTable = true;
+        tableId = injuriesTable.id;
+      }
+      
+      // Exibir o chat card final
+      await this._showFinalCard(actor, hasAssistant, resilienceRoll, resilienceValue, totalResult, difficultyRating, isSuccess, honorRoll, damageRoll, hasDebilitatingInjuriesTable, tableId);
       
     } catch (error) {
       console.error("Erro ao realizar o teste de Resiliência para Seppuku:", error);
@@ -273,9 +325,21 @@ class SeppukuRoll {
    * @param {boolean} isSuccess - Se o teste foi um sucesso
    * @param {Roll} honorRoll - A rolagem para o aumento de Honra (pode ser null)
    * @param {Roll} damageRoll - A rolagem para o dano (pode ser null)
+   * @param {boolean} hasDebilitatingInjuriesTable - Se existe a tabela de Lesões Debilitantes
+   * @param {string} tableId - ID da tabela de Lesões Debilitantes
    * @private
    */
-  static async _showFinalCard(actor, hasAssistant, resilienceRoll, resilienceValue, totalResult, difficultyRating, isSuccess, honorRoll, damageRoll) {
+  static async _showFinalCard(actor, hasAssistant, resilienceRoll, resilienceValue, totalResult, difficultyRating, isSuccess, honorRoll, damageRoll, hasDebilitatingInjuriesTable, tableId) {
+    // Preparar o texto do botão baseado no idioma atual
+    let rollTableButtonText = "Roll Debilitating Injuries"; // Texto padrão em inglês
+    
+    // Verificar se há uma tradução para o botão
+    if (game.i18n.has("RONIN.Tables.RollDebilitatingInjuries")) {
+      rollTableButtonText = game.i18n.localize("RONIN.Tables.RollDebilitatingInjuries");
+    } else if (game.i18n.lang === "pt-BR") {
+      rollTableButtonText = "Rolar Lesões Debilitantes";
+    }
+    
     // Prepara os dados para o chat-card
     const chatTemplateData = {
       actor: actor,
@@ -286,7 +350,11 @@ class SeppukuRoll {
       isSuccess: isSuccess,
       hasAssistant: hasAssistant,
       honorRoll: honorRoll,
-      damageRoll: damageRoll
+      damageRoll: damageRoll,
+      hasDebilitatingInjuriesTable: hasDebilitatingInjuriesTable,
+      tableId: tableId,
+      showRollTableButton: !isSuccess && !hasAssistant && hasDebilitatingInjuriesTable,
+      rollTableButtonText: rollTableButtonText
     };
     
     // Renderiza o template do chat-card
@@ -302,6 +370,36 @@ class SeppukuRoll {
     
     // Cria a mensagem de chat
     await ChatMessage.create(chatData);
+  }
+  
+  /**
+   * Rola na tabela de Lesões Debilitantes
+   * @param {string} tableId - ID da tabela
+   * @private
+   */
+  static async _rollOnDebilitatingInjuriesTable(tableId) {
+    // Obter a tabela pelo ID
+    const table = game.tables.get(tableId);
+    
+    if (table) {
+      try {
+        // Rolar na tabela com animação do Dice So Nice se disponível
+        const dsn = game.modules.get("dice-so-nice")?.active;
+        const result = await table.draw({displayChat: true});
+        
+        // Mostrar a animação dos dados se o DSN estiver ativo e há uma rolagem
+        if (dsn && result.roll) {
+          await game.dice3d.showForRoll(result.roll);
+        }
+        
+        return result;
+      } catch (error) {
+        console.error("Erro ao rolar na tabela:", error);
+        ui.notifications.error(`Erro ao rolar na tabela: ${error.message}`);
+      }
+    } else {
+      ui.notifications.error("Tabela de Lesões Debilitantes não encontrada.");
+    }
   }
 }
 
@@ -330,5 +428,17 @@ Hooks.on("renderChatMessage", (message, html, data) => {
     
     // Continuar com o teste de Resiliência
     await SeppukuRoll._performResilienceTest(actor, hasAssistant);
+  });
+  
+  // Adicionar listener para o botão de rolagem na tabela de Lesões Debilitantes
+  html.find(".roll-injuries-table-button").click(async (event) => {
+    event.preventDefault();
+    
+    // Obter os dados do botão
+    const button = event.currentTarget;
+    const tableId = button.dataset.tableId;
+    
+    // Rolar na tabela
+    await SeppukuRoll._rollOnDebilitatingInjuriesTable(tableId);
   });
 });

@@ -39,6 +39,14 @@
               <p>{{localize "RONIN.Seppuku.DamageTaken"}}: {{damageRoll.total}}</p>
             </div>
           {{/if}}
+          
+          {{#if showRollTableButton}}
+            <div class="debilitating-injuries-button" style="margin-top: 10px;">
+              <button class="roll-injuries-table-button" data-table-id="{{tableId}}">
+                <i class="fas fa-dice-d20"></i> {{rollTableButtonText}}
+              </button>
+            </div>
+          {{/if}}
         {{/if}}
       {{/if}}
     </div>

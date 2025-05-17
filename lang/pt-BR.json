@@ -219,6 +219,10 @@
   "NoFoodAndWater": "Sem Comida e Água",
   "OK": "Descansar",
   "Cancel": "Cancelar"
+},
+"Tables": {
+  "DebilitatingInjuries": "Lesões Debilitantes",
+  "RollDebilitatingInjuries": "Rolar Lesões Debilitantes"
 }
   }
 }
