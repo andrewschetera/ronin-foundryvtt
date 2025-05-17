@@ -201,6 +201,24 @@
       "DeductConsumablesHint": "When enabled, characters will automatically consume water and food items when resting.",
       "SaveButton": "Save Settings",
       "Saved": "Settings saved successfully!"
-    }
+    },
+"Rest": {
+  "Title": "Rest",
+  "Short": "Short Rest",
+  "Long": "Long Rest",
+  "ShortDescription": "Recover d4 HP. Uses 1 food and 1 water.",
+  "LongDescription": "Recover d6 HP and Virtues. Uses 1 food and 1 water.",
+  "MeditationDescription": "Gain 1 Honor and +1 to an attribute of your choice. Once per game week.",
+  "HaikuDescription": "Write a Haiku and recover 1 Virtue (or suffer -1 to Spirit until the end of the day).",
+  "WarningDescription": "No food or water = no HP recovery. Two days without food: lose d4 HP/day. Infected/poisoned: lose d6 HP/day instead of healing.",
+  "InfectedOrPoisoned": "Infected or Poisoned",
+  "Meditation": "Meditation",
+  "Haiku": "Haiku",
+  "Water": "Water",
+  "Food": "Food",
+  "NoFoodAndWater": "No Food and Water",
+  "OK": "Rest",
+  "Cancel": "Cancel"
+}
   }
 }

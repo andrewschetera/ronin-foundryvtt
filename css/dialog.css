@@ -1,0 +1,97 @@
+/* dialogs.css - Estilos para diálogos do sistema RONIN */
+
+/* Estilos para o diálogo de descanso */
+.rest-options {
+  margin-bottom: 15px;
+}
+
+.rest-option {
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.rest-option .radio-label {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.rest-option input[type="radio"] {
+  margin-right: 10px;
+}
+
+.rest-type {
+  font-size: 1.1em;
+}
+
+.rest-description {
+  margin: 0 0 0 25px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.rest-warning {
+  margin: 15px 0;
+  padding: 10px;
+  border-radius: 3px;
+  background-color: rgba(255, 200, 0, 0.1);
+  border-left: 3px solid #fc0;
+}
+
+.rest-warning p {
+  margin: 0;
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+.rest-conditions {
+  margin-top: 15px;
+}
+
+/* Estilo específico para a opção de meditação */
+.meditation-option {
+  margin-top: 15px;
+  background-color: rgba(0, 0, 128, 0.05); /* Cor de fundo levemente azulada para diferenciar */
+  border-left: 3px solid rgba(0, 0, 128, 0.3);
+}
+
+/* Adicionar estilo para a descrição da opção haiku */
+.option-description {
+  margin: 2px 0 0 25px;
+  font-size: 0.9em;
+  color: #555;
+  font-style: italic;
+}
+
+/* Estilos para o campo de Haiku */
+.haiku-field {
+  margin: 10px 0;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 3px;
+}
+
+.haiku-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Alinhamento à esquerda */
+}
+
+.haiku-checkbox label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.haiku-checkbox input[type="checkbox"] {
+  margin: 0;
+}
+
+.haiku-description {
+  margin: 5px 0 0 0;
+  font-size: 0.9em;
+  color: #555;
+  font-style: italic;
+}

@@ -164,6 +164,9 @@ activateListeners(html) {
   // Listener para botão de uso de consumível
   html.find('.consumable-use').click(this._onConsumableUse.bind(this));
   
+  // Listener para o botão de descanso
+  html.find('.button-rest').click(this._onRestButtonClick.bind(this));
+  
   // Funcionalidade condicional para as ações do proprietário
   if (this.actor.isOwner) {
     // Item creation
@@ -713,6 +716,136 @@ _onSeppukuButtonClick(event) {
   
   // Se chegou aqui, o módulo existe, então faz a rolagem
   RONIN.SeppukuRoll.roll(this.actor);
+}
+
+/**
+ * Manipula o clique no botão de descanso
+ * @param {Event} event O evento de clique
+ * @private
+ */
+_onRestButtonClick(event) {
+  event.preventDefault();
+  
+  // Calcular usos disponíveis de água e comida
+  const waterItems = this.actor.items.filter(
+    i => i.type === "consumable" && i.system.consumableType === "water"
+  );
+  const foodItems = this.actor.items.filter(
+    i => i.type === "consumable" && i.system.consumableType === "food"
+  );
+  
+  const waterUses = waterItems.reduce(
+    (total, item) => total + (item.system.uses?.value || 0), 0
+  );
+  const foodUses = foodItems.reduce(
+    (total, item) => total + (item.system.uses?.value || 0), 0
+  );
+  
+  // Preparar e exibir o diálogo
+  this._showRestDialog(waterUses, foodUses);
+}
+
+/**
+ * Exibe o diálogo de descanso
+ * @param {number} waterUses Total de usos de água disponíveis
+ * @param {number} foodUses Total de usos de comida disponíveis
+ * @private
+ */
+async _showRestDialog(waterUses, foodUses) {
+  // Obter o valor da configuração de descontar água e comida
+  const deductConsumables = game.settings.get("ronin", "deductConsumables");
+  
+  // Preparar dados para o template
+  const templateData = {
+    waterUses: waterUses,
+    foodUses: foodUses,
+    deductConsumables: deductConsumables
+  };
+  
+  // Renderizar o template
+  const content = await renderTemplate("systems/ronin/templates/dialogs/rest-dialog.html", templateData);
+  
+  // Criar o diálogo
+  const dialog = new Dialog({
+    title: game.i18n.localize("RONIN.Rest.Title"),
+    content: content,
+    buttons: {
+      rest: {
+        icon: '<i class="fas fa-bed"></i>',
+        label: game.i18n.localize("RONIN.Rest.OK"),
+        callback: html => this._onRestConfirmed(html[0].querySelector("form"))
+      },
+      cancel: {
+        icon: '<i class="fas fa-times"></i>',
+        label: game.i18n.localize("RONIN.Rest.Cancel")
+      }
+    },
+    default: "rest"
+  });
+  
+  // Exibir o diálogo
+  dialog.render(true);
+}
+
+/**
+ * Processa o descanso após a confirmação
+ * @param {HTMLFormElement} form O formulário do diálogo
+ * @private
+ */
+_onRestConfirmed(form) {
+  // Obter os valores do formulário
+  const restType = form.restType.value;
+  const isInfectedOrPoisoned = form.infectedOrPoisoned.checked;
+  
+  // Verificar se estamos deduzindo consumíveis
+  const deductConsumables = game.settings.get("ronin", "deductConsumables");
+  
+  let waterUsed = 0;
+  let foodUsed = 0;
+  let noFoodAndWater = false;
+  
+  if (deductConsumables) {
+    waterUsed = parseInt(form.water.value) || 0;
+    foodUsed = parseInt(form.food.value) || 0;
+  } else {
+    noFoodAndWater = form.noFoodAndWater?.checked || false;
+  }
+  
+  // Verificar se foi escolhida a meditação e se o haiku está marcado
+  const haiku = restType === "meditation" ? (form.haiku?.checked || false) : false;
+  
+  // Por enquanto, apenas logamos os valores
+  console.log("Rest confirmed", {
+    restType,
+    isInfectedOrPoisoned,
+    deductConsumables,
+    waterUsed,
+    foodUsed,
+    noFoodAndWater,
+    haiku
+  });
+  
+  // A implementação completa do descanso será feita posteriormente
+  ui.notifications.info(`${this._getRestTypeName(restType)} completed.`);
+}
+
+/**
+ * Obtém o nome traduzido do tipo de descanso
+ * @param {string} restType O tipo de descanso (short, long, meditation)
+ * @returns {string} O nome traduzido
+ * @private
+ */
+_getRestTypeName(restType) {
+  switch (restType) {
+    case "short":
+      return game.i18n.localize("RONIN.Rest.Short");
+    case "long":
+      return game.i18n.localize("RONIN.Rest.Long");
+    case "meditation":
+      return game.i18n.localize("RONIN.Rest.Meditation");
+    default:
+      return restType;
+  }
 }
 
 /**

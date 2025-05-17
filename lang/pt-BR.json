@@ -201,6 +201,24 @@
       "DeductConsumablesHint": "Quando ativado, os personagens consumirão automaticamente itens de água e comida ao descansar.",
       "SaveButton": "Salvar Configurações",
       "Saved": "Configurações salvas com sucesso!"
-    }
+    },
+"Rest": {
+  "Title": "Descanso",
+  "Short": "Descanso Curto",
+  "Long": "Descanso Longo",
+  "ShortDescription": "Recupere d4 PV. Consome 1 comida e 1 água.",
+  "LongDescription": "Recupere d6 PV e Virtudes. Consome 1 comida e 1 água.",
+  "MeditationDescription": "Ganhe 1 Honra e +1 em um atributo à sua escolha. Uma vez por semana de jogo.",
+  "HaikuDescription": "Escreva um Haiku e recupere 1 Virtude (ou sofra -1 em Espírito até o final do dia).",
+  "WarningDescription": "Sem comida ou água = sem recuperação de PV. Dois dias sem comida: perca d4 PV/dia. Infectado/envenenado: perca d6 PV/dia ao invés de curar.",
+  "InfectedOrPoisoned": "Infectado ou Envenenado",
+  "Meditation": "Meditação",
+  "Haiku": "Haiku",
+  "Water": "Água",
+  "Food": "Comida",
+  "NoFoodAndWater": "Sem Comida e Água",
+  "OK": "Descansar",
+  "Cancel": "Cancelar"
+}
   }
 }
