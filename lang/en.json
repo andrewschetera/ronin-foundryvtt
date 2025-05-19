@@ -233,8 +233,20 @@
         "Unseen": "Unseen"
       }
     },
-        "Texts": {
-      "NoUsesAvailable": "You don't have any Text uses available."
+    "Texts": {
+      "NoUsesAvailable": "You don't have any Text uses available.",
+      "HeavyArmorRestriction": "You cannot use Texts while wearing Medium or Heavy Armor.",
+      "TwoHandedWeaponRestriction": "You cannot use Texts while wielding a two-handed weapon.",
+      "DualWieldRestriction": "You cannot use Texts while dual wielding.",
+      "FailureEffect": "You suffer from severe dizziness and lose (1d2) HP.",
+      "FailureEffectWithDamage": "You suffer from severe dizziness and lose {{damage}} HP.",
+      "FumbleEffect": "When you mess with ancient words, the Kami may become restless.",
+      "RollKamiRevenge": "Roll on Kami's Revenge Table",
+      "RollKamiRevengeManual": "Roll on Kami's Revenge Table.",
+      "KamiRevengeTable": "Kami's Revenge",
+      "DamageTaken": "Damage Taken",
+      "UseText": "Use Text",
+      "TextDialog": "Text Usage"
     }
   }
 }

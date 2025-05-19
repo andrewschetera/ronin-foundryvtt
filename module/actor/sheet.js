@@ -379,7 +379,7 @@ _onConsumableUse(event) {
  * @param {Event} event O evento de clique
  * @private
  */
-async _onTextUse(event) {
+_onTextUse(event) {
   event.preventDefault();
   const button = event.currentTarget;
   const itemId = button.dataset.itemId;
@@ -387,40 +387,38 @@ async _onTextUse(event) {
   
   if (!item) return;
   
-  // Verificar se o ator possui usos de texto disponíveis
-  const textsValue = this.actor.system.resources.texts.value;
-  
-  if (textsValue <= 0) {
-    // Não há usos disponíveis, exibir aviso
-    ui.notifications.warn(game.i18n.localize("RONIN.Texts.NoUsesAvailable"));
+  // Verificar se o namespace RONIN existe
+  if (!window.RONIN) {
+    console.error("Namespace RONIN não encontrado");
+    ui.notifications.error("Erro no sistema: Namespace RONIN não encontrado");
     return;
   }
   
-  try {
-    // Renderizar o template do chat-card
-    const chatContent = await renderTemplate("systems/ronin/templates/chat/text-use-card.html", {
-      actor: this.actor,
-      item: item
-    });
+  // Verificar se o módulo TextRoll existe
+  if (!window.RONIN.TextRoll) {
+    console.error("Módulo de rolagem de Texto não encontrado no namespace RONIN");
+    ui.notifications.error("Módulo de rolagem de Texto não disponível");
     
-    // Configurar as opções de chat
-    const chatData = {
-      user: game.user.id,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      content: chatContent
-    };
-    
-    // Criar a mensagem de chat
-    await ChatMessage.create(chatData);
-    
-    // Diminuir o número de usos de texto disponíveis
-    const newTextsValue = Math.max(0, textsValue - 1);
-    await this.actor.update({"system.resources.texts.value": newTextsValue});
-    
-  } catch (error) {
-    console.error("Erro ao usar texto:", error);
-    ui.notifications.error(`Erro ao usar texto: ${error.message}`);
+    // Tentar importar dinamicamente (apenas como fallback)
+    try {
+      import('../rolls/text-roll.js').then(module => {
+        if (module && module.default) {
+          console.log("Módulo de rolagem de Texto carregado dinamicamente");
+          module.default.roll(item, this.actor);
+        } else {
+          console.error("Falha ao importar módulo de rolagem de Texto");
+        }
+      }).catch(err => {
+        console.error("Erro ao importar módulo de rolagem de Texto:", err);
+      });
+    } catch (error) {
+      console.error("Erro ao tentar importação dinâmica:", error);
+    }
+    return;
   }
+  
+  // Se chegou aqui, o módulo existe, então faz a rolagem
+  RONIN.TextRoll.roll(item, this.actor);
 }
 
 /**

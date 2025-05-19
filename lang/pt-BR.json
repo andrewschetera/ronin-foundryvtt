@@ -233,7 +233,20 @@
         "Unseen": "Oculto"
       }
   },
-      "Texts": {
-      "NoUsesAvailable": "Você não tem mais usos de Texto disponíveis."
+    "Texts": {
+      "NoUsesAvailable": "Você não tem mais usos de Texto disponíveis.",
+      "HeavyArmorRestriction": "Você não pode usar Textos enquanto estiver usando Armadura Média ou Pesada.",
+      "TwoHandedWeaponRestriction": "Você não pode usar Textos enquanto estiver empunhando uma arma de duas mãos.",
+      "DualWieldRestriction": "Você não pode usar Textos enquanto estiver empunhando duas armas.",
+      "FailureEffect": "Você sofre de graves tonturas e perde (1d2) PV.",
+      "FailureEffectWithDamage": "Você sofre de graves tonturas e perde {{damage}} PV.",
+      "FumbleEffect": "Quando você mexe com palavras antigas, os Kami podem se inquietar.",
+      "RollKamiRevenge": "Rolar na tabela Vingança de Kami",
+      "RollKamiRevengeManual": "Role na tabela Vingança de Kami.",
+      "KamiRevengeTable": "Vingança de Kami",
+      "DamageTaken": "Dano Sofrido",
+      "UseText": "Usar Texto",
+      "TextDialog": "Uso de Texto"
     }
+}
 }

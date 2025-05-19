@@ -1,5 +1,5 @@
 <div class="ronin-chat-card text-use-card">
-  <div class="card-header">
+  <div class="card-header {{rollResult}}">
     <h3>{{item.name}}</h3>
   </div>
   
@@ -12,8 +12,55 @@
       {{/if}}
     </div>
     
+    {{#if rollDetails}}
+    <div class="roll-calculation">
+      {{d20Result}} + {{spiritValue}}{{#if modifier}} + {{modifier}}{{/if}} = {{totalResult}} vs DR {{difficultyRating}}
+    </div>
+    
+    <div class="roll-outcome {{rollResult}}">
+      {{#if isCrit}}
+        <h3 class="crit">{{localize "RONIN.Rolls.CriticalSuccess"}}</h3>
+      {{else if isFumble}}
+        <h3 class="fumble">{{localize "RONIN.Rolls.CriticalFailure"}}</h3>
+      {{else if isSuccess}}
+        <h3 class="success">{{localize "RONIN.Rolls.Success"}}</h3>
+      {{else}}
+        <h3 class="failure">{{localize "RONIN.Rolls.Failure"}}</h3>
+      {{/if}}
+    </div>
+    
+    {{#if isSuccess}}
+      <div class="text-description">
+        {{{item.system.description}}}
+      </div>
+    {{else if isFumble}}
+      <div class="fumble-effect">
+        <p class="fumble">{{localize "RONIN.Texts.FumbleEffect"}}</p>
+        
+        {{#if hasKamiRevengeTable}}
+          <div class="kami-revenge-button" style="margin-top: 10px;">
+            <button class="roll-kami-revenge-button" data-table-id="{{kamiTableId}}">
+              <i class="fas fa-dice-d20"></i> {{localize "RONIN.Texts.RollKamiRevenge"}}
+            </button>
+          </div>
+        {{else}}
+          <p>{{localize "RONIN.Texts.RollKamiRevengeManual"}}</p>
+        {{/if}}
+      </div>
+    {{else}}
+      <div class="failure-effect">
+        <p class="failure">{{localize "RONIN.Texts.FailureEffect"}}</p>
+        {{#if damageRoll}}
+          <div class="damage-result">
+            <p>{{localize "RONIN.Texts.DamageTaken"}}: {{damageRoll.total}}</p>
+          </div>
+        {{/if}}
+      </div>
+    {{/if}}
+    {{else}}
     <div class="text-description">
       {{{item.system.description}}}
     </div>
+    {{/if}}
   </div>
 </div>
