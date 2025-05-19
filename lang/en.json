@@ -34,7 +34,8 @@
       "Defend": "DEFEND",
       "Parry": "PARRY",
       "Attack": "ATTACK",
-      "Use": "USE"
+      "Use": "USE",
+      "Activate": "ACTIVATE"
     },
     "Broken": {
       "Result1": "Falls unconscious for {rounds} rounds and awakens with {hp} HP",

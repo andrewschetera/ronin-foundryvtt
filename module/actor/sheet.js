@@ -174,6 +174,9 @@ activateListeners(html) {
   // Listener para o botão de uso de texto
   html.find('.text-use').click(this._onTextUse.bind(this));
   
+  // Novo listener para o botão de ativação de feat
+  html.find('.feat-activate').click(this._onFeatActivate.bind(this));
+  
   // Funcionalidade condicional para as ações do proprietário
   if (this.actor.isOwner) {
     // Item creation
@@ -376,6 +379,53 @@ _onConsumableUse(event) {
   
   // Chamar o método de uso do item
   item.use();
+}
+
+/**
+ * Manipula o clique no botão de ativação de feat
+ * @param {Event} event O evento de clique
+ * @private
+ */
+_onFeatActivate(event) {
+  event.preventDefault();
+  const button = event.currentTarget;
+  const itemId = button.dataset.itemId;
+  const item = this.actor.items.get(itemId);
+  
+  if (!item) return;
+  
+  // Verificar se o namespace RONIN existe
+  if (!window.RONIN) {
+    console.error("Namespace RONIN não encontrado");
+    ui.notifications.error("Erro no sistema: Namespace RONIN não encontrado");
+    return;
+  }
+  
+  // Verificar se o módulo FeatRoll existe
+  if (!window.RONIN.FeatRoll) {
+    console.error("Módulo de ativação de feat não encontrado no namespace RONIN");
+    ui.notifications.error("Módulo de ativação de feat não disponível");
+    
+    // Tentar importar dinamicamente (apenas como fallback)
+    try {
+      import('../rolls/feat-roll.js').then(module => {
+        if (module && module.default) {
+          console.log("Módulo de ativação de feat carregado dinamicamente");
+          module.default.roll(item, this.actor);
+        } else {
+          console.error("Falha ao importar módulo de ativação de feat");
+        }
+      }).catch(err => {
+        console.error("Erro ao importar módulo de ativação de feat:", err);
+      });
+    } catch (error) {
+      console.error("Erro ao tentar importação dinâmica:", error);
+    }
+    return;
+  }
+  
+  // Se chegou aqui, o módulo existe, então faz a ativação
+  RONIN.FeatRoll.roll(item, this.actor);
 }
 
 /**

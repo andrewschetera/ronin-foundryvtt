@@ -34,7 +34,8 @@
       "Defend": "DEFENDER",
       "Parry": "APARAR",
       "Attack": "ATACAR",
-      "Use": "USAR"
+      "Use": "USAR",
+      "Activate": "ATIVAR"
     },
     "Broken": {
       "Result1": "Cai inconsciente por {rounds} rodadas e desperta com {hp} PV",
