@@ -110,12 +110,6 @@
     "Encumbrance": {
       "MaxLoadExceeded": "Cannot add this item. The maximum load limit ({max}) would be exceeded!"
     },
-    "Features": {
-      "Feats": "Feats",
-      "Texts": "Texts",
-      "TextType": "Text Type",
-      "Prepared": "Prepared"
-    },
     "ItemTypes": {
       "Weapon": "Weapon",
       "Armor": "Armor",
@@ -123,7 +117,8 @@
       "Ammo": "Ammunition",
       "Consumable": "Consumable",
       "Feat": "Feat",
-      "Text": "Text"
+      "Text": "Text",
+      "Class": "Class"
     },
     "Rolls": {
       "AbilityCheck": "{ability} Check",
@@ -225,6 +220,7 @@
   "RollDebilitatingInjuries": "Roll Debilitating Injuries"
 },
     "Features": {
+      "Feats": "Feats",
       "Texts": "Texts",
       "TextType": "Text Type",
       "Prepared": "Prepared",

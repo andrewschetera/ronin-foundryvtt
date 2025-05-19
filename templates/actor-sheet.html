@@ -102,20 +102,82 @@
     <!-- Navegação de Abas - Nova estrutura com container -->
     <div class="tabs-container">
       <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="background">{{localize "RONIN.Tabs.Background"}}</a>
+        <a class="item" data-tab="background">{{localize "RONIN.Tabs.Features"}}</a>
         <a class="item" data-tab="equipment">{{localize "RONIN.Tabs.Equipment"}}</a>
         <a class="item" data-tab="tatakai">{{localize "RONIN.Tabs.Tatakai"}}</a>
-        <a class="item" data-tab="features">{{localize "RONIN.Tabs.Features"}}</a>
+        <!-- Removido a aba Features -->
       </nav>
     </div>
     
     <!-- Corpo da Ficha -->
     <section class="sheet-body">
-      <!-- Tab de Background -->
+      <!-- Tab de Features (anteriormente Background) -->
       <div class="tab" data-group="primary" data-tab="background">
-        <div class="tab-background">
-          <div class="editor-wrapper">
-            <textarea class="background-editor" name="system.background">{{system.background}}</textarea>
+        <div class="tab-features">
+          <!-- Seção de Classes -->
+          <div class="inventory-category">
+            <h2 class="category-header">
+              <span>{{localize "RONIN.ItemTypes.Class"}}</span>
+              <a class="item-create" title="Create Class" data-type="class">
+                <i class="fas fa-plus"></i> Add
+              </a>
+            </h2>
+            
+            <ol class="item-list">
+              {{#each items as |item id|}}
+                {{#if (eq item.type "class")}}
+                  <li class="item class-item" data-item-id="{{item._id}}">
+                    <div class="item-header">
+                      <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+                      <div class="item-name">{{item.name}}</div>
+                      <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                      </div>
+                    </div>
+                    <div class="item-description">{{{item.system.description}}}</div>
+                  </li>
+                {{/if}}
+              {{/each}}
+            </ol>
+          </div>
+          
+          <!-- Seção de Características -->
+          <div class="inventory-category">
+            <h2 class="category-header">
+              <span>{{localize "RONIN.Features.Feats"}}</span>
+              <a class="item-create" title="Create Feature" data-type="feat">
+                <i class="fas fa-plus"></i> Add
+              </a>
+            </h2>
+            
+            <ol class="item-list">
+              {{#each items as |item id|}}
+                {{#if (eq item.type "feat")}}
+                  <li class="item feat-item" data-item-id="{{item._id}}">
+                    <div class="item-header">
+                      <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+                      <div class="item-name">{{item.name}}</div>
+                      <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                      </div>
+                    </div>
+                    <div class="item-description">{{{item.system.description}}}</div>
+                  </li>
+                {{/if}}
+              {{/each}}
+            </ol>
+          </div>
+          
+          <!-- Editor de Background com cabeçalho -->
+          <div class="inventory-category">
+            <h2 class="category-header">
+              <span>Background</span>
+            </h2>
+            <div class="editor-wrapper">
+              <textarea class="background-editor" name="system.background">{{system.background}}</textarea>
+            </div>
           </div>
         </div>
       </div>
@@ -550,71 +612,8 @@
         </div>
       </div>
       
-      <!-- Tab de Features -->
-      <div class="tab" data-group="primary" data-tab="features">
-        <div class="tab-features">
-          <!-- Feats -->
-          <div class="features-section">
-            <h2 class="section-header">
-              <span>{{localize "RONIN.Features.Feats"}}</span>
-              <a class="item-create" title="Create Feat" data-type="feat">
-                <i class="fas fa-plus"></i> Add
-              </a>
-            </h2>
-            <ol class="feature-list">
-              {{#each items as |item id|}}
-                {{#if (eq item.type "feat")}}
-                  <li class="feature-item" data-item-id="{{item._id}}">
-                    <div class="item-header">
-                      <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
-                      <div class="item-name">{{item.name}}</div>
-                      <div class="item-controls">
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </div>
-                    <div class="item-description">{{{item.system.description}}}</div>
-                  </li>
-                {{/if}}
-              {{/each}}
-            </ol>
-          </div>
-
-          <!-- Texts -->
-          <div class="texts-section">
-            <h2 class="section-header">
-              <span>{{localize "RONIN.Features.Texts"}}</span>
-              <a class="item-create" title="Create Text" data-type="text">
-                <i class="fas fa-plus"></i> Add
-              </a>
-            </h2>
-            <ol class="feature-list">
-              {{#each items as |item id|}}
-                {{#if (eq item.type "text")}}
-                  <li class="feature-item" data-item-id="{{item._id}}">
-                    <div class="item-header">
-                      <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
-                      <div class="item-name">{{item.name}}</div>
-                      <div class="item-controls">
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </div>
-                    <div class="item-details">
-                      <div class="text-type">{{localize "RONIN.Features.TextType"}}: {{item.system.textType}}</div>
-                      <div class="text-prepared">
-                        <input type="checkbox" {{#if item.system.prepared}}checked{{/if}} data-item-id="{{item._id}}" data-prepared>
-                        <label>{{localize "RONIN.Features.Prepared"}}</label>
-                      </div>
-                    </div>
-                    <div class="item-description">{{{item.system.description}}}</div>
-                  </li>
-                {{/if}}
-              {{/each}}
-            </ol>
-          </div>
-        </div>
-      </div>
+      <!-- Removido completamente a aba Features e sua seção -->
+      
     </section>
   </div>
 </form>

@@ -110,12 +110,6 @@
     "Encumbrance": {
       "MaxLoadExceeded": "Não é possível adicionar este item. O limite máximo de carga ({max}) seria ultrapassado!"
     },
-    "Features": {
-      "Feats": "Características",
-      "Texts": "Textos",
-      "TextType": "Tipo de Texto",
-      "Prepared": "Preparado"
-    },
     "ItemTypes": {
       "Weapon": "Arma",
       "Armor": "Armadura",
@@ -123,7 +117,8 @@
       "Ammo": "Munição",
       "Consumable": "Consumível",
       "Feat": "Característica",
-      "Text": "Texto"
+      "Text": "Texto",
+      "Class": "Classe"
     },
     "Rolls": {
       "AbilityCheck": "Teste de {ability}",
@@ -225,6 +220,7 @@
   "RollDebilitatingInjuries": "Rolar Lesões Debilitantes"
 },
     "Features": {
+      "Feats": "Características",
       "Texts": "Textos",
       "TextType": "Tipo de Texto",
       "Prepared": "Preparado",
