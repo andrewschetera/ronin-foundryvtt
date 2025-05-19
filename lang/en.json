@@ -232,6 +232,9 @@
         "Shintai": "Shintai",
         "Unseen": "Unseen"
       }
+    },
+        "Texts": {
+      "NoUsesAvailable": "You don't have any Text uses available."
     }
   }
 }

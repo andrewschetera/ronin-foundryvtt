@@ -167,6 +167,9 @@ activateListeners(html) {
   // Listener para o botão de descanso
   html.find('.button-rest').click(this._onRestButtonClick.bind(this));
   
+  // Listener para o botão de uso de texto
+  html.find('.text-use').click(this._onTextUse.bind(this));
+  
   // Funcionalidade condicional para as ações do proprietário
   if (this.actor.isOwner) {
     // Item creation
@@ -369,6 +372,55 @@ _onConsumableUse(event) {
   
   // Chamar o método de uso do item
   item.use();
+}
+
+/**
+ * Manipula o clique no botão de usar texto
+ * @param {Event} event O evento de clique
+ * @private
+ */
+async _onTextUse(event) {
+  event.preventDefault();
+  const button = event.currentTarget;
+  const itemId = button.dataset.itemId;
+  const item = this.actor.items.get(itemId);
+  
+  if (!item) return;
+  
+  // Verificar se o ator possui usos de texto disponíveis
+  const textsValue = this.actor.system.resources.texts.value;
+  
+  if (textsValue <= 0) {
+    // Não há usos disponíveis, exibir aviso
+    ui.notifications.warn(game.i18n.localize("RONIN.Texts.NoUsesAvailable"));
+    return;
+  }
+  
+  try {
+    // Renderizar o template do chat-card
+    const chatContent = await renderTemplate("systems/ronin/templates/chat/text-use-card.html", {
+      actor: this.actor,
+      item: item
+    });
+    
+    // Configurar as opções de chat
+    const chatData = {
+      user: game.user.id,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      content: chatContent
+    };
+    
+    // Criar a mensagem de chat
+    await ChatMessage.create(chatData);
+    
+    // Diminuir o número de usos de texto disponíveis
+    const newTextsValue = Math.max(0, textsValue - 1);
+    await this.actor.update({"system.resources.texts.value": newTextsValue});
+    
+  } catch (error) {
+    console.error("Erro ao usar texto:", error);
+    ui.notifications.error(`Erro ao usar texto: ${error.message}`);
+  }
 }
 
 /**

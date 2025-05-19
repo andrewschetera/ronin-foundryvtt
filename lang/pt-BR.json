@@ -232,5 +232,8 @@
         "Shintai": "Shintai",
         "Unseen": "Oculto"
       }
-  }
+  },
+      "Texts": {
+      "NoUsesAvailable": "Você não tem mais usos de Texto disponíveis."
+    }
 }

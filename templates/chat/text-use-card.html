@@ -1,0 +1,19 @@
+<div class="ronin-chat-card text-use-card">
+  <div class="card-header">
+    <h3>{{item.name}}</h3>
+  </div>
+  
+  <div class="card-content">
+    <div class="text-type">
+      {{#if (eq item.system.textType "shintai")}}
+        <span class="text-type-shintai">{{localize "RONIN.Features.TextTypes.Shintai"}}</span>
+      {{else}}
+        <span class="text-type-unseen">{{localize "RONIN.Features.TextTypes.Unseen"}}</span>
+      {{/if}}
+    </div>
+    
+    <div class="text-description">
+      {{{item.system.description}}}
+    </div>
+  </div>
+</div>

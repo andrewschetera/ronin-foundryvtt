@@ -270,3 +270,25 @@
   color: #666;
   font-size: 0.9em;
 }
+
+/* Estilos para o chat card de uso de texto */
+.ronin-chat-card.text-use-card .text-type {
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.ronin-chat-card.text-use-card .text-type-shintai {
+  color: #006600; /* Verde para Shintai */
+}
+
+.ronin-chat-card.text-use-card .text-type-unseen {
+  color: #660099; /* Roxo para Oculto */
+}
+
+.ronin-chat-card.text-use-card .text-description {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
