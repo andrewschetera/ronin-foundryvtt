@@ -223,6 +223,14 @@
 "Tables": {
   "DebilitatingInjuries": "Lesões Debilitantes",
   "RollDebilitatingInjuries": "Rolar Lesões Debilitantes"
-}
+},
+    "Features": {
+      "Texts": "Textos",
+      "TextType": "Tipo de Texto",
+      "Prepared": "Preparado",
+      "TextTypes": {
+        "Shintai": "Shintai",
+        "Unseen": "Oculto"
+      }
   }
 }

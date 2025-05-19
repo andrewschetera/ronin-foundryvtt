@@ -223,6 +223,15 @@
 "Tables": {
   "DebilitatingInjuries": "Debilitating Injuries",
   "RollDebilitatingInjuries": "Roll Debilitating Injuries"
-}
+},
+    "Features": {
+      "Texts": "Texts",
+      "TextType": "Text Type",
+      "Prepared": "Prepared",
+      "TextTypes": {
+        "Shintai": "Shintai",
+        "Unseen": "Unseen"
+      }
+    }
   }
 }

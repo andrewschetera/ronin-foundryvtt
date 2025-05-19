@@ -29,7 +29,12 @@ RONIN.config = {
     weaponTypes: ["melee", "ranged"],
     weaponHands: ["one", "two"],
     armorTiers: [1, 2, 3],
-    consumableTypes: ["vial", "water", "food", "other"] // Alterado para os novos tipos
+    consumableTypes: ["vial", "water", "food", "other"]
+  },
+  
+  // Configurações para textos
+  texts: {
+    textTypes: ["shintai", "unseen"]
   },
   
   // Mapeamento de tipos de item para localização

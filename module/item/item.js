@@ -267,17 +267,22 @@ class RoninItem extends Item {
     }
   }
   
-  /**
-   * Preparação específica para textos
-   * @param {Object} itemData Os dados do item
-   * @private
-   */
-  _prepareTextData(itemData) {
-    // Verificar se o campo textType existe
-    if (!itemData.textType) {
-      itemData.textType = "unseen"; // Tipo padrão
-    }
+/**
+ * Preparação específica para textos
+ * @param {Object} itemData Os dados do item
+ * @private
+ */
+_prepareTextData(itemData) {
+  // Verificar se o campo textType existe e é válido
+  if (!itemData.textType || !RONIN.config.texts.textTypes.includes(itemData.textType)) {
+    itemData.textType = "unseen"; // Tipo padrão
   }
+  
+  // Garantir que o campo de descrição exista
+  if (!itemData.description) {
+    itemData.description = "";
+  }
+}
   
   /**
    * Obtém o tipo do item localizado
