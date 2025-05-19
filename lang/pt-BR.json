@@ -221,6 +221,7 @@
 },
     "Features": {
       "Feats": "Características",
+      "ClassLimit": "Um personagem só pode ter uma classe!",
       "Texts": "Textos",
       "TextType": "Tipo de Texto",
       "Prepared": "Preparado",

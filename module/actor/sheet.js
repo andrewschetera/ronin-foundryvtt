@@ -50,6 +50,10 @@ getData() {
     context.ammoItemsMap[ammo.id] = ammo;
   });
   
+  // Verificar se o ator já tem uma classe
+  const hasClass = context.items.filter(i => i.type === "class").length > 0;
+  context.hasClass = hasClass;
+  
   return context;
 }
   
@@ -941,16 +945,29 @@ _onGetBetterButtonClick(event) {
 }
 
   // Métodos para manipulação de itens
-  _onItemCreate(event) {
-    event.preventDefault();
-    const header = event.currentTarget;
-    const type = header.dataset.type;
-    const itemData = {
-      name: `Novo ${type}`,
-      type: type
-    };
-    return this.actor.createEmbeddedDocuments("Item", [itemData]);
+_onItemCreate(event) {
+  event.preventDefault();
+  const header = event.currentTarget;
+  const type = header.dataset.type;
+  
+  // Verificar se é uma classe e se já existe uma classe
+  if (type === "class") {
+    // Contar classes existentes
+    const existingClasses = this.actor.items.filter(i => i.type === "class");
+    if (existingClasses.length > 0) {
+      // Já existe uma classe, exibir notificação e impedir a criação
+      ui.notifications.warn("Um personagem só pode ter uma classe!");
+      return;
+    }
   }
+  
+  // Procede com a criação do item normalmente
+  const itemData = {
+    name: `Novo ${type}`,
+    type: type
+  };
+  return this.actor.createEmbeddedDocuments("Item", [itemData]);
+}
 
   _onItemEdit(event) {
     event.preventDefault();

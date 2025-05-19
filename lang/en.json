@@ -221,6 +221,8 @@
 },
     "Features": {
       "Feats": "Feats",
+      "Class": "Class",
+      "ClassLimit": "A character can only have one class!",
       "Texts": "Texts",
       "TextType": "Text Type",
       "Prepared": "Prepared",
