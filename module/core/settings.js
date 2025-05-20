@@ -35,6 +35,17 @@ class RoninSettings {
       default: true,
       restricted: true
     });
+    
+    // Registrar a configuração para geração de personagem ao adicionar classe
+    game.settings.register("ronin", "characterGeneration", {
+      name: "RONIN.Settings.CharacterGeneration",
+      hint: "RONIN.Settings.CharacterGenerationHint",
+      scope: "world",
+      config: true,
+      type: Boolean,
+      default: true,
+      restricted: true
+    });
   }
 }
 
