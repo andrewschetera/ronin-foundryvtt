@@ -1,0 +1,17 @@
+/* character-generator.css - Estilos para o botão de gerador de personagens */
+
+.character-generator-button {
+  margin-right: 4px;
+  background-color: var(--color-red);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 0 8px;
+  line-height: 24px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.character-generator-button:hover {
+  background-color: var(--color-red-dark);
+}

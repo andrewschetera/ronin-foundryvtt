@@ -246,6 +246,12 @@
       "DamageTaken": "Dano Sofrido",
       "UseText": "Usar Texto",
       "TextDialog": "Uso de Texto"
+    },
+        "CharacterGenerator": {
+      "GenerateButton": "Gerar Personagem",
+      "ComingSoon": "O gerador de personagens será implementado em breve.",
+      "ModuleLoaded": "Botão de gerador de personagens carregado."
     }
 }
 }
+

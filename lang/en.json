@@ -247,6 +247,12 @@
       "DamageTaken": "Damage Taken",
       "UseText": "Use Text",
       "TextDialog": "Text Usage"
+    },
+        "CharacterGenerator": {
+      "GenerateButton": "Generate Character",
+      "ComingSoon": "The character generator will be implemented soon.",
+      "ModuleLoaded": "Character generator button loaded."
     }
   }
 }
+

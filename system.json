@@ -13,6 +13,7 @@
     }
   ],
 "esmodules": [
+  "module/ui/character-generator-button.js",
   "module/rolls/ability-roll.js",
   "module/rolls/attack-roll.js",
   "module/rolls/defense-roll.js",
@@ -36,7 +37,8 @@
 ],
   "scripts": [],
   "styles": [
-    "css/ronin.css"
+    "css/ronin.css",
+    "css/character-generator.css"
   ],
   "packs": [],
   "languages": [
