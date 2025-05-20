@@ -197,7 +197,9 @@
       "DeductConsumables": "Descontar Água e Comida ao Descansar",
       "DeductConsumablesHint": "Quando ativado, os personagens consumirão automaticamente itens de água e comida ao descansar.",
       "SaveButton": "Salvar Configurações",
-      "Saved": "Configurações salvas com sucesso!"
+      "Saved": "Configurações salvas com sucesso!",
+      "CharacterGeneration": "Geração de Personagem ao adicionar classe",
+      "CharacterGenerationHint": "Quando ativado, gera automaticamente atributos do personagem baseados na classe ao adicionar uma classe ao personagem."
     },
 "Rest": {
   "Title": "Descanso",
