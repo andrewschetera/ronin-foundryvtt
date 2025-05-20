@@ -197,9 +197,7 @@
       "DeductConsumables": "Deduct Water and Food when Resting",
       "DeductConsumablesHint": "When enabled, characters will automatically consume water and food items when resting.",
       "SaveButton": "Save Settings",
-      "Saved": "Settings saved successfully!",
-      "CharacterGeneration": "Character Generation when adding class",
-      "CharacterGenerationHint": "When enabled, automatically generates character attributes based on class when adding a class to a character."
+      "Saved": "Settings saved successfully!"
     },
 "Rest": {
   "Title": "Rest",
