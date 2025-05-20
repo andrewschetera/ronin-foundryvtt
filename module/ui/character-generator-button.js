@@ -1,5 +1,8 @@
 // module/ui/character-generator-button.js - Adiciona botão de gerador de personagens na interface
 
+// Importar a função de diálogo
+import { showCharacterGeneratorDialog } from './character-generator-dialog.js';
+
 // Registrar o hook para quando a lista de atores for renderizada
 Hooks.on('renderActorDirectory', (app, html, data) => {
   // Verificar se o usuário tem permissão para criar personagens
@@ -9,11 +12,10 @@ Hooks.on('renderActorDirectory', (app, html, data) => {
       <i class="fas fa-magic"></i> ${game.i18n.localize("RONIN.CharacterGenerator.GenerateButton")}
     </button>`);
     
-    // Adicionar um event listener temporariamente (sem funcionalidade real)
+    // Adicionar listener para abrir a janela de diálogo do gerador de personagens
     button.click(ev => {
       ev.preventDefault();
-      // Por enquanto, apenas mostrar uma notificação localizada
-      ui.notifications.info(game.i18n.localize("RONIN.CharacterGenerator.ComingSoon"));
+      showCharacterGeneratorDialog();
     });
     
     // Encontrar o header da janela para inserir o botão

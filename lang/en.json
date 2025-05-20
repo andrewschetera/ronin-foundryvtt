@@ -199,28 +199,28 @@
       "SaveButton": "Save Settings",
       "Saved": "Settings saved successfully!"
     },
-"Rest": {
-  "Title": "Rest",
-  "Short": "Short Rest",
-  "Long": "Long Rest",
-  "ShortDescription": "Recover d4 HP. Uses 1 food and 1 water.",
-  "LongDescription": "Recover d6 HP and Virtues. Uses 1 food and 1 water.",
-  "MeditationDescription": "Gain 1 Honor and +1 to an attribute of your choice. Once per game week.",
-  "HaikuDescription": "Write a Haiku and recover 1 Virtue (or suffer -1 to Spirit until the end of the day).",
-  "WarningDescription": "No food or water = no HP recovery. Two days without food: lose d4 HP/day. Infected/poisoned: lose d6 HP/day instead of healing.",
-  "InfectedOrPoisoned": "Infected or Poisoned",
-  "Meditation": "Meditation",
-  "Haiku": "Haiku",
-  "Water": "Water",
-  "Food": "Food",
-  "NoFoodAndWater": "No Food and Water",
-  "OK": "Rest",
-  "Cancel": "Cancel"
-},
-"Tables": {
-  "DebilitatingInjuries": "Debilitating Injuries",
-  "RollDebilitatingInjuries": "Roll Debilitating Injuries"
-},
+    "Rest": {
+      "Title": "Rest",
+      "Short": "Short Rest",
+      "Long": "Long Rest",
+      "ShortDescription": "Recover d4 HP. Uses 1 food and 1 water.",
+      "LongDescription": "Recover d6 HP and Virtues. Uses 1 food and 1 water.",
+      "MeditationDescription": "Gain 1 Honor and +1 to an attribute of your choice. Once per game week.",
+      "HaikuDescription": "Write a Haiku and recover 1 Virtue (or suffer -1 to Spirit until the end of the day).",
+      "WarningDescription": "No food or water = no HP recovery. Two days without food: lose d4 HP/day. Infected/poisoned: lose d6 HP/day instead of healing.",
+      "InfectedOrPoisoned": "Infected or Poisoned",
+      "Meditation": "Meditation",
+      "Haiku": "Haiku",
+      "Water": "Water",
+      "Food": "Food",
+      "NoFoodAndWater": "No Food and Water",
+      "OK": "Rest",
+      "Cancel": "Cancel"
+    },
+    "Tables": {
+      "DebilitatingInjuries": "Debilitating Injuries",
+      "RollDebilitatingInjuries": "Roll Debilitating Injuries"
+    },
     "Features": {
       "Feats": "Feats",
       "Class": "Class",
@@ -248,11 +248,18 @@
       "UseText": "Use Text",
       "TextDialog": "Text Usage"
     },
-        "CharacterGenerator": {
+    "CharacterGenerator": {
       "GenerateButton": "Generate Character",
       "ComingSoon": "The character generator will be implemented soon.",
-      "ModuleLoaded": "Character generator button loaded."
+      "ModuleLoaded": "Character generator button loaded.",
+      "DialogTitle": "Character Generator",
+      "Alignment": "Alignment",
+      "Honorable": "Honorable",
+      "Normal": "Normal",
+      "Dishonorable": "Dishonorable",
+      "AvailableClasses": "Available Classes",
+      "SelectAll": "Select All",
+      "SelectNone": "Select None"
     }
   }
 }
-

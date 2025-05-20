@@ -14,6 +14,7 @@
   ],
 "esmodules": [
   "module/ui/character-generator-button.js",
+  "module/ui/character-generator-dialog.js",
   "module/rolls/ability-roll.js",
   "module/rolls/attack-roll.js",
   "module/rolls/defense-roll.js",
