@@ -111,8 +111,19 @@
       "prepared": false
     },
     "class": {
-      "templates": ["itemDescription", "physicalItem"],
-      "quantity": 1
+      "templates": ["itemDescription"],
+      "baseStats": {
+        "vigor": "",
+        "swiftness": "",
+        "spirit": "",
+        "resilience": "",
+        "honor": "",
+        "virtues": "",
+        "hp": "",
+        "ryo": ""
+      },
+      "featsTable": "",
+      "startingItems": ""
     }
   }
 }

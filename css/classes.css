@@ -1,0 +1,41 @@
+/* Estilos específicos para a ficha de classe */
+.class-attributes-grid {
+  margin-bottom: 20px;
+}
+
+.class-attributes-grid h2,
+.class-special-sections h2 {
+  border-bottom: 1px solid #666;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  font-size: 1.2em;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.class-special-sections {
+  margin-bottom: 20px;
+}
+
+.class-description {
+  margin-top: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 3px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  padding: 5px;
+  width: 100%;
+}

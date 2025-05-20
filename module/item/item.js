@@ -39,8 +39,46 @@ class RoninItem extends Item {
       case 'text':
         this._prepareTextData(systemData);
         break;
+      case 'class':
+        this._prepareClassData(systemData);
+        break;
     }
   }
+  
+  /**
+ * Preparação específica para classes
+ * @param {Object} itemData Os dados do item
+ * @private
+ */
+_prepareClassData(itemData) {
+  // Garantir que o objeto baseStats exista
+  if (!itemData.baseStats) {
+    itemData.baseStats = {
+      vigor: "",
+      swiftness: "",
+      spirit: "",
+      resilience: "",
+      honor: "",
+      virtues: "",
+      hp: "",
+      ryo: ""
+    };
+  }
+  
+  // Garantir que os campos de texto existam
+  if (!itemData.featsTable) {
+    itemData.featsTable = "";
+  }
+  
+  if (!itemData.startingItems) {
+    itemData.startingItems = "";
+  }
+  
+  // Garantir que o campo de descrição exista
+  if (!itemData.description) {
+    itemData.description = "";
+  }
+}
   
   /**
    * Preparação específica para armas

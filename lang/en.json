@@ -106,6 +106,7 @@
         "Food": "Food",
         "Other": "Other"
       },
+      "StartingItems": "Starting Items",
       "ConsumableType": "Type"
     },
     "Encumbrance": {
