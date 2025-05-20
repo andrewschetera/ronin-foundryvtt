@@ -19,6 +19,16 @@ RONIN.registerHandlebarsHelpers = function() {
       accum += block.fn(i);
     return accum;
   });
+  
+  /**
+ * Helper 'mod' para obter o resto da divisão (módulo)
+ * @param {number} a Dividendo
+ * @param {number} b Divisor
+ * @returns {number} Resto da divisão a/b
+ */
+Handlebars.registerHelper('mod', function (a, b) {
+  return a % b;
+});
 
   /**
    * Helper para converter valores em inteiros para comparação

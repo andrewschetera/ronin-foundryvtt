@@ -16,16 +16,33 @@
     <h3 class="classes-title">{{localize "RONIN.CharacterGenerator.AvailableClasses"}}</h3>
   </div>
   
-  <div class="form-group info-group">
-    <div class="classes-info">
-      <p><em>Classes serão implementadas em uma atualização futura.</em></p>
-    </div>
+  <div class="form-group classes-content">
+    {{#if hasClasses}}
+      <div class="classes-list" style="max-height: 300px; overflow-y: auto; margin-top: 10px;">
+        <div style="width: 100%; display: flex; flex-direction: row; flex-wrap: wrap;">
+          {{#each availableClasses as |class i|}}
+            <div style="width: 50%; padding: 3px; box-sizing: border-box;">
+              <div style="display: flex; flex-direction: row; align-items: center; gap: 2px;">
+                <input type="checkbox" id="class-{{class.id}}" name="selectedClass" value="{{class.id}}" data-pack="{{class.pack}}" style="margin: 0 2px 0 0;">
+                <label for="class-{{class.id}}" style="margin: 0; padding: 0; display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{class.name}}</label>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    {{else}}
+      <div class="classes-info">
+        <p><em>Nenhuma classe encontrada no sistema. Adicione classes como itens do tipo "class".</em></p>
+      </div>
+    {{/if}}
   </div>
   
   <div class="form-group buttons-group">
     <div class="class-selection-controls">
-      <button type="button" class="select-all-button">{{localize "RONIN.CharacterGenerator.SelectAll"}}</button>
-      <button type="button" class="select-none-button">{{localize "RONIN.CharacterGenerator.SelectNone"}}</button>
+      {{#if hasClasses}}
+        <button type="button" class="select-all-button">{{localize "RONIN.CharacterGenerator.SelectAll"}}</button>
+        <button type="button" class="select-none-button">{{localize "RONIN.CharacterGenerator.SelectNone"}}</button>
+      {{/if}}
     </div>
   </div>
 </form>

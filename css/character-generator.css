@@ -66,12 +66,41 @@
   width: 100%;
 }
 
-/* Classes info section */
-.info-group {
-  display: block;
+/* Classes list in two columns using table */
+.classes-table {
   width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
 }
 
+.classes-table td {
+  padding: 5px 10px;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.classes-table input[type="checkbox"] {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.classes-table label {
+  display: inline;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+/* Make left column items align to left */
+.left-column {
+  justify-content: flex-start;
+}
+
+/* Make right column items align to left too */
+.right-column {
+  justify-content: flex-start;
+}
+
+/* Info for when no classes exist */
 .classes-info {
   text-align: center;
   margin: 0;
@@ -79,12 +108,14 @@
   color: #666;
   display: block;
   width: 100%;
+  padding: 10px 0;
 }
 
 /* Buttons section */
 .buttons-group {
   display: block;
   width: 100%;
+  margin-top: 10px;
 }
 
 .class-selection-controls {
