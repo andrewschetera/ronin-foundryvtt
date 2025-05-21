@@ -254,9 +254,9 @@
       "ModuleLoaded": "Character generator button loaded.",
       "DialogTitle": "Character Generator",
       "Alignment": "Alignment",
-      "Honorable": "Honorable",
+      "Honored": "Honored",
       "Normal": "Normal",
-      "Dishonorable": "Dishonorable",
+      "Dishonored": "Dishonored",
       "AvailableClasses": "Available Classes",
       "SelectAll": "Select All",
       "SelectNone": "Select None"
