@@ -228,7 +228,7 @@
   "PotentialDamage": "Dano potencial por falta de comida (após 3+ dias): {damage}",
   "InfectedOrPoisonedDamage": "Dano sofrido por infecção/veneno: {damage}",
   "MeditationEffects": "Efeitos de Meditação",
-  "MeditationBonusesRemoved": "Bônus temporários de meditação foram removidos:",
+  "AttributeBonusesRemoved": "Bônus temporários de atributos da meditação foram removidos:",
   "BonusRemoved": "bônus removido"
     },
     "Tables": {
@@ -281,6 +281,22 @@
       "GrimChronicles": "Crônicas Sombrias",
       "BadHabits": "Maus Hábitos",
       "AwfulAfflictions": "Aflições Terríveis"
-    }
+    },
+"Meditation": {
+  "AttributeSelection": "Selecionar Atributo",
+  "SelectAttribute": "Selecione um atributo para melhorar",
+  "AttributeInfo": "O atributo selecionado receberá um bônus de +1 até seu próximo descanso longo. Você também ganhará +1 de Honra.",
+  "HaikuInfo": "Você tentará escrever um haiku. Sucesso concede 1 Virtude, falha impõe uma penalidade de -1 em Espírito até seu próximo descanso longo.",
+  "Confirm": "Confirmar",
+  "Cancel": "Cancelar",
+  "InvalidAttribute": "Atributo selecionado inválido",
+  "AttributeBonus": "Bônus de Atributo",
+  "HonorIncrease": "Aumento de Honra",
+  "VirtueGained": "Você ganhou 1 Virtude com seu haiku.",
+  "MaxVirtuesReached": "Você já atingiu o máximo de Virtudes.",
+  "SpiritPenalty": "Você recebeu uma penalidade de -1 em Espírito até seu próximo descanso longo.",
+  "AttributeBonusReminder": "O bônus de atributo será removido no seu próximo descanso longo.",
+  "TemporaryBonus": "(temporário)"
+}
   }
 }

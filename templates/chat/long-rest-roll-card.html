@@ -57,20 +57,16 @@
       <p>{{localize "RONIN.Rest.TextsRecovered" value=results.textsRecovered formula=results.textsRoll.formula}}</p>
     </div>
     
-    <!-- Meditation Bonuses Section (if applicable) -->
-    {{#if results.meditationBonusesRemoved}}
-      <div class="rest-section meditation-section">
-        <h4>{{localize "RONIN.Rest.MeditationEffects"}}</h4>
-        <p>{{localize "RONIN.Rest.MeditationBonusesRemoved"}}</p>
-        
-        {{#each results.meditationAttributes}}
-          <p>{{localize (concat "RONIN.Abilities." (capitalize this))}} {{localize "RONIN.Rest.BonusRemoved"}}</p>
-        {{/each}}
-        
-        {{#if results.honorChanged}}
-          <p>{{localize "RONIN.Resources.Honor"}} {{localize "RONIN.Rest.BonusRemoved"}}</p>
-        {{/if}}
-      </div>
-    {{/if}}
+<!-- Meditation Bonuses Section (if applicable) -->
+{{#if results.meditationBonusesRemoved}}
+  <div class="rest-section meditation-section">
+    <h4>{{localize "RONIN.Rest.MeditationEffects"}}</h4>
+    <p>{{localize "RONIN.Rest.AttributeBonusesRemoved"}}</p>
+    
+    {{#each results.meditationAttributes}}
+      <p>{{localize (concat "RONIN.Abilities." (capitalize this))}} {{localize "RONIN.Rest.BonusRemoved"}}</p>
+    {{/each}}
+  </div>
+{{/if}}
   </div>
 </div>

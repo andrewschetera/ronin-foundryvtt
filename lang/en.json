@@ -228,7 +228,7 @@
   "PotentialDamage": "Potential damage from lack of food (after 3+ days): {damage}",
   "InfectedOrPoisonedDamage": "Damage taken from infection/poison: {damage}",
   "MeditationEffects": "Meditation Effects",
-  "MeditationBonusesRemoved": "Temporary bonuses from meditation have been removed:",
+  "AttributeBonusesRemoved": "Temporary attribute bonuses from meditation have been removed:",
   "BonusRemoved": "bonus removed"
     },
     "Tables": {
@@ -282,6 +282,22 @@
       "GrimChronicles": "Grim Chronicles",
       "BadHabits": "Bad Habits",
       "AwfulAfflictions": "Awful Afflictions"
-    }
+    },
+"Meditation": {
+  "AttributeSelection": "Select Attribute",
+  "SelectAttribute": "Select an attribute to enhance",
+  "AttributeInfo": "The selected attribute will receive a +1 bonus until your next long rest. You'll also gain +1 Honor.",
+  "HaikuInfo": "You'll attempt to write a haiku. Success grants 1 Virtue, failure imposes a -1 Spirit penalty until your next long rest.",
+  "Confirm": "Confirm",
+  "Cancel": "Cancel",
+  "InvalidAttribute": "Invalid attribute selected",
+  "AttributeBonus": "Attribute Bonus",
+  "HonorIncrease": "Honor Increase",
+  "VirtueGained": "You gained 1 Virtue from your haiku.",
+  "MaxVirtuesReached": "You've already reached your maximum Virtues.",
+  "SpiritPenalty": "You received a -1 Spirit penalty until your next long rest.",
+  "AttributeBonusReminder": "The attribute bonus will be removed on your next long rest.",
+  "TemporaryBonus": "(temporary)"
+}
   }
 }

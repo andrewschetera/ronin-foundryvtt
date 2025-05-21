@@ -1,0 +1,21 @@
+<form>
+  <div class="form-group">
+    <label>{{localize "RONIN.Meditation.SelectAttribute"}}</label>
+    <select name="attribute">
+      <option value="vigor">{{localize "RONIN.Abilities.Vigor"}}</option>
+      <option value="swiftness">{{localize "RONIN.Abilities.Swiftness"}}</option>
+      <option value="spirit">{{localize "RONIN.Abilities.Spirit"}}</option>
+      <option value="resilience">{{localize "RONIN.Abilities.Resilience"}}</option>
+    </select>
+  </div>
+  
+  <div class="form-group meditation-info">
+    <p>{{localize "RONIN.Meditation.AttributeInfo"}}</p>
+</div>    
+    {{#if withHaiku}}
+    <div>
+      <p style="margin-top: 10px;">{{localize "RONIN.Meditation.HaikuInfo"}}</p>
+    {{/if}}
+  </div>
+</form>
+

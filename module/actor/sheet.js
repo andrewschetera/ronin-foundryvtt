@@ -1003,6 +1003,32 @@ _onRestConfirmed(form) {
     
     // Se chegou aqui, o módulo existe, então faz a rolagem
     RONIN.LongRestRoll.roll(this.actor, noFoodAndWater, deductConsumables, isInfectedOrPoisoned);
+  } else if (restType === "meditation") {
+    // Verificar se o módulo MeditationRoll existe
+    if (!window.RONIN.MeditationRoll) {
+      console.error("Módulo de rolagem de meditação não encontrado no namespace RONIN");
+      ui.notifications.error("Módulo de rolagem de meditação não disponível");
+      
+      // Tentar importar dinamicamente (apenas como fallback)
+      try {
+        import('../rolls/meditation-roll.js').then(module => {
+          if (module && module.default) {
+            console.log("Módulo de rolagem de meditação carregado dinamicamente");
+            module.default.roll(this.actor, haiku);
+          } else {
+            console.error("Falha ao importar módulo de rolagem de meditação");
+          }
+        }).catch(err => {
+          console.error("Erro ao importar módulo de rolagem de meditação:", err);
+        });
+      } catch (error) {
+        console.error("Erro ao tentar importação dinâmica:", error);
+      }
+      return;
+    }
+    
+    // Se chegou aqui, o módulo existe, então faz a rolagem
+    RONIN.MeditationRoll.roll(this.actor, haiku);
   } else {
     // Outros tipos de descanso serão implementados posteriormente
     ui.notifications.info(`${this._getRestTypeName(restType)} completed.`);

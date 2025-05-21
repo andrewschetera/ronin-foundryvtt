@@ -21,6 +21,7 @@
   "module/rolls/parry-roll.js",
   "module/rolls/short-rest-roll.js",
   "module/rolls/long-rest-roll.js",
+  "module/rolls/meditation-roll.js",
   "module/rolls/broken-roll.js",
   "module/rolls/get-better-roll.js",
   "module/rolls/seppuku-roll.js",

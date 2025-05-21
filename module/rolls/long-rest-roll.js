@@ -154,46 +154,37 @@ class LongRestRoll {
     
     await actor.update({"system.resources.texts.value": newTexts});
     
-    // Verificar e remover bônus temporários de meditação (flags no ator)
-    if (actor.getFlag("ronin", "meditationBonuses")) {
-      const meditationBonuses = actor.getFlag("ronin", "meditationBonuses");
+// Verificar e remover bônus temporários de atributos da meditação (flags no ator)
+if (actor.getFlag("ronin", "meditationBonuses")) {
+  const meditationBonuses = actor.getFlag("ronin", "meditationBonuses");
+  
+  // Lista para rastrear os atributos que tinham bônus
+  const modifiedAttributes = [];
+  
+  // Processar bônus de atributos
+  for (const [key, value] of Object.entries(meditationBonuses.attributes || {})) {
+    if (value !== 0) {
+      // Registrar o atributo que teve bônus removido
+      modifiedAttributes.push(key);
       
-      // Lista para rastrear os atributos que tinham bônus
-      const modifiedAttributes = [];
+      // Preparar caminho de atualização
+      const updatePath = `system.abilities.${key}.value`;
+      const currentValue = actor.system.abilities[key].value;
       
-      // Processar bônus de atributos
-      for (const [key, value] of Object.entries(meditationBonuses.attributes || {})) {
-        if (value !== 0) {
-          // Registrar o atributo que teve bônus removido
-          modifiedAttributes.push(key);
-          
-          // Preparar caminho de atualização
-          const updatePath = `system.abilities.${key}.value`;
-          const currentValue = actor.system.abilities[key].value;
-          
-          // Remover o bônus
-          await actor.update({[updatePath]: currentValue - value});
-        }
-      }
-      
-      // Processar bônus de honra
-      let honorChanged = false;
-      if (meditationBonuses.honor && meditationBonuses.honor !== 0) {
-        const currentHonor = actor.system.resources.honor.value;
-        await actor.update({"system.resources.honor.value": currentHonor - meditationBonuses.honor});
-        honorChanged = true;
-      }
-      
-      // Se houve alguma alteração, registre que os bônus foram removidos
-      if (modifiedAttributes.length > 0 || honorChanged) {
-        results.meditationBonusesRemoved = true;
-        results.meditationAttributes = modifiedAttributes;
-        results.honorChanged = honorChanged;
-      }
-      
-      // Remover a flag completamente
-      await actor.unsetFlag("ronin", "meditationBonuses");
+      // Remover o bônus
+      await actor.update({[updatePath]: currentValue - value});
     }
+  }
+  
+  // Se houve alguma alteração, registre que os bônus foram removidos
+  if (modifiedAttributes.length > 0) {
+    results.meditationBonusesRemoved = true;
+    results.meditationAttributes = modifiedAttributes;
+  }
+  
+  // Remover a flag completamente após processar os bônus
+  await actor.unsetFlag("ronin", "meditationBonuses");
+}
     
     // Preparar os dados para o chat-card
     const chatTemplateData = {
