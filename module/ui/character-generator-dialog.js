@@ -1,6 +1,68 @@
 // module/ui/character-generator-dialog.js - Janela de diálogo para o gerador de personagens
 
 /**
+ * Verifica a existência das tabelas de nome e rola nelas para gerar o nome do personagem
+ * @returns {Object} Objeto contendo os resultados das rolagens ou null se as tabelas não forem encontradas
+ */
+async function rollForCharacterName() {
+  // Obter os nomes localizados das tabelas
+  const nameTableName = game.i18n.has("RONIN.CharacterGenerator.NameTable") ? 
+    game.i18n.localize("RONIN.CharacterGenerator.NameTable") : "Name";
+  
+  const lastNameTableName = game.i18n.has("RONIN.CharacterGenerator.LastNameTable") ? 
+    game.i18n.localize("RONIN.CharacterGenerator.LastNameTable") : "Last Name";
+  
+  const nicknameTableName = game.i18n.has("RONIN.CharacterGenerator.NicknameTable") ? 
+    game.i18n.localize("RONIN.CharacterGenerator.NicknameTable") : "Nickname";
+  
+  // Procurar as tabelas pelo nome localizado
+  const nameTable = game.tables.find(t => t.name === nameTableName);
+  const lastNameTable = game.tables.find(t => t.name === lastNameTableName);
+  const nicknameTable = game.tables.find(t => t.name === nicknameTableName);
+  
+  // Verificar se todas as tabelas necessárias foram encontradas
+  const hasNameTables = nameTable && lastNameTable;
+  
+  if (!hasNameTables) {
+    return null;
+  }
+  
+  // Criar objeto para armazenar os resultados
+  const nameResults = {
+    firstName: "",
+    lastName: "",
+    nickname: ""
+  };
+  
+  try {
+    // Rolar na tabela de nomes
+    const nameResult = await nameTable.draw({ displayChat: false });
+    if (nameResult.results && nameResult.results.length > 0) {
+      nameResults.firstName = nameResult.results[0].text;
+    }
+    
+    // Rolar na tabela de sobrenomes
+    const lastNameResult = await lastNameTable.draw({ displayChat: false });
+    if (lastNameResult.results && lastNameResult.results.length > 0) {
+      nameResults.lastName = lastNameResult.results[0].text;
+    }
+    
+    // Rolar na tabela de apelidos (se existir)
+    if (nicknameTable) {
+      const nicknameResult = await nicknameTable.draw({ displayChat: false });
+      if (nicknameResult.results && nicknameResult.results.length > 0) {
+        nameResults.nickname = nicknameResult.results[0].text;
+      }
+    }
+    
+    return nameResults;
+  } catch (error) {
+    console.error("Erro ao rolar nas tabelas de nome:", error);
+    return null;
+  }
+}
+
+/**
  * Obter todas as classes disponíveis no sistema
  * @returns {Array} Array contendo informações de todas as classes
  */
@@ -649,9 +711,30 @@ export async function showCharacterGeneratorDialog() {
               ryoValue = ryoRoll.total;
             }
             
+            // Verificar se existem as tabelas de nome
+            const nameResults = await rollForCharacterName();
+
+            // Determinar o nome e nickname do personagem
+            let characterName, characterNickname;
+
+            if (nameResults) {
+              // Se encontrou as tabelas, use os resultados
+              characterName = `${nameResults.firstName} ${nameResults.lastName}`.trim();
+              characterNickname = nameResults.nickname;
+              
+              // Se não conseguiu um nome válido das tabelas, use o padrão
+              if (!characterName || characterName === " ") {
+                characterName = `Novo ${chosenClass.name}`;
+              }
+            } else {
+              // Se não encontrou as tabelas, use o padrão
+              characterName = `Novo ${chosenClass.name}`;
+              characterNickname = "";
+            }
+
             // Criar o novo personagem com os atributos calculados
             const newCharacter = await Actor.create({
-              name: `Novo ${chosenClass.name}`,
+              name: characterName,
               type: "character",
               img: "icons/svg/mystery-man.svg", // Imagem padrão
               system: {
@@ -668,7 +751,8 @@ export async function showCharacterGeneratorDialog() {
                   ryo: { value: ryoValue },
                   texts: { value: textsValue }
                 },
-                class: classItem.name
+                class: classItem.name,
+                nickname: characterNickname // Adicionar o nickname
               }
             });
             
