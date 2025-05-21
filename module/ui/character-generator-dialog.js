@@ -487,6 +487,47 @@ async function addStartingItems(actor, classItem) {
 }
 
 /**
+ * Rola em uma tabela especial opcional e retorna o resultado
+ * @param {string} tableKey - Chave da tabela (ex: "broken-bodies", "grim-chronicles")
+ * @returns {string} O texto resultante da rolagem ou null se a tabela não foi encontrada
+ */
+async function rollOnOptionalTable(tableKey) {
+  // Mapear a chave da tabela para o nome traduzido
+  const tableNameMap = {
+    "broken-bodies": game.i18n.localize("RONIN.CharacterGenerator.BrokenBodies"),
+    "grim-chronicles": game.i18n.localize("RONIN.CharacterGenerator.GrimChronicles"),
+    "bad-habits": game.i18n.localize("RONIN.CharacterGenerator.BadHabits"),
+    "awful-afflictions": game.i18n.localize("RONIN.CharacterGenerator.AwfulAfflictions")
+  };
+  
+  const tableName = tableNameMap[tableKey];
+  if (!tableName) return null;
+  
+  // Procurar a tabela pelo nome traduzido
+  const table = game.tables.find(t => t.name === tableName);
+  if (!table) {
+    console.warn(`Tabela "${tableName}" não encontrada`);
+    return null;
+  }
+  
+  // Rolar na tabela
+  try {
+    const result = await table.draw({ displayChat: false });
+    
+    if (!result.results || result.results.length === 0) {
+      console.warn(`Tabela "${tableName}" não retornou resultados`);
+      return null;
+    }
+    
+    // Retornar o texto do resultado
+    return `[${tableName}] ${result.results[0].text}`;
+  } catch (error) {
+    console.error(`Erro ao rolar na tabela "${tableName}":`, error);
+    return null;
+  }
+}
+
+/**
  * Função para exibir a janela de diálogo do gerador de personagens
  */
 export async function showCharacterGeneratorDialog() {
@@ -525,6 +566,12 @@ export async function showCharacterGeneratorDialog() {
             name: $(this).next('label').text().trim(),
             pack: $(this).data('pack')
           });
+        });
+        
+        // Obter tabelas opcionais selecionadas
+        const selectedTables = [];
+        html.find('input[name="optionalTable"]:checked').each(function() {
+          selectedTables.push($(this).val());
         });
         
         // Verificar se alguma classe foi selecionada
@@ -752,7 +799,8 @@ export async function showCharacterGeneratorDialog() {
                   texts: { value: textsValue }
                 },
                 class: classItem.name,
-                nickname: characterNickname // Adicionar o nickname
+                nickname: characterNickname, // Adicionar o nickname
+                background: "" // Inicializa o campo de background vazio
               }
             });
             
@@ -826,6 +874,27 @@ export async function showCharacterGeneratorDialog() {
             // Adicionar informações dos itens iniciais
             if (startingItemsLog) {
               rollResults += `\n\n${startingItemsLog}`;
+            }
+            
+            // Agora, processar as tabelas opcionais
+            if (selectedTables.length > 0) {
+              // Preparar o texto do background com os resultados das tabelas
+              let backgroundText = "";
+              
+              // Rolar em cada tabela selecionada
+              for (const tableKey of selectedTables) {
+                const result = await rollOnOptionalTable(tableKey);
+                if (result) {
+                  // Adicionar o resultado ao texto do background com quebra de linha
+                  backgroundText += result + "\n";
+                }
+              }
+              
+              // Atualizar o campo de background do personagem
+              if (backgroundText) {
+                await newCharacter.update({ "system.background": backgroundText });
+                rollResults += `\n\nTabelas opcionais adicionadas ao Background:\n${backgroundText}`;
+              }
             }
             
             // Exibir mensagem com os resultados
