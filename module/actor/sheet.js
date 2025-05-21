@@ -977,6 +977,32 @@ _onRestConfirmed(form) {
     
     // Se chegou aqui, o módulo existe, então faz a rolagem
     RONIN.ShortRestRoll.roll(this.actor, noFoodAndWater, deductConsumables);
+  } else if (restType === "long") {
+    // Verificar se o módulo LongRestRoll existe
+    if (!window.RONIN.LongRestRoll) {
+      console.error("Módulo de rolagem de descanso longo não encontrado no namespace RONIN");
+      ui.notifications.error("Módulo de rolagem de descanso longo não disponível");
+      
+      // Tentar importar dinamicamente (apenas como fallback)
+      try {
+        import('../rolls/long-rest-roll.js').then(module => {
+          if (module && module.default) {
+            console.log("Módulo de rolagem de descanso longo carregado dinamicamente");
+            module.default.roll(this.actor, noFoodAndWater, deductConsumables, isInfectedOrPoisoned);
+          } else {
+            console.error("Falha ao importar módulo de rolagem de descanso longo");
+          }
+        }).catch(err => {
+          console.error("Erro ao importar módulo de rolagem de descanso longo:", err);
+        });
+      } catch (error) {
+        console.error("Erro ao tentar importação dinâmica:", error);
+      }
+      return;
+    }
+    
+    // Se chegou aqui, o módulo existe, então faz a rolagem
+    RONIN.LongRestRoll.roll(this.actor, noFoodAndWater, deductConsumables, isInfectedOrPoisoned);
   } else {
     // Outros tipos de descanso serão implementados posteriormente
     ui.notifications.info(`${this._getRestTypeName(restType)} completed.`);

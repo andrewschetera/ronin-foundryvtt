@@ -1,0 +1,76 @@
+<div class="ronin-chat-card rest-roll-card">
+  <div class="card-header">
+    <h3>{{localize "RONIN.Rest.Long"}}</h3>
+  </div>
+  
+  <div class="card-roll-result">
+    <!-- HP Section -->
+    <div class="rest-section hp-section">
+      <h4>{{localize "RONIN.Resources.HP"}}</h4>
+      
+      {{#if isInfectedOrPoisoned}}
+        <div class="damage-taken">
+          <p>{{localize "RONIN.Rest.InfectedOrPoisonedDamage" damage=results.damageSuffered}}</p>
+        </div>
+      {{else if results.canRecoverHP}}
+        <div class="hp-recovery">
+          <p>{{localize "RONIN.Rest.HPRecovered" value=results.hpRecovered}}</p>
+        </div>
+      {{else}}
+        <div class="no-recovery">
+          <p>{{localize "RONIN.Rest.NoHPRecovery"}}</p>
+          
+          {{#if noFoodAndWater}}
+            <p>{{localize "RONIN.Rest.NoFoodAndWaterReason"}}</p>
+          {{else}}
+            <p>{{localize "RONIN.Rest.MissingConsumablesReason"}}</p>
+          {{/if}}
+          
+          <p>{{localize "RONIN.Rest.PotentialDamage" damage=results.damageSuffered}}</p>
+        </div>
+      {{/if}}
+      
+      {{#if results.canRecoverHP}}
+        {{#if results.waterUsed}}
+          <p>{{localize "RONIN.Rest.UsedWater"}}: {{results.waterUsed.name}}</p>
+        {{/if}}
+        
+        {{#if results.foodUsed}}
+          <p>{{localize "RONIN.Rest.UsedFood"}}: {{results.foodUsed.name}}</p>
+        {{/if}}
+      {{/if}}
+    </div>
+    
+    <!-- Virtues Section -->
+    <div class="rest-section virtues-section">
+      <h4>{{localize "RONIN.Resources.Virtues"}}</h4>
+      {{#if results.virtuesRecovered}}
+        <p>{{localize "RONIN.Rest.VirtuesRecovered" value=results.virtuesRecovered}}</p>
+      {{else}}
+        <p>{{localize "RONIN.Rest.NoVirtuesRecovered"}}</p>
+      {{/if}}
+    </div>
+    
+    <!-- Texts Section -->
+    <div class="rest-section texts-section">
+      <h4>{{localize "RONIN.Resources.Texts"}}</h4>
+      <p>{{localize "RONIN.Rest.TextsRecovered" value=results.textsRecovered formula=results.textsRoll.formula}}</p>
+    </div>
+    
+    <!-- Meditation Bonuses Section (if applicable) -->
+    {{#if results.meditationBonusesRemoved}}
+      <div class="rest-section meditation-section">
+        <h4>{{localize "RONIN.Rest.MeditationEffects"}}</h4>
+        <p>{{localize "RONIN.Rest.MeditationBonusesRemoved"}}</p>
+        
+        {{#each results.meditationAttributes}}
+          <p>{{localize (concat "RONIN.Abilities." (capitalize this))}} {{localize "RONIN.Rest.BonusRemoved"}}</p>
+        {{/each}}
+        
+        {{#if results.honorChanged}}
+          <p>{{localize "RONIN.Resources.Honor"}} {{localize "RONIN.Rest.BonusRemoved"}}</p>
+        {{/if}}
+      </div>
+    {{/if}}
+  </div>
+</div>

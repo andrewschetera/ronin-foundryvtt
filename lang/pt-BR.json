@@ -216,12 +216,20 @@
       "NoFoodAndWater": "Sem Comida e Água",
       "OK": "Descansar",
       "Cancel": "Cancelar",
-        "HPRecovered": "PV Recuperados",
+  "HPRecovered": "PV Recuperados: {value}",
+  "VirtuesRecovered": "Virtudes Recuperadas: {value}",
+  "NoVirtuesRecovered": "Nenhuma Virtude recuperada (valor atual já é maior que o valor rolado).",
+  "TextsRecovered": "Textos Recuperados: {value} ({formula})",
   "UsedWater": "Água Utilizada",
   "UsedFood": "Comida Utilizada",
   "NoHPRecovery": "Sem Recuperação de PV",
   "NoFoodAndWaterReason": "Sem comida e água disponíveis.",
-  "MissingConsumablesReason": "Falta comida ou água."
+  "MissingConsumablesReason": "Falta comida ou água.",
+  "PotentialDamage": "Dano potencial por falta de comida (após 3+ dias): {damage}",
+  "InfectedOrPoisonedDamage": "Dano sofrido por infecção/veneno: {damage}",
+  "MeditationEffects": "Efeitos de Meditação",
+  "MeditationBonusesRemoved": "Bônus temporários de meditação foram removidos:",
+  "BonusRemoved": "bônus removido"
     },
     "Tables": {
       "DebilitatingInjuries": "Lesões Debilitantes",

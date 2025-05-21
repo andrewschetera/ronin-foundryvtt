@@ -216,12 +216,20 @@
       "NoFoodAndWater": "No Food and Water",
       "OK": "Rest",
       "Cancel": "Cancel",
-        "HPRecovered": "HP Recovered",
+  "HPRecovered": "HP Recovered: {value}",
+  "VirtuesRecovered": "Virtues Recovered: {value}",
+  "NoVirtuesRecovered": "No Virtues recovered (current value is already higher than the rolled value).",
+  "TextsRecovered": "Texts Recovered: {value} ({formula})",
   "UsedWater": "Used Water",
   "UsedFood": "Used Food",
   "NoHPRecovery": "No HP Recovery",
   "NoFoodAndWaterReason": "No food and water available.",
-  "MissingConsumablesReason": "Missing food or water consumables."
+  "MissingConsumablesReason": "Missing food or water consumables.",
+  "PotentialDamage": "Potential damage from lack of food (after 3+ days): {damage}",
+  "InfectedOrPoisonedDamage": "Damage taken from infection/poison: {damage}",
+  "MeditationEffects": "Meditation Effects",
+  "MeditationBonusesRemoved": "Temporary bonuses from meditation have been removed:",
+  "BonusRemoved": "bonus removed"
     },
     "Tables": {
       "DebilitatingInjuries": "Debilitating Injuries",
