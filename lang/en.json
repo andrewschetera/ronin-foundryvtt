@@ -262,7 +262,12 @@
       "Dishonored": "Dishonored",
       "AvailableClasses": "Available Classes",
       "SelectAll": "Select All",
-      "SelectNone": "Select None"
+      "SelectNone": "Select None",
+      "OptionalTables": "Optional Tables",
+      "BrokenBodies": "Broken Bodies",
+      "GrimChronicles": "Grim Chronicles",
+      "BadHabits": "Bad Habits",
+      "AwfulAfflictions": "Awful Afflictions"
     }
   }
 }
