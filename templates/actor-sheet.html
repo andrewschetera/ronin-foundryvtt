@@ -114,7 +114,7 @@
       <!-- Tab de Features (anteriormente Background) -->
       <div class="tab" data-group="primary" data-tab="background">
         <div class="tab-features">
-<!-- Seção de Classes - Correto -->
+<!-- Seção de Classes - Com botão para mostrar/esconder descrição -->
 <div class="inventory-category">
   <h2 class="category-header">
     <span>{{localize "RONIN.ItemTypes.Class"}}</span>
@@ -136,9 +136,14 @@
             <div class="item-name">{{item.name}}</div>
             <div class="item-controls">
               <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-              </div>
+              <!-- Novo botão para mostrar/esconder descrição -->
+              <a class="item-control toggle-description" title="Toggle Description" data-item-id="{{item._id}}">
+                <i class="fas fa-book"></i>
+              </a>
+            </div>
           </div>
-          <div class="item-description">{{{item.system.description}}}</div>
+          <!-- Descrição da classe agora tem classe CSS para controlar visibilidade -->
+          <div class="item-description class-description" data-item-id="{{item._id}}" style="display: none;">{{{item.system.description}}}</div>
         </li>
       {{/if}}
     {{/each}}
@@ -167,9 +172,14 @@
                 <i class="fas fa-fire"></i> {{localize "RONIN.Actions.Activate"}}
               </a>
               <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-              <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+              <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a><!-- Novo botão para mostrar/esconder descrição -->
+              <a class="item-control toggle-description" title="Toggle Description" data-item-id="{{item._id}}">
+                <i class="fas fa-book"></i>
+              </a>
             </div>
           </div>
+          <!-- Descrição da classe agora tem classe CSS para controlar visibilidade -->
+          <div class="item-description class-description" data-item-id="{{item._id}}" style="display: none;">{{{item.system.description}}}</div>
         </li>
       {{/if}}
     {{/each}}
