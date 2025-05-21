@@ -45,4 +45,39 @@
       {{/if}}
     </div>
   </div>
+  
+  <!-- Nova seção de tabelas opcionais com estrutura igual à das classes -->
+  <div class="form-group optional-tables-group">
+    <h3 class="optional-tables-title">{{localize "RONIN.CharacterGenerator.OptionalTables"}}</h3>
+  </div>
+  
+  <div class="form-group optional-tables-content">
+    <div style="width: 100%; display: flex; flex-direction: row; flex-wrap: wrap;">
+      <!-- Primeira coluna -->
+      <div style="width: 50%; padding: 3px; box-sizing: border-box;">
+        <div style="display: flex; flex-direction: row; align-items: center; gap: 2px;">
+          <input type="checkbox" id="table-broken-bodies" name="optionalTable" value="broken-bodies" style="margin: 0 4px 0 0;">
+          <label for="table-broken-bodies" style="margin: 0; padding: 0;">{{localize "RONIN.CharacterGenerator.BrokenBodies"}}</label>
+        </div>
+        
+        <div style="display: flex; flex-direction: row; align-items: center; gap: 2px; margin-top: 8px;">
+          <input type="checkbox" id="table-grim-chronicles" name="optionalTable" value="grim-chronicles" style="margin: 0 4px 0 0;">
+          <label for="table-grim-chronicles" style="margin: 0; padding: 0;">{{localize "RONIN.CharacterGenerator.GrimChronicles"}}</label>
+        </div>
+      </div>
+      
+      <!-- Segunda coluna -->
+      <div style="width: 50%; padding: 3px; box-sizing: border-box;">
+        <div style="display: flex; flex-direction: row; align-items: center; gap: 2px;">
+          <input type="checkbox" id="table-bad-habits" name="optionalTable" value="bad-habits" style="margin: 0 4px 0 0;">
+          <label for="table-bad-habits" style="margin: 0; padding: 0;">{{localize "RONIN.CharacterGenerator.BadHabits"}}</label>
+        </div>
+        
+        <div style="display: flex; flex-direction: row; align-items: center; gap: 2px; margin-top: 8px;">
+          <input type="checkbox" id="table-awful-afflictions" name="optionalTable" value="awful-afflictions" style="margin: 0 4px 0 0;">
+          <label for="table-awful-afflictions" style="margin: 0; padding: 0;">{{localize "RONIN.CharacterGenerator.AwfulAfflictions"}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
 </form>
