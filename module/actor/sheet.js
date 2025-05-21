@@ -950,19 +950,37 @@ _onRestConfirmed(form) {
   // Verificar se foi escolhida a meditação e se o haiku está marcado
   const haiku = restType === "meditation" ? (form.haiku?.checked || false) : false;
   
-  // Por enquanto, apenas logamos os valores
-  console.log("Rest confirmed", {
-    restType,
-    isInfectedOrPoisoned,
-    deductConsumables,
-    waterUsed,
-    foodUsed,
-    noFoodAndWater,
-    haiku
-  });
-  
-  // A implementação completa do descanso será feita posteriormente
-  ui.notifications.info(`${this._getRestTypeName(restType)} completed.`);
+  // Processar o tipo de descanso
+  if (restType === "short") {
+    // Verificar se o módulo ShortRestRoll existe
+    if (!window.RONIN.ShortRestRoll) {
+      console.error("Módulo de rolagem de descanso curto não encontrado no namespace RONIN");
+      ui.notifications.error("Módulo de rolagem de descanso curto não disponível");
+      
+      // Tentar importar dinamicamente (apenas como fallback)
+      try {
+        import('../rolls/short-rest-roll.js').then(module => {
+          if (module && module.default) {
+            console.log("Módulo de rolagem de descanso curto carregado dinamicamente");
+            module.default.roll(this.actor, noFoodAndWater, deductConsumables);
+          } else {
+            console.error("Falha ao importar módulo de rolagem de descanso curto");
+          }
+        }).catch(err => {
+          console.error("Erro ao importar módulo de rolagem de descanso curto:", err);
+        });
+      } catch (error) {
+        console.error("Erro ao tentar importação dinâmica:", error);
+      }
+      return;
+    }
+    
+    // Se chegou aqui, o módulo existe, então faz a rolagem
+    RONIN.ShortRestRoll.roll(this.actor, noFoodAndWater, deductConsumables);
+  } else {
+    // Outros tipos de descanso serão implementados posteriormente
+    ui.notifications.info(`${this._getRestTypeName(restType)} completed.`);
+  }
 }
 
 /**

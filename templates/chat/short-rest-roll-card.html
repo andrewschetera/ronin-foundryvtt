@@ -1,0 +1,37 @@
+<div class="ronin-chat-card rest-roll-card">
+  <div class="card-header">
+    <h3>{{localize "RONIN.Rest.Short"}}</h3>
+  </div>
+  
+  <div class="card-roll-result">
+    {{#if canRecoverHP}}
+      <div class="hp-recovery-section">
+        <div class="roll-result">
+          {{localize "RONIN.Rest.HPRecovered"}}: {{hpRecovered}}
+        </div>
+        
+        {{#if deductConsumables}}
+          <div class="consumables-used">
+            {{#if waterUsed}}
+              <p>{{localize "RONIN.Rest.UsedWater"}}: {{waterUsed.name}}</p>
+            {{/if}}
+            
+            {{#if foodUsed}}
+              <p>{{localize "RONIN.Rest.UsedFood"}}: {{foodUsed.name}}</p>
+            {{/if}}
+          </div>
+        {{/if}}
+      </div>
+    {{else}}
+      <div class="no-recovery">
+        <p>{{localize "RONIN.Rest.NoHPRecovery"}}</p>
+        
+        {{#if noFoodAndWater}}
+          <p>{{localize "RONIN.Rest.NoFoodAndWaterReason"}}</p>
+        {{else}}
+          <p>{{localize "RONIN.Rest.MissingConsumablesReason"}}</p>
+        {{/if}}
+      </div>
+    {{/if}}
+  </div>
+</div>

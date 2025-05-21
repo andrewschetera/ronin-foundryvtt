@@ -215,7 +215,13 @@
       "Food": "Food",
       "NoFoodAndWater": "No Food and Water",
       "OK": "Rest",
-      "Cancel": "Cancel"
+      "Cancel": "Cancel",
+        "HPRecovered": "HP Recovered",
+  "UsedWater": "Used Water",
+  "UsedFood": "Used Food",
+  "NoHPRecovery": "No HP Recovery",
+  "NoFoodAndWaterReason": "No food and water available.",
+  "MissingConsumablesReason": "Missing food or water consumables."
     },
     "Tables": {
       "DebilitatingInjuries": "Debilitating Injuries",

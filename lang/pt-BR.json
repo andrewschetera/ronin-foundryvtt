@@ -215,7 +215,13 @@
       "Food": "Comida",
       "NoFoodAndWater": "Sem Comida e Água",
       "OK": "Descansar",
-      "Cancel": "Cancelar"
+      "Cancel": "Cancelar",
+        "HPRecovered": "PV Recuperados",
+  "UsedWater": "Água Utilizada",
+  "UsedFood": "Comida Utilizada",
+  "NoHPRecovery": "Sem Recuperação de PV",
+  "NoFoodAndWaterReason": "Sem comida e água disponíveis.",
+  "MissingConsumablesReason": "Falta comida ou água."
     },
     "Tables": {
       "DebilitatingInjuries": "Lesões Debilitantes",
