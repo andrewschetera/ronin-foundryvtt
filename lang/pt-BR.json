@@ -261,7 +261,12 @@
       "Dishonorable": "Desonrado",
       "AvailableClasses": "Classes Disponíveis",
       "SelectAll": "Selecionar Todos",
-      "SelectNone": "Selecionar Nenhum"
+      "SelectNone": "Selecionar Nenhum",
+      "OptionalTables": "Tabelas Opcionais",
+      "BrokenBodies": "Corpos Quebrados",
+      "GrimChronicles": "Crônicas Sombrias",
+      "BadHabits": "Maus Hábitos",
+      "AwfulAfflictions": "Aflições Terríveis"
     }
   }
 }
