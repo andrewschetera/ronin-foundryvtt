@@ -70,6 +70,90 @@ function extractFeatsAndTables(featsTableText) {
 }
 
 /**
+ * Extrai os itens iniciais do texto
+ * @param {string} startingItemsText - Texto do campo startingItems
+ * @returns {Object} Objeto com arrays de itens com suas quantidades e tabelas com suas quantidades
+ */
+function extractStartingItems(startingItemsText) {
+  if (!startingItemsText) return { items: [], tables: [] };
+  
+  const parts = startingItemsText.split(',').map(part => part.trim());
+  const items = [];
+  const tables = [];
+  
+  // Expressão regular para capturar quantidades
+  // Captura: 
+  // - um número simples "10 shurikens" 
+  // - uma expressão de dado "1d4 bandagens"
+  // - uma expressão de dados com multiplicador "2d6*10 ryo"
+  const quantityRegex = /^((\d+)|((\d+)d(\d+))(\*(\d+))?)?\s+(.+)$/;
+  
+  for (let part of parts) {
+    if (!part) continue;
+    
+    // Verificar se é uma rolltable (entre colchetes)
+    const tableMatch = part.match(/(\d+d\d+)?\s*\[(.*?)\]/);
+    if (tableMatch) {
+      // Se for uma rolltable com quantidade
+      const rollQuantity = tableMatch[1]; // pode ser undefined se não houver quantidade
+      const tableName = tableMatch[2];
+      
+      // Se tiver uma expressão de dado para quantidade
+      if (rollQuantity) {
+        tables.push({
+          name: tableName,
+          quantity: rollQuantity  // Ex: "1d4"
+        });
+      } else {
+        tables.push({
+          name: tableName,
+          quantity: "1"  // Valor padrão
+        });
+      }
+    } else {
+      // Se for um item normal
+      const quantityMatch = part.match(quantityRegex);
+      
+      if (quantityMatch) {
+        // Se houver padrão de quantidade no início
+        let quantity;
+        
+        // Captura simples número (grupo 2) ou expressão de dado (grupos 4 e 5)
+        if (quantityMatch[2]) {
+          // Número simples
+          quantity = quantityMatch[2];
+        } else if (quantityMatch[4] && quantityMatch[5]) {
+          // Expressão de dado
+          if (quantityMatch[7]) {
+            // Com multiplicador
+            quantity = `${quantityMatch[4]}d${quantityMatch[5]}*${quantityMatch[7]}`;
+          } else {
+            // Sem multiplicador
+            quantity = `${quantityMatch[4]}d${quantityMatch[5]}`;
+          }
+        } else {
+          quantity = "1"; // Padrão se não houver correspondência
+        }
+        
+        const itemName = quantityMatch[8];
+        items.push({
+          name: itemName,
+          quantity: quantity
+        });
+      } else {
+        // Se não tiver padrão de quantidade, assume 1
+        items.push({
+          name: part,
+          quantity: "1"
+        });
+      }
+    }
+  }
+  
+  return { items, tables };
+}
+
+/**
  * Encontra um feat pelo nome
  * @param {string} featName - Nome do feat
  * @returns {Object} O item feat encontrado ou null
@@ -94,6 +178,56 @@ async function findFeatByName(featName) {
   }
   
   return feat;
+}
+
+/**
+ * Encontra um item pelo nome no mundo ou compêndios
+ * @param {string} itemName - Nome do item a ser encontrado
+ * @param {string} itemType - (Opcional) Tipo do item a ser encontrado
+ * @returns {Object} O item encontrado ou null
+ */
+async function findItemByName(itemName, itemType = null) {
+  // Procurar nos itens do mundo
+  let itemQuery = game.items.filter(i => i.name.toLowerCase() === itemName.toLowerCase());
+  
+  // Se especificou um tipo, filtrar pelo tipo
+  if (itemType) {
+    itemQuery = itemQuery.filter(i => i.type === itemType);
+  }
+  
+  // Se encontrou algum item
+  if (itemQuery.length > 0) {
+    return itemQuery[0];
+  }
+  
+  // Se não encontrou nos itens do mundo, procurar nos compêndios
+  for (let pack of game.packs) {
+    if (pack.metadata.type === "Item") {
+      const packIndex = await pack.getIndex();
+      
+      // Filtrar pelo nome (case insensitive)
+      let indexEntryQuery = packIndex.filter(i => 
+        i.name.toLowerCase() === itemName.toLowerCase()
+      );
+      
+      // Se especificou um tipo, filtrar pelo tipo
+      if (itemType && indexEntryQuery.length > 0) {
+        // Precisamos verificar o tipo de cada item
+        for (let indexEntry of indexEntryQuery) {
+          const item = await pack.getDocument(indexEntry._id);
+          if (item.type === itemType) {
+            return item;
+          }
+        }
+      } else if (indexEntryQuery.length > 0) {
+        // Se não especificou tipo, retornar o primeiro que encontrar
+        return await pack.getDocument(indexEntryQuery[0]._id);
+      }
+    }
+  }
+  
+  // Se não encontrou em lugar nenhum
+  return null;
 }
 
 /**
@@ -139,6 +273,155 @@ async function rollOnTable(tableName) {
   }
   
   return null;
+}
+
+/**
+ * Rola uma expressão e retorna o resultado
+ * @param {string} diceExpression - Expressão de dado (Ex: "1d4", "2d6*10")
+ * @returns {number} Resultado da rolagem
+ */
+async function rollQuantity(diceExpression) {
+  // Verificar se é um número simples
+  if (/^\d+$/.test(diceExpression)) {
+    return parseInt(diceExpression);
+  }
+  
+  // Verificar se tem multiplicador
+  const multMatch = diceExpression.match(/^(\d+d\d+)\*(\d+)$/);
+  if (multMatch) {
+    const diceFormula = multMatch[1];
+    const multiplier = parseInt(multMatch[2]);
+    
+    // Rolar os dados
+    const roll = new Roll(diceFormula);
+    await roll.evaluate();
+    
+    // Multiplicar pelo multiplicador
+    return roll.total * multiplier;
+  }
+  
+  // Rolagem simples de dados
+  const roll = new Roll(diceExpression);
+  await roll.evaluate();
+  return roll.total;
+}
+
+/**
+ * Adiciona itens iniciais ao personagem
+ * @param {Object} actor - O personagem a receber os itens
+ * @param {Object} classItem - O item da classe com o campo startingItems
+ */
+async function addStartingItems(actor, classItem) {
+  if (!actor || !classItem || !classItem.system?.startingItems) return;
+  
+  // Extrair os itens do texto
+  const startingItemsText = classItem.system.startingItems;
+  const { items, tables } = extractStartingItems(startingItemsText);
+  
+  // Array para armazenar todos os itens a serem adicionados
+  const itemsToAdd = [];
+  
+  // Log para o usuário
+  let startingItemsLog = "Itens iniciais adicionados:\n";
+  
+  // Processar itens regulares
+  for (const itemData of items) {
+    // Buscar o item
+    const item = await findItemByName(itemData.name);
+    
+    if (item) {
+      // Verificar se tem uma expressão de dado para quantidade
+      let quantity;
+      if (itemData.quantity.includes("d")) {
+        quantity = await rollQuantity(itemData.quantity);
+      } else {
+        quantity = parseInt(itemData.quantity) || 1;
+      }
+      
+      // Criar cópia do item e definir a quantidade
+      const itemCopy = item.toObject();
+      
+      // Definir a quantidade com base no tipo do item
+      if (["gear", "ammo", "consumable"].includes(item.type)) {
+        itemCopy.system.quantity = quantity;
+      }
+      
+      // Adicionar à lista de itens
+      itemsToAdd.push(itemCopy);
+      
+      // Adicionar ao log
+      startingItemsLog += `- ${item.name} (${quantity})\n`;
+    } else {
+      console.warn(`Item não encontrado: ${itemData.name}`);
+      startingItemsLog += `- ERRO: Item não encontrado: ${itemData.name}\n`;
+    }
+  }
+  
+  // Processar tabelas
+  for (const tableData of tables) {
+    // Determinar o número de rolagens na tabela
+    let rollsCount;
+    if (tableData.quantity.includes("d")) {
+      rollsCount = await rollQuantity(tableData.quantity);
+    } else {
+      rollsCount = parseInt(tableData.quantity) || 1;
+    }
+    
+    // Buscar a tabela pelo nome
+    const table = game.tables.find(t => t.name.toLowerCase() === tableData.name.toLowerCase());
+    
+    if (table) {
+      startingItemsLog += `- Rolado ${rollsCount}x na tabela [${tableData.name}]:\n`;
+      
+      // Rolar na tabela o número de vezes indicado
+      for (let i = 0; i < rollsCount; i++) {
+        const result = await table.draw({ displayChat: false });
+        
+        if (result.results && result.results.length > 0) {
+          const drawnResult = result.results[0];
+          
+          // Processar o resultado da tabela
+          let resultItem = null;
+          
+          // Se o resultado for uma referência a um documento
+          if (drawnResult.documentCollection) {
+            if (drawnResult.documentCollection === "Item") {
+              // Se for uma referência a um Item, obter o item
+              resultItem = game.items.get(drawnResult.documentId);
+            } else if (drawnResult.documentCollection.startsWith("Compendium.")) {
+              // Se for uma referência a um item de compêndio
+              const packName = drawnResult.documentCollection.substring(11);
+              const pack = game.packs.get(packName);
+              if (pack) {
+                resultItem = await pack.getDocument(drawnResult.documentId);
+              }
+            }
+          } else if (drawnResult.text) {
+            // Se for um texto, procurar um item com esse nome
+            resultItem = await findItemByName(drawnResult.text);
+          }
+          
+          // Se encontrou um item, adicionar à lista
+          if (resultItem) {
+            itemsToAdd.push(resultItem.toObject());
+            startingItemsLog += `  - ${resultItem.name}\n`;
+          } else {
+            startingItemsLog += `  - ERRO: Resultado não encontrado: ${drawnResult.text || "Resultado desconhecido"}\n`;
+          }
+        }
+      }
+    } else {
+      console.warn(`Tabela não encontrada: ${tableData.name}`);
+      startingItemsLog += `- ERRO: Tabela não encontrada: ${tableData.name}\n`;
+    }
+  }
+  
+  // Adicionar os itens ao personagem
+  if (itemsToAdd.length > 0) {
+    await actor.createEmbeddedDocuments("Item", itemsToAdd);
+  }
+  
+  return startingItemsLog;
 }
 
 /**
@@ -425,6 +708,9 @@ export async function showCharacterGeneratorDialog() {
               await newCharacter.createEmbeddedDocuments("Item", featsToAdd);
             }
             
+            // Adicionar os itens iniciais
+            const startingItemsLog = await addStartingItems(newCharacter, classItem);
+            
             // Mostrar o modificador de alinhamento no log
             let alignmentInfo = "";
             if (alignment === "honored") alignmentInfo = " (+1 por Honrado)";
@@ -450,7 +736,12 @@ export async function showCharacterGeneratorDialog() {
             
             // Adicionar informações dos feats
             if (featNames.length > 0) {
-              rollResults += `Características adicionadas: ${featNames.join(", ")}`;
+              rollResults += `\nCaracterísticas adicionadas: ${featNames.join(", ")}`;
+            }
+            
+            // Adicionar informações dos itens iniciais
+            if (startingItemsLog) {
+              rollResults += `\n\n${startingItemsLog}`;
             }
             
             // Exibir mensagem com os resultados
