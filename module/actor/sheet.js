@@ -177,6 +177,9 @@ activateListeners(html) {
   // Novo listener para o botão de ativação de feat
   html.find('.feat-activate').click(this._onFeatActivate.bind(this));
   
+  // Novo listener para o botão de mostrar/esconder descrição da classe
+  html.find('.toggle-description').click(this._onToggleClassDescription.bind(this));
+  
   // Funcionalidade condicional para as ações do proprietário
   if (this.actor.isOwner) {
     // Item creation
@@ -379,6 +382,35 @@ _onConsumableUse(event) {
   
   // Chamar o método de uso do item
   item.use();
+}
+
+/**
+ * Manipula o clique no botão de mostrar/esconder descrição da classe
+ * @param {Event} event O evento de clique
+ * @private
+ */
+_onToggleClassDescription(event) {
+  event.preventDefault();
+  const button = event.currentTarget;
+  const itemId = button.dataset.itemId;
+  
+  // Encontrar a descrição correspondente
+  const description = this.element.find(`.item-description[data-item-id="${itemId}"]`);
+  
+  // Alternar a visibilidade da descrição
+  if (description.is(":visible")) {
+    description.slideUp(200);
+    // Mudar o ícone para "livro fechado"
+    button.querySelector("i").classList.remove("fa-book-open");
+    button.querySelector("i").classList.add("fa-book");
+    button.title = "Show Description";
+  } else {
+    description.slideDown(200);
+    // Mudar o ícone para "livro aberto"
+    button.querySelector("i").classList.remove("fa-book");
+    button.querySelector("i").classList.add("fa-book-open");
+    button.title = "Hide Description";
+  }
 }
 
 /**
