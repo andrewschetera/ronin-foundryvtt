@@ -37,6 +37,12 @@
       "Use": "USAR",
       "Activate": "ATIVAR"
     },
+    "Enemy": {
+      "Moral": "Moral",
+      "Attacks": "Ataques",
+      "Defenses": "Defesas",
+      "Special": "Especial"
+    },
     "Broken": {
       "Result1": "Cai inconsciente por {rounds} rodadas e desperta com {hp} PV",
       "Result2a": "Membro quebrado ou amputado.",

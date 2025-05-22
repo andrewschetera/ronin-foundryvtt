@@ -1,0 +1,68 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+  <header class="sheet-header">
+    <div class="header-grid">
+      <!-- Imagem do Inimigo -->
+      <div class="character-img-container">
+        <div class="character-img">
+          <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+        </div>
+      </div>
+      
+      <!-- Informações Básicas -->
+      <div class="header-fields">
+        <h1 class="character-name">
+          <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}"/>
+        </h1>
+      </div>
+    </div>
+  </header>
+
+  <section class="sheet-body">
+    <div class="enemy-properties">
+      
+      <!-- Moral -->
+      <div class="form-group">
+        <label>{{localize "RONIN.Enemy.Moral"}}</label>
+        <div class="form-fields">
+          <button class="moral-button" type="button">{{localize "RONIN.Enemy.Moral"}}</button>
+          <input type="number" name="system.moral.value" value="{{system.moral.value}}" min="0" data-dtype="Number"/>
+        </div>
+      </div>
+      
+      <!-- Pontos de Vida -->
+      <div class="form-group">
+        <label>{{localize "RONIN.Resources.HP"}}</label>
+        <div class="form-fields">
+          <input type="number" name="system.hp.value" value="{{system.hp.value}}" min="0" data-dtype="Number"/>
+          <span class="separator">/</span>
+          <input type="number" name="system.hp.max" value="{{system.hp.max}}" min="0" data-dtype="Number"/>
+        </div>
+      </div>
+      
+      <!-- Ataques -->
+      <div class="form-group">
+        <label>{{localize "RONIN.Enemy.Attacks"}}</label>
+        <textarea name="system.attacks" rows="4" style="width: 100%;">{{system.attacks}}</textarea>
+      </div>
+      
+      <!-- Defesas -->
+      <div class="form-group">
+        <label>{{localize "RONIN.Enemy.Defenses"}}</label>
+        <textarea name="system.defenses" rows="4" style="width: 100%;">{{system.defenses}}</textarea>
+      </div>
+      
+      <!-- Especial -->
+      <div class="form-group">
+        <label>{{localize "RONIN.Enemy.Special"}}</label>
+        <textarea name="system.special" rows="4" style="width: 100%;">{{system.special}}</textarea>
+      </div>
+      
+      <!-- Descrição -->
+      <div class="form-group enemy-description">
+        <label>{{localize "RONIN.Description"}}</label>
+        <textarea name="system.description" rows="6" style="width: 100%;">{{system.description}}</textarea>
+      </div>
+      
+    </div>
+  </section>
+</form>

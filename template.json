@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character"],
+    "types": ["character", "enemy"],
     "templates": {
       "base": {
         "abilities": {
@@ -54,6 +54,19 @@
       "class": "",
       "nickname": "",
       "biography": ""
+    },
+    "enemy": {
+      "moral": {
+        "value": 12
+      },
+      "hp": {
+        "value": 10,
+        "max": 10
+      },
+      "attacks": "",
+      "defenses": "",
+      "special": "",
+      "description": ""
     }
   },
   "Item": {

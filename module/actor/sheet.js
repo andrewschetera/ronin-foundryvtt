@@ -15,7 +15,7 @@ class RoninActorSheet extends ActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["ronin", "sheet", "actor"],
-      template: "systems/ronin/templates/actor-sheet.html",
+      template: this.getTemplate(),
       width: 700,
       height: 600,
       tabs: [
@@ -24,6 +24,28 @@ class RoninActorSheet extends ActorSheet {
       scrollY: [".tab"], // Configurar rolagem apenas para as abas
       resizable: false // Impedir que o tamanho da ficha seja alterado
     });
+  }
+  
+  /**
+   * Retorna o template apropriado com base no tipo do ator
+   * @returns {string} Caminho do template
+   * @static
+   */
+  static getTemplate() {
+    // Isso será chamado no contexto da instância, então não podemos usar this.actor aqui
+    // Vamos usar o template padrão e sobrescrever no get template
+    return "systems/ronin/templates/actor-sheet.html";
+  }
+  
+  /**
+   * Retorna o template apropriado com base no tipo do ator
+   * @override
+   */
+  get template() {
+    if (this.actor.type === "enemy") {
+      return "systems/ronin/templates/enemy-sheet.html";
+    }
+    return "systems/ronin/templates/actor-sheet.html";
   }
   
 /**
@@ -40,19 +62,22 @@ getData() {
   context.system = actorData.system;
   context.items = actorData.items;
   
-  // Preparar dados de munição
-  const ammoItems = context.items.filter(i => i.type === "ammo");
-  context.ammoItems = ammoItems;
-  
-  // Criar mapa para acesso rápido às munições
-  context.ammoItemsMap = {};
-  ammoItems.forEach(ammo => {
-    context.ammoItemsMap[ammo.id] = ammo;
-  });
-  
-  // Verificar se o ator já tem uma classe
-  const hasClass = context.items.filter(i => i.type === "class").length > 0;
-  context.hasClass = hasClass;
+  // Se for um personagem, preparar dados específicos de personagem
+  if (actorData.type === "character") {
+    // Preparar dados de munição
+    const ammoItems = context.items.filter(i => i.type === "ammo");
+    context.ammoItems = ammoItems;
+    
+    // Criar mapa para acesso rápido às munições
+    context.ammoItemsMap = {};
+    ammoItems.forEach(ammo => {
+      context.ammoItemsMap[ammo.id] = ammo;
+    });
+    
+    // Verificar se o ator já tem uma classe
+    const hasClass = context.items.filter(i => i.type === "class").length > 0;
+    context.hasClass = hasClass;
+  }
   
   return context;
 }
@@ -66,8 +91,11 @@ getData() {
     
     // Adicionar um pequeno atraso para garantir que o DOM esteja pronto
     setTimeout(() => {
-      this._fixScrollingLayout();
-      this._fixHonorSelection();
+      // Só aplicar correções de layout para fichas de personagem
+      if (this.actor.type === "character") {
+        this._fixScrollingLayout();
+        this._fixHonorSelection();
+      }
     }, 100);
   }
 
@@ -76,7 +104,7 @@ getData() {
    * @private
    */
   _fixHonorSelection() {
-    if (!this.element) return;
+    if (!this.element || this.actor.type !== "character") return;
     
     const honorValue = parseInt(this.actor.system.resources.honor.value);
     console.log(`Inicializando seleção de honor: ${honorValue}`);
@@ -93,7 +121,7 @@ getData() {
    * @private
    */
   _fixScrollingLayout() {
-    if (!this.element) return;
+    if (!this.element || this.actor.type !== "character") return;
     
     // Configurar rolagem apenas para as abas
     this.element.find('.tab').css('overflow-y', 'auto');
@@ -117,7 +145,9 @@ getData() {
    */
   _onResize(event) {
     super._onResize(event);
-    this._fixScrollingLayout();
+    if (this.actor.type === "character") {
+      this._fixScrollingLayout();
+    }
   }
   
  /**
@@ -128,72 +158,95 @@ getData() {
 activateListeners(html) {
   super.activateListeners(html);
   
-  // Listener especial para os botões de honor
-  html.find('input[data-select-single="true"]').click(this._onClickHonorDot.bind(this));
+  // Listeners específicos para personagens
+  if (this.actor.type === "character") {
+    // Listener especial para os botões de honor
+    html.find('input[data-select-single="true"]').click(this._onClickHonorDot.bind(this));
+    
+    // Adicionar listener para os rótulos das habilidades
+    html.find('.ability label').click(this._onAbilityLabelClick.bind(this));
+    
+    // Listeners para equipar armas e armaduras
+    html.find('.weapon-equip-icon').click(this._onWeaponEquipToggle.bind(this));
+    html.find('.armor-equip-icon').click(this._onArmorEquipToggle.bind(this));
+    
+    // Novo listener para selecionar categoria atual de armadura na aba Tatakai
+    html.find('.armor-current-category').change(this._onArmorCategoryChange.bind(this));
+    
+    // Listener para botões de ataque nas armas da aba Tatakai
+    html.find('.weapon-attack-button').click(this._onWeaponAttack.bind(this));
+    
+    // Listener para o botão de defesa
+    html.find('.defend-action').click(this._onDefendButtonClick.bind(this));
+    
+    // Listener para o botão de aparar
+    html.find('.parry-action').click(this._onParryButtonClick.bind(this));
+    
+    // Listener para alteração de quantidade de itens
+    html.find('.quantity-input').change(this._onItemQuantityChange.bind(this));
+    
+    // Listener para seleção de munição na aba Tatakai
+    html.find('.ammo-select').change(this._onAmmoSelectChange.bind(this));
+    
+    // Listener para o botão quebrado
+    html.find('.button-broken').click(this._onBrokenButtonClick.bind(this));
+    
+    // Listener para o botão de melhoria
+    html.find('.button-get-better').click(this._onGetBetterButtonClick.bind(this));
+    
+    // Listener para o botão de Seppuku
+    html.find('.button-seppuku').click(this._onSeppukuButtonClick.bind(this));
+    
+    // Listener para botão de uso de consumível
+    html.find('.consumable-use').click(this._onConsumableUse.bind(this));
+    
+    // Listener para o botão de descanso
+    html.find('.button-rest').click(this._onRestButtonClick.bind(this));
+    
+    // Listener para o botão de uso de texto
+    html.find('.text-use').click(this._onTextUse.bind(this));
+    
+    // Novo listener para o botão de ativação de feat
+    html.find('.feat-activate').click(this._onFeatActivate.bind(this));
+    
+    // Novo listener para o botão de mostrar/esconder descrição da classe
+    html.find('.toggle-description').click(this._onToggleClassDescription.bind(this));
+  }
   
-  // Adicionar listener para os rótulos das habilidades
-  html.find('.ability label').click(this._onAbilityLabelClick.bind(this));
-  
-  // Listeners para equipar armas e armaduras
-  html.find('.weapon-equip-icon').click(this._onWeaponEquipToggle.bind(this));
-  html.find('.armor-equip-icon').click(this._onArmorEquipToggle.bind(this));
-  
-  // Novo listener para selecionar categoria atual de armadura na aba Tatakai
-  html.find('.armor-current-category').change(this._onArmorCategoryChange.bind(this));
-  
-  // Listener para botões de ataque nas armas da aba Tatakai
-  html.find('.weapon-attack-button').click(this._onWeaponAttack.bind(this));
-  
-  // Listener para o botão de defesa
-  html.find('.defend-action').click(this._onDefendButtonClick.bind(this));
-  
-  // Listener para o botão de aparar
-  html.find('.parry-action').click(this._onParryButtonClick.bind(this));
-  
-  // Listener para alteração de quantidade de itens
-  html.find('.quantity-input').change(this._onItemQuantityChange.bind(this));
-  
-  // Listener para seleção de munição na aba Tatakai
-  html.find('.ammo-select').change(this._onAmmoSelectChange.bind(this));
-  
-  // Listener para o botão quebrado
-  html.find('.button-broken').click(this._onBrokenButtonClick.bind(this));
-  
-  // Listener para o botão de melhoria
-  html.find('.button-get-better').click(this._onGetBetterButtonClick.bind(this));
-  
-  // Listener para o botão de Seppuku
-  html.find('.button-seppuku').click(this._onSeppukuButtonClick.bind(this));
-  
-  // Listener para botão de uso de consumível
-  html.find('.consumable-use').click(this._onConsumableUse.bind(this));
-  
-  // Listener para o botão de descanso
-  html.find('.button-rest').click(this._onRestButtonClick.bind(this));
-  
-  // Listener para o botão de uso de texto
-  html.find('.text-use').click(this._onTextUse.bind(this));
-  
-  // Novo listener para o botão de ativação de feat
-  html.find('.feat-activate').click(this._onFeatActivate.bind(this));
-  
-  // Novo listener para o botão de mostrar/esconder descrição da classe
-  html.find('.toggle-description').click(this._onToggleClassDescription.bind(this));
+  // Listeners específicos para inimigos
+  if (this.actor.type === "enemy") {
+    // Listener para o botão de Moral (sem funcionalidade por enquanto)
+    html.find('.moral-button').click(this._onMoralButtonClick.bind(this));
+  }
   
   // Funcionalidade condicional para as ações do proprietário
   if (this.actor.isOwner) {
-    // Item creation
-    html.find('.item-create').click(this._onItemCreate.bind(this));
+    // Item creation (só para personagens)
+    if (this.actor.type === "character") {
+      html.find('.item-create').click(this._onItemCreate.bind(this));
+      
+      // Item editing
+      html.find('.item-edit').click(this._onItemEdit.bind(this));
 
-    // Item editing
-    html.find('.item-edit').click(this._onItemEdit.bind(this));
-
-    // Item deletion
-    html.find('.item-delete').click(this._onItemDelete.bind(this));
+      // Item deletion
+      html.find('.item-delete').click(this._onItemDelete.bind(this));
+    }
     
     // Outras interações com botões podem ser adicionadas aqui
   }
 }
+
+  /**
+   * Manipula o clique no botão de Moral do inimigo (sem funcionalidade por enquanto)
+   * @param {Event} event O evento de clique
+   * @private
+   */
+  _onMoralButtonClick(event) {
+    event.preventDefault();
+    
+    // Por enquanto, apenas uma mensagem informativa
+    ui.notifications.info("Funcionalidade do botão Moral será implementada em breve.");
+  }
 
   /**
    * Manipula o clique em um botão de honor

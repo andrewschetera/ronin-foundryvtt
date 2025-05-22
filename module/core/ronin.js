@@ -21,7 +21,10 @@ Hooks.once('init', async function() {
   
   // Registrar folhas de personagem
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("ronin", RONIN.ActorSheet, { makeDefault: true });
+  Actors.registerSheet("ronin", RONIN.ActorSheet, { 
+    types: ["character", "enemy"],
+    makeDefault: true 
+  });
   
   // Registrar folhas de item
   Items.unregisterSheet("core", ItemSheet);

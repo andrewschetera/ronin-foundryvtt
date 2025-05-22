@@ -19,6 +19,8 @@ class RoninActor extends Actor {
     
     if (actorData.type === 'character') {
       this._prepareCharacterData(actorData);
+    } else if (actorData.type === 'enemy') {
+      this._prepareEnemyData(actorData);
     }
   }
   
@@ -69,11 +71,72 @@ _prepareCharacterData(actorData) {
   systemData.carryingCapacity.value = totalWeight;
 }
 
+/**
+ * Prepara os dados específicos do inimigo.
+ * @param {Object} actorData Os dados do ator
+ * @private
+ */
+_prepareEnemyData(actorData) {
+  // Referência ao sistema de dados do ator
+  const systemData = actorData.system;
+  
+  // Garantir que os campos básicos existam
+  if (!systemData.moral) {
+    systemData.moral = { value: 12 };
+  }
+  
+  if (!systemData.hp) {
+    systemData.hp = { value: 10, max: 10 };
+  }
+  
+  if (!systemData.attacks) {
+    systemData.attacks = "";
+  }
+  
+  if (!systemData.defenses) {
+    systemData.defenses = "";
+  }
+  
+  if (!systemData.special) {
+    systemData.special = "";
+  }
+  
+  if (!systemData.description) {
+    systemData.description = "";
+  }
+  
+  // Garantir que HP não seja negativo
+  if (systemData.hp.value < 0) {
+    systemData.hp.value = 0;
+  }
+  
+  // Garantir que HP máximo seja pelo menos 1
+  if (systemData.hp.max < 1) {
+    systemData.hp.max = 1;
+  }
+  
+  // Garantir que HP atual não seja maior que o máximo
+  if (systemData.hp.value > systemData.hp.max) {
+    systemData.hp.value = systemData.hp.max;
+  }
+  
+  // Garantir que Moral não seja negativo
+  if (systemData.moral.value < 0) {
+    systemData.moral.value = 0;
+  }
+}
+
   /**
-   * Método para realizar uma rolagem de habilidade
+   * Método para realizar uma rolagem de habilidade (apenas para personagens)
    * @param {string} abilityKey A chave da habilidade a ser rolada
    */
   rollAbility(abilityKey) {
+    // Apenas personagens podem fazer rolagens de habilidade
+    if (this.type !== 'character') {
+      ui.notifications.warn("Apenas personagens podem fazer rolagens de habilidade.");
+      return;
+    }
+    
     // Verificar se o módulo de rolagem está disponível
     if (RONIN.AbilityRoll) {
       RONIN.AbilityRoll.roll(abilityKey, this);

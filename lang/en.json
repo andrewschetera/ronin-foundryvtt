@@ -37,6 +37,12 @@
       "Use": "USE",
       "Activate": "ACTIVATE"
     },
+    "Enemy": {
+      "Moral": "Moral",
+      "Attacks": "Attacks",
+      "Defenses": "Defenses",
+      "Special": "Special"
+    },
     "Broken": {
       "Result1": "Falls unconscious for {rounds} rounds and awakens with {hp} HP",
       "Result2a": "Broken or amputated limb.",
