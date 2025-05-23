@@ -236,17 +236,47 @@ activateListeners(html) {
   }
 }
 
-  /**
-   * Manipula o clique no botão de Moral do inimigo (sem funcionalidade por enquanto)
-   * @param {Event} event O evento de clique
-   * @private
-   */
-  _onMoralButtonClick(event) {
-    event.preventDefault();
-    
-    // Por enquanto, apenas uma mensagem informativa
-    ui.notifications.info("Funcionalidade do botão Moral será implementada em breve.");
+/**
+ * Manipula o clique no botão de Moral do inimigo
+ * @param {Event} event O evento de clique
+ * @private
+ */
+_onMoralButtonClick(event) {
+  event.preventDefault();
+  
+  // Verificar se o namespace RONIN existe
+  if (!window.RONIN) {
+    console.error("Namespace RONIN não encontrado");
+    ui.notifications.error("Erro no sistema: Namespace RONIN não encontrado");
+    return;
   }
+  
+  // Verificar se o módulo MoralRoll existe
+  if (!window.RONIN.MoralRoll) {
+    console.error("Módulo de rolagem de Moral não encontrado no namespace RONIN");
+    ui.notifications.error("Módulo de rolagem de Moral não disponível");
+    
+    // Tentar importar dinamicamente (apenas como fallback)
+    try {
+      import('../rolls/moral-roll.js').then(module => {
+        if (module && module.default) {
+          console.log("Módulo de rolagem de Moral carregado dinamicamente");
+          module.default.roll(this.actor);
+        } else {
+          console.error("Falha ao importar módulo de rolagem de Moral");
+        }
+      }).catch(err => {
+        console.error("Erro ao importar módulo de rolagem de Moral:", err);
+      });
+    } catch (error) {
+      console.error("Erro ao tentar importação dinâmica:", error);
+    }
+    return;
+  }
+  
+  // Se chegou aqui, o módulo existe, então faz a rolagem
+  RONIN.MoralRoll.roll(this.actor);
+}
 
   /**
    * Manipula o clique em um botão de honor

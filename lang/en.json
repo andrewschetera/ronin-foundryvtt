@@ -41,7 +41,9 @@
       "Moral": "Moral",
       "Attacks": "Attacks",
       "Defenses": "Defenses",
-      "Special": "Special"
+      "Special": "Special",
+      "Demoralized": "The enemy is demoralized",
+      "NotDemoralized": "The enemy is not demoralized"
     },
     "Broken": {
       "Result1": "Falls unconscious for {rounds} rounds and awakens with {hp} HP",

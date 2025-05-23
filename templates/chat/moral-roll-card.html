@@ -1,0 +1,31 @@
+<div class="ronin-chat-card moral-roll-card">
+  <div class="card-header {{#if isDemoralized}}failure{{else}}success{{/if}}">
+    <h3>{{localize "RONIN.Enemy.Moral"}}</h3>
+  </div>
+  
+  <div class="card-roll-result">
+    <div class="roll-formula">
+      <span>2d6 vs {{localize "RONIN.Enemy.Moral"}} {{moralValue}}</span>
+    </div>
+    
+    <div class="roll-calculation">
+      {{roll.total}} vs {{moralValue}}
+    </div>
+    
+    <div class="roll-outcome {{#if isDemoralized}}failure{{else}}success{{/if}}">
+      {{#if isDemoralized}}
+        <h3 class="failure">{{demoralizedText}}</h3>
+        
+        {{#if foundTable}}
+          {{#if tableResult}}
+            <div class="table-result">
+              <p>{{tableResult}}</p>
+            </div>
+          {{/if}}
+        {{/if}}
+      {{else}}
+        <h3 class="success">{{localize "RONIN.Enemy.NotDemoralized"}}</h3>
+      {{/if}}
+    </div>
+  </div>
+</div>

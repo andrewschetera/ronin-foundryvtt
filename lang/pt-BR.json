@@ -41,7 +41,9 @@
       "Moral": "Moral",
       "Attacks": "Ataques",
       "Defenses": "Defesas",
-      "Special": "Especial"
+      "Special": "Especial",
+      "Demoralized": "A criatura está desmoralizada",
+      "NotDemoralized": "A criatura não está desmoralizada"
     },
     "Broken": {
       "Result1": "Cai inconsciente por {rounds} rodadas e desperta com {hp} PV",

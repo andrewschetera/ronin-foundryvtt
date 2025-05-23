@@ -1,236 +1,202 @@
-/* enemy-sheet.css - Estilos específicos para a ficha de inimigo para o sistema RONIN */
-
-/* Cabeçalho da ficha de inimigo */
-.ronin.sheet.actor.enemy .sheet-header {
-  flex: 0 0 auto;
-  padding: 5px;
-  margin-bottom: 15px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--color-gray);
+/* Estilos atualizados para a ficha de inimigo */
+.ronin.sheet.actor.enemy {
+  min-height: 350px;
+  max-height: 400px;
+  min-width: 400px; /* Reduzido de ~600px (padrão) */
+  max-width: 500px; /* Limite máximo de largura */
 }
 
-/* Grid do cabeçalho - versão simplificada para inimigos */
+.ronin.sheet.actor.enemy .sheet-body {
+  padding: 8px;
+}
+
+/* Reduzir o tamanho da imagem do inimigo no cabeçalho */
 .ronin.sheet.actor.enemy .header-grid {
   display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 10px;
-  height: 120px;
+  grid-template-columns: 60px 1fr;
+  gap: 8px;
+  height: 60px;
   margin-bottom: 5px;
 }
 
-/* Container da imagem do inimigo */
-.ronin.sheet.actor.enemy .character-img-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-.ronin.sheet.actor.enemy .character-img {
-  flex: 1 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-}
-
-/* Sobrescreve estilo padrão do Foundry para a imagem do inimigo */
-.ronin.sheet.actor.enemy .sheet-header .profile-img {
-  width: 100%;
-  height: 100%;
+.ronin.sheet.actor.enemy .profile-img {
+  width: 60px;
+  height: 60px;
   object-fit: cover;
-  border: 2px solid var(--color-gray);
-  border-radius: 5px;
-}
-
-/* Campos do cabeçalho */
-.ronin.sheet.actor.enemy .header-fields {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-}
-
-.ronin.sheet.actor.enemy .header-fields h1.character-name {
-  margin: 0 0 10px 0;
-  font-size: 1.4em;
-}
-
-.ronin.sheet.actor.enemy .header-fields h1.character-name input {
-  height: 40px;
-  font-size: 1.4em;
-  font-weight: bold;
-  margin: 0;
-  width: 100%;
-  border: 1px solid var(--color-gray);
   border-radius: 3px;
-  padding: 0 10px;
-  text-align: center;
 }
 
-/* Corpo da ficha de inimigo */
-.ronin.sheet.actor.enemy .sheet-body {
-  overflow-y: auto;
-  padding: 10px;
+/* Layout em Grid para as duas colunas */
+.ronin.sheet.actor.enemy .enemy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr; /* Proporção ajustada */
+  gap: 6px;
+  margin-bottom: 6px;
 }
 
-.ronin.sheet.actor.enemy .enemy-properties {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-/* Grupos de campos */
-.ronin.sheet.actor.enemy .form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-.ronin.sheet.actor.enemy .form-group label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  font-size: 1.1em;
-}
-
-/* Campos de entrada padrão */
-.ronin.sheet.actor.enemy .form-group input[type="number"],
-.ronin.sheet.actor.enemy .form-group textarea {
-  border: 1px solid var(--color-gray);
-  border-radius: 3px;
-  padding: 5px;
-  font-size: 1em;
-}
-
-.ronin.sheet.actor.enemy .form-group input[type="number"] {
-  height: 32px;
-}
-
-.ronin.sheet.actor.enemy .form-group textarea {
-  resize: vertical;
-  min-height: 60px;
-  font-family: inherit;
-}
-
-/* Campo de Moral - layout horizontal especial */
-.ronin.sheet.actor.enemy .form-group .form-fields {
+/* Estilo para o botão de Moral - agora horizontal */
+.ronin.sheet.actor.enemy .enemy-moral {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
+  margin-bottom: 6px;
+  flex-direction: row;
 }
 
 .ronin.sheet.actor.enemy .moral-button {
+  flex: 0 0 auto;
   background-color: var(--color-red);
   color: white;
   border: none;
   border-radius: 3px;
-  padding: 8px 16px;
+  padding: 2px 6px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 0.85em;
   transition: background-color 0.2s;
+  height: 22px;
 }
 
 .ronin.sheet.actor.enemy .moral-button:hover {
   background-color: var(--color-red-dark);
 }
 
-/* Campo de HP - layout horizontal */
-.ronin.sheet.actor.enemy .form-fields input[type="number"] {
-  width: 80px;
+.ronin.sheet.actor.enemy .enemy-moral input {
+  width: 40px;
+  height: 22px;
   text-align: center;
+  font-size: 0.85em;
 }
 
-.ronin.sheet.actor.enemy .form-fields .separator {
-  margin: 0 5px;
+/* Estilo para o campo de HP */
+.ronin.sheet.actor.enemy .enemy-hp {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.ronin.sheet.actor.enemy .enemy-hp label {
+  margin: 0;
+  padding: 0;
+  font-size: 0.85em;
   font-weight: bold;
-  font-size: 1.2em;
+  white-space: nowrap;
 }
 
-/* Campos de texto grandes */
+.ronin.sheet.actor.enemy .hp-fields {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+}
+
+.ronin.sheet.actor.enemy .hp-fields input {
+  width: 40px;
+  height: 22px;
+  text-align: center;
+  margin-top: 0;
+  font-size: 0.85em;
+}
+
+.ronin.sheet.actor.enemy .hp-fields .separator {
+  margin: 0 2px;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+/* Layout horizontal para os campos de texto */
+.ronin.sheet.actor.enemy .form-group.horizontal-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 4px;
+  padding: 0;
+  gap: 4px;
+}
+
+.ronin.sheet.actor.enemy .form-group.horizontal-layout label {
+  flex: 0 0 60px; /* Largura fixa para os labels */
+  font-weight: bold;
+  margin: 0;
+  padding: 2px 0 0 0;
+  font-size: 0.85em;
+  text-align: right;
+}
+
+.ronin.sheet.actor.enemy .form-group.horizontal-layout textarea {
+  flex: 1;
+  margin: 0;
+  padding: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  resize: vertical;
+  font-family: inherit;
+  min-height: 38px;
+  font-size: 0.85em;
+}
+
+/* Altura específica para cada área de texto */
+.ronin.sheet.actor.enemy .enemy-attacks textarea,
+.ronin.sheet.actor.enemy .enemy-defenses textarea {
+  min-height: 36px;
+}
+
+.ronin.sheet.actor.enemy .enemy-special textarea {
+  min-height: 36px;
+}
+
 .ronin.sheet.actor.enemy .enemy-description textarea {
-  min-height: 100px;
+  min-height: 60px;
 }
 
-/* Destaque visual para diferentes seções */
-.ronin.sheet.actor.enemy .form-group:nth-child(1) {
-  /* Moral - destaque vermelho sutil */
-  background-color: rgba(128, 0, 0, 0.05);
-  padding: 10px;
-  border-radius: 5px;
-  border-left: 3px solid var(--color-red);
+/* Estilo para a seção especial+descrição */
+.ronin.sheet.actor.enemy .enemy-special-description {
+  margin-top: 0;
 }
 
-.ronin.sheet.actor.enemy .form-group:nth-child(2) {
-  /* HP - destaque verde sutil */
-  background-color: rgba(0, 128, 0, 0.05);
-  padding: 10px;
-  border-radius: 5px;
-  border-left: 3px solid #008000;
+.ronin.sheet.actor.enemy .enemy-special {
+  margin-bottom: 4px;
 }
 
-.ronin.sheet.actor.enemy .form-group:nth-child(3) {
-  /* Ataques - destaque laranja sutil */
-  background-color: rgba(255, 165, 0, 0.05);
-  padding: 10px;
-  border-radius: 5px;
-  border-left: 3px solid #FFA500;
+/* Ajustes para garantir que não haja espaços */
+.ronin.sheet.actor.enemy input,
+.ronin.sheet.actor.enemy textarea,
+.ronin.sheet.actor.enemy button {
+  box-sizing: border-box;
 }
 
-.ronin.sheet.actor.enemy .form-group:nth-child(4) {
-  /* Defesas - destaque azul sutil */
-  background-color: rgba(0, 0, 255, 0.05);
-  padding: 10px;
-  border-radius: 5px;
-  border-left: 3px solid #0000FF;
+/* Cabeçalho da ficha com nome mais compacto */
+.ronin.sheet.actor.enemy .header-fields h1.character-name {
+  margin: 0;
+  font-size: 1.1em;
 }
 
-.ronin.sheet.actor.enemy .form-group:nth-child(5) {
-  /* Especial - destaque roxo sutil */
-  background-color: rgba(128, 0, 128, 0.05);
-  padding: 10px;
-  border-radius: 5px;
-  border-left: 3px solid #800080;
+.ronin.sheet.actor.enemy .header-fields h1.character-name input {
+  height: 30px;
+  font-size: 1.1em;
+  margin: 0;
 }
 
-.ronin.sheet.actor.enemy .form-group:nth-child(6) {
-  /* Descrição - destaque cinza sutil */
-  background-color: rgba(128, 128, 128, 0.05);
-  padding: 10px;
-  border-radius: 5px;
-  border-left: 3px solid #808080;
-}
-
-/* Responsividade */
-@media (max-width: 600px) {
-  .ronin.sheet.actor.enemy .header-grid {
-    grid-template-columns: 80px 1fr;
-    height: 100px;
+/* Responsividade para telas menores */
+@media (max-width: 450px) {
+  .ronin.sheet.actor.enemy .enemy-grid {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
   
-  .ronin.sheet.actor.enemy .header-fields h1.character-name {
-    font-size: 1.2em;
+  .ronin.sheet.actor.enemy .enemy-left-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
   }
   
-  .ronin.sheet.actor.enemy .header-fields h1.character-name input {
-    height: 32px;
-    font-size: 1.2em;
-    padding: 0 5px;
-  }
-  
-  .ronin.sheet.actor.enemy .form-fields {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 5px;
-  }
-  
-  .ronin.sheet.actor.enemy .moral-button {
-    width: 100%;
-  }
-  
-  .ronin.sheet.actor.enemy .form-fields input[type="number"] {
-    width: 100%;
+  .ronin.sheet.actor.enemy .form-group.horizontal-layout label {
+    flex: 0 0 50px;
+    font-size: 0.8em;
   }
 }

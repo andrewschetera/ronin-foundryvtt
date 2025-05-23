@@ -27,6 +27,7 @@
   "module/rolls/seppuku-roll.js",
   "module/rolls/text-roll.js",
   "module/rolls/feat-roll.js",
+  "module/rolls/moral-roll.js",
   "module/helpers/handlebars.js",
   "module/helpers/listeners.js",
   "module/core/config.js",
