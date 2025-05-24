@@ -161,7 +161,9 @@
       "ParryDRInfo": "Cálculo de DR de Aparar",
       "ParrySuccess": "Aparar bem sucedido! Contra-ataque com sua arma!",
       "ParryFailure": "Aparar falhou! Você sofre dano da arma inimiga!",
-      "ParryFumbleEffect": "Falha crítica! Sofra o dano dobrado, sua armadura é reduzida em uma categoria, e sua arma é quebrada ou perdida!"
+      "ParryFumbleEffect": "Falha crítica! Sofra o dano dobrado, sua armadura é reduzida em uma categoria, e sua arma é quebrada ou perdida!",
+      "CompleteSuccess": "SUCESSO COMPLETO",
+      "PartialSuccess": "SUCESSO PARCIAL"
     },
     "Description": "Descrição",
     "GetBetter": {
