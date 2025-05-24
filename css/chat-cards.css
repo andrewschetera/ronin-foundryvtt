@@ -292,3 +292,52 @@
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.5);
 }
+
+/* Estilos para o chat-card do modo solo */
+.ronin-chat-card .solo-roll-results {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.ronin-chat-card .roll-calculation .roll-1,
+.ronin-chat-card .roll-calculation .roll-2 {
+  display: block;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.ronin-chat-card .roll-calculation .success {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.ronin-chat-card .roll-calculation .failure {
+  background-color: rgba(128, 0, 0, 0.1);
+}
+
+.ronin-chat-card .roll-calculation .crit {
+  color: #008000;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+.ronin-chat-card .roll-calculation .fumble {
+  color: #800000;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.ronin-chat-card .roll-outcome .complete-success {
+  color: #006600;
+  font-weight: bold;
+}
+
+.ronin-chat-card .roll-outcome .partial-success {
+  color: #cc6600;
+  font-weight: bold;
+}
+
+.ronin-chat-card .roll-outcome.partial {
+  background-color: rgba(204, 102, 0, 0.2);
+}
