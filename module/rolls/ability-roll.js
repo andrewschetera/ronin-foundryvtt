@@ -1,4 +1,4 @@
-// ability-roll.js - Sistema de rolagem de habilidades para RONIN
+// ability-roll.js - Sistema de rolagem de habilidades para RONIN (modificado para suporte ao modo solo)
 
 // Inicializa o namespace global
 window.RONIN = window.RONIN || {};
@@ -127,79 +127,193 @@ window.RONIN.AbilityRoll = {
       // Construir a fórmula da rolagem
       const formula = "1d20";
       
-      // Cria a rolagem
-      let roll = new Roll(formula);
+      // Verificar se o modo Solo está ativado
+      const useSoloRules = game.settings.get("ronin", "useSoloRules");
       
-      // Avalia a rolagem - Correção para API v12 do Foundry
-      await roll.evaluate(); // Removida a opção {async: true} que está obsoleta
-      
-      // Obtém o resultado do d20
-      const d20Result = roll.terms[0].results[0].result;
-      
-      // Calcula o resultado total
-      const totalResult = d20Result + abilityValue + modifier;
-      
-      // Determina o sucesso ou falha
-      const isSuccess = totalResult >= finalDR;
-      const isCrit = d20Result === 20;
-      const isFumble = d20Result === 1;
-      
-      // Define o resultado da rolagem
-      let rollResult = "";
-      if (isCrit) rollResult = "success";
-      else if (isFumble) rollResult = "failure";
-      else if (isSuccess) rollResult = "success";
-      else rollResult = "failure";
-      
-      // Formata o modificador como texto
-      let modifierText = "";
-      if (modifier !== 0) {
-        modifierText = modifier > 0 ? ` + ${modifier}` : ` - ${Math.abs(modifier)}`;
+      // Se estiver usando regras solo, faz duas rolagens
+      if (useSoloRules) {
+        // Realizar a primeira rolagem
+        let roll1 = new Roll(formula);
+        await roll1.evaluate();
+        
+        // Realizar a segunda rolagem
+        let roll2 = new Roll(formula);
+        await roll2.evaluate();
+        
+        // Obter os resultados dos d20
+        const d20Result1 = roll1.terms[0].results[0].result;
+        const d20Result2 = roll2.terms[0].results[0].result;
+        
+        // Calcular os resultados totais
+        const totalResult1 = d20Result1 + abilityValue + modifier;
+        const totalResult2 = d20Result2 + abilityValue + modifier;
+        
+        // Determinar o sucesso ou falha de cada rolagem
+        const isSuccess1 = totalResult1 >= finalDR;
+        const isSuccess2 = totalResult2 >= finalDR;
+        const isCrit1 = d20Result1 === 20;
+        const isCrit2 = d20Result2 === 20;
+        const isFumble1 = d20Result1 === 1;
+        const isFumble2 = d20Result2 === 1;
+        
+        // Determinar o resultado final (sucesso completo, parcial ou falha)
+        let soloResult = "";
+        if (isSuccess1 && isSuccess2) {
+          soloResult = "complete-success";
+        } else if (isSuccess1 || isSuccess2) {
+          soloResult = "partial-success";
+        } else {
+          soloResult = "failure";
+        }
+        
+        // Define o resultado da rolagem para o chat-card (compatibilidade com o sistema existente)
+        let rollResult = "";
+        if ((isCrit1 && isCrit2) || (isCrit1 && isSuccess2) || (isSuccess1 && isCrit2)) {
+          rollResult = "crit";
+        } else if ((isFumble1 && isFumble2) || (isFumble1 && !isSuccess2) || (!isSuccess1 && isFumble2)) {
+          rollResult = "fumble";
+        } else if (soloResult === "complete-success") {
+          rollResult = "success";
+        } else if (soloResult === "partial-success") {
+          rollResult = "partial"; // Novo tipo de resultado para sucesso parcial
+        } else {
+          rollResult = "failure";
+        }
+        
+        // Formata o modificador como texto
+        let modifierText = "";
+        if (modifier !== 0) {
+          modifierText = modifier > 0 ? ` + ${modifier}` : ` - ${Math.abs(modifier)}`;
+        }
+        
+        // Prepara os dados para o chat-card
+        const chatTemplateData = {
+          actor: actor,
+          abilityName: abilityName,
+          abilityAbbrev: abilityAbbrev,
+          abilityValue: abilityValue,
+          d20Result1: d20Result1,
+          d20Result2: d20Result2,
+          modifier: modifier,
+          modifierText: modifierText,
+          totalResult1: totalResult1,
+          totalResult2: totalResult2,
+          baseDR: baseDR,
+          difficultyRating: finalDR,
+          isSuccess1: isSuccess1,
+          isSuccess2: isSuccess2,
+          isCrit1: isCrit1,
+          isCrit2: isCrit2,
+          isFumble1: isFumble1,
+          isFumble2: isFumble2,
+          rollResult: rollResult,
+          soloResult: soloResult,
+          useSoloRules: true,
+          isOverencumbered: isOverencumbered,
+          overencumberedPenalty: overencumberedPenalty,
+          isSwiftness: abilityKey === 'swiftness',
+          armorSwiftnessPenalty: armorSwiftnessPenalty,
+          showSwiftnessPenalty: abilityKey === 'swiftness' && armorSwiftnessPenalty > 0
+        };
+        
+        // Renderiza o template do chat-card para o modo solo
+        const chatContent = await renderTemplate("systems/ronin/templates/chat/ability-roll-solo-card.html", chatTemplateData);
+        
+        // Configura as opções de chat
+        const chatData = {
+          user: game.user.id,
+          speaker: ChatMessage.getSpeaker({actor: actor}),
+          content: chatContent,
+          sound: CONFIG.sounds.dice
+        };
+        
+        // Verifica se o módulo Dice So Nice está ativo
+        if (game.modules.get("dice-so-nice")?.active) {
+          // Exibe a animação do Dice So Nice para as duas rolagens
+          await game.dice3d.showForRoll(roll1);
+          await game.dice3d.showForRoll(roll2);
+        }
+        
+        // Cria a mensagem de chat
+        await ChatMessage.create(chatData);
+      } else {
+        // Modo normal (não-solo) - Usa o código original
+        
+        // Cria a rolagem
+        let roll = new Roll(formula);
+        
+        // Avalia a rolagem - Correção para API v12 do Foundry
+        await roll.evaluate(); // Removida a opção {async: true} que está obsoleta
+        
+        // Obtém o resultado do d20
+        const d20Result = roll.terms[0].results[0].result;
+        
+        // Calcula o resultado total
+        const totalResult = d20Result + abilityValue + modifier;
+        
+        // Determina o sucesso ou falha
+        const isSuccess = totalResult >= finalDR;
+        const isCrit = d20Result === 20;
+        const isFumble = d20Result === 1;
+        
+        // Define o resultado da rolagem
+        let rollResult = "";
+        if (isCrit) rollResult = "success";
+        else if (isFumble) rollResult = "failure";
+        else if (isSuccess) rollResult = "success";
+        else rollResult = "failure";
+        
+        // Formata o modificador como texto
+        let modifierText = "";
+        if (modifier !== 0) {
+          modifierText = modifier > 0 ? ` + ${modifier}` : ` - ${Math.abs(modifier)}`;
+        }
+        
+        // Prepara os dados para o chat-card
+        const chatTemplateData = {
+          actor: actor,
+          abilityName: abilityName,
+          abilityAbbrev: abilityAbbrev,
+          abilityValue: abilityValue,
+          d20Result: d20Result,
+          modifier: modifier,
+          modifierText: modifierText,
+          totalResult: totalResult,
+          baseDR: baseDR,
+          difficultyRating: finalDR,
+          isSuccess: isSuccess,
+          isCrit: isCrit,
+          isFumble: isFumble,
+          rollResult: rollResult,
+          isOverencumbered: isOverencumbered,
+          overencumberedPenalty: overencumberedPenalty,
+          isSwiftness: abilityKey === 'swiftness',
+          armorSwiftnessPenalty: armorSwiftnessPenalty,
+          showSwiftnessPenalty: abilityKey === 'swiftness' && armorSwiftnessPenalty > 0,
+          useSoloRules: false
+        };
+        
+        // Renderiza o template do chat-card
+        const chatContent = await renderTemplate("systems/ronin/templates/chat/ability-roll-card.html", chatTemplateData);
+        
+        // Configura as opções de chat
+        const chatData = {
+          user: game.user.id,
+          speaker: ChatMessage.getSpeaker({actor: actor}),
+          content: chatContent,
+          sound: CONFIG.sounds.dice
+        };
+        
+        // Verifica se o módulo Dice So Nice está ativo
+        if (game.modules.get("dice-so-nice")?.active) {
+          // Exibe a animação do Dice So Nice
+          console.log("Mostrando animação do Dice So Nice");
+          await game.dice3d.showForRoll(roll);
+        }
+        
+        // Cria a mensagem de chat
+        await ChatMessage.create(chatData);
       }
-      
-      // Prepara os dados para o chat-card
-      const chatTemplateData = {
-        actor: actor,
-        abilityName: abilityName,
-        abilityAbbrev: abilityAbbrev,
-        abilityValue: abilityValue,
-        d20Result: d20Result,
-        modifier: modifier,
-        modifierText: modifierText,
-        totalResult: totalResult,
-        baseDR: baseDR,
-        difficultyRating: finalDR,
-        isSuccess: isSuccess,
-        isCrit: isCrit,
-        isFumble: isFumble,
-        rollResult: rollResult,
-        isOverencumbered: isOverencumbered,
-        overencumberedPenalty: overencumberedPenalty,
-        isSwiftness: abilityKey === 'swiftness',
-        armorSwiftnessPenalty: armorSwiftnessPenalty,
-        showSwiftnessPenalty: abilityKey === 'swiftness' && armorSwiftnessPenalty > 0
-      };
-      
-      // Renderiza o template do chat-card
-      const chatContent = await renderTemplate("systems/ronin/templates/chat/ability-roll-card.html", chatTemplateData);
-      
-      // Configura as opções de chat
-      const chatData = {
-        user: game.user.id,
-        speaker: ChatMessage.getSpeaker({actor: actor}),
-        content: chatContent,
-        sound: CONFIG.sounds.dice
-      };
-      
-      // Verifica se o módulo Dice So Nice está ativo
-      if (game.modules.get("dice-so-nice")?.active) {
-        // Exibe a animação do Dice So Nice
-        console.log("Mostrando animação do Dice So Nice");
-        await game.dice3d.showForRoll(roll);
-      }
-      
-      // Cria a mensagem de chat
-      await ChatMessage.create(chatData);
       
     } catch (error) {
       console.error("Erro ao realizar a rolagem:", error);
