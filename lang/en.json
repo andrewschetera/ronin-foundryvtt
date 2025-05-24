@@ -161,7 +161,9 @@
       "ParryDRInfo": "Parry DR calculation",
       "ParrySuccess": "Parry successful! Counter-attack with your weapon!",
       "ParryFailure": "Parry failed! You take damage from the enemy weapon!",
-      "ParryFumbleEffect": "Critical failure! Take double damage, your armor is reduced by one category, and your weapon is broken or lost!"
+      "ParryFumbleEffect": "Critical failure! Take double damage, your armor is reduced by one category, and your weapon is broken or lost!",
+      "CompleteSuccess": "COMPLETE SUCCESS",
+      "PartialSuccess": "PARTIAL SUCCESS"
     },
     "Description": "Description",
     "GetBetter": {
