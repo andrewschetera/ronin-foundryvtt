@@ -14,7 +14,7 @@ class RoninActorSheet extends ActorSheet {
    */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["ronin", "sheet", "actor", "enemy"],
+      classes: ["ronin", "sheet", "actor"],
       template: this.getTemplate(),
       width: 700,
       height: 600,
