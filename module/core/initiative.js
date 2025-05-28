@@ -11,9 +11,6 @@ RONIN.initiative = {
    * Inicializa os hooks de iniciativa
    */
   init() {
-    // Hook para interceptar a rolagem de iniciativa e aplicar as regras personalizadas
-    Hooks.on("preUpdateCombat", this._onPreUpdateCombat.bind(this));
-    
     // Hooks para substituir o botão de rolagem de iniciativa
     Hooks.on("renderCombatTracker", this._onRenderCombatTracker.bind(this));
     
@@ -21,34 +18,12 @@ RONIN.initiative = {
   },
   
   /**
-   * Hook para interceptar atualizações de combate e implementar a lógica personalizada de iniciativa
-   * @param {Combat} combat O objeto de combate
-   * @param {Object} updateData Os dados de atualização
-   * @param {Object} options As opções de atualização
-   * @param {string} userId O ID do usuário que fez a atualização
-   */
-  _onPreUpdateCombat(combat, updateData, options, userId) {
-    // Verifica se está sendo solicitada uma rolagem de iniciativa
-    if (!("direction" in updateData) && !hasProperty(updateData, "turns") && !hasProperty(updateData, "turn")) {
-      return true;
-    }
-    
-    // Se o combate já tem iniciativas definidas, permitir a atualização normal
-    const needsInitiativeRoll = combat.combatants.some(c => c.initiative === null);
-    if (!needsInitiativeRoll) {
-      return true;
-    }
-    
-    // Cancelar a atualização padrão para que possamos implementar nossa própria lógica
-    return this._rollGroupInitiative(combat);
-  },
-  
-  /**
    * Implementa a rolagem de iniciativa em grupo
    * @param {Combat} combat O objeto de combate
-   * @returns {boolean} False para cancelar a atualização padrão
    */
-  async _rollGroupInitiative(combat) {
+  async rollGroupInitiative(combat) {
+    if (!combat) return;
+
     // Rolar 1d6 uma única vez para determinar quem vai primeiro
     const roll = new Roll("1d6");
     await roll.evaluate({async: true});
@@ -107,9 +82,6 @@ RONIN.initiative = {
     
     // Re-renderizar o combat tracker para mostrar as mudanças
     ui.combat.render();
-    
-    // Retornar false para impedir a atualização padrão
-    return false;
   },
   
   /**
@@ -133,7 +105,7 @@ RONIN.initiative = {
         // Chamar nossa função personalizada de rolagem de iniciativa
         const combat = game.combat;
         if (combat) {
-          this._rollGroupInitiative(combat);
+          this.rollGroupInitiative(combat);
         }
       });
     }
