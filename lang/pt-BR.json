@@ -319,7 +319,13 @@
       "RollResult": "Resultado da rolagem",
       "RollAll": "Rolar Iniciativa para Todos",
       "DisabledIndividual": "Use Rolar Todos para iniciativa de grupo",
-      "NoIndividual": "Rolagens de iniciativa individuais estão desativadas"
+      "NoIndividual": "Rolagens de iniciativa individuais estão desativadas",
+      "CharacterRolls": "Rolagens de Iniciativa dos Personagens",
+      "Character": "Personagem",
+      "Roll": "Rolagem",
+      "Total": "Total",
+      "FinalValue": "Iniciativa",
+      "RollsExplanation": "As iniciativas dos personagens são calculadas como: (1d6 + Rapidez) adicionado como decimal ao valor base."
     }
   }
 }

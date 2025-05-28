@@ -1,0 +1,34 @@
+<div class="ronin-chat-card initiative-character-rolls">
+  <div class="card-header">
+    <h3>{{localize "RONIN.Initiative.CharacterRolls"}}</h3>
+  </div>
+  
+  <div class="card-content">
+    <table class="initiative-rolls-table">
+      <thead>
+        <tr>
+          <th>{{localize "RONIN.Initiative.Character"}}</th>
+          <th>{{localize "RONIN.Initiative.Roll"}}</th>
+          <th>{{localize "RONIN.Abilities.Swiftness"}}</th>
+          <th>{{localize "RONIN.Initiative.Total"}}</th>
+          <th>{{localize "RONIN.Initiative.FinalValue"}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each characterRolls as |rollData|}}
+        <tr>
+          <td>{{rollData.name}}</td>
+          <td>{{rollData.roll.total}}</td>
+          <td>{{rollData.swiftness}}</td>
+          <td>{{rollData.total}}</td>
+          <td><strong>{{rollData.initiative}}</strong></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    
+    <div class="initiative-rolls-explanation">
+      <p>{{localize "RONIN.Initiative.RollsExplanation"}}</p>
+    </div>
+  </div>
+</div>

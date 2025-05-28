@@ -320,7 +320,13 @@
       "RollResult": "Roll result",
       "RollAll": "Roll Initiative for Everyone",
       "DisabledIndividual": "Use Roll All for group initiative",
-      "NoIndividual": "Individual initiative rolls are disabled"
+      "NoIndividual": "Individual initiative rolls are disabled",
+      "CharacterRolls": "Character Initiative Rolls",
+      "Character": "Character",
+      "Roll": "Roll",
+      "Total": "Total",
+      "FinalValue": "Initiative",
+      "RollsExplanation": "Character initiatives are calculated as: (1d6 + Swiftness) added as decimal to base value."
     }
   }
 }
