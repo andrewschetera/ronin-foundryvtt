@@ -3,6 +3,9 @@
 // Garantir que o namespace RONIN existe
 window.RONIN = window.RONIN || {};
 
+// Importar o módulo de iniciativa
+import RONIN_initiative from './initiative.js';
+
 /**
  * Inicialização do sistema
  */
@@ -32,6 +35,10 @@ Hooks.once('init', async function() {
 
   // Registrar helpers do Handlebars
   RONIN.registerHandlebarsHelpers();
+  
+  // Inicializar o sistema de iniciativa personalizado
+  RONIN.initiative = RONIN_initiative;
+  RONIN.initiative.init();
   
   // Garantir que os módulos de rolagem estão disponíveis
   console.log('ronin | Verificando módulos de rolagem');

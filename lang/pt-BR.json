@@ -307,6 +307,19 @@
   "SpiritPenalty": "Você recebeu uma penalidade de -1 em Espírito até seu próximo descanso longo.",
   "AttributeBonusReminder": "O bônus de atributo será removido no seu próximo descanso longo.",
   "TemporaryBonus": "(temporário)"
-}
+},
+    "Initiative": {
+      "Title": "Iniciativa",
+      "GroupRoll": "Rolagem de Iniciativa de Grupo",
+      "System": "Sistema",
+      "EnemiesFirst": "Inimigos Agem Primeiro!",
+      "EnemiesFirstDescription": "Os inimigos reagiram mais rápido e agirão antes dos personagens.",
+      "CharactersFirst": "Personagens Agem Primeiro!",
+      "CharactersFirstDescription": "Os personagens reagiram mais rápido e agirão antes dos inimigos.",
+      "RollResult": "Resultado da rolagem",
+      "RollAll": "Rolar Iniciativa para Todos",
+      "DisabledIndividual": "Use Rolar Todos para iniciativa de grupo",
+      "NoIndividual": "Rolagens de iniciativa individuais estão desativadas"
+    }
   }
 }

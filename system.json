@@ -13,6 +13,7 @@
     }
   ],
 "esmodules": [
+  "module/core/initiative.js",
   "module/ui/character-generator-button.js",
   "module/ui/character-generator-dialog.js",
   "module/rolls/ability-roll.js",

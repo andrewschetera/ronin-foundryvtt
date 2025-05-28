@@ -308,6 +308,19 @@
   "SpiritPenalty": "You received a -1 Spirit penalty until your next long rest.",
   "AttributeBonusReminder": "The attribute bonus will be removed on your next long rest.",
   "TemporaryBonus": "(temporary)"
-}
+},
+    "Initiative": {
+      "Title": "Initiative",
+      "GroupRoll": "Group Initiative Roll",
+      "System": "System",
+      "EnemiesFirst": "Enemies Go First!",
+      "EnemiesFirstDescription": "The enemies reacted quicker and will act before the characters.",
+      "CharactersFirst": "Characters Go First!",
+      "CharactersFirstDescription": "The characters reacted quicker and will act before the enemies.",
+      "RollResult": "Roll result",
+      "RollAll": "Roll Initiative for Everyone",
+      "DisabledIndividual": "Use Roll All for group initiative",
+      "NoIndividual": "Individual initiative rolls are disabled"
+    }
   }
 }

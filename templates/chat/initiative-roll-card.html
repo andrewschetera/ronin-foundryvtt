@@ -1,0 +1,21 @@
+<div class="ronin-chat-card initiative-roll-card">
+  <div class="card-header">
+    <h3>{{localize "RONIN.Initiative.Title"}}</h3>
+  </div>
+  
+  <div class="card-roll-result">
+    <div class="roll-outcome">
+      {{#if enemiesFirst}}
+        <h3>{{localize "RONIN.Initiative.EnemiesFirst"}}</h3>
+        <p>{{localize "RONIN.Initiative.EnemiesFirstDescription"}}</p>
+      {{else}}
+        <h3>{{localize "RONIN.Initiative.CharactersFirst"}}</h3>
+        <p>{{localize "RONIN.Initiative.CharactersFirstDescription"}}</p>
+      {{/if}}
+    </div>
+    
+    <div class="roll-details">
+      <p>{{localize "RONIN.Initiative.RollResult"}}: {{rollValue}} (1d6)</p>
+    </div>
+  </div>
+</div>
