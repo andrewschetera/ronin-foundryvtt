@@ -1,0 +1,23 @@
+<div class="ronin-chat-card seppuku-spirit-failure-card">
+  <div class="card-header failure">
+    <h3>{{localize "RONIN.Seppuku.SpiritTestTitle"}}</h3>
+  </div>
+  
+  <div class="card-roll-result">
+    <div class="roll-formula">
+      <span>1d20 + {{localize "RONIN.Abilities.AbbrevSpirit"}} VS DR {{difficultyRating}}</span>
+    </div>
+    
+    <div class="roll-calculation">
+      {{d20Result}} + {{spiritValue}} = {{totalResult}}
+    </div>
+    
+    <div class="roll-outcome failure">
+      <h3>{{localize "RONIN.Rolls.Failure"}}</h3>
+    </div>
+    
+    <div class="seppuku-failure-description">
+      <p>{{localize "RONIN.Seppuku.SpiritFailureText"}}</p>
+    </div>
+  </div>
+</div>

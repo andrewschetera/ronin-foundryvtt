@@ -1,0 +1,626 @@
+/* inventory.css - Estilos para o inventário para o sistema RONIN */
+
+/* Estilos para a seção de Carrying Capacity */
+.carrying-capacity-section {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.carrying-capacity-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.carrying-capacity-info label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.carrying-capacity-current, 
+.carrying-capacity-max {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.carrying-capacity-rules {
+  margin-left: 10px;
+  font-style: italic;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Em telas pequenas, coloca as regras em outra linha */
+@media (max-width: 600px) {
+  .carrying-capacity-rules {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 5px;
+  }
+}
+
+/* Inventário - Layout de duas colunas (mantido para compatibilidade) */
+.inventory-categories {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+/* Novo layout de uma coluna para a aba Equipment */
+.inventory-single-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.inventory-category {
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 3px;
+  margin-bottom: 3px;
+  border-bottom: 1px solid;
+}
+
+.item-create {
+  margin-left: auto;
+}
+
+.item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  padding: 3px 0;
+}
+
+.item-header {
+  display: flex;
+  align-items: center;
+}
+
+.item-image {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-name {
+  flex: 1;
+}
+
+.item-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.item-details {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+  padding-left: 29px;
+  font-size: 0.9em;
+}
+
+/* Exibir o peso dos itens na lista */
+.item-weight {
+  margin-left: 10px;
+  font-style: italic;
+}
+
+/* Estilo para quando a capacidade de carga está no máximo */
+.carrying-capacity-info.capacity-full label,
+.carrying-capacity-info.capacity-full .carrying-capacity-current,
+.carrying-capacity-info.capacity-full .carrying-capacity-max {
+  color: var(--color-red);
+  font-weight: bold;
+}
+
+.carrying-capacity-info.capacity-full {
+  background-color: rgba(128, 0, 0, 0.1);
+  border-color: var(--color-red);
+}
+
+/* Estilo para o ícone de escudo de arma equipada */
+.weapon-equip-icon {
+  margin-right: 5px;
+  cursor: pointer;
+  color: #999; /* Cor clara para desativado */
+  transition: color 0.2s;
+}
+
+.weapon-equip-icon.equipped {
+  color: #333; /* Cor escura para ativado */
+}
+
+/* Mensagem de alerta para limite de armas */
+.weapons-limit-warning {
+  color: var(--color-red);
+  font-style: italic;
+  font-size: 0.9em;
+  margin-top: 5px;
+  padding: 3px;
+  background-color: rgba(255, 0, 0, 0.1);
+  border-radius: 3px;
+  display: none;
+}
+
+.weapons-limit-warning.show {
+  display: block;
+}
+
+/* Remover a exibição de checkbox para equipar */
+.item-equipped input[type="checkbox"] {
+  display: none;
+}
+
+/* Item simplificado na lista de inventário */
+.weapon-item-simplified .item-header {
+  display: flex;
+  align-items: center;
+}
+
+.weapon-item-simplified .item-image {
+  margin-right: 5px;
+}
+
+.weapon-item-simplified .item-controls {
+  margin-left: auto;
+}
+
+/* Estilos para exibição simplificada de armas */
+.weapon-item-simplified .item-details {
+  display: flex;
+  margin-top: 3px;
+  padding-left: 29px;
+}
+
+.weapon-item-simplified .item-properties {
+  display: flex;
+  gap: 10px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Ajuste do espaçamento para informações de armas em linha */
+.weapon-item-inline .item-name {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.weapon-item-inline .item-properties {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribui os itens uniformemente */
+  gap: 20px; /* Aumenta o gap entre os itens */
+  font-size: 0.85em;
+  margin-left: 15px;
+  width: 65%; /* Define uma largura para as propriedades */
+}
+
+/* Cada propriedade individual agora terá largura fixa */
+.weapon-item-inline .item-type,
+.weapon-item-inline .item-hand,
+.weapon-item-inline .item-weight {
+  min-width: 80px; /* Largura mínima para cada item */
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  border-radius: 0px;
+  white-space: nowrap; /* Evita quebra de linha */
+  color: #000000 ; /* Forçar texto preto com !important */
+  font-weight: bold; /* Tornar texto em negrito para melhor legibilidade */
+  background-color: rgba(0, 0, 0, 0); /* Fundo sutil para todas as propriedades */
+  border: 0px solid rgba(0, 0, 0, 0); /* Borda sutil para todas as propriedades */
+}
+
+/* Estilos para a lista de armaduras na aba Equipamento */
+.armor-item-inline .item-name {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.armor-item-inline .item-properties {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 0.85em;
+  margin-left: 15px;
+  width: 65%;
+  position: relative; /* Para posicionamento do ícone de dano */
+}
+
+/* Cada propriedade individual com largura fixa */
+.armor-item-inline .item-category,
+.armor-item-inline .item-weight {
+  min-width: 80px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  border-radius: 0px;
+  white-space: nowrap;
+  color: #000000;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px solid rgba(0, 0, 0, 0);
+}
+
+/* Cores para as categorias de armadura */
+.armor-cat-0 {
+  color: #666666;
+}
+
+.armor-cat-1 {
+  color: #006600;
+}
+
+.armor-cat-2 {
+  color: #0000CC;
+}
+
+.armor-cat-3 {
+  color: #660000;
+}
+
+/* Container do ícone de armadura danificada com largura fixa */
+.armor-damaged-icon-container {
+  width: 20px;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Ícone de armadura danificada */
+.armor-damaged-icon {
+  color: #CC6600;
+}
+
+/* Estilo para o ícone de escudo de armadura equipada */
+.armor-equip-icon {
+  margin-right: 5px;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s;
+}
+
+.armor-equip-icon.equipped {
+  color: #333;
+}
+
+/* Mensagem de alerta para limite de armaduras */
+.armor-limit-warning {
+  color: var(--color-red);
+  font-style: italic;
+  font-size: 0.9em;
+  margin-top: 5px;
+  padding: 3px;
+  background-color: rgba(255, 0, 0, 0.1);
+  border-radius: 3px;
+  display: none;
+}
+
+.armor-limit-warning.show {
+  display: block;
+}
+
+/* Estilos para a armadura equipada na aba Tatakai */
+.tatakai-armor-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.armor-main-info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+.armor-image {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+}
+
+.armor-name {
+  flex: 1;
+  font-weight: bold;
+  min-width: 120px;
+}
+
+.armor-category {
+  flex: 0 0 150px;
+}
+
+.armor-current-category {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 2px;
+  font-size: 0.85em;
+}
+
+/* Proteção sem quebra de linha */
+.armor-protection {
+  flex: 0 0 120px;
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 10px;
+}
+
+.armor-penalties {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 8px;
+  padding-top: 5px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.9em;
+}
+
+.swiftness-penalty, .defense-penalty {
+  padding: 2px 10px;
+  white-space: nowrap;
+}
+
+/* Cores para valores de penalidade */
+.swiftness-penalty[data-value]:not([data-value="0"]),
+.defense-penalty[data-value]:not([data-value="0"]) {
+  color: var(--color-red);
+  font-weight: bold;
+}
+
+/* Mensagem quando não há armadura equipada */
+.no-equipped-armor {
+  padding: 10px;
+  text-align: center;
+  font-style: italic;
+  color: #666;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+}
+
+/* Estilos para a exibição de itens em linha na aba Equipamento */
+.misc-item-inline .item-name {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.misc-item-inline .item-properties {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 0.85em;
+  margin-left: 15px;
+  width: 65%;
+}
+
+/* Cada propriedade individual com largura fixa */
+.misc-item-inline .item-quantity,
+.misc-item-inline .item-weight {
+  min-width: 80px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  border-radius: 0px;
+  white-space: nowrap;
+  color: #000000;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px solid rgba(0, 0, 0, 0);
+}
+
+/* Ícone para munição */
+.misc-item-inline .ammo-icon {
+  margin-left: 5px;
+  color: #8b4513; /* Cor marrom para munição */
+}
+
+/* Container do ícone de munição */
+.ammo-icon-container {
+  width: 20px;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Estilo para o campo de quantidade editável */
+.misc-item-inline .quantity-input {
+  width: 40px;
+  text-align: center;
+  height: 22px;
+  margin-left: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.misc-item-inline .quantity-input:focus {
+  outline: none;
+  border-color: #6c8eef;
+  box-shadow: 0 0 3px rgba(108, 142, 239, 0.5);
+}
+
+/* Estilos para os novos tipos de itens */
+
+/* Botões de criação de item agrupados */
+.item-create-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.item-create-buttons a {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  color: #444;
+  transition: all 0.2s ease;
+}
+
+.item-create-buttons a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #000;
+}
+
+/* Ícones específicos para cada tipo */
+.item-create-buttons a[data-type="gear"] i {
+  color: #555;
+}
+
+.item-create-buttons a[data-type="ammo"] i {
+  color: #8b4513;
+}
+
+.item-create-buttons a[data-type="consumable"] i {
+  color: #4b0082;
+}
+
+/* Container do ícone de consumível */
+.consumable-icon-container {
+  width: 20px;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Ícone de consumível */
+.consumable-icon {
+  color: #4b0082;
+}
+
+/* Estilo para o campo de usos */
+.item-uses {
+  min-width: 80px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  white-space: nowrap;
+  color: #000000;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px solid rgba(0, 0, 0, 0);
+}
+
+/* Estilos na ficha de item para os novos tipos */
+.ronin.sheet.item .gear-properties,
+.ronin.sheet.item .ammo-properties,
+.ronin.sheet.item .consumable-properties {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ronin.sheet.item .form-fields {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ronin.sheet.item .separator {
+  margin: 0 2px;
+}
+
+/* Estilos para a exibição de itens de texto em linha na aba Equipamento */
+.text-item-inline .item-name {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.text-item-inline .item-properties {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 0.85em;
+  margin-left: 15px;
+  width: 65%;
+}
+
+/* Cada propriedade individual com largura fixa */
+.text-item-inline .item-texttype {
+  min-width: 80px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  border-radius: 0px;
+  white-space: nowrap;
+  color: #000000;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px solid rgba(0, 0, 0, 0);
+}
+
+/* Cores para os tipos de texto */
+.text-item-inline .text-type-shintai {
+  color: #006600; /* Verde para Shintai */
+}
+
+.text-item-inline .text-type-unseen {
+  color: #660099; /* Roxo para Oculto */
+}
+
+/* Botão de usar texto */
+.text-item-inline .text-use {
+  background-color: #4b0082; /* Cor roxa escura */
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 3px 6px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  margin-left: auto;
+}
+
+.text-item-inline .text-use:hover {
+  background-color: #6a1b9a; /* Cor roxa mais clara no hover */
+}

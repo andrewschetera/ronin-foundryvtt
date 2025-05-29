@@ -1,0 +1,42 @@
+<div class="ronin-chat-card get-better-roll-card">
+  <div class="card-header">
+    <h3>{{localize "RONIN.GetBetter.Result"}}</h3>
+  </div>
+  
+  <div class="card-roll-result">
+    <!-- Resultado da rolagem de HP -->
+    <div class="get-better-section hp-section">
+      <div class="roll-summary">
+        <p>{{localize "RONIN.GetBetter.RollResult" result=hpRoll.total}} ({{hpRoll.formula}})</p>
+        <p>{{localize "RONIN.GetBetter.HPThreshold" threshold=hpRoll.threshold}}</p>
+      </div>
+      
+      {{#if hpIncrease}}
+        <div class="hp-increase success">
+          <p>{{localize "RONIN.GetBetter.HPIncrease" value=hpIncreaseValue}}</p>
+        </div>
+      {{else}}
+        <div class="hp-unchanged">
+          <p>{{localize "RONIN.GetBetter.NoHPChange"}}</p>
+        </div>
+      {{/if}}
+    </div>
+    
+    <!-- Resultados das rolagens de atributos -->
+    <div class="get-better-section attributes-section">
+      {{#each attributes as |attr attrKey|}}
+        <div class="attribute-roll">
+          <p>{{localize "RONIN.GetBetter.AttributeRoll" attribute=(localize (concat "RONIN.Abilities." (capitalize attrKey))) roll=attr.roll.total}}</p>
+          
+          {{#if attr.change}}
+            {{#if (gt attr.change 0)}}
+              <p class="attribute-change success">{{localize "RONIN.GetBetter.AttributeIncrease" attribute=(localize (concat "RONIN.Abilities." (capitalize attrKey)))}}</p>
+            {{else}}
+              <p class="attribute-change failure">{{localize "RONIN.GetBetter.AttributeDecrease" attribute=(localize (concat "RONIN.Abilities." (capitalize attrKey)))}}</p>
+            {{/if}}
+          {{/if}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>

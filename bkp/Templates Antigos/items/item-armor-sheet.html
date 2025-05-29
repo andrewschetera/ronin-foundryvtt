@@ -1,0 +1,69 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="item-name">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}"/>
+      </h1>
+    </div>
+  </header>
+
+  <section class="sheet-body">
+    <div class="armor-properties">
+      <div class="form-group">
+        <label>{{localize "RONIN.Equipment.Weight"}}</label>
+        <select name="system.weight">
+          <option value="small" {{#if (eq system.weight "small")}}selected{{/if}}>{{localize "RONIN.Equipment.Small"}}</option>
+          <option value="normal" {{#if (eq system.weight "normal")}}selected{{/if}}>{{localize "RONIN.Equipment.Normal"}}</option>
+          <option value="heavy" {{#if (eq system.weight "heavy")}}selected{{/if}}>{{localize "RONIN.Equipment.Heavy"}}</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>{{localize "RONIN.Equipment.MaxCategory"}}</label>
+        <select name="system.maxCategory">
+          <option value="0" {{#if (eq system.maxCategory 0)}}selected{{/if}}>{{localize "RONIN.Equipment.ArmorCat0"}}</option>
+          <option value="1" {{#if (eq system.maxCategory 1)}}selected{{/if}}>{{localize "RONIN.Equipment.ArmorCat1"}}</option>
+          <option value="2" {{#if (eq system.maxCategory 2)}}selected{{/if}}>{{localize "RONIN.Equipment.ArmorCat2"}}</option>
+          <option value="3" {{#if (eq system.maxCategory 3)}}selected{{/if}}>{{localize "RONIN.Equipment.ArmorCat3"}}</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>{{localize "RONIN.Equipment.CurrentCategory"}}</label>
+        <select name="system.currentCategory" data-dtype="Number">
+          <option value="0" {{#if (eq system.currentCategory 0)}}selected{{/if}}>{{localize "RONIN.Equipment.ArmorCat0"}}</option>
+          <option value="1" {{#if (eq system.currentCategory 1)}}selected{{/if}}>{{localize "RONIN.Equipment.ArmorCat1"}}</option>
+          <option value="2" {{#if (eq system.currentCategory 2)}}selected{{/if}}>{{localize "RONIN.Equipment.ArmorCat2"}}</option>
+          <option value="3" {{#if (eq system.currentCategory 3)}}selected{{/if}}>{{localize "RONIN.Equipment.ArmorCat3"}}</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>{{localize "RONIN.Equipment.Protection"}}</label>
+        <input type="text" name="system.protection" value="{{system.protection}}" disabled/>
+        <p class="notes">{{localize "RONIN.Equipment.ProtectionNotes"}}</p>
+      </div>
+      
+      <div class="form-group">
+        <label>{{localize "RONIN.Equipment.SwiftnessPenalty"}}</label>
+        <input type="number" name="system.swiftnessPenalty" value="{{system.swiftnessPenalty}}" data-dtype="Number"/>
+      </div>
+      
+      <div class="form-group">
+        <label>{{localize "RONIN.Equipment.DefensePenalty"}}</label>
+        <input type="number" name="system.defensePenalty" value="{{system.defensePenalty}}" data-dtype="Number"/>
+      </div>
+      
+      <div class="form-group">
+        <label>{{localize "RONIN.Equipment.Price"}} ({{localize "RONIN.Resources.Ryo"}})</label>
+        <input type="number" name="system.price" value="{{system.price}}" min="0"/>
+      </div>
+      
+      <div class="form-group armor-description">
+        <label>{{localize "RONIN.Description"}}</label>
+        <textarea name="system.description" rows="8" style="width: 100%;">{{system.description}}</textarea>
+      </div>
+    </div>
+  </section>
+</form>

@@ -1,0 +1,27 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="item-name">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}"/>
+      </h1>
+    </div>
+  </header>
+
+  <section class="sheet-body">
+    <div class="text-properties">
+      <div class="form-group">
+        <label>{{localize "RONIN.Features.TextType"}}</label>
+        <select name="system.textType">
+          <option value="shintai" {{#if (eq system.textType "shintai")}}selected{{/if}}>{{localize "RONIN.Features.TextTypes.Shintai"}}</option>
+          <option value="unseen" {{#if (eq system.textType "unseen")}}selected{{/if}}>{{localize "RONIN.Features.TextTypes.Unseen"}}</option>
+        </select>
+      </div>
+      
+      <div class="form-group text-description">
+        <label>{{localize "RONIN.Description"}}</label>
+        <textarea name="system.description" rows="8" style="width: 100%;">{{system.description}}</textarea>
+      </div>
+    </div>
+  </section>
+</form>

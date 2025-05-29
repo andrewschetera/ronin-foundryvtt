@@ -1,0 +1,101 @@
+/* header.css - Estilos do cabeçalho da ficha para o sistema RONIN */
+
+/* Cabeçalho */
+.sheet-header {
+  flex: 0 0 auto;
+  padding: 5px;
+  margin-bottom: 2px;
+  padding-bottom: 10px;
+  border-bottom: 0px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Grid do cabeçalho */
+.header-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 0.8fr;
+  gap: 2px;
+  height: 200px;
+  margin-bottom: 5px;
+}
+
+/* Container da imagem */
+
+.ronin.sheet.actor .sheet-header .profile-img { /*sobrescreve estilo padrão do foundry para deixar a imagem do personagem maior */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0px solid transparent;
+}
+
+.character-img-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.character-img {
+  flex: 1 0 auto;
+  display: ;/*faz com que a imagem do personagem fique maior, cortando um pouco acima e abaixo */
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  margin-bottom: 5px;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Botões de ação */
+.action-buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  padding: 2px;
+}
+
+/* Seção de informações básicas */
+.basic-info {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.character-name {
+  font-size: 1.6em;
+  font-weight: bold;
+  margin: 0 0 2px 0;
+  text-align: center;
+}
+
+.character-name input {
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.character-class {
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.character-class input {
+  width: 100%;
+  margin-bottom: 2px;
+  text-align: center;
+}
+
+/* Responsividade para o cabeçalho */
+@media (max-height: 700px) {
+  .header-grid {
+    height: 180px;
+  }
+  
+  .character-img {
+    height: 120px;
+  }
+}

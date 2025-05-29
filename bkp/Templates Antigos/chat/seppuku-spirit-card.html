@@ -1,0 +1,29 @@
+<div class="ronin-chat-card seppuku-spirit-card">
+  <div class="card-header success">
+    <h3>{{localize "RONIN.Seppuku.SpiritTestTitle"}}</h3>
+  </div>
+  
+  <div class="card-roll-result">
+    <div class="roll-formula">
+      <span>1d20 + {{localize "RONIN.Abilities.AbbrevSpirit"}} VS DR {{difficultyRating}}</span>
+    </div>
+    
+    <div class="roll-calculation">
+      {{d20Result}} + {{spiritValue}} = {{totalResult}}
+    </div>
+    
+    <div class="roll-outcome success">
+      <h3>{{localize "RONIN.Rolls.Success"}}</h3>
+    </div>
+    
+    <div class="seppuku-description">
+      <p>{{localize "RONIN.Seppuku.RitualPreparation"}}</p>
+    </div>
+    
+    <div class="seppuku-actions">
+      <button class="seppuku-continue-button" data-actor-id="{{actor.id}}" data-has-assistant="{{hasAssistant}}">
+        {{localize "RONIN.Seppuku.ContinueButton"}}
+      </button>
+    </div>
+  </div>
+</div>

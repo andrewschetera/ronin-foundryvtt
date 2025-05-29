@@ -1,0 +1,83 @@
+<form>
+  <div class="form-group alignment-group">
+    <div class="alignment-options">
+      {{#each alignmentOptions}}
+      <div class="alignment-option">
+        <div class="radio-container">
+          <input type="radio" id="alignment-{{this.value}}" name="alignment" value="{{this.value}}" {{#if this.checked}}checked{{/if}}>
+        </div>
+        <label for="alignment-{{this.value}}">{{this.label}}</label>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  
+  <div class="form-group classes-group">
+    <h3 class="classes-title">{{localize "RONIN.CharacterGenerator.AvailableClasses"}}</h3>
+  </div>
+  
+  <div class="form-group classes-content">
+    {{#if hasClasses}}
+      <div class="classes-list" style="max-height: 300px; overflow-y: auto; margin-top: 10px;">
+        <div style="width: 100%; display: flex; flex-direction: row; flex-wrap: wrap;">
+          {{#each availableClasses as |class i|}}
+            <div style="width: 50%; padding: 3px; box-sizing: border-box;">
+              <div style="display: flex; flex-direction: row; align-items: center; gap: 2px;">
+                <input type="checkbox" id="class-{{class.id}}" name="selectedClass" value="{{class.id}}" data-pack="{{class.pack}}" style="margin: 0 2px 0 0;">
+                <label for="class-{{class.id}}" style="margin: 0; padding: 0; display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{class.name}}</label>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    {{else}}
+      <div class="classes-info">
+        <p><em>Nenhuma classe encontrada no sistema. Adicione classes como itens do tipo "class".</em></p>
+      </div>
+    {{/if}}
+  </div>
+  
+  <div class="form-group buttons-group">
+    <div class="class-selection-controls">
+      {{#if hasClasses}}
+        <button type="button" class="select-all-button">{{localize "RONIN.CharacterGenerator.SelectAll"}}</button>
+        <button type="button" class="select-none-button">{{localize "RONIN.CharacterGenerator.SelectNone"}}</button>
+      {{/if}}
+    </div>
+  </div>
+  
+  <!-- Nova seção de tabelas opcionais com estrutura igual à das classes -->
+  <div class="form-group optional-tables-group">
+    <h3 class="optional-tables-title">{{localize "RONIN.CharacterGenerator.OptionalTables"}}</h3>
+  </div>
+  
+  <div class="form-group optional-tables-content">
+    <div style="width: 100%; display: flex; flex-direction: row; flex-wrap: wrap;">
+      <!-- Primeira coluna -->
+      <div style="width: 50%; padding: 3px; box-sizing: border-box;">
+        <div style="display: flex; flex-direction: row; align-items: center; gap: 2px;">
+          <input type="checkbox" id="table-broken-bodies" name="optionalTable" value="broken-bodies" style="margin: 0 4px 0 0;">
+          <label for="table-broken-bodies" style="margin: 0; padding: 0;">{{localize "RONIN.CharacterGenerator.BrokenBodies"}}</label>
+        </div>
+        
+        <div style="display: flex; flex-direction: row; align-items: center; gap: 2px; margin-top: 8px;">
+          <input type="checkbox" id="table-grim-chronicles" name="optionalTable" value="grim-chronicles" style="margin: 0 4px 0 0;">
+          <label for="table-grim-chronicles" style="margin: 0; padding: 0;">{{localize "RONIN.CharacterGenerator.GrimChronicles"}}</label>
+        </div>
+      </div>
+      
+      <!-- Segunda coluna -->
+      <div style="width: 50%; padding: 3px; box-sizing: border-box;">
+        <div style="display: flex; flex-direction: row; align-items: center; gap: 2px;">
+          <input type="checkbox" id="table-bad-habits" name="optionalTable" value="bad-habits" style="margin: 0 4px 0 0;">
+          <label for="table-bad-habits" style="margin: 0; padding: 0;">{{localize "RONIN.CharacterGenerator.BadHabits"}}</label>
+        </div>
+        
+        <div style="display: flex; flex-direction: row; align-items: center; gap: 2px; margin-top: 8px;">
+          <input type="checkbox" id="table-awful-afflictions" name="optionalTable" value="awful-afflictions" style="margin: 0 4px 0 0;">
+          <label for="table-awful-afflictions" style="margin: 0; padding: 0;">{{localize "RONIN.CharacterGenerator.AwfulAfflictions"}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

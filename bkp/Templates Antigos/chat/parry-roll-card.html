@@ -1,0 +1,113 @@
+<div class="ronin-chat-card parry-roll-card">
+  <div class="card-header {{rollResult}}">
+    <h3>{{localize "RONIN.Actions.Parry"}}</h3>
+  </div>
+  
+  <div class="card-roll-result">
+    <div class="roll-formula">
+      <span>1d20 + {{resilienceAbbrev}} {{#if modifierText}}{{modifierText}}{{/if}} VS DR {{parryDR}}</span>
+      
+      <div class="parry-formula">
+        ({{localize "RONIN.Rolls.BaseDR"}} {{baseDR}} + 2
+        {{#if showDefensePenalty}}
+          + {{localize "RONIN.Equipment.DefensePenalty"}} {{armorDefensePenalty}}
+        {{/if}}
+        )
+      </div>
+    </div>
+    
+    <div class="roll-calculation">
+      {{d20Result}} + {{resilienceValue}}{{#if modifier}} + {{modifier}}{{/if}} = {{totalResult}}
+    </div>
+    
+    <div class="roll-outcome {{rollResult}}">
+      {{#if isCrit}}
+        <h3 class="crit">{{localize "RONIN.Rolls.CriticalSuccess"}}</h3>
+      {{else if isFumble}}
+        <h3 class="fumble">{{localize "RONIN.Rolls.CriticalFailure"}}</h3>
+      {{else if isSuccess}}
+        <h3 class="success">{{localize "RONIN.Rolls.Success"}}</h3>
+      {{else}}
+        <h3 class="failure">{{localize "RONIN.Rolls.Failure"}}</h3>
+      {{/if}}
+    </div>
+    
+    {{#if isSuccess}}
+      <div class="parry-success">
+        <p>{{localize "RONIN.Rolls.ParrySuccess"}}</p>
+      </div>
+      
+      <div class="damage-section">
+        <!-- Dano da arma do personagem -->
+        <div class="damage-weapon">
+          <div class="section-label">{{#if selectedWeapon}}{{selectedWeapon.name}}{{else}}{{localize "RONIN.Equipment.Weapon"}}{{/if}}</div>
+          <div class="section-result">
+            {{attackDamageRoll.formula}}:
+            {{#if isCrit}}
+              {{attackDamageRoll.total}} + {{attackDamageRoll2.total}} = {{attackTotalDamage}}
+            {{else}}
+              {{attackDamageRoll.total}}
+            {{/if}}
+          </div>
+        </div>
+        
+        <!-- Proteção da armadura do oponente -->
+        <div class="armor-protection">
+          <div class="section-label">{{localize "RONIN.Equipment.EnemyArmor"}}</div>
+          <div class="section-result">
+            {{attackArmorRoll.formula}}: {{attackArmorRoll.total}}
+          </div>
+        </div>
+        
+        <!-- Dano final causado -->
+        <div class="final-damage">
+          <h4>{{localize "RONIN.Rolls.DamageDealt"}}: {{attackFinalDamage}}</h4>
+        </div>
+      </div>
+      
+      {{#if isCrit}}
+        <div class="critical-effect">
+          <p class="crit">{{localize "RONIN.Rolls.CriticalDamageEffect"}}</p>
+        </div>
+      {{/if}}
+    {{else}}
+      <div class="parry-failure">
+        <p>{{localize "RONIN.Rolls.ParryFailure"}}</p>
+      </div>
+      
+      <div class="damage-section">
+        <!-- Dano da arma do oponente -->
+        <div class="damage-weapon">
+          <div class="section-label">{{localize "RONIN.Equipment.EnemyWeapon"}}</div>
+          <div class="section-result">
+            {{defenseDamageRoll.formula}}:
+            {{#if isFumble}}
+              {{defenseDamageRoll.total}} + {{defenseDamageRoll2.total}} = {{defenseTotalDamage}}
+            {{else}}
+              {{defenseDamageRoll.total}}
+            {{/if}}
+          </div>
+        </div>
+        
+        <!-- Proteção da armadura do personagem -->
+        <div class="armor-protection">
+          <div class="section-label">{{localize "RONIN.Equipment.Protection"}}</div>
+          <div class="section-result">
+            {{defenseArmorRoll.formula}}: {{defenseArmorRoll.total}}
+          </div>
+        </div>
+        
+        <!-- Dano final sofrido -->
+        <div class="final-damage">
+          <h4>{{localize "RONIN.Rolls.DamageTaken"}}: {{defenseFinalDamage}}</h4>
+        </div>
+      </div>
+      
+      {{#if isFumble}}
+        <div class="fumble-effect">
+          <p class="fumble">{{localize "RONIN.Rolls.ParryFumbleEffect"}}</p>
+        </div>
+      {{/if}}
+    {{/if}}
+  </div>
+</div>

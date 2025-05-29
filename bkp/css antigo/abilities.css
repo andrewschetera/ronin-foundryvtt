@@ -1,0 +1,46 @@
+/* abilities.css - Estilos para a seção de habilidades para o sistema RONIN */
+
+/* Habilidades */
+.abilities-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  align-items: flex-end;
+  gap: 0px; /* espaço entre os atributos */
+}
+
+.ability {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 2px;
+  height: 40px;
+  width: 100%;
+  position: relative;
+}
+
+.ability label {
+  font-size: 1.7em;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.ability input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.7em;
+}
+
+/* Estilo para rótulos de habilidades clicáveis */
+.ability label {
+  cursor: pointer;
+  user-select: none;
+}
+
+.ability label:hover {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}

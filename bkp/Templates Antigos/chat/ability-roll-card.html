@@ -1,0 +1,42 @@
+<div class="ronin-chat-card ability-roll-card">
+    <div class="card-header {{rollResult}}">
+      <h3>{{abilityName}} {{localize "RONIN.Rolls.Check"}}</h3>
+    </div>
+    
+    <div class="card-roll-result">
+      <div class="roll-formula">
+        <span>1d20 + {{abilityAbbrev}} {{#if modifierText}}{{modifierText}}{{/if}} VS DR {{difficultyRating}}</span>
+        
+        {{#if isSwiftness}}
+          {{#if (or showSwiftnessPenalty isOverencumbered)}}
+            <div class="swiftness-penalty">
+              ({{localize "RONIN.Rolls.BaseDR"}} {{baseDR}}
+              {{#if showSwiftnessPenalty}}
+                + {{localize "RONIN.Equipment.SwiftnessPenalty"}} {{armorSwiftnessPenalty}}
+              {{/if}}
+              {{#if isOverencumbered}}
+                + {{localize "RONIN.Rolls.OverencumberedPenalty"}} {{overencumberedPenalty}}
+              {{/if}}
+              )
+            </div>
+          {{/if}}
+        {{/if}}
+      </div>
+      
+      <div class="roll-calculation">
+        {{d20Result}} + {{abilityValue}}{{#if modifier}} + {{modifier}}{{/if}} = {{totalResult}}
+      </div>
+      
+      <div class="roll-outcome {{rollResult}}">
+        {{#if isCrit}}
+          <h3 class="crit">{{localize "RONIN.Rolls.CriticalSuccess"}}</h3>
+        {{else if isFumble}}
+          <h3 class="fumble">{{localize "RONIN.Rolls.CriticalFailure"}}</h3>
+        {{else if isSuccess}}
+          <h3 class="success">{{localize "RONIN.Rolls.Success"}}</h3>
+        {{else}}
+          <h3 class="failure">{{localize "RONIN.Rolls.Failure"}}</h3>
+        {{/if}}
+      </div>
+    </div>
+  </div>
