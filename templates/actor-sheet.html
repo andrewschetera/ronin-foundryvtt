@@ -1,7 +1,7 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
   <div class="ronin-sheet">
     <!-- Header da Ficha (incorporado) -->
-    <header class="sheet-header">
+    <header class="sheet-header ronin-character-header">
       <div class="header-grid">
         <!-- Imagem do Personagem e Botões (aumentada para 1.5fr) -->
         <div class="character-img-container">
@@ -27,7 +27,7 @@
             <input name="system.nickname" type="text" value="{{system.nickname}}" placeholder="Nickname"/>
           </div>
           
-          <div class="resources-grid">
+          <div class="resources-grid ronin-character-resources">
             <!-- HP -->
             <div class="resource hp">
               <label>{{localize "RONIN.Resources.HP"}}:</label>
@@ -58,7 +58,7 @@
           </div>
 
           <!-- Honor abaixo dos recursos -->
-          <div class="honor-section">
+          <div class="honor-section ronin-character-honor">
             <div class="honor-layout">
               <label class="honor-label">{{localize "RONIN.Resources.Honor"}}</label>
               <div class="honor-track">
@@ -75,7 +75,7 @@
         </div>
         
         <!-- Abilities (reduzida para 0.8fr) -->
-        <div class="abilities-column">
+        <div class="abilities-column ronin-character-abilities">
           <div class="ability vigor">
             <label>{{localize "RONIN.Abilities.AbbrevVigor"}}</label>
             <input name="system.abilities.vigor.value" type="text" value="{{formatSign system.abilities.vigor.value}}" data-dtype="Number"/>
@@ -112,10 +112,10 @@
     <!-- Corpo da Ficha -->
     <section class="sheet-body">
       <!-- Tab de Features (anteriormente Background) -->
-      <div class="tab" data-group="primary" data-tab="background">
+      <<div class="tab ronin-character-tab" data-group="primary" data-tab="background">
         <div class="tab-features">
 <!-- Seção de Classes - Com botão para mostrar/esconder descrição -->
-<div class="inventory-category">
+<div class="inventory-category ronin-character-inventory-category">
   <h2 class="category-header">
     <span>{{localize "RONIN.ItemTypes.Class"}}</span>
     {{#if hasClass}}
@@ -151,7 +151,7 @@
 </div>
           
 <!-- Seção de Características -->
-<div class="inventory-category">
+<div class="inventory-category ronin-character-inventory-category">
   <h2 class="category-header">
     <span>{{localize "RONIN.Features.Feats"}}</span>
     <a class="item-create" title="Create Feature" data-type="feat">
@@ -187,7 +187,7 @@
 </div>
           
           <!-- Editor de Background com cabeçalho -->
-          <div class="inventory-category">
+          <div class="inventory-category ronin-character-inventory-category">
             <h2 class="category-header">
               <span>Background</span>
             </h2>
@@ -201,10 +201,10 @@
 <!-- Correção da aba Equipment e estrutura geral -->
 
 <!-- Tab de Equipment -->
-<div class="tab" data-group="primary" data-tab="equipment">
+<div class="tab ronin-character-tab" data-group="primary" data-tab="equipment">
   <div class="tab-equipment">
     <!-- Carrying Capacity no início da aba -->
-    <div class="carrying-capacity-info {{#if (lte (sum system.abilities.vigor.value 8) system.carryingCapacity.value)}}capacity-full{{/if}}">
+    <div class="carrying-capacity-info ronin-character-carrying-info{{#if (lte (sum system.abilities.vigor.value 8) system.carryingCapacity.value)}}capacity-full{{/if}}">
       <label>{{localize "RONIN.Equipment.CarryingCapacity"}}:</label>
       <span class="carrying-capacity-current">{{system.carryingCapacity.value}}</span>
       <span>/</span>
@@ -216,10 +216,10 @@
       {{/with}}
     </div>
 
-    <div class="inventory-single-column">
+    <div class="inventory-single-column ronin-character-inventory">
       <!-- Weapons -->
 <!-- Atualizar a seção de weapons para mostrar tipo, hand e weight -->
-<div class="inventory-category">
+<div class="inventory-category ronin-character-inventory-category">
   <h2 class="category-header">
     <span>{{localize "RONIN.Equipment.Weapons"}}</span>
     <a class="item-create" title="Create Weapon" data-type="weapon">
@@ -279,7 +279,7 @@
   </ol>
 </div>
 <!-- Armaduras - Formato atualizado similar às armas -->
-<div class="inventory-category">
+<div class="inventory-category ronin-character-inventory-category">
   <h2 class="category-header">
     <span>{{localize "RONIN.Equipment.Armor"}}</span>
     <a class="item-create" title="Create Armor" data-type="armor">
@@ -335,7 +335,7 @@
 </div>
 
 <!-- Misc -->
-<div class="inventory-category">
+<div class="inventory-category ronin-character-inventory-category">
   <h2 class="category-header">
     <span>{{localize "RONIN.Equipment.Misc"}}</span>
     <div class="item-create-buttons">
@@ -462,7 +462,7 @@
 </div>
 
 <!-- Textos - Formato atualizado -->
-<div class="inventory-category">
+<div class="inventory-category ronin-character-inventory-category">
   <h2 class="category-header">
     <span>{{localize "RONIN.Resources.Texts"}}</span>
     <a class="item-create" title="Create Text" data-type="text">
@@ -506,13 +506,13 @@
   </div>
 </div>     
       <!-- Tab de Tatakai (Combate) -->
-      <div class="tab" data-group="primary" data-tab="tatakai">
+      <div class="tab ronin-character-tab" data-group="primary" data-tab="tatakai">
         <div class="tab-tatakai">
-          <div class="combat-section">
+          <div class="combat-section ronin-character-combat">
             
 <!-- Armas equipadas -->
 <!-- Versão básica da seção de armas equipadas para a aba Tatakai -->
-<div class="equipped-weapons">
+<div class="equipped-weapons ronin-character-equipped-weapons">
   <h2>{{localize "RONIN.Equipment.Weapons"}} {{localize "RONIN.Equipment.Equipped"}}</h2>
   <div class="tatakai-weapons-list">
     <!-- Percorre todos os itens -->

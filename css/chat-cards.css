@@ -1,12 +1,14 @@
-/* chat-cards.css - Estilos para chat cards para o sistema RONIN */
+/* --------------------------------- */
+/* RONIN CHAT CARDS STYLES          */
+/* --------------------------------- */
 
-/* Estilos para o chat-card */
+/* Estilo base para todos os cartões de chat */
 .ronin-chat-card {
   font-family: var(--font-primary);
   margin-bottom: 5px;
-  border: 1px solid #000;
+  border: 1px solid var(--color-black);
   border-radius: 3px;
-  background: #f0f0f0;
+  background: var(--color-background);
 }
 
 .ronin-chat-card .card-header {
@@ -14,8 +16,8 @@
   justify-content: center;
   align-items: center;
   padding: 5px;
-  background: #333;
-  color: white;
+  background: var(--color-gray);
+  color: var(--color-white);
   border-radius: 2px 2px 0 0;
   text-align: center;
 }
@@ -40,7 +42,7 @@
 .ronin-chat-card .roll-calculation {
   margin: 10px 0;
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-light-gray);
   border-radius: 3px;
   background-color: rgba(255, 255, 255, 0.5);
   text-align: center;
@@ -62,32 +64,46 @@
   font-size: 1.3em;
 }
 
-/* Result styling */
+/* Estilo de resultados */
 .ronin-chat-card .success {
-  background-color: rgba(0, 128, 0, 0.2);
+  background-color: var(--color-success-bg);
 }
 
 .ronin-chat-card .failure {
-  background-color: rgba(128, 0, 0, 0.2);
+  background-color: var(--color-failure-bg);
+}
+
+.ronin-chat-card .partial {
+  background-color: var(--color-warning-bg);
 }
 
 .ronin-chat-card .crit {
-  color: #008000;
+  color: var(--color-success);
   font-weight: bold;
   text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
 }
 
 .ronin-chat-card .fumble {
-  color: #800000;
+  color: var(--color-failure);
   font-weight: bold;
   text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 }
 
-/* Estilos para a seção de dano */
+.ronin-chat-card .complete-success {
+  color: var(--color-success);
+  font-weight: bold;
+}
+
+.ronin-chat-card .partial-success {
+  color: var(--color-warning);
+  font-weight: bold;
+}
+
+/* Seção de dano */
 .ronin-chat-card .damage-section {
   margin-top: 15px;
   padding: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-light-gray);
   border-radius: 3px;
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -106,7 +122,7 @@
 
 .ronin-chat-card .section-result {
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-light-gray);
   border-radius: 3px;
   background-color: rgba(255, 255, 255, 0.5);
   text-align: center;
@@ -128,9 +144,10 @@
   margin: 0;
   font-size: 1.2em;
   font-weight: bold;
-  color: #006600;
+  color: var(--color-success);
 }
 
+/* Efeitos críticos e falhas */
 .ronin-chat-card .critical-effect,
 .ronin-chat-card .fumble-effect {
   margin-top: 10px;
@@ -140,14 +157,14 @@
 }
 
 .ronin-chat-card .critical-effect {
-  background-color: rgba(0, 128, 0, 0.2);
+  background-color: var(--color-success-bg);
 }
 
 .ronin-chat-card .fumble-effect {
-  background-color: rgba(128, 0, 0, 0.2);
+  background-color: var(--color-failure-bg);
 }
 
-/* Regras de quebra de texto para chat cards */
+/* Regras de quebra de texto */
 .ronin-chat-card .roll-formula,
 .ronin-chat-card .roll-calculation,
 .ronin-chat-card .defense-success p,
@@ -160,26 +177,15 @@
   white-space: normal;
 }
 
-/* Estilos específicos para a penalidade de defesa */
-.ronin-chat-card .defense-penalty {
-  display: block;
-  font-style: italic;
-  font-size: 0.9em;
-  color: #800000;
-  margin-top: 5px;
-  width: 100%;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  white-space: normal;
-  text-align: center;
-}
+/* ESTILOS ESPECÍFICOS PARA TIPOS DE CARTÕES */
 
-/* Estilos para a penalidade de rapidez da armadura */
+/* Cartão de Rolagem de Defesa */
+.ronin-chat-card .defense-penalty,
 .ronin-chat-card .swiftness-penalty {
   display: block;
   font-style: italic;
   font-size: 0.9em;
-  color: #800000;
+  color: var(--color-failure);
   margin-top: 5px;
   width: 100%;
   word-wrap: break-word;
@@ -188,9 +194,7 @@
   text-align: center;
 }
 
-
-/* Estilos para o formulário de cálculo de DR de Aparar */
-.parry-formula {
+.ronin-chat-card .parry-formula {
   display: block;
   font-style: italic;
   font-size: 0.9em;
@@ -203,7 +207,6 @@
   text-align: center;
 }
 
-/* Estilos específicos para os resultados de Aparar */
 .ronin-chat-card .parry-success,
 .ronin-chat-card .parry-failure {
   margin: 10px 0;
@@ -215,25 +218,19 @@
 
 .ronin-chat-card .parry-success {
   background-color: rgba(0, 128, 0, 0.1);
-  color: #006600;
+  color: var(--color-success);
 }
 
 .ronin-chat-card .parry-failure {
   background-color: rgba(128, 0, 0, 0.1);
-  color: #660000;
+  color: var(--color-failure);
 }
 
-/* Estilo para a mensagem de info do cálculo no diálogo */
-.defense-penalty-info p {
-  margin: 0;
-  padding: 5px;
-  text-align: center;
-}
-/* Estilos para o chat card de Get Better */
+/* Cartão de Get Better */
 .ronin-chat-card .get-better-section {
   margin: 10px 0;
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-light-gray);
   border-radius: 3px;
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -246,11 +243,11 @@
 
 .ronin-chat-card .hp-increase.success,
 .ronin-chat-card .attribute-change.success {
-  color: #008000;
+  color: var(--color-success);
 }
 
 .ronin-chat-card .attribute-change.failure {
-  color: #800000;
+  color: var(--color-failure);
 }
 
 .ronin-chat-card .attribute-roll {
@@ -271,7 +268,7 @@
   font-size: 0.9em;
 }
 
-/* Estilos para o chat card de uso de texto */
+/* Cartão de Uso de Texto */
 .ronin-chat-card.text-use-card .text-type {
   text-align: center;
   margin-bottom: 10px;
@@ -279,21 +276,21 @@
 }
 
 .ronin-chat-card.text-use-card .text-type-shintai {
-  color: #006600; /* Verde para Shintai */
+  color: var(--color-shintai);
 }
 
 .ronin-chat-card.text-use-card .text-type-unseen {
-  color: #660099; /* Roxo para Oculto */
+  color: var(--color-unseen);
 }
 
 .ronin-chat-card.text-use-card .text-description {
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-light-gray);
   border-radius: 3px;
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-/* Estilos para o chat-card do modo solo */
+/* Cartão de Modo Solo */
 .ronin-chat-card .solo-roll-results {
   display: flex;
   flex-direction: column;
@@ -308,54 +305,7 @@
   border-radius: 3px;
 }
 
-.ronin-chat-card .roll-calculation .success {
-  background-color: rgba(0, 128, 0, 0.1);
-}
-
-.ronin-chat-card .roll-calculation .failure {
-  background-color: rgba(128, 0, 0, 0.1);
-}
-
-.ronin-chat-card .roll-calculation .crit {
-  color: #008000;
-  font-weight: bold;
-  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-}
-
-.ronin-chat-card .roll-calculation .fumble {
-  color: #800000;
-  font-weight: bold;
-  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
-}
-
-.ronin-chat-card .roll-outcome .complete-success {
-  color: #006600;
-  font-weight: bold;
-}
-
-.ronin-chat-card .roll-outcome .partial-success {
-  color: #cc6600;
-  font-weight: bold;
-}
-
-.ronin-chat-card .roll-outcome.partial {
-  background-color: rgba(204, 102, 0, 0.2);
-}
-
-/* Estilos específicos para o chat card de iniciativa */
-.ronin-chat-card.initiative-roll-card .card-header {
-  background-color: #333;
-  color: white;
-  border-radius: 3px 3px 0 0;
-  padding: 5px;
-}
-
-.ronin-chat-card.initiative-roll-card .card-header h3 {
-  margin: 0;
-  text-align: center;
-  font-size: 1.2em;
-}
-
+/* Cartão de Iniciativa */
 .ronin-chat-card.initiative-roll-card .roll-outcome {
   padding: 10px;
   margin: 5px 0;
@@ -378,69 +328,7 @@
   font-style: italic;
 }
 
-/* Estilos específicos para o chat card de iniciativa */
-.ronin-chat-card.initiative-roll-card .card-header {
-  background-color: #333;
-  color: white;
-  border-radius: 3px 3px 0 0;
-  padding: 5px;
-}
-
-.ronin-chat-card.initiative-roll-card .card-header h3 {
-  margin: 0;
-  text-align: center;
-  font-size: 1.2em;
-}
-
-.ronin-chat-card.initiative-roll-card .roll-outcome {
-  padding: 10px;
-  margin: 5px 0;
-  text-align: center;
-  border-radius: 3px;
-}
-
-.ronin-chat-card.initiative-roll-card .roll-outcome h3 {
-  margin: 0 0 5px 0;
-  font-size: 1.1em;
-  font-weight: bold;
-}
-
-.ronin-chat-card.initiative-roll-card .roll-details {
-  margin-top: 10px;
-  padding: 5px;
-  font-size: 0.9em;
-  text-align: center;
-  color: #666;
-  font-style: italic;
-}
-
-/* Estilos para o chat card de rolagens individuais de personagens */
-.ronin-chat-card.initiative-character-rolls {
-  font-family: var(--font-primary);
-  margin-bottom: 5px;
-  border: 1px solid #000;
-  border-radius: 3px;
-  background: #f0f0f0;
-}
-
-.ronin-chat-card.initiative-character-rolls .card-header {
-  background-color: #333;
-  color: white;
-  border-radius: 2px 2px 0 0;
-  padding: 5px;
-  text-align: center;
-}
-
-.ronin-chat-card.initiative-character-rolls .card-header h3 {
-  margin: 0;
-  border: none;
-  font-size: 1.2em;
-}
-
-.ronin-chat-card.initiative-character-rolls .card-content {
-  padding: 10px;
-}
-
+/* Tabela de rolagens de iniciativa de personagens */
 .initiative-rolls-table {
   width: 100%;
   border-collapse: collapse;
@@ -452,7 +340,7 @@
   background-color: #eee;
   padding: 5px;
   text-align: center;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--color-light-gray);
   font-weight: bold;
 }
 

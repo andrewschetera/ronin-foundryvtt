@@ -1,18 +1,23 @@
-/* ronin.css - Arquivo principal CSS que importa todos os estilos para o sistema RONIN */
+/* --------------------------------- */
+/* RONIN SYSTEM - MAIN CSS FILE      */
+/* --------------------------------- */
 
 /* Importação dos módulos CSS */
 @import url("base.css");
-@import url("sheet-layout.css");
-@import url("header.css");
-@import url("abilities.css");
-@import url("resources.css");
-@import url("inventory.css");
-@import url("combat.css");
-@import url("features.css");
-@import url("chat-cards.css");
-@import url("weapon-sheet.css");
-@import url("armor-sheet.css");
+@import url("character-sheet.css");
 @import url("enemy-sheet.css");
+@import url("item-sheets.css");
+@import url("chat-cards.css");
 @import url("dialogs.css");
-@import url("classes.css");
-@import url("character-generator.css");
+
+/* 
+Este é o arquivo principal que importa todos os outros arquivos CSS.
+A estrutura foi organizada da seguinte forma:
+
+1. base.css - Estilos base, variáveis e resets
+2. character-sheet.css - Estilos específicos para ficha de personagem
+3. enemy-sheet.css - Estilos específicos para ficha de inimigo
+4. item-sheets.css - Estilos para todas as fichas de item
+5. chat-cards.css - Estilos para cartões de chat
+6. dialogs.css - Estilos para caixas de diálogo
+*/

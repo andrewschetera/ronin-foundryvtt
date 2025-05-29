@@ -1,5 +1,5 @@
-<form class="{{cssClass}}" autocomplete="off">
-  <header class="sheet-header">
+<form class="{{cssClass}} ronin-item-{{item.type}}" autocomplete="off">
+  <header class="sheet-header ronin-item-header">
     <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
     <div class="header-fields">
       <h1 class="item-name">
@@ -8,8 +8,8 @@
     </div>
   </header>
 
-  <section class="sheet-body">
-    <div class="ammo-properties">
+  <section class="sheet-body ronin-item-body">
+    <div class="ammo-properties ronin-item-form-group">
       <div class="form-group">
         <label>{{localize "RONIN.Equipment.Quantity"}}</label>
         <input type="number" name="system.quantity" value="{{system.quantity}}" min="0" data-dtype="Number"/>

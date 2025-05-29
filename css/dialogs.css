@@ -1,39 +1,58 @@
-/* dialogs.css - Estilos para diálogos do sistema RONIN */
+/* --------------------------------- */
+/* RONIN DIALOGS STYLES             */
+/* --------------------------------- */
 
-/* Estilos para o diálogo de descanso */
-.rest-options {
+/* ESTILOS PARA DIÁLOGOS DE ROLAGEM */
+.ronin-dialog .form-group {
+  margin-bottom: 10px;
+}
+
+.ronin-dialog .form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+.ronin-dialog .form-fields {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* DIÁLOGO DE DESCANSO */
+.ronin-rest-dialog .rest-options {
   margin-bottom: 15px;
 }
 
-.rest-option {
+.ronin-rest-dialog .rest-option {
   margin-bottom: 10px;
   padding: 5px;
   border-radius: 3px;
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-.rest-option .radio-label {
+.ronin-rest-dialog .rest-option .radio-label {
   display: flex;
   align-items: center;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-.rest-option input[type="radio"] {
+.ronin-rest-dialog .rest-option input[type="radio"] {
   margin-right: 10px;
 }
 
-.rest-type {
+.ronin-rest-dialog .rest-type {
   font-size: 1.1em;
 }
 
-.rest-description {
+.ronin-rest-dialog .rest-description {
   margin: 0 0 0 25px;
   font-size: 0.9em;
   color: #555;
 }
 
-.rest-warning {
+.ronin-rest-dialog .rest-warning {
   margin: 15px 0;
   padding: 10px;
   border-radius: 3px;
@@ -41,57 +60,188 @@
   border-left: 3px solid #fc0;
 }
 
-.rest-warning p {
+.ronin-rest-dialog .rest-warning p {
   margin: 0;
   font-size: 0.9em;
   font-style: italic;
 }
 
-.rest-conditions {
+.ronin-rest-dialog .rest-conditions {
   margin-top: 15px;
 }
 
-/* Estilo específico para a opção de meditação */
-.meditation-option {
+/* Opção de meditação */
+.ronin-rest-dialog .meditation-option {
   margin-top: 15px;
-  background-color: rgba(0, 0, 128, 0.05); /* Cor de fundo levemente azulada para diferenciar */
+  background-color: rgba(0, 0, 128, 0.05);
   border-left: 3px solid rgba(0, 0, 128, 0.3);
 }
 
-/* Adicionar estilo para a descrição da opção haiku */
-.option-description {
+/* Descrição da opção de haiku */
+.ronin-rest-dialog .option-description {
   margin: 2px 0 0 25px;
   font-size: 0.9em;
   color: #555;
   font-style: italic;
 }
 
-/* Estilos para o campo de Haiku */
-.haiku-field {
+/* Campos de Haiku */
+.ronin-rest-dialog .haiku-field {
   margin: 10px 0;
   padding: 8px;
   background-color: rgba(0, 0, 0, 0.03);
   border-radius: 3px;
 }
 
-.haiku-checkbox {
+.ronin-rest-dialog .haiku-checkbox {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Alinhamento à esquerda */
+  justify-content: flex-start;
 }
 
-.haiku-checkbox label {
+.ronin-rest-dialog .haiku-checkbox label {
   margin-right: 10px;
   font-weight: bold;
 }
 
-.haiku-checkbox input[type="checkbox"] {
+.ronin-rest-dialog .haiku-checkbox input[type="checkbox"] {
   margin: 0;
 }
 
-.haiku-description {
+.ronin-rest-dialog .haiku-description {
   margin: 5px 0 0 0;
   font-size: 0.9em;
   color: #555;
   font-style: italic;
+}
+
+/* DIÁLOGO DE MEDITAÇÃO */
+.ronin-meditation-dialog .form-group {
+  margin-bottom: 15px;
+}
+
+.ronin-meditation-dialog select {
+  width: 100%;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid var(--color-light-gray);
+}
+
+.ronin-meditation-dialog .meditation-info {
+  font-style: italic;
+  color: #555;
+  margin-top: 5px;
+}
+
+/* DIÁLOGO DE SEPPUKU */
+.ronin-seppuku-dialog .form-group {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* DIÁLOGO DE GERADOR DE PERSONAGEM */
+.ronin-character-generator .form-group {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.ronin-character-generator .alignment-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 15px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.ronin-character-generator .alignment-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.ronin-character-generator .radio-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.ronin-character-generator .alignment-option label {
+  font-weight: bold;
+}
+
+.ronin-character-generator .classes-group {
+  display: block;
+  width: 100%;
+}
+
+.ronin-character-generator .classes-title {
+  text-align: center;
+  margin: 0;
+  font-size: 1.2em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 5px;
+  display: block;
+  width: 100%;
+}
+
+.ronin-character-generator .classes-list {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.ronin-character-generator .classes-info {
+  text-align: center;
+  margin: 0;
+  font-style: italic;
+  color: #666;
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.ronin-character-generator .buttons-group {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.ronin-character-generator .class-selection-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+  width: 100%;
+}
+
+.ronin-character-generator .select-all-button,
+.ronin-character-generator .select-none-button {
+  background-color: var(--color-red);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 0 8px;
+  line-height: 24px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.ronin-character-generator .select-all-button:hover,
+.ronin-character-generator .select-none-button:hover {
+  background-color: var(--color-red-dark);
+}
+
+.ronin-character-generator .optional-tables-title {
+  text-align: center;
+  margin: 15px 0 5px 0;
+  font-size: 1.2em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 5px;
+  display: block;
+  width: 100%;
 }
