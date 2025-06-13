@@ -1,6 +1,11 @@
 # ronin-foundryvtt
 
+![ronin compatible](https://github.com/user-attachments/assets/804d32e7-26cc-4f51-96bc-3bd25776df3f)
+
 Sistema não-oficial do jogo RONIN para o Foundry VTT
+
+RONIN-Foundryvtt é uma produção independente de Andrews_Chetera. não é afiliado à Slightky Reckless Games LTD. É distribuída sob a Rōnin Third Party License.
+Rōnin é marca registrada de © Slightly Reckless Games LTD.
 
 Esta implementação foi inspirada no sistema MorkBorg para o foundry.
 
@@ -21,7 +26,13 @@ Você pode configurar equipamentos iniciais, características e habilidades da c
 - Reformulação dos estilos css para melhor manutenção
 
 # ronin-foundryvtt
+
+![ronin compatible](https://github.com/user-attachments/assets/804d32e7-26cc-4f51-96bc-3bd25776df3f)
+
 Unofficial system for the RONIN RPG, made for Foundry VTT
+
+RONIN-Foundryvtt is an independent production by Andrews_Chetera. It is not affiliated with Slightly Reckless Games LTD. It is published under the Rōnin Third Party License.
+Rōnin is copyright © Slightly Reckless Games LTD.
 
 This implementation was inspired by the Mörk Borg system for Foundry.
 
