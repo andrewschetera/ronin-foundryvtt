@@ -55,6 +55,9 @@ class RoninActorSheet extends ActorSheet {
 getData() {
   const context = super.getData();
   
+  // Força as classes CSS corretas - ADICIONAR ESTA LINHA
+  context.cssClass = `ronin sheet actor ${this.actor.type}`;
+  
   // Adiciona o sistema ao contexto para acessar os dados
   const actorData = context.actor;
   
