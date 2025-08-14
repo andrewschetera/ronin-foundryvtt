@@ -8,23 +8,38 @@ window.RONIN = window.RONIN || {};
  * @extends {ActorSheet}
  */
 class RoninActorSheet extends ActorSheet {
+
+constructor(actor, options = {}) {
+  // Definir tamanho baseado no tipo de ator ANTES de chamar super
+  if (actor.type === "enemy") {
+    options.width = options.width || 450;
+    options.height = options.height || 400;
+  } else if (actor.type === "character") {
+    options.width = options.width || 700;
+    options.height = options.height || 630;
+  }
+  
+  super(actor, options);
+}
+
   /**
    * Define as opções padrão para a ficha
    * @override
    */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["ronin", "sheet", "actor"],
-      template: this.getTemplate(),
-      width: 700,
-      height: 600,
-      tabs: [
-        {navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "background"}
-      ],
-      scrollY: [".tab"], // Configurar rolagem apenas para as abas
-      resizable: false // Impedir que o tamanho da ficha seja alterado
-    });
-  }
+ static get defaultOptions() {
+  // Criar opções base sem width e height
+  const baseOptions = {
+    classes: ["ronin", "sheet", "actor"],
+    template: this.getTemplate(),
+    tabs: [
+      {navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "background"}
+    ],
+    scrollY: [".tab"],
+    resizable: true
+  };
+  
+  return foundry.utils.mergeObject(super.defaultOptions, baseOptions);
+}
   
   /**
    * Retorna o template apropriado com base no tipo do ator
