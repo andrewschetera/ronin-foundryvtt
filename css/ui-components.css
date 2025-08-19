@@ -76,13 +76,11 @@
 }
 
 .ronin-chat-card .crit {
-  color: #008000;
   font-weight: bold;
   text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
 }
 
 .ronin-chat-card .fumble {
-  color: #800000;
   font-weight: bold;
   text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 }
