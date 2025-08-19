@@ -348,7 +348,7 @@
 }
 
 .armor-damaged-icon {
-  color: #CC6600;
+  color: var(--color-red-dark);
 }
 
 .armor-equip-icon {
@@ -421,7 +421,7 @@
 }
 
 .quantity-input {
-  width: 40px;
+  width: 50px;
   text-align: center;
   height: 22px;
   margin-left: 5px;
@@ -460,15 +460,15 @@
 }
 
 .item-create-buttons a[data-type="gear"] i {
-  color: #555;
+  color: var(--color-red-dark);
 }
 
 .item-create-buttons a[data-type="ammo"] i {
-  color: #8b4513;
+  color: var(--color-red-dark);
 }
 
 .item-create-buttons a[data-type="consumable"] i {
-  color: #4b0082;
+  color: var(--color-red-dark);
 }
 
 /* CONSUMÍVEIS */
@@ -479,7 +479,7 @@
 }
 
 .consumable-icon {
-  color: #4b0082;
+  color: var(--color-black);
 }
 
 .item-uses {
@@ -537,7 +537,7 @@
 }
 
 .text-item-inline .text-use {
-  background-color: #4b0082;
+  background-color: var(--color-red);
   color: white;
   border: none;
   border-radius: 3px;
@@ -550,7 +550,7 @@
 }
 
 .text-item-inline .text-use:hover {
-  background-color: #6a1b9a;
+  background-color: var(--color-red-dark);
 }
 
 /* ================================================
