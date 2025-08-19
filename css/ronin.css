@@ -13,8 +13,8 @@
   --color-gray: #333333;
   --color-honor: #000000;
   --color-dishonor: #800000;
-  --color-shintai: #006600;
-  --color-unseen: #660099;
+  --color-shintai: #000000;
+  --color-unseen: #680202;
   --font-primary: "Reggae One", sans-serif;
   --font-display: "Reggae One", sans-serif;
 }
@@ -586,6 +586,10 @@
    BOTÕES E AÇÕES
    ================================================ */
 button,
+.dialog .dialog-buttons button,
+.dialog.dialog .dialog-buttons button,
+.app.dialog .dialog-buttons button,
+body .dialog .dialog-buttons button,
 .ronin button,
 .ronin.sheet button,
 .ronin.sheet.actor button {
@@ -600,7 +604,11 @@ button,
 }
 
 button:hover,
-.ronin. button:hover,
+.dialog .dialog-buttons button:hover,
+.dialog.dialog .dialog-buttons button:hover,
+.app.dialog .dialog-buttons button:hover,
+body .dialog .dialog-buttons button:hover,
+.ronin button:hover,
 .ronin.sheet button:hover,
 .ronin.sheet.actor button:hover {
   background-color: var(--color-red-dark);
