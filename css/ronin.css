@@ -585,7 +585,10 @@
 /* ================================================
    BOTÕES E AÇÕES
    ================================================ */
-button {
+button,
+.ronin button,
+.ronin.sheet button,
+.ronin.sheet.actor button {
   background-color: var(--color-red);
   color: white;
   border: none;
@@ -596,7 +599,10 @@ button {
   font-size: 0.9em;
 }
 
-button:hover {
+button:hover,
+.ronin. button:hover,
+.ronin.sheet button:hover,
+.ronin.sheet.actor button:hover {
   background-color: var(--color-red-dark);
 }
 
