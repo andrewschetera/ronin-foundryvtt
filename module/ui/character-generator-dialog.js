@@ -783,7 +783,7 @@ export async function showCharacterGeneratorDialog() {
             const newCharacter = await Actor.create({
               name: characterName,
               type: "character",
-              img: "icons/svg/mystery-man.svg", // Imagem padrão
+              img: classItem.img || "icons/svg/mystery-man.svg", // Imagem padrão
               system: {
                 abilities: {
                   vigor: { value: vigorValue },
