@@ -163,7 +163,11 @@
       "ParryFailure": "Parry failed! You take damage from the enemy weapon!",
       "ParryFumbleEffect": "Critical failure! Take double damage, your armor is reduced by one category, and your weapon is broken or lost!",
       "CompleteSuccess": "COMPLETE SUCCESS",
-      "PartialSuccess": "PARTIAL SUCCESS"
+      "PartialSuccess": "PARTIAL SUCCESS",
+      "RollType": "Roll Type",
+      "Normal": "Normal",
+      "Advantage": "Advantage",
+      "Disadvantage": "Disadvantage"
     },
     "Description": "Description",
     "GetBetter": {
