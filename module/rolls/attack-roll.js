@@ -1,4 +1,4 @@
-// attack-roll.js - Sistema de rolagem de ataques para RONIN
+// attack-roll.js - Sistema de rolagem de ataques para RONIN (modificado para suporte a vantagem/desvantagem)
 
 // Inicializa o namespace global
 window.RONIN = window.RONIN || {};
@@ -125,12 +125,18 @@ window.RONIN.AttackRoll = {
       const form = html[0].querySelector("form");
       const abilityValue = parseInt(actor.system.abilities[abilityKey].value);
       const modifier = parseInt(form.modifier.value) || 0;
+      const rollType = form.rollType.value || "normal";
       const difficultyRating = parseInt(form.difficultyRating.value) || 12;
       const damageFormula = form.damageFormula.value;
       const enemyArmor = form.enemyArmor.value;
       
-      // Construir a fórmula da rolagem
-      const formula = "1d20";
+      // Construir a fórmula da rolagem baseada no tipo
+      let formula = "1d20";
+      if (rollType === "advantage") {
+        formula = "2d20kh";
+      } else if (rollType === "disadvantage") {
+        formula = "2d20kl";
+      }
       
       // Cria a rolagem
       let roll = new Roll(formula);
@@ -138,8 +144,14 @@ window.RONIN.AttackRoll = {
       // Avalia a rolagem - Correção para API v12 do Foundry
       await roll.evaluate(); // Removida a opção {async: true} que está obsoleta
       
-      // Obtém o resultado do d20
-      const d20Result = roll.terms[0].results[0].result;
+      // Obtém o resultado do d20 baseado no tipo de rolagem
+      let d20Result;
+      if (rollType === "normal") {
+        d20Result = roll.terms[0].results[0].result;
+      } else {
+        // Para vantagem/desvantagem, o total já é o resultado final do d20
+        d20Result = roll.total;
+      }
       
       // Calcula o resultado total
       const totalResult = d20Result + abilityValue + modifier;
@@ -213,7 +225,9 @@ window.RONIN.AttackRoll = {
         damageRoll2: damageRoll2,
         armorRoll: armorRoll,
         totalDamage: totalDamage,
-        finalDamage: finalDamage
+        finalDamage: finalDamage,
+        rollType: rollType,
+        rollTypeText: game.i18n.localize(`RONIN.Rolls.${rollType.charAt(0).toUpperCase() + rollType.slice(1)}`)
       };
       
       // Renderiza o template do chat-card
