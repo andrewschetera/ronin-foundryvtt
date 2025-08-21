@@ -299,6 +299,19 @@
   background-color: var(--color-red-dark);
 }
 
+.roll-type-options {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.roll-type-options label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+}
+
 /* ================================================
    ESTILOS PARA EDITOR DE TEXTO
    ================================================ */
