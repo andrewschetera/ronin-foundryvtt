@@ -18,6 +18,27 @@
       <input type="number" name="modifier" value="0" />
     </div>
   </div>
+  
+  <div class="form-group">
+  <label>{{localize "RONIN.Rolls.RollType"}}:</label>
+  <div class="form-fields">
+    <div class="roll-type-options">
+      <label>
+        <input type="radio" name="rollType" value="normal" checked />
+        {{localize "RONIN.Rolls.Normal"}}
+      </label>
+      <label>
+        <input type="radio" name="rollType" value="advantage" />
+        {{localize "RONIN.Rolls.Advantage"}}
+      </label>
+      <label>
+        <input type="radio" name="rollType" value="disadvantage" />
+        {{localize "RONIN.Rolls.Disadvantage"}}
+      </label>
+    </div>
+  </div>
+</div>
+
   <div class="form-group">
     <label>{{localize "RONIN.Rolls.DR"}}:</label>
     <div class="form-fields">
