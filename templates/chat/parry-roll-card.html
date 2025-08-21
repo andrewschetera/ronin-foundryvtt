@@ -14,6 +14,15 @@
         {{/if}}
         )
       </div>
+      
+      {{#if rollType}}
+  {{#unless (eq rollType "normal")}}
+    <div class="roll-type-indicator">
+      <strong>{{rollTypeText}}</strong>
+    </div>
+  {{/unless}}
+{{/if}}
+      
     </div>
     
     <div class="roll-calculation">
