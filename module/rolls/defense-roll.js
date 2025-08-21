@@ -1,4 +1,4 @@
-// defense-roll.js - Sistema de rolagem de defesa para RONIN
+// defense-roll.js - Sistema de rolagem de defesa para RONIN (modificado para suporte a vantagem/desvantagem)
 
 // Inicializa o namespace global
 window.RONIN = window.RONIN || {};
@@ -94,6 +94,7 @@ window.RONIN.DefenseRoll = {
       const form = html[0].querySelector("form");
       const swiftnessValue = parseInt(actor.system.abilities.swiftness.value);
       const modifier = parseInt(form.modifier.value) || 0;
+      const rollType = form.rollType.value || "normal";
       
       // Obtém o DR base do campo e ADICIONA a penalidade de defesa da armadura
       const baseDR = parseInt(form.difficultyRating.value) || 12;
@@ -102,8 +103,13 @@ window.RONIN.DefenseRoll = {
       const enemyWeaponDamage = form.enemyWeaponDamage.value;
       const armorProtection = form.armorProtection.value;
       
-      // Construir a fórmula da rolagem
-      const formula = "1d20";
+      // Construir a fórmula da rolagem baseada no tipo
+      let formula = "1d20";
+      if (rollType === "advantage") {
+        formula = "2d20kh";
+      } else if (rollType === "disadvantage") {
+        formula = "2d20kl";
+      }
       
       // Cria a rolagem
       let roll = new Roll(formula);
@@ -111,8 +117,14 @@ window.RONIN.DefenseRoll = {
       // Avalia a rolagem
       await roll.evaluate();
       
-      // Obtém o resultado do d20
-      const d20Result = roll.terms[0].results[0].result;
+      // Obtém o resultado do d20 baseado no tipo de rolagem
+      let d20Result;
+      if (rollType === "normal") {
+        d20Result = roll.terms[0].results[0].result;
+      } else {
+        // Para vantagem/desvantagem, o total já é o resultado final do d20
+        d20Result = roll.total;
+      }
       
       // Calcula o resultado total
       const totalResult = d20Result + swiftnessValue + modifier;
@@ -198,7 +210,9 @@ window.RONIN.DefenseRoll = {
         armorRoll: armorRoll,
         totalDamage: totalDamage,
         finalDamage: finalDamage,
-        showDefensePenalty: armorDefensePenalty > 0
+        showDefensePenalty: armorDefensePenalty > 0,
+        rollType: rollType,
+        rollTypeText: game.i18n.localize(`RONIN.Rolls.${rollType.charAt(0).toUpperCase() + rollType.slice(1)}`)
       };
       
       // Renderiza o template do chat-card
