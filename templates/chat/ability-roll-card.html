@@ -7,6 +7,14 @@
       <div class="roll-formula">
         <span>1d20 + {{abilityAbbrev}} {{#if modifierText}}{{modifierText}}{{/if}} VS DR {{difficultyRating}}</span>
         
+        {{#if rollType}}
+  {{#unless (eq rollType "normal")}}
+    <div class="roll-type-indicator">
+      <strong>{{rollTypeText}}</strong>
+    </div>
+  {{/unless}}
+{{/if}}
+        
         {{#if isSwiftness}}
           {{#if (or showSwiftnessPenalty isOverencumbered)}}
             <div class="swiftness-penalty">
