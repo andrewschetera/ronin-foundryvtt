@@ -8,6 +8,14 @@
         <span>1d20 + {{abilityAbbrev}} {{#if modifierText}}{{modifierText}}{{/if}} VS DR {{difficultyRating}}</span>
       </div>
       
+      {{#if rollType}}
+  {{#unless (eq rollType "normal")}}
+    <div class="roll-type-indicator">
+      <strong>{{rollTypeText}}</strong>
+    </div>
+  {{/unless}}
+{{/if}}
+      
       <div class="roll-calculation">
         {{d20Result}} + {{abilityValue}}{{#if modifier}} + {{modifier}}{{/if}} = {{totalResult}}
       </div>
