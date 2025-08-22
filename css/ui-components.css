@@ -329,3 +329,64 @@
   border: none;
   overflow-y: auto;
 }
+
+/* ================================================
+   ESTILOS PARA ROLAGENS SOLO 
+   ================================================ */
+
+/* Container para os resultados das duas rolagens solo */
+.solo-roll-results {
+  margin: 10px 0;
+}
+
+/* Estilos para cada rolagem individual */
+.solo-roll-results .roll-calculation {
+  margin: 5px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  font-family: var(--font-primary);
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+/* Label para identificar cada rolagem */
+.roll-label {
+  font-size: 0.9em;
+  font-weight: normal;
+  color: #666;
+  display: block;
+  margin-bottom: 3px;
+}
+
+/* Indicadores de crítico e falha crítica */
+.crit-indicator {
+  color: var(--color-black);
+  font-weight: bold;
+  text-shadow: 0 0 3px rgba(0, 255, 0, 0.5);
+}
+
+.fumble-indicator {
+  color: var(--color-red-dark);
+  font-weight: bold;
+  text-shadow: 0 0 3px rgba(255, 0, 0, 0.5);
+}
+
+/* Indicador do tipo de rolagem */
+.roll-type-indicator {
+  margin-top: 5px;
+  padding: 3px 8px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+/* Penalidade de swiftness */
+.swiftness-penalty {
+  margin-top: 5px;
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+}
