@@ -7,14 +7,13 @@
     <div class="roll-formula">
       <span>1d20 + {{abilityAbbrev}} {{#if modifierText}}{{modifierText}}{{/if}} VS DR {{difficultyRating}}</span>
       
-      {{#if rollType}}<div class="ronin-chat-card ability-roll-card">
-  <div class="card-header {{rollResult}}">
-    <h3>{{abilityName}} {{localize "RONIN.Rolls.Check"}}</h3>
-  </div>
-  
-  <div class="card-roll-result">
-    <div class="roll-formula">
-      <span>1d20 + {{abilityAbbrev}} {{#if modifierText}}{{modifierText}}{{/if}} VS DR {{difficultyRating}}</span>
+      {{#if rollType}}
+        {{#unless (eq rollType "normal")}}
+          <div class="roll-type-indicator">
+            <strong>{{rollTypeText}}</strong>
+          </div>
+        {{/unless}}
+      {{/if}}
       
       {{#if isSwiftness}}
         {{#if (or showSwiftnessPenalty isOverencumbered)}}
@@ -34,58 +33,23 @@
     
     <!-- Resultados das duas rolagens -->
     <div class="solo-roll-results">
-      <div class="roll-calculation">
-        <span class="roll-1 {{#if isSuccess1}}success{{else}}failure{{/if}} {{#if isCrit1}}crit{{/if}} {{#if isFumble1}}fumble{{/if}}">
-          {{d20Result1}} + {{abilityValue}}{{#if modifier}} + {{modifier}}{{/if}} = {{totalResult1}}
-        </span>
+      <div class="roll-calculation"> 
+        {{d20Result1}} + {{abilityValue}}{{#if modifier}} + {{modifier}}{{/if}} = {{totalResult1}}
+        {{#if isCrit1}}<span class="crit-indicator"> (CRÍTICO!)</span>{{/if}}
+        {{#if isFumble1}}<span class="fumble-indicator"> (FALHA CRÍTICA!)</span>{{/if}}
       </div>
       <div class="roll-calculation">
-        <span class="roll-2 {{#if isSuccess2}}success{{else}}failure{{/if}} {{#if isCrit2}}crit{{/if}} {{#if isFumble2}}fumble{{/if}}">
-          {{d20Result2}} + {{abilityValue}}{{#if modifier}} + {{modifier}}{{/if}} = {{totalResult2}}
-        </span>
-
-  {{#unless (eq rollType "normal")}}
-    <div class="roll-type-indicator">
-      <strong>{{rollTypeText}}</strong>
-    </div>
-  {{/unless}}
-{{/if}}
-      
-      {{#if isSwiftness}}
-        {{#if (or showSwiftnessPenalty isOverencumbered)}}
-          <div class="swiftness-penalty">
-            ({{localize "RONIN.Rolls.BaseDR"}} {{baseDR}}
-            {{#if showSwiftnessPenalty}}
-              + {{localize "RONIN.Equipment.SwiftnessPenalty"}} {{armorSwiftnessPenalty}}
-            {{/if}}
-            {{#if isOverencumbered}}
-              + {{localize "RONIN.Rolls.OverencumberedPenalty"}} {{overencumberedPenalty}}
-            {{/if}}
-            )
-          </div>
-        {{/if}}
-      {{/if}}
-    </div>
-    
-    <!-- Resultados das duas rolagens -->
-    <div class="solo-roll-results">
-      <div class="roll-calculation">
-        <span class="roll-1 {{#if isSuccess1}}success{{else}}failure{{/if}} {{#if isCrit1}}crit{{/if}} {{#if isFumble1}}fumble{{/if}}">
-          {{d20Result1}} + {{abilityValue}}{{#if modifier}} + {{modifier}}{{/if}} = {{totalResult1}}
-        </span>
-      </div>
-      <div class="roll-calculation">
-        <span class="roll-2 {{#if isSuccess2}}success{{else}}failure{{/if}} {{#if isCrit2}}crit{{/if}} {{#if isFumble2}}fumble{{/if}}">
-          {{d20Result2}} + {{abilityValue}}{{#if modifier}} + {{modifier}}{{/if}} = {{totalResult2}}
-        </span>
+        {{d20Result2}} + {{abilityValue}}{{#if modifier}} + {{modifier}}{{/if}} = {{totalResult2}}
+        {{#if isCrit2}}<span class="crit-indicator"> (CRÍTICO!)</span>{{/if}}
+        {{#if isFumble2}}<span class="fumble-indicator"> (FALHA CRÍTICA!)</span>{{/if}}
       </div>
     </div>
     
     <div class="roll-outcome {{rollResult}}">
       {{#if (eq soloResult "complete-success")}}
-        <h3 class="complete-success">{{localize "RONIN.Rolls.CompleteSuccess"}}</h3>
+        <h3 class="success">{{localize "RONIN.Rolls.CompleteSuccess"}}</h3>
       {{else if (eq soloResult "partial-success")}}
-        <h3 class="partial-success">{{localize "RONIN.Rolls.PartialSuccess"}}</h3>
+        <h3 class="success">{{localize "RONIN.Rolls.PartialSuccess"}}</h3>
       {{else}}
         <h3 class="failure">{{localize "RONIN.Rolls.Failure"}}</h3>
       {{/if}}
