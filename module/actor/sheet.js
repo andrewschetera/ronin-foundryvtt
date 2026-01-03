@@ -7,7 +7,7 @@ window.RONIN = window.RONIN || {};
  * Estende a classe base ActorSheet para personalizar a ficha de personagem.
  * @extends {ActorSheet}
  */
-class RoninActorSheet extends ActorSheet {
+class RoninActorSheet extends foundry.appv1.sheets.ActorSheet {
 
 constructor(actor, options = {}) {
   // Definir tamanho baseado no tipo de ator ANTES de chamar super
