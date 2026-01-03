@@ -7,7 +7,7 @@ window.RONIN = window.RONIN || {};
  * Estende a classe base ItemSheet para personalizar a ficha de itens.
  * @extends {ItemSheet}
  */
-class RoninItemSheet extends ItemSheet {
+class RoninItemSheet extends foundry.appv1.sheets.ItemSheet {
   /**
    * Define as opções padrão para a ficha
    * @override
