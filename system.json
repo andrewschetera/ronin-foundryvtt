@@ -1,53 +1,56 @@
 {
-  "name": "ronin",
+  "id": "ronin",
   "title": "RONIN",
   "description": "Sistema de jogo para o RPG RONIN baseado em MÖRK BORG.",
-  "version": "0.1.0",
+  "version": "1.3.0",
+
   "compatibility": {
-    "minimum": "12.0.0",
-    "verified": "12,331"
+    "minimum": "13",
+    "verified": "13.351"
   },
+
   "authors": [
     {
       "name": "andrews"
     }
   ],
-"esmodules": [
-  "module/core/initiative.js",
-  "module/ui/character-generator-button.js",
-  "module/ui/character-generator-dialog.js",
-  "module/rolls/ability-roll.js",
-  "module/rolls/attack-roll.js",
-  "module/rolls/defense-roll.js",
-  "module/rolls/parry-roll.js",
-  "module/rolls/short-rest-roll.js",
-  "module/rolls/long-rest-roll.js",
-  "module/rolls/meditation-roll.js",
-  "module/rolls/broken-roll.js",
-  "module/rolls/get-better-roll.js",
-  "module/rolls/seppuku-roll.js",
-  "module/rolls/text-roll.js",
-  "module/rolls/feat-roll.js",
-  "module/rolls/moral-roll.js",
-  "module/helpers/handlebars.js",
-  "module/helpers/listeners.js",
-  "module/core/config.js",
-  "module/core/settings.js",
-  "module/actor/actor.js",
-  "module/actor/sheet.js",
-  "module/item/item.js",
-  "module/item/sheet.js",
-  "module/hooks/encumbrance-hooks.js",
-  "module/hooks/class-limiter-hooks.js",
-  "module/core/ronin.js"
-],
-  "scripts": [],
+
+  "esmodules": [
+    "module/core/initiative.js",
+    "module/ui/character-generator-button.js",
+    "module/ui/character-generator-dialog.js",
+    "module/rolls/ability-roll.js",
+    "module/rolls/attack-roll.js",
+    "module/rolls/defense-roll.js",
+    "module/rolls/parry-roll.js",
+    "module/rolls/short-rest-roll.js",
+    "module/rolls/long-rest-roll.js",
+    "module/rolls/meditation-roll.js",
+    "module/rolls/broken-roll.js",
+    "module/rolls/get-better-roll.js",
+    "module/rolls/seppuku-roll.js",
+    "module/rolls/text-roll.js",
+    "module/rolls/feat-roll.js",
+    "module/rolls/moral-roll.js",
+    "module/helpers/handlebars.js",
+    "module/helpers/listeners.js",
+    "module/core/config.js",
+    "module/core/settings.js",
+    "module/actor/actor.js",
+    "module/actor/sheet.js",
+    "module/item/item.js",
+    "module/item/sheet.js",
+    "module/hooks/encumbrance-hooks.js",
+    "module/hooks/class-limiter-hooks.js",
+    "module/core/ronin.js"
+  ],
+
   "styles": [
     "css/ronin.css",
     "css/ui-components.css",
     "css/combat-items.css"
   ],
-  "packs": [],
+
   "languages": [
     {
       "lang": "pt-BR",
@@ -60,15 +63,17 @@
       "path": "lang/en.json"
     }
   ],
+
   "grid": {
     "distance": 5,
     "units": "ft"
   },
+
+  "initiative": "1d6",
   "primaryTokenAttribute": "resources.hp",
   "secondaryTokenAttribute": null,
-  "initiative": "1d6",
-  "socket": false,
-  "url": "https://github.com/yourusername/ronin",
-  "manifest": "https://raw.githubusercontent.com/yourusername/ronin/main/system.json",
-  "download": "https://github.com/yourusername/ronin/archive/main.zip"
+
+  "url": "https://github.com/andrewschetera/ronin-foundryvtt",
+  "manifest": "https://github.com/andrewschetera/ronin-foundryvtt/releases/download/1.3.0/system.json",
+  "download": "https://github.com/andrewschetera/ronin-foundryvtt/releases/download/1.3.0/main.zip"
 }
