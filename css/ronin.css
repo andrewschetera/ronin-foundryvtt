@@ -1,10 +1,21 @@
 /* ronin.css - Arquivo principal CSS reorganizado para o sistema RONIN */
 
 /* ================================================
-   IMPORTAÇÃO DE FONTES E VARIÁVEIS GLOBAIS
+   FONTES (LOCAL)
+   Arquivo esperado:
+   systems/ronin/fonts/reggae-one/ReggaeOne-Regular.woff2
    ================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Reggae+One&display=swap');
+@font-face {
+  font-family: "Reggae One";
+  src: url("../fonts/reggae-one/ReggaeOne-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
+/* ================================================
+   VARIÁVEIS GLOBAIS
+   ================================================ */
 :root {
   --color-white: #ffffff;
   --color-black: #000000;
@@ -15,18 +26,66 @@
   --color-dishonor: #800000;
   --color-shintai: #000000;
   --color-unseen: #680202;
+
+  /* Fonte do sistema */
   --font-primary: "Reggae One", sans-serif;
   --font-display: "Reggae One", sans-serif;
+}
+
+/* ================================================
+   APLICAÇÃO DA FONTE (IMPORTANTE NO V13)
+   ================================================ */
+
+/*
+  Caminho "oficial": quando você adicionar a classe `ronin` no <form> raiz
+  (ex: <form class="{{cssClass}} ronin flexcol">), este seletor vai sempre casar.
+*/
+.ronin.sheet {
+  font-family: var(--font-primary);
+}
+
+/* Garantir que inputs/textarea/select herdem a fonte (Foundry costuma sobrescrever) */
+.ronin.sheet input,
+.ronin.sheet select,
+.ronin.sheet textarea,
+.ronin.sheet button {
+  font-family: inherit;
+}
+
+/*
+  Fallback: seu actor-sheet usa um wrapper <div class="ronin-sheet">.
+  Mesmo que o root não tenha a classe `ronin`, isso aplica dentro do container.
+*/
+.ronin-sheet {
+  font-family: var(--font-primary);
+}
+
+.ronin-sheet input,
+.ronin-sheet select,
+.ronin-sheet textarea,
+.ronin-sheet button {
+  font-family: inherit;
+}
+
+/* Opcional: chat cards e possíveis dialogs custom */
+.ronin-chat-card,
+.ronin.app,
+.ronin.dialog {
+  font-family: var(--font-primary);
 }
 
 /* ================================================
    RESET E CONFIGURAÇÕES BASE
    ================================================ */
 .ronin-system-loaded {
-  /* Classes adicionadas ao body quando o sistema carrega completamente */
+  /* Classe adicionada ao body quando o sistema carrega completamente */
 }
 
-.sheet-header, .tabs-container, .sheet-body, .sheet-tabs, .sheet-tabs .item {
+.sheet-header,
+.tabs-container,
+.sheet-body,
+.sheet-tabs,
+.sheet-tabs .item {
   z-index: auto;
   position: static;
 }
@@ -220,12 +279,16 @@
   display: none;
 }
 
-.ronin.sheet.actor.character input[type="radio"][name="system.resources.honor.value"]:checked + label.honor-dot {
+.ronin.sheet.actor.character
+  input[type="radio"][name="system.resources.honor.value"]:checked
+  + label.honor-dot {
   background-color: var(--color-honor);
   color: var(--color-white);
 }
 
-.ronin.sheet.actor.character input[type="radio"][name="system.resources.honor.value"]:checked + label.honor-dot.dishonor {
+.ronin.sheet.actor.character
+  input[type="radio"][name="system.resources.honor.value"]:checked
+  + label.honor-dot.dishonor {
   background-color: var(--color-dishonor);
   color: var(--color-white);
 }
@@ -493,7 +556,7 @@
   margin-right: 5px;
 }
 
-.carrying-capacity-current, 
+.carrying-capacity-current,
 .carrying-capacity-max {
   font-weight: bold;
   font-size: 1.1em;
@@ -622,13 +685,13 @@ body .dialog .dialog-buttons button:hover,
     grid-template-columns: 1fr;
     gap: 4px;
   }
-  
+
   .ronin.sheet.actor.enemy .enemy-left-column {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4px;
   }
-  
+
   .ronin.sheet.actor.enemy .form-group.horizontal-layout label {
     flex: 0 0 50px;
     font-size: 0.8em;
@@ -639,7 +702,7 @@ body .dialog .dialog-buttons button:hover,
   .ronin.sheet.actor.character .header-grid {
     height: 180px;
   }
-  
+
   .ronin.sheet.actor.character .character-img {
     height: 120px;
   }
@@ -651,4 +714,12 @@ body .dialog .dialog-buttons button:hover,
     margin-left: 0;
     margin-top: 5px;
   }
+}
+
+/* ================================================
+   FIX: Forçar fonte do sistema nas sheets (Foundry V13)
+   ================================================ */
+.app.sheet.ronin .window-content,
+.app.sheet.ronin .window-content * {
+  font-family: var(--font-primary) !important;
 }
