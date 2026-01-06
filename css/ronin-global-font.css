@@ -1,0 +1,80 @@
+/* ronin-global-font.css (independente)
+   - Carregar por último no system.json -> "styles"
+*/
+
+/* Fonte local */
+@font-face {
+  font-family: "ReggaeOne";
+  src: url("../fonts/reggae-one/ReggaeOne-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ronin-global-font: "ReggaeOne", sans-serif;
+
+  /* Variáveis comuns (quando existirem) */
+  --font-primary: var(--ronin-global-font);
+  --font-body: var(--ronin-global-font);
+  --font-ui: var(--ronin-global-font);
+  --font-sans: var(--ronin-global-font);
+}
+
+/* 1) Base: UI + janelas */
+body,
+#ui,
+.window-app,
+.window-app .window-content,
+#sidebar {
+  font-family: var(--ronin-global-font);
+}
+
+/* 2) Elementos que você listou (e headings) */
+button,
+a,
+a.item,
+a.item.active,
+a.item-create,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+span,
+p,
+li,
+label {
+  font-family: var(--ronin-global-font);
+}
+
+/* 3) Form controls */
+input,
+select,
+textarea,
+option {
+  font-family: var(--ronin-global-font);
+}
+
+/* 4) Evitar quebrar ícones (Font Awesome / ícones do Foundry e módulos) */
+i,
+.fa,
+.fas,
+.far,
+.fab,
+[class^="fa-"],
+[class*=" fa-"] {
+  font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", "Font Awesome 5 Free", "FontAwesome" !important;
+}
+
+/* 5) Caso existam botões/links com pseudo-elementos de ícone */
+a::before,
+a::after,
+button::before,
+button::after {
+  /* Mantém a fonte do texto; se algum tema usar ícone via pseudo-elemento e fonte de ícone,
+     pode ser necessário tratar o caso específico depois. */
+  font-family: inherit;
+}
