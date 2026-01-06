@@ -56,14 +56,19 @@
   Fallback: seu actor-sheet usa um wrapper <div class="ronin-sheet">.
   Mesmo que o root não tenha a classe `ronin`, isso aplica dentro do container.
 */
-.ronin-sheet {
+.window-app .window-content .ronin-sheet,
+.window-app .window-content form.ronin {
   font-family: var(--font-primary);
 }
 
-.ronin-sheet input,
-.ronin-sheet select,
-.ronin-sheet textarea,
-.ronin-sheet button {
+.window-app .window-content .ronin-sheet input,
+.window-app .window-content .ronin-sheet select,
+.window-app .window-content .ronin-sheet textarea,
+.window-app .window-content .ronin-sheet button ,
+.window-app .window-content form.ronin input,
+.window-app .window-content form.ronin select,
+.window-app .window-content form.ronin textarea,
+.window-app .window-content form.ronin button {
   font-family: inherit;
 }
 
@@ -715,3 +720,4 @@ body .dialog .dialog-buttons button:hover,
     margin-top: 5px;
   }
 }
+
