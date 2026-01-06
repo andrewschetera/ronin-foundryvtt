@@ -715,11 +715,3 @@ body .dialog .dialog-buttons button:hover,
     margin-top: 5px;
   }
 }
-
-/* ================================================
-   FIX: Forçar fonte do sistema nas sheets (Foundry V13)
-   ================================================ */
-.app.sheet.ronin .window-content,
-.app.sheet.ronin .window-content * {
-  font-family: var(--font-primary) !important;
-}
