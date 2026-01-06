@@ -2,7 +2,7 @@
   "id": "ronin",
   "title": "RONIN",
   "description": "Sistema de jogo para o RPG RONIN baseado em MÖRK BORG.",
-  "version": "1.3.0",
+  "version": "1.3.1",
 
   "compatibility": {
     "minimum": "13",
@@ -46,9 +46,10 @@
   ],
 
   "styles": [
-    "css/ronin.css",
+    "css/combat-items.css",
     "css/ui-components.css",
-    "css/combat-items.css"
+    "css/ronin.css",
+    "css/ronin-global-font.css"
   ],
 
   "languages": [
@@ -74,6 +75,6 @@
   "secondaryTokenAttribute": null,
 
   "url": "https://github.com/andrewschetera/ronin-foundryvtt",
-  "manifest": "https://github.com/andrewschetera/ronin-foundryvtt/releases/download/1.3.0/system.json",
-  "download": "https://github.com/andrewschetera/ronin-foundryvtt/releases/download/1.3.0/main.zip"
+  "manifest": "https://github.com/andrewschetera/ronin-foundryvtt/releases/download/1.3.1/system.json",
+  "download": "https://github.com/andrewschetera/ronin-foundryvtt/releases/download/1.3.1/main.zip"
 }
