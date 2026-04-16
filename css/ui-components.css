@@ -24,9 +24,11 @@
 }
 
 .ronin-chat-card .card-header h3 {
-  margin: 0;
-  border: none;
-  font-size: 1.2em;
+    font-family: var(--font-primary);
+    color: #f0f0f0;
+    margin: 0;
+    border: none;
+    font-size: 1.2em;
 }
 
 .ronin-chat-card .card-roll-result {
@@ -61,9 +63,11 @@
 }
 
 .ronin-chat-card .roll-outcome h3 {
-  margin: 0;
-  border: none;
-  font-size: 1.3em;
+    font-family: var(--font-primary);
+    color: #f0f0f0;
+    margin: 0;
+    border: none;
+    font-size: 1.3em;
 }
 
 /* Estilos de resultado */
@@ -186,7 +190,9 @@
   background-color: var(--color-red-dark);
 }
 
-.form-group {
+.ronin .form-group,
+.window-app .window-content .ronin-sheet .form-group,
+.ronin-chat-card .form-group {
   display: block;
   width: 100%;
   margin-bottom: 15px;
@@ -267,7 +273,8 @@
   padding: 10px 0;
 }
 
-.buttons-group {
+.ronin .buttons-group,
+.window-app .window-content .ronin-sheet .buttons-group {
   display: block;
   width: 100%;
   margin-top: 10px;
